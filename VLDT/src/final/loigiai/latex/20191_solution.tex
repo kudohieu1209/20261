@@ -1,0 +1,178 @@
+\documentclass[11pt,a4paper,twocolumn]{article}
+\usepackage[utf8]{vietnam}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1.5cm}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+\setlength{\columnsep}{0.8cm}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.1cm}
+
+\begin{document}
+
+\twocolumn[
+\begin{center}
+    \textbf{\Large LỜI GIẢI ĐỀ THI CUỐI KỲ 20191}
+    
+    \vspace{0.2cm}
+    Môn thi: Vật Lý Điện Tử (PH3330) --- Thời gian: 90 phút
+\end{center}
+\vspace{0.3cm}
+\hrule
+\vspace{0.5cm}
+]
+
+\textbf{\textit{Câu 1 --- Trình bày hiện tượng cộng hưởng từ hạt nhân và ứng dụng (3 điểm)}}
+
+\textbf{Đề bài gốc:} \textit{Hãy trình bày hiện tượng cộng hưởng từ hạt nhân và nêu ứng dụng của nó.}
+
+\textbf{Tóm tắt dữ kiện \& Lời giải}
+
+\textbf{Hiện tượng:} Khi các hạt nhân nguyên tử có mômen từ spin khác không (ví dụ $^1H$, $^{13}C$) được đặt trong một từ trường tĩnh $\vec{B}_0$, các mức năng lượng spin của hạt nhân sẽ bị tách ra thành các mức riêng biệt (hiệu ứng Zeeman). Nếu lúc này ta chiếu vào một bức xạ điện từ (thường là sóng vô tuyến RF) có tần số $\nu$ sao cho năng lượng photon $h\nu$ bằng đúng khoảng cách giữa các mức năng lượng bị tách ($\Delta E$), hạt nhân sẽ hấp thụ photon và chuyển dịch lên mức năng lượng cao hơn. Sự hấp thụ có tính lựa chọn này gọi là hiện tượng cộng hưởng từ hạt nhân.
+
+\textbf{Điều kiện cộng hưởng:} 
+\begin{equation*}
+    \boxed{h\nu = \Delta E = \gamma \hbar B_0}
+\end{equation*}
+(với $\gamma$ là tỷ số từ hồi chuyển của hạt nhân).
+
+\textbf{Ứng dụng:}
+\begin{itemize}[leftmargin=*, topsep=0pt, itemsep=0pt]
+    \item \textbf{Trong y học:} Ứng dụng để chế tạo máy chụp cộng hưởng từ (MRI) giúp chẩn đoán hình ảnh chi tiết các cơ quan nội tạng, mô mềm trong cơ thể với độ phân giải cao mà không dùng bức xạ ion hoá độc hại (tia X).
+    \item \textbf{Trong hóa học, sinh học:} Kỹ thuật quang phổ NMR được sử dụng rất phổ biến để phân tích, xác định cấu trúc phân tử, nhận biết liên kết hóa học và cấu hình không gian của các hợp chất hữu cơ, protein.
+\end{itemize}
+
+\vspace{0.4cm}
+\textbf{\textit{Câu 2 --- Hệ quang học điện tử tĩnh điện (2 điểm)}}
+
+\textbf{Đề bài gốc:} \textit{Một hệ quang học điện tử gồm một catốt phẳng K, một lưới tăng tốc G có điện thế $U_G$ bằng 250 V, một tấm ngăn (diapham) có điện thế $U_D$ và một anốt A được nối với diapham. Cho biết khoảng cách giữa lưới tăng tốc G đến diapham D là $d_1 = 1,2$ cm, khoảng cách giữa diapham D đến anốt A là $d_2 = 3,0$ cm. Xác định điện thế $U_D$ (so với catốt K) để chùm điện tử song song hội tụ lên anốt A.}
+
+\textbf{Tóm tắt dữ kiện \& Lời giải}
+
+\textbf{Dữ kiện:} $U_G = 250$ V; $U_A = U_D$; $d_1 = 1,2$ cm; $d_2 = 3,0$ cm.
+
+Theo lý thuyết thấu kính điện tử tĩnh điện lỗ tròn, tiêu cự $f$ của thấu kính lỗ tròn (tại D) được tính bởi công thức:
+\begin{equation*}
+    \boxed{f = \frac{4U_D}{E_2 - E_1}}
+\end{equation*}
+Trong đó:
+\begin{itemize}[leftmargin=*, topsep=0pt, itemsep=0pt]
+    \item $E_1$ là cường độ điện trường trước thấu kính (vùng G $\rightarrow$ D): $E_1 = \frac{U_D - U_G}{d_1}$
+    \item $E_2$ là cường độ điện trường sau thấu kính (vùng D $\rightarrow$ A). Vì anốt A được nối với D nên $U_A = U_D \Rightarrow E_2 = 0$.
+\end{itemize}
+
+Thay vào công thức tiêu cự, ta có:
+\begin{equation*}
+    f = \frac{4U_D}{0 - \frac{U_D - U_G}{d_1}} = \frac{4U_D d_1}{U_G - U_D}
+\end{equation*}
+Do chùm tia tới là chùm điện tử song song nên nó sẽ hội tụ tại tiêu điểm của thấu kính. Theo đề bài chùm điện tử hội tụ lên bề mặt anốt A (cách D khoảng $d_2$). Vậy: $f = d_2$.
+
+Ta có phương trình:
+\begin{equation*}
+    \frac{4U_D d_1}{U_G - U_D} = d_2 \Rightarrow 4 U_D d_1 = d_2 (U_G - U_D)
+\end{equation*}
+Thế số ($d_1 = 1,2$ cm, $d_2 = 3,0$ cm, $U_G = 250$ V):
+\begin{align*}
+    4 \times 1,2 \times U_D &= 3,0 \times (250 - U_D) \\
+    4,8 U_D &= 750 - 3,0 U_D \\
+    7,8 U_D &= 750 \Rightarrow U_D \approx \textbf{96,15 V}
+\end{align*}
+
+\vspace{0.4cm}
+\textbf{\textit{Câu 3 --- Nồng độ hạt dẫn và vị trí mức Fermi (2.5 điểm)}}
+
+\textbf{Đề bài gốc:} \textit{Tính nồng độ điện tử, lỗ trống, vị trí mức Fermi của mẫu Si chứa $4,5.10^{16}$ nguyên tử B trên 1 cm$^3$ ở nhiệt độ 300 K. Tính giá trị của các đại lượng trên khi pha thêm vào mẫu các nguyên tử P với nồng độ $1,5.10^{17}$ nguyên tử trên 1 cm$^3$. Cho biết $n_i = 1,45.10^{10}$ cm$^{-3}$; $\Delta E_g = 1,12$ eV; $N_c = 2,8.10^{19}$ cm$^{-3}$; $N_v = 1.10^{19}$ cm$^{-3}$; $kT = 0,026$ eV.}
+
+\textbf{Tóm tắt dữ kiện \& Lời giải}
+
+\textbf{Dữ kiện:} $N_A = 4,5 \cdot 10^{16}$ cm$^{-3}$; $n_i = 1,45 \cdot 10^{10}$ cm$^{-3}$; $N_c = 2,8 \cdot 10^{19}$ cm$^{-3}$; $N_v = 10^{19}$ cm$^{-3}$; $kT = 0,026$ eV.
+
+\textbf{a) Mẫu Si ban đầu (chứa B):}
+
+Boron (B) thuộc nhóm III nên đây là tạp chất nhận (acceptor). Bán dẫn là loại p.
+\begin{itemize}[leftmargin=*, topsep=0pt, itemsep=0pt]
+    \item Nồng độ lỗ trống: $p_0 \approx N_A = \textbf{4,5} \cdot \textbf{10}^{\textbf{16}} \text{ \textbf{cm}}^{\textbf{-3}}$
+    \item Nồng độ điện tử: 
+    $$n_0 = \frac{n_i^2}{p_0} = \frac{(1,45 \cdot 10^{10})^2}{4,5 \cdot 10^{16}} \approx \textbf{4,67} \cdot \textbf{10}^{\textbf{3}} \text{ \textbf{cm}}^{\textbf{-3}}$$
+    \item Vị trí mức Fermi so với đỉnh vùng hóa trị $E_V$:
+    \begin{align*}
+        E_F - E_V &= kT \ln \left( \frac{N_V}{p_0} \right) \\
+        &= 0,026 \cdot \ln \left( \frac{10^{19}}{4,5 \cdot 10^{16}} \right) \approx \textbf{0,140 eV}
+    \end{align*}
+\end{itemize}
+
+\textbf{b) Khi pha thêm P (donor):}
+
+$N_D = 1,5 \cdot 10^{17}$ cm$^{-3}$. Vì $N_D > N_A$, bán dẫn chuyển sang loại n do sự bù trừ tạp chất.
+\begin{itemize}[leftmargin=*, topsep=0pt, itemsep=0pt]
+    \item Nồng độ tạp chất cho hiệu dụng: 
+    $$N_D' = N_D - N_A = \textbf{1,05} \cdot \textbf{10}^{\textbf{17}} \text{ \textbf{cm}}^{\textbf{-3}}$$
+    \item Nồng độ điện tử: $n_0 \approx N_D' = \textbf{1,05} \cdot \textbf{10}^{\textbf{17}} \text{ \textbf{cm}}^{\textbf{-3}}$
+    \item Nồng độ lỗ trống: 
+    $$p_0 = \frac{n_i^2}{n_0} = \frac{(1,45 \cdot 10^{10})^2}{1,05 \cdot 10^{17}} \approx \textbf{2} \cdot \textbf{10}^{\textbf{3}} \text{ \textbf{cm}}^{\textbf{-3}}$$
+    \item Vị trí mức Fermi so với đáy vùng dẫn $E_C$:
+    \begin{align*}
+        E_C - E_F &= kT \ln \left( \frac{N_C}{n_0} \right) \\
+        &= 0,026 \cdot \ln \left( \frac{2,8 \cdot 10^{19}}{1,05 \cdot 10^{17}} \right) \approx \textbf{0,145 eV}
+    \end{align*}
+\end{itemize}
+
+\vspace{0.4cm}
+\textbf{\textit{Câu 4 --- Hấp thụ ánh sáng trong GaAs (2.5 điểm)}}
+
+\textbf{Đề bài gốc:} \textit{Một mẫu GaAs được chiếu sáng bởi ánh sáng có bước sóng $\lambda = 0,5 \, \mu$m. Công suất tia tới là 30 mW. Nếu 1/6 công suất đó bị phản xạ trở lại và 1/3 thoát ra từ mặt sau của mẫu thì bề dày của mẫu bằng bao nhiêu? Tìm năng lượng nhiệt truyền cho mạng tinh thể trong 1 s và số photon sinh ra do tái hợp bức xạ trong 15 s. $\alpha = 4.10^4$ cm$^{-1}$; $\Delta E_g = 1,42$ eV.}
+
+\textbf{Tóm tắt dữ kiện \& Lời giải}
+
+\textbf{Dữ kiện:} $P_0 = 30$ mW; $R = 1/6$; $P_{out} = P_0/3 = 10$ mW. $\lambda = 0,5 \, \mu$m; $\alpha = 4 \cdot 10^4$ cm$^{-1}$; $\Delta E_g = 1,42$ eV.
+
+\textbf{a) Bề dày của mẫu $d$:}
+
+Công suất đi vào bên trong mẫu:
+\begin{equation*}
+    P_{in} = P_0 \left( 1 - R \right) = 30 \left( 1 - \frac{1}{6} \right) = 25 \text{ mW}
+\end{equation*}
+Theo định luật hấp thụ:
+\begin{equation*}
+    \boxed{P_{out} = P_{in} e^{-\alpha d}} \Rightarrow 10 = 25 e^{-4 \cdot 10^4 d}
+\end{equation*}
+\begin{align*}
+    e^{-4 \cdot 10^4 d} &= 0,4 \\
+    \Rightarrow d &= \frac{-\ln(0,4)}{4 \cdot 10^4} \approx \textbf{2,29} \cdot \textbf{10}^{\textbf{-5}} \text{ \textbf{cm}} \, (\textbf{0,229} \, \mu\textbf{m})
+\end{align*}
+
+\textbf{b) Năng lượng nhiệt truyền cho mạng tinh thể trong 1s:}
+
+Công suất ánh sáng bị hấp thụ trong mẫu:
+\begin{equation*}
+    P_{abs} = P_{in} - P_{out} = 25 - 10 = 15 \text{ mW}
+\end{equation*}
+Năng lượng của 1 photon tới:
+\begin{equation*}
+    E_{ph} = \frac{hc}{\lambda} = \frac{1,24}{0,5} = 2,48 \text{ eV}
+\end{equation*}
+Mỗi photon hấp thụ tạo ra một cặp e-h (tốn $\Delta E_g = 1,42$ eV). Phần thừa $E_{ph} - \Delta E_g = 1,06$ eV chuyển thành nhiệt.
+Công suất nhiệt:
+\begin{align*}
+    P_{nhiet} &= P_{abs} \cdot \frac{E_{ph} - \Delta E_g}{E_{ph}} \\
+    &= 15 \cdot \frac{1,06}{2,48} \approx \textbf{6,41 mW (hay mJ/s)}
+\end{align*}
+
+\textbf{c) Số photon sinh ra do tái hợp trong 15s:}
+
+Công suất tái hợp bức xạ:
+\begin{equation*}
+    P_{bx} = P_{abs} - P_{nhiet} = 15 - 6,41 = 8,59 \text{ mW}
+\end{equation*}
+Số photon sinh ra trong 1s (mỗi photon $\approx \Delta E_g$):
+\begin{equation*}
+    N_1 = \frac{P_{bx}}{\Delta E_g} = \frac{8,59 \cdot 10^{-3}}{1,42 \cdot 1,6 \cdot 10^{-19}} \approx 3,78 \cdot 10^{16} \text{ hạt/s}
+\end{equation*}
+Số photon sinh ra trong 15s:
+\begin{equation*}
+    N_{15} = 3,78 \cdot 10^{16} \times 15 = \textbf{5,67} \cdot \textbf{10}^{\textbf{17}} \text{ \textbf{hạt}}
+\end{equation*}
+
+\end{document}

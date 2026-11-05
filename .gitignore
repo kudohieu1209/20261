@@ -1,0 +1,81 @@
+# ==========================================
+# Danh mục loại trừ theo yêu cầu người dùng
+# ==========================================
+/DA1/
+/GPLX/
+/Planner/
+/TOEIC/
+
+# ==========================================
+# Dependencies & Package Managers
+# ==========================================
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+
+# ==========================================
+# Python Virtual Environments & Cache
+# ==========================================
+.venv/
+.venv*/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+
+# ==========================================
+# Build Artifacts & Compiled Binaries
+# ==========================================
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+*.elf
+*.bin
+*.hex
+*.efi
+*.fd
+*.img
+*.iso
+*.vmdk
+*.qcow2
+*.apk
+*.aab
+
+# ==========================================
+# Frontend / Framework Build Outputs
+# ==========================================
+.next/
+dist/
+build/
+out/
+.parcel-cache/
+.cache/
+
+# ==========================================
+# Large generated artifacts & temporary files
+# ==========================================
+.codex-slides/
+tmp/
+output/
+*.log
+*.tmp
+*.swp
+*.swo
+*~
+~$*
+
+# ==========================================
+# OS & IDE Files
+# ==========================================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/

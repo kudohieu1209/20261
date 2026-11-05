@@ -1,0 +1,125 @@
+% =============================================================
+\section{Mạng hàng đợi}
+% =============================================================
+
+Mạng gồm nhiều nút hàng đợi nối với nhau. Sau khi được phục vụ ở một nút, khách chuyển sang nút khác hoặc rời mạng theo các xác suất định tuyến.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}c X@{}}
+\toprule
+\textbf{Ký hiệu} & \textbf{Ý nghĩa} \\
+\midrule
+$\lambda$ & Tổng tốc độ đến trung bình từ bên ngoài vào mạng \\
+$\mu_i$ & Tốc độ phục vụ của nút $i$ \\
+$r_{sj}$ & Xác suất khách từ nguồn được đưa vào nút $j$ \\
+$r_{jk}$ & Xác suất khách rời nút $j$ đi tiếp tới nút $k$ \\
+$r_{jd}$ & Xác suất khách rời nút $j$ đi ra đích (rời mạng) \\
+$\theta_i$ & \textbf{Thông lượng} trung bình qua nút $i$ (tốc độ đến tổng tại nút $i$) \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Phương trình lưu lượng}
+
+\begin{congthuc}[Cân bằng luồng tại mỗi nút]
+\[
+\theta_j = \lambda\, r_{sj} + \sum_{k} \theta_k\, r_{kj}\qquad\text{với mọi nút } j
+\]
+Luồng vào nút $j$ = luồng đến từ ngoài + tổng các luồng chuyển tới từ những nút khác (kể cả từ chính nó).\\
+\textbf{Điều kiện ổn định của mạng:} $\rho_i = \theta_i/\mu_i < 1$, tức $\mu_i > \theta_i$, với \textbf{mọi} nút $i$.
+\end{congthuc}
+
+\subsection{Định lý Burke}
+
+Đầu ra của một hàng M/M/1 (hoặc M/M/$c$) \textbf{ổn định} có tốc độ $\lambda$ cũng là một \textbf{luồng Poisson với tốc độ $\lambda$}. Hơn nữa, trạng thái của hàng đợi tại thời điểm $t$ độc lập với quá trình rời đi trước $t$.\\
+\emph{Hệ quả:} với mạng nối tiếp (không có vòng phản hồi), đầu vào của mọi nút đều là Poisson. Nhờ vậy có thể phân tích từng nút như một M/M/1 riêng.
+
+\subsection{Mạng Jackson và định lý Jackson}
+
+\textbf{Mạng Jackson} (mạng mở) có các đặc điểm: mỗi nút là hàng FIFO, hàng đợi vô hạn, thời gian phục vụ có phân bố mũ $\operatorname{Exp}(\mu_i)$, khách từ ngoài đến theo Poisson, định tuyến theo xác suất cố định.
+
+\begin{congthuc}[Định lý Jackson: coi mỗi nút là một M/M/1 độc lập]
+\[
+p(n_1,n_2,\dots,n_M) = \prod_{i=1}^{M} (1-\rho_i)\,\rho_i^{\,n_i},\qquad \rho_i = \frac{\theta_i}{\mu_i}
+\]
+\[
+E(N_i) = \frac{\rho_i}{1-\rho_i},\qquad E(T_i) = \frac{1}{\theta_i}\cdot\frac{\rho_i}{1-\rho_i} = \frac{1}{\mu_i-\theta_i}
+\]
+\[
+N_{\text{mạng}} = \sum_i E(N_i),\qquad T_{\text{mạng}} = \frac{N_{\text{mạng}}}{\lambda} = \sum_i \frac{\theta_i}{\lambda}\,E(T_i),\qquad P\{\text{mạng rỗng}\} = \prod_i (1-\rho_i)
+\]
+\end{congthuc}
+$\theta_i/\lambda$ là \textbf{số lần trung bình một khách đi qua nút $i$}. Nút có vòng phản hồi thì giá trị này lớn hơn 1.
+
+\begin{luuy}[Bẫy khi tính trễ toàn mạng]
+Trễ toàn mạng là $N_{\text{mạng}}$ chia cho \textbf{$\lambda$} (tốc độ đến từ \emph{bên ngoài}), \textbf{không} chia cho $\sum\theta_i$. Có vòng phản hồi thì một khách đi qua một nút nhiều lần, nên $\sum \theta_i > \lambda$.
+\end{luuy}
+
+\begin{vidu}[mạng hai nút có phản hồi]
+Gói đến nút 1 theo Poisson với $\lambda = 10$ gói/s. Xong nút 1 thì sang nút 2. Xong nút 2 thì gói quay lại nút 1 với xác suất 0,5, hoặc rời mạng với xác suất 0,5. Cho $\mu_1 = 25$, $\mu_2 = 50$ gói/s.
+
+\begin{center}
+\begin{tikzpicture}[
+  nd/.style={draw=accent,very thick,fill=accentsoft,rounded corners=2pt,minimum width=24mm,minimum height=10mm,align=center,font=\small},
+  ar/.style={-{Stealth[length=2.2mm]},thick,color=ink!80}]
+  \node (in) at (0,0) {};
+  \node[nd] (q1) at (3,0) {Nút 1\\[-2pt]\footnotesize$\mu_1=25$};
+  \node[nd] (q2) at (7,0) {Nút 2\\[-2pt]\footnotesize$\mu_2=50$};
+  \node (out) at (10.5,0) {};
+  \draw[ar] (in) -- node[above,font=\small]{$\lambda=10$} (q1);
+  \draw[ar] (q1) -- node[above,font=\small]{$\theta_1$} (q2);
+  \draw[ar] (q2) -- node[above,font=\small]{0,5 ra} (out);
+  \draw[ar] (q2.south) -- ++(0,-0.7) -| node[pos=0.25,below,font=\small]{0,5 quay lại} (q1.south);
+\end{tikzpicture}
+\end{center}
+
+\loigiai Phương trình lưu lượng: $\theta_1 = 10 + 0{,}5\,\theta_2$, $\theta_2 = \theta_1$. Suy ra $\theta_1=\theta_2 = 20$ gói/s.\\
+$\rho_1 = 20/25 = 0{,}8$,\quad $\rho_2 = 20/50 = 0{,}4$. Cả hai đều nhỏ hơn 1 nên mạng ổn định.
+\[
+E(N_1) = \frac{0{,}8}{0{,}2} = 4,\qquad E(N_2) = \frac{0{,}4}{0{,}6}\approx 0{,}667,\qquad N_{\text{mạng}}\approx 4{,}667 \text{ gói}
+\]
+\[
+T_{\text{mạng}} = \frac{4{,}667}{10} \approx \dapan{0{,}467\text{ s}},\qquad P\{\text{mạng rỗng}\} = 0{,}2\cdot 0{,}6 = \dapan{0{,}12}
+\]
+\emph{Kiểm tra:} mỗi gói qua mỗi nút trung bình $20/10 = 2$ lần, nên $T = 2\cdot\frac{1}{25-20} + 2\cdot\frac{1}{50-20} = 0{,}4 + 0{,}067 = 0{,}467$ s. Khớp.
+\end{vidu}
+
+\subsection{Xấp xỉ độc lập Kleinrock (KIA)}
+
+Dùng để tính trễ trong \textbf{mạng truyền dữ liệu nhiều luồng}. Mỗi liên kết $(i,j)$ được coi là một hàng M/M/1 độc lập, dù trên thực tế độ dài gói giữ nguyên khi đi qua các liên kết.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}c X@{}}
+\toprule
+$x_s$ & Tốc độ gói của luồng $s$ (đi theo một đường cố định từ nguồn tới đích) \\
+$\lambda_{ij}$ & Tốc độ đến trên liên kết $(i,j)$ = tổng $x_s$ của các luồng đi qua liên kết đó. Nếu luồng $s$ chỉ đưa một phần $f_{ij}(s)$ qua liên kết thì $\lambda_{ij} = \sum_s f_{ij}(s)\,x_s$ \\
+$\mu_{ij}$ & Tốc độ phục vụ của liên kết: $\mu_{ij} = C_{ij}/L$ (dung lượng chia cho độ dài gói trung bình) \\
+$\gamma$ & Tổng tốc độ đến của toàn mạng: $\gamma = \sum_s x_s$ \\
+$d_{ij}$ & Trễ lan truyền trên liên kết $(i,j)$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{congthuc}[Công thức KIA]
+\[
+N_{ij} = \frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}},\qquad
+N = \sum_{(i,j)} \frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}},\qquad
+T = \frac{1}{\gamma}\sum_{(i,j)}\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}} = \sum_{(i,j)}\alpha_{ij}T_{ij}
+\]
+với $\alpha_{ij} = \lambda_{ij}/\gamma$ và $T_{ij} = \dfrac{1}{\mu_{ij}-\lambda_{ij}}$. Nếu tính thêm \textbf{trễ lan truyền}:
+\[
+T = \frac{1}{\gamma}\sum_{(i,j)}\Bigl(\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}} + \lambda_{ij}\,d_{ij}\Bigr)
+\]
+\textbf{Trễ của một luồng} đi theo đường $p$:\quad
+$T_p = \displaystyle\sum_{(i,j)\in p}\Bigl(\frac{\rho_{ij}}{\mu_{ij}-\lambda_{ij}} + \frac{1}{\mu_{ij}} + d_{ij}\Bigr)$, với $\rho_{ij} = \lambda_{ij}/\mu_{ij}$.
+\end{congthuc}
+
+\begin{vidu}[ba nút A--B--C]
+Liên kết A$\to$B có $\mu=500$ gói/s, liên kết B$\to$C có $\mu = 400$ gói/s. Có ba luồng: $s_1$: A$\to$C với 100 gói/s; $s_2$: A$\to$B với 150 gói/s; $s_3$: B$\to$C với 200 gói/s. Bỏ qua trễ lan truyền.
+
+\loigiai $\lambda_{AB} = 100+150 = 250$,\quad $\lambda_{BC} = 100 + 200 = 300$,\quad $\gamma = 450$ gói/s.
+\[
+N_{AB} = \frac{250}{500-250} = 1,\qquad N_{BC} = \frac{300}{400-300} = 3,\qquad T = \frac{1+3}{450}\approx\dapan{8{,}89\text{ ms}}
+\]
+Trễ riêng của luồng $s_1$ (đi qua cả hai liên kết): $T_{s_1} = \dfrac{1}{250} + \dfrac{1}{100} = 4 + 10 = \dapan{14\text{ ms}}$.
+\end{vidu}

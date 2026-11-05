@@ -1,0 +1,5 @@
+# Ví dụ Round Robin trong sách Silberschatz: q = 4 -> Avg WT = 5.67
+# Name  Arrival  Burst
+P1      0        24
+P2      0        3
+P3      0        3

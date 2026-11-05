@@ -1,0 +1,76 @@
+% =============================================================
+\section{Tổng kết và ôn thi}
+% =============================================================
+
+\subsection{Bảng so sánh tất cả các mô hình}
+
+\begingroup
+\small
+\everymath{\displaystyle}
+\renewcommand{\arraystretch}{2.6}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l >{\raggedright\arraybackslash}p{2.3cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+\toprule
+\normalfont\textbf{Mô hình} & \textbf{$\rho$ / điều kiện} & \textbf{$p_0$} & \textbf{Kết quả đặc trưng} \\
+\midrule
+M/M/1 & $\rho = \frac{\lambda}{\mu}<1$ & $1-\rho$ & $N = \frac{\rho}{1-\rho}$,\ $T = \frac{1}{\mu-\lambda}$,\ $T_Q = \frac{\rho}{\mu-\lambda}$,\ $N_Q = \frac{\rho^2}{1-\rho}$ \\
+M/M/1/$K$ & $\rho=\frac{\lambda}{\mu}$, không cần $<1$ & $\frac{1-\rho}{1-\rho^{K+1}}$ & $p_K = \rho^K p_0$;\ $N = \frac{\rho}{1-\rho}-\frac{(K+1)\rho^{K+1}}{1-\rho^{K+1}}$;\ $T = \frac{N}{\lambda_a}$ \\
+M/M/$c$ & $\rho = \frac{\lambda}{c\mu}<1$ & $\Bigl[\sum_{i=0}^{c-1}\frac{a^i}{i!}+\frac{a^c}{c!(1-\rho)}\Bigr]^{-1}$ & $P_Q = \frac{a^c p_0}{c!(1-\rho)}$;\ $T_Q = \frac{P_Q}{c\mu-\lambda}$;\ $N = a + N_Q$ \\
+M/M/$c$/$c$ & $a = \frac{\lambda}{\mu}$, không cần điều kiện & $\Bigl[\sum_{i=0}^{c}\frac{a^i}{i!}\Bigr]^{-1}$ & $P_B = \frac{a^c}{c!}p_0$ (Erlang B);\ $T = \frac1\mu$;\ $N = a(1-P_B)$ \\
+M/M/$c$/$K$ & $\rho = \frac{\lambda}{c\mu}$, không cần $<1$ & $\Bigl[\sum_{i=0}^{c-1}\frac{a^i}{i!}+\frac{a^c}{c!}\sum_{j=0}^{K-c}\rho^j\Bigr]^{-1}$ & $p_K = \frac{a^c}{c!}\rho^{K-c}p_0$;\ $P_{\text{đợi}}=\sum_{i=c}^{K-1}p_i$;\ dùng $\lambda_a$ \\
+M/M/$\infty$ & không cần điều kiện & $e^{-a}$ & $p_i = \frac{a^i}{i!}e^{-a}$;\ $N = a$;\ $T = \frac1\mu$ \\
+M/G/1 & $\rho = \lambda E[X]<1$ & $1-\rho$ & $T_Q = \frac{\lambda E[X^2]}{2(1-\rho)}$ (P-K) \\
+Jackson & $\frac{\theta_i}{\mu_i}<1\ \forall i$ & $\prod_i(1-\rho_i)$ & $N = \sum\frac{\rho_i}{1-\rho_i}$;\ $T = \frac{N}{\lambda}$ \\
+KIA & $\lambda_{ij}<\mu_{ij}$ & -- & $T = \frac1\gamma\sum\frac{\lambda_{ij}}{\mu_{ij}-\lambda_{ij}}$ \\
+\bottomrule
+\end{tabularx}
+\endgroup
+
+\subsection{Nhận diện mô hình từ đề bài}\label{sec:nhandien}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}X l@{}}
+\toprule
+\textbf{Dấu hiệu trong đề} & \textbf{Kết luận} \\
+\midrule
+“đến theo tiến trình Poisson”, “khoảng cách giữa hai lần đến có phân bố mũ” & A = M \\
+“thời gian phục vụ/xử lý có phân bố mũ”, “độ dài gói có phân bố mũ” & S = M \\
+“thời gian phục vụ cố định”, “gói có độ dài cố định” & S = D \\
+“một quầy”, “một đường truyền”, “một CPU” & $c=1$ \\
+“4 nhân”, “3 quầy”, “$c$ kênh” & $c = 4,\ 3,\ \dots$ \\
+“đủ chỗ cho tất cả”, “bộ nhớ đủ lớn”, “không giới hạn” & $K=\infty$ \\
+“tối đa $K$ khách trong hệ thống” & $K$ \\
+“bộ đệm (chỗ chờ) chứa $B$” & $K = B + c$ \\
+“không có chỗ chờ”, “bận thì cuộc gọi bị mất” & $K = c$ (Erlang B) \\
+Hỏi “xác suất phải đợi” với nhiều server & Erlang C (M/M/$c$) \\
+Hỏi “xác suất từ chối/mất gói/tắc nghẽn” & $K$ hữu hạn, tính $p_K$ \\
+Nhiều router/nút nối nhau, có xác suất định tuyến & Mạng Jackson \\
+Nhiều luồng đi qua các liên kết có dung lượng $C_{ij}$ & KIA \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Mười lỗi hay mất điểm}
+
+\begin{luuy}[Kiểm tra trước khi nộp bài]
+\begin{enumerate}[leftmargin=1.5em]
+  \item \textbf{Không đổi đơn vị}: $\lambda$ theo giờ nhưng thời gian phục vụ theo phút; Byte và bit ($1$ Byte $= 8$ bit); ms và s.
+  \item Đề cho dung lượng $C$ (bps) và độ dài gói $L$ (bit) mà quên tính \textbf{$\mu = C/L$}.
+  \item “Trung bình 5 phút/chuyến” là \textbf{$1/\lambda$}, không phải $\lambda$.
+  \item Với $c$ server dùng nhầm $\rho = \lambda/\mu$. Đúng phải là \textbf{$\rho = \lambda/(c\mu)$}.
+  \item Hệ thống có $K$ hữu hạn mà vẫn dùng $\lambda$ trong định lý Little. Phải dùng \textbf{$\lambda_a = \lambda(1-p_K)$}.
+  \item Nhầm \textbf{$T$} (trong hệ thống) với \textbf{$T_Q$} (trong hàng đợi).
+  \item Coi “bộ đệm $B$” là $K$, trong khi $K = B + c$.
+  \item Nhầm \textbf{Erlang B} (không có hàng đợi, xác suất bị chặn) với \textbf{Erlang C} (có hàng đợi, xác suất phải chờ).
+  \item Mạng có phản hồi: tính trễ toàn mạng phải chia cho $\lambda$ \textbf{từ bên ngoài}, không chia cho $\sum\theta_i$.
+  \item Quên \textbf{kiểm tra điều kiện ổn định} trước khi dùng công thức của hệ thống vô hạn.
+\end{enumerate}
+\end{luuy}
+
+\subsection{Mẹo tính nhanh khi đi thi}
+
+\begin{itemize}
+  \item Lập sẵn \textbf{bảng $a^i/i!$} cho $i = 0,\dots,c$. Mọi công thức M/M/$c$, M/M/$c$/$c$, M/M/$c$/$K$ đều dùng lại bảng này.
+  \item Erlang B: dùng đệ quy $B(k) = \dfrac{aB(k-1)}{k+aB(k-1)}$ thay vì tính giai thừa lớn.
+  \item Tổng cấp số nhân: $\displaystyle\sum_{j=0}^{n}\rho^j = \frac{1-\rho^{n+1}}{1-\rho}$.
+  \item \textbf{Tự kiểm tra} bằng ba hệ thức: $T - T_Q = 1/\mu$;\ $N - N_Q$ = số server bận trung bình ($= a$ khi không từ chối, $= \lambda_a/\mu$ khi có từ chối);\ $\sum p_i = 1$.
+\end{itemize}

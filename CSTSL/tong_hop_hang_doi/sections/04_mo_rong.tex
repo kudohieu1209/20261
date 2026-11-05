@@ -1,0 +1,63 @@
+% =============================================================
+\section{Mô hình mở rộng và quy tắc phục vụ}
+% =============================================================
+
+\begin{luuy}[Phạm vi]
+Mục~\ref{sec:mg1} (M/G/1, M/D/1) \textbf{không có trong slide} của môn. Phần này để tham khảo và để hiểu vì sao giả thiết “phục vụ mũ” lại quan trọng. Mục~\ref{sec:uutien} tóm tắt phần lý thuyết về quy tắc phục vụ có trong slide.
+\end{luuy}
+
+\subsection{M/G/1 và M/D/1}\label{sec:mg1}
+
+Khi thời gian phục vụ $X$ \textbf{không} có phân bố mũ thì không còn chuỗi sinh--tử. Lúc đó dùng công thức \textbf{Pollaczek--Khinchine (P-K)}:
+
+\begin{congthuc}[{Công thức P-K cho M/G/1 ($\rho = \lambda E[X] < 1$)}]
+\[
+T_Q = \frac{\lambda\,E[X^2]}{2(1-\rho)},\qquad E[X^2] = \operatorname{Var}(X) + \bigl(E[X]\bigr)^2,\qquad
+T = T_Q + E[X],\qquad N_Q = \lambda T_Q
+\]
+\end{congthuc}
+
+\begin{center}
+\begin{tabular}{@{}l c c@{}}
+\toprule
+\textbf{Mô hình} & \textbf{$E[X^2]$} & \textbf{$T_Q$} \\
+\midrule
+M/M/1 (mũ) & $2/\mu^2$ & $\dfrac{\rho}{\mu(1-\rho)}$ \\[2mm]
+M/D/1 (hằng số, ví dụ gói cùng độ dài) & $1/\mu^2$ & $\dfrac{\rho}{2\mu(1-\rho)}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Nhận xét:} với cùng $\rho$, thời gian chờ của \textbf{M/D/1 chỉ bằng một nửa M/M/1}. Thời gian phục vụ càng biến động thì hàng đợi càng dài. Ví dụ với $\rho=0{,}8$ và $\mu = 1$: M/M/1 có $T_Q = 4$, M/D/1 có $T_Q = 2$.
+
+\subsection{Quy tắc phục vụ và hàng đợi ưu tiên}\label{sec:uutien}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}l X@{}}
+\toprule
+\textbf{Quy tắc} & \textbf{Mô tả} \\
+\midrule
+FCFS / FIFO & Đến trước phục vụ trước. Đây là mặc định khi đề không nói gì \\
+LCFS / LIFO & Đến sau phục vụ trước (kiểu ngăn xếp) \\
+SIRO (RANDOM) & Chọn ngẫu nhiên, mọi khách đang chờ có xác suất được chọn như nhau \\
+SJF / SPF & Ưu tiên công việc có thời gian xử lý ngắn nhất \\
+RR (Round Robin) & Mỗi khách được phục vụ một lát thời gian cố định, chưa xong thì quay lại cuối hàng \\
+PS (Processor Sharing) & Mọi khách chia đều năng lực phục vụ \\
+FB (Foreground--Background) & Cố gắng đạt hiệu quả như SJF mà không cần biết trước thời gian phục vụ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\textbf{Thuật toán xếp hàng trong router:}
+\begin{itemize}
+  \item \textbf{FIFO Queuing}: đơn giản, không cần cấu hình, nhưng không phân biệt ưu tiên. Một nguồn phát quá nhiều có thể làm tăng trễ của mọi luồng khác.
+  \item \textbf{PQ (Priority Queuing)}: nhiều hàng có mức ưu tiên khác nhau, hàng ưu tiên cao luôn được phục vụ trước. Không tự thích nghi khi điều kiện mạng thay đổi.
+  \item \textbf{CQ (Custom Queuing)}: mỗi loại lưu lượng có một phần hàng đợi riêng, phục vụ xoay vòng (round-robin) để chia băng thông theo tỷ lệ. Không tự thích nghi.
+  \item \textbf{WFQ (Weighted Fair Queuing)}: giống CQ nhưng trọng số được hệ thống tự điều chỉnh (qua báo hiệu QoS), tự thích ứng với lưu lượng.
+\end{itemize}
+
+\textbf{Hàng đợi có ưu tiên}, chia theo cách xử lý khi khách ưu tiên cao đến:
+\begin{itemize}
+  \item \textbf{Không ưu tiên phục vụ trước} (non-preemptive, HOL): khách ưu tiên cao vẫn phải đợi khách đang được phục vụ xong.
+  \item \textbf{Ưu tiên phục vụ trước} (preemptive): ngắt ngay khách ưu tiên thấp. Có ba kiểu: \emph{phục hồi} (resume, làm tiếp từ chỗ dừng), \emph{không lấy mẫu lại} (làm lại từ đầu với thời gian cũ), \emph{lấy mẫu lại} (làm lại với thời gian phục vụ mới).
+\end{itemize}

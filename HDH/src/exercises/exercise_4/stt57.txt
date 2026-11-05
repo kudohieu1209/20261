@@ -1,0 +1,6 @@
+# Exercise 4 - STT 57 - MSSV 20223967 (3967 = b3 b2 b1 b0) - FCFS
+# Name  Arrival  Burst
+T1      3        3
+T2      9        9
+T3      6        2
+T4      7        4

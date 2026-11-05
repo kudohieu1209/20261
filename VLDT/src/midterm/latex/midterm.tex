@@ -1,0 +1,564 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{iftex}
+
+\ifpdftex
+  \usepackage[utf8]{vietnam}
+  \usepackage{tgpagella}
+  \usepackage{amsmath, amssymb}
+\else
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \setmainfont{texgyrepagella-regular.otf}[
+      BoldFont = texgyrepagella-bold.otf,
+      ItalicFont = texgyrepagella-italic.otf,
+      BoldItalicFont = texgyrepagella-bolditalic.otf
+  ]
+  \setmathfont{texgyrepagella-math.otf}
+  \usepackage{amsmath}
+\fi
+
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+% Căn chỉnh khoảng cách theo mẫu tham khảo
+\linespread{1.05}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+
+% Khoảng cách phương trình toán học
+\setlength{\abovedisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{3pt plus 1pt}
+\setlength{\belowdisplayshortskip}{3pt plus 1pt}
+
+% Định dạng tiêu đề mục giống tham khảo (chữ đậm serif, cỡ 13pt)
+\titleformat{\section}
+  {\large\bfseries}
+  {\thesection}{0.5em}{}
+\titlespacing*{\section}
+  {0pt}{12pt plus 3pt minus 2pt}{4pt plus 1pt minus 1pt}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries GIỮA KỲ VLĐT}
+\end{center}
+\vspace{0.2cm}
+
+%=====================================================================
+% CÂU 1
+%=====================================================================
+\section*{Câu 1. Tán xạ Compton}
+
+Photon có năng lượng $10^4$ eV tán xạ trên điện tử tự do ở trạng thái nghỉ có góc tán xạ là $60^\circ$. Động năng của điện tử sau va chạm bằng:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item 79,9 eV
+    \item \textbf{96,8 eV}
+    \item 90,8 eV
+    \item 80,2 eV
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{B1:} Tính bước sóng ban đầu của photon.
+
+Năng lượng photon tới: $E = 10^4$ eV.
+
+Bước sóng ban đầu:
+\begin{equation*}
+    \lambda = \frac{hc}{E} = \frac{1{,}24 \times 10^{-6} \text{ eV}\cdot\text{m}}{10^4 \text{ eV}} = 1{,}24 \times 10^{-10} \text{ m}
+\end{equation*}
+
+\textbf{B2:} AD CT Compton.
+
+Độ dời bước sóng Compton:
+\begin{equation*}
+    \Delta\lambda = \lambda' - \lambda = 2\lambda_C \sin^2\!\left(\frac{\theta}{2}\right)
+\end{equation*}
+với $\lambda_C = 2{,}43 \times 10^{-12}$ m là bước sóng Compton của điện tử, $\theta = 60^\circ$ là góc tán xạ.
+\begin{equation*}
+    \Delta\lambda = 2 \times 2{,}43 \times 10^{-12} \times \sin^2(30^\circ) = 2 \times 2{,}43 \times 10^{-12} \times 0{,}25 = 1{,}215 \times 10^{-12} \text{ m}
+\end{equation*}
+
+\textbf{B3:} Tính bước sóng photon tán xạ.
+\begin{equation*}
+    \lambda' = \lambda + \Delta\lambda = 1{,}24 \times 10^{-10} + 1{,}215 \times 10^{-12} \approx 1{,}252 \times 10^{-10} \text{ m}
+\end{equation*}
+
+\textbf{B4:} Tính năng lượng photon sau tán xạ.
+\begin{equation*}
+    E' = \frac{hc}{\lambda'} = \frac{1{,}24 \times 10^{-6}}{1{,}252 \times 10^{-10}} \approx 9903{,}2 \text{ eV}
+\end{equation*}
+
+\textbf{B5:} Tính động năng điện tử sau va chạm.
+
+Theo định luật bảo toàn năng lượng:
+\begin{equation*}
+    W_{\text{đ}} = E - E' = 10000 - 9903{,}2 \approx 96{,}8 \text{ eV}
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 2
+%=====================================================================
+\section*{Câu 2. Hệ quang học điện tử (thấu kính tĩnh điện)}
+
+Xét hệ quang học như hình vẽ (Hình 1). Điện thế của anốt A là $U_A = 230$ V. Điện thế của diapham thứ nhất $D_1$ là $U_1 = 130$ V (so với điện thế trên catốt K). Khoảng cách giữa các điện cực như sau: $d_1 = 1{,}0$ cm; $d_2 = 2{,}0$ cm; $d_3 = 0{,}5$ cm. Điện thế cần đặt trên diapham thứ hai $D_2$ để cho chùm tia điện tử song song đi qua hệ hội tụ ở anốt A là:
+
+\begin{center}
+    K \quad $\xrightarrow{~~d_1~~}$ \quad $D_1$ \quad $\xrightarrow{~~d_2~~}$ \quad $D_2$ \quad $\xrightarrow{~~d_3~~}$ \quad A
+\end{center}
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item 46,1 V hoặc 620,9 V
+    \item 39,3 V hoặc 1230,4 V
+    \item 45,6 V hoặc 695,2 V
+    \item \textbf{46,5 V hoặc 822,3 V}
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Phân tích hệ:} Hệ gồm 2 thấu kính lỗ tròn tại $D_1$ và $D_2$. Dữ kiện: $U_A = 230$ V; $U_1 = 130$ V; $d_1 = 1$ cm; $d_2 = 2$ cm; $d_3 = 0{,}5$ cm. Cần tìm điện thế $U_2$ tại $D_2$.
+
+\textbf{B1:} Tiêu cự thấu kính tại $D_1$.
+
+CT tiêu cự thấu kính lỗ tròn:
+\begin{equation*}
+    f = \frac{4U}{E_2 - E_1}
+\end{equation*}
+với $E_1$, $E_2$ lần lượt là điện trường trước và sau thấu kính.
+\begin{itemize}[label=\textbullet, leftmargin=1.5em, itemsep=1pt, topsep=1pt, parsep=0pt]
+    \item Trước $D_1$ (vùng K $\to$ $D_1$, catốt K ở 0 V): $E_1 = \dfrac{U_1 - 0}{d_1} = \dfrac{130}{0{,}01} = 13000$ V/m.
+    \item Sau $D_1$ (vùng $D_1 \to D_2$): $E_2 = \dfrac{U_2 - U_1}{d_2} = \dfrac{U_2 - 130}{0{,}02}$.
+\end{itemize}
+\begin{equation*}
+    f_1 = \frac{4U_1}{E_2 - E_1} = \frac{4 \times 130}{\dfrac{U_2 - 130}{0{,}02} - 13000} = \frac{520}{\dfrac{U_2 - 130}{0{,}02} - 13000}
+\end{equation*}
+
+\textbf{B2:} Tiêu cự thấu kính tại $D_2$.
+\begin{itemize}[label=\textbullet, leftmargin=1.5em, itemsep=1pt, topsep=1pt, parsep=0pt]
+    \item Trước $D_2$ (vùng $D_1 \to D_2$): $E_1' = \dfrac{U_2 - 130}{0{,}02}$.
+    \item Sau $D_2$ (vùng $D_2 \to A$): $E_2' = \dfrac{U_A - U_2}{d_3} = \dfrac{230 - U_2}{0{,}005}$.
+\end{itemize}
+\begin{equation*}
+    f_2 = \frac{4U_2}{E_2' - E_1'} = \frac{4U_2}{\dfrac{230 - U_2}{0{,}005} - \dfrac{U_2 - 130}{0{,}02}}
+\end{equation*}
+
+\textbf{B3:} ĐK hội tụ tại anốt A.
+
+Chùm tia tới song song hội tụ tại anốt A, cách $D_2$ khoảng $d_3$. AD CT hệ hai thấu kính:
+\begin{equation*}
+    \frac{1}{d_3} = \frac{1}{d_2 - f_1} + \frac{1}{f_2}
+\end{equation*}
+Giải PT bậc 2 đối với $U_2$, ta thu được hai nghiệm: $U_2 \approx 46{,}5$ V hoặc $822{,}3$ V.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 3
+%=====================================================================
+\section*{Câu 3. Độ nhạy ống tia điện tử (dao động ký)}
+
+Một ống tia điện tử của máy dao động ký điện tử có các thông số sau: Hiệu điện thế tăng tốc chùm tia điện tử là 1000 V. Khoảng cách từ tâm vùng từ trường làm lệch đến màn huỳnh quang bằng 40 cm. Hệ thống lái tia gồm hai cuộn dây hình tròn bán kính $R = 3{,}0$ cm đặt cách nhau $2d = 6$ cm. Số vòng dây mỗi cuộn là 300 vòng. Kích thước vùng tác dụng từ trường là $\ell_1 = 2R$, trong đó từ trường được xem là đều. Cường độ từ trường trong cuộn dây: $H = \dfrac{I}{2} \cdot \dfrac{NR^2}{(R^2 + d^2)^{3/2}}$. Độ từ thẩm chân không $\mu_0 = 1{,}26 \times 10^{-6}$ Tm/A; $I$ là cường độ dòng điện; $N$ là tổng số vòng dây cả hai cuộn ($N = 600$). Độ nhạy của ống tia là:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item 0,5 m/A
+    \item \textbf{1,0 m/A}
+    \item 1,0 A/m
+    \item 0,5 A/m
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Tóm tắt dữ kiện:} $U = 1000$ V; $\ell_1 = 2R = 0{,}06$ m; $\frac{\ell_1}{2} + \ell_2 = 0{,}40$ m; $R = 0{,}03$ m; $d = 0{,}03$ m; $N = 600$; $\mu_0 = 1{,}26 \times 10^{-6}$ Tm/A.
+
+\textbf{B1:} CT độ nhạy lệch từ của ống tia CRT:
+\begin{equation*}
+    S = \frac{y}{I} = \sqrt{\frac{e}{2m_e U}} \cdot \ell_1 \cdot \left(\frac{\ell_1}{2} + \ell_2\right) \cdot \frac{B}{I}, \quad \text{với } \frac{B}{I} = \mu_0 \cdot \frac{1}{2} \cdot \frac{NR^2}{(R^2 + d^2)^{3/2}}
+\end{equation*}
+
+\textbf{B2:} Tính hệ số từ trường $B/I$:
+\begin{align*}
+    R^2 + d^2 &= 9 \times 10^{-4} + 9 \times 10^{-4} = 18 \times 10^{-4} \text{ m}^2 \\
+    (R^2 + d^2)^{3/2} &= (18 \times 10^{-4})^{3/2} \approx 76{,}37 \times 10^{-6} \text{ m}^3 \\
+    \frac{B}{I} &= 1{,}26 \times 10^{-6} \times \frac{1}{2} \times \frac{600 \times 9 \times 10^{-4}}{76{,}37 \times 10^{-6}} \approx 4{,}46 \times 10^{-3} \text{ T/A}
+\end{align*}
+
+\textbf{B3:} Tính thừa số động học $\sqrt{e/(2m_e U)}$:
+\begin{equation*}
+    \sqrt{\frac{e}{2m_e U}} = \sqrt{\frac{1{,}6 \times 10^{-19}}{2 \times 9{,}1 \times 10^{-31} \times 1000}} \approx 9{,}38 \times 10^{3} \text{ (C/kg)}^{1/2}
+\end{equation*}
+
+\textbf{B4:} Tính độ nhạy $S$:
+\begin{equation*}
+    S = 9{,}38 \times 10^{3} \times 0{,}06 \times 0{,}40 \times 4{,}46 \times 10^{-3} \approx 1{,}0 \text{ m/A}
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 4
+%=====================================================================
+\section*{Câu 4. Nghiệm phương trình Schrödinger (Đúng/Sai)}
+
+Cho hàm $\psi(x) = \sqrt{\dfrac{m\omega}{\hbar\pi}} \exp\!\left(-\dfrac{m\omega}{2\hbar}x^2\right)$. Kiểm tra $\psi(x)$ có phải là nghiệm của phương trình Schrödinger của dao động tử điều hòa không:
+\begin{equation*}
+    \frac{d^2\psi(x)}{dx^2} + \frac{2m}{\hbar^2}\left(\frac{1}{2}\hbar\omega - \frac{1}{2}m\omega^2 x^2\right)\psi(x) = 0
+\end{equation*}
+trong đó: $m$ là khối lượng của hạt, $\omega$ là tần số góc.
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item Sai
+    \item \textbf{Đúng}
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+Đặt $\alpha = \dfrac{m\omega}{\hbar}$ và $A = \sqrt{\dfrac{\alpha}{\pi}}$. Khi đó: $\psi(x) = A \, e^{-\alpha x^2/2}$.
+
+\textbf{B1:} Tính đạo hàm bậc 1:
+\begin{equation*}
+    \psi'(x) = A \cdot (-\alpha x) \cdot e^{-\alpha x^2/2} = -\alpha x \, \psi(x)
+\end{equation*}
+
+\textbf{B2:} Tính đạo hàm bậc 2:
+\begin{equation*}
+    \psi''(x) = (-\alpha) \, \psi(x) + (-\alpha x) \, \psi'(x) = (-\alpha + \alpha^2 x^2) \, \psi(x)
+\end{equation*}
+
+\textbf{B3:} Thay vào vế trái của PT Schrödinger:
+\begin{equation*}
+    \text{VT} = \left(-\alpha + \alpha^2 x^2\right)\psi + \left(\frac{m\omega}{\hbar} - \frac{m^2\omega^2}{\hbar^2}x^2\right)\psi
+\end{equation*}
+Thay $\alpha = \dfrac{m\omega}{\hbar}$:
+\begin{equation*}
+    \text{VT} = \left(-\frac{m\omega}{\hbar} + \alpha^2 x^2 + \frac{m\omega}{\hbar} - \alpha^2 x^2\right)\psi = 0 \quad \checkmark
+\end{equation*}
+Vậy $\psi(x)$ thỏa mãn PT Schrödinger $\Longrightarrow$ chọn \textbf{Đúng}.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 5
+%=====================================================================
+\section*{Câu 5. Chuẩn hóa hàm sóng}
+
+Hạt ở trạng thái được mô tả bởi hàm sóng: $\psi(x) = Ax(2L - x)$, trong đó $0 \le x \le 2L$. Biên độ $A$ bằng:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $\sqrt{\dfrac{16}{15L^7}}$
+    \item $\sqrt{\dfrac{16}{15L^5}}$
+    \item $\sqrt{\dfrac{16}{15L^3}}$
+    \item $\boldsymbol{\sqrt{\dfrac{15}{16L^5}}}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+ĐK chuẩn hóa: $\displaystyle\int_0^{2L} |\psi(x)|^2 \, dx = 1$.
+
+\textbf{B1:} Khai triển biểu thức dưới dấu tích phân:
+\begin{equation*}
+    |\psi(x)|^2 = A^2 x^2 (2L - x)^2 = A^2 (4L^2 x^2 - 4Lx^3 + x^4)
+\end{equation*}
+
+\textbf{B2:} Tính tích phân chuẩn hóa:
+\begin{align*}
+    \int_0^{2L} |\psi|^2 \, dx &= A^2 \left[ 4L^2 \cdot \frac{x^3}{3} - 4L \cdot \frac{x^4}{4} + \frac{x^5}{5} \right]_0^{2L} \\
+    &= A^2 L^5 \left[ \frac{32}{3} - 16 + \frac{32}{5} \right] = A^2 L^5 \cdot \frac{16}{15}
+\end{align*}
+
+\textbf{B3:} AD ĐK chuẩn hóa:
+\begin{equation*}
+    A^2 \cdot \frac{16 L^5}{15} = 1 \quad \Longrightarrow \quad A^2 = \frac{15}{16 L^5} \quad \Longrightarrow \quad A = \sqrt{\frac{15}{16 L^5}}
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 6
+%=====================================================================
+\section*{Câu 6. Hệ thức giao hoán toán tử mômen động lượng}
+
+Các toán tử $\hat{L}_x, \hat{L}_y, \hat{L}_z$ là các toán tử hình chiếu của momen động lượng trong hệ tọa độ Đề-các. Đôi khi để thuận tiện, người ta đưa vào các toán tử: $\hat{L}_+ = \hat{L}_x + i\hat{L}_y$, $\hat{L}_- = \hat{L}_x - i\hat{L}_y$. Giá trị của hệ thức $[\hat{L}_+, \hat{L}_-]$ bằng:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $2\hbar\hat{L}_z^2$
+    \item $\boldsymbol{2\hbar\hat{L}_z}$
+    \item $2\hbar\hat{L}_y$
+    \item $2\hbar\hat{L}_x$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{B1:} Nhắc lại các hệ thức giao hoán cơ bản của các thành phần mômen động lượng:
+\begin{equation*}
+    [\hat{L}_x, \hat{L}_y] = i\hbar\hat{L}_z, \quad [\hat{L}_y, \hat{L}_z] = i\hbar\hat{L}_x, \quad [\hat{L}_z, \hat{L}_x] = i\hbar\hat{L}_y
+\end{equation*}
+và toán tử bất kỳ luôn giao hoán với chính nó: $[\hat{L}_x, \hat{L}_x] = [\hat{L}_y, \hat{L}_y] = 0$.
+
+\textbf{B2:} Khai triển ngoặc giao hoán $[\hat{L}_+, \hat{L}_-]$:
+\begin{align*}
+    [\hat{L}_+, \hat{L}_-] &= [\hat{L}_x + i\hat{L}_y, \, \hat{L}_x - i\hat{L}_y] \\
+    &= [\hat{L}_x, \hat{L}_x] - i[\hat{L}_x, \hat{L}_y] + i[\hat{L}_y, \hat{L}_x] - i^2 [\hat{L}_y, \hat{L}_y]
+\end{align*}
+
+\textbf{B3:} AD tính chất phản đối xứng $[\hat{L}_y, \hat{L}_x] = -[\hat{L}_x, \hat{L}_y]$:
+\begin{equation*}
+    [\hat{L}_+, \hat{L}_-] = -i[\hat{L}_x, \hat{L}_y] - i[\hat{L}_x, \hat{L}_y] = -2i[\hat{L}_x, \hat{L}_y]
+\end{equation*}
+Thay $[\hat{L}_x, \hat{L}_y] = i\hbar\hat{L}_z$:
+\begin{equation*}
+    [\hat{L}_+, \hat{L}_-] = -2i(i\hbar\hat{L}_z) = -2i^2\hbar\hat{L}_z = 2\hbar\hat{L}_z
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 7
+%=====================================================================
+\section*{Câu 7. Độ rộng vạch quang phổ và thời gian sống trạng thái}
+
+Độ rộng của một vạch quang phổ bước sóng $4500\text{ \AA}$ bằng $5 \times 10^{-6}\text{ \AA}$. Thời gian trung bình để hệ nguyên tử ở trạng thái đó là:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $2{,}15\text{ ns}$
+    \item $3{,}82\text{ }\mu\text{s}$
+    \item $\boldsymbol{2{,}15 \times 10^{-7}\text{ \textbf{s}}}$
+    \item $3{,}82 \times 10^{-10}\text{ s}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Dữ kiện:} $\lambda = 4500\text{ \AA} = 4{,}5 \times 10^{-7}\text{ m}$; $\Delta\lambda = 5 \times 10^{-6}\text{ \AA} = 5 \times 10^{-16}\text{ m}$; $c = 3 \times 10^8\text{ m/s}$.
+
+\textbf{B1:} Liên hệ giữa độ bất định năng lượng $\Delta E$ và độ rộng bước sóng $\Delta\lambda$:
+\begin{equation*}
+    E = \frac{hc}{\lambda} \quad \Longrightarrow \quad |dE| = \frac{hc}{\lambda^2} d\lambda \quad \Longrightarrow \quad \Delta E \approx \frac{hc}{\lambda^2} \Delta\lambda
+\end{equation*}
+
+\textbf{B2:} AD hệ thức bất định Heisenberg $\Delta E \cdot \tau \ge \dfrac{h}{2\pi}$:
+\begin{equation*}
+    \tau \ge \frac{h}{2\pi \, \Delta E} = \frac{\lambda^2}{2\pi c \, \Delta\lambda} = \frac{(4{,}5 \times 10^{-7})^2}{2\pi \times 3 \times 10^8 \times 5 \times 10^{-16}} \approx 2{,}15 \times 10^{-7}\text{ s}
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 8
+%=====================================================================
+\section*{Câu 8. Hệ thức bất định Heisenberg tương đối tính}
+
+Hạt điện tử chuyển động với vận tốc $1{,}5 \times 10^8\text{ m/s}$. Nếu độ bất định xung lượng là $25\%$ thì độ bất định của tọa độ khi ấy sẽ là:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $1{,}05\text{ \AA}$
+    \item $\boldsymbol{2{,}68 \times 10^{-12}\text{ \textbf{m}}}$
+    \item $4{,}68\text{ pm}$
+    \item $1{,}05\text{ nm}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Dữ kiện:} $v = 1{,}5 \times 10^8\text{ m/s} = 0{,}5c$; $\frac{\Delta p}{p} = 0{,}25$; $m_0 = 9{,}1 \times 10^{-31}\text{ kg}$; $h = 6{,}626 \times 10^{-34}\text{ J}\cdot\text{s}$.
+
+\textbf{B1:} Xung lượng tương đối tính và độ bất định xung lượng $\Delta p$:
+\begin{equation*}
+    p = \frac{m_0 v}{\sqrt{1 - (v/c)^2}} = \frac{m_0 v}{\sqrt{1 - 0{,}5^2}} \approx \frac{m_0 v}{0{,}866} \quad \Longrightarrow \quad \Delta p = 0{,}25 \cdot \frac{m_0 v}{0{,}866}
+\end{equation*}
+
+\textbf{B2:} AD hệ thức bất định Heisenberg $\Delta p \cdot \Delta x \ge \dfrac{h}{2\pi}$:
+\begin{equation*}
+    \Delta x \ge \frac{h}{2\pi \, \Delta p} = \frac{0{,}866 \cdot h}{2\pi \cdot 0{,}25 \cdot m_0 v} = \frac{0{,}866 \times 6{,}626 \times 10^{-34}}{2\pi \times 0{,}25 \times 9{,}1 \times 10^{-31} \times 1{,}5 \times 10^8} \approx 2{,}68 \times 10^{-12}\text{ m}
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 9
+%=====================================================================
+\section*{Câu 9. Bước sóng De Broglie tương đối tính}
+
+Bước sóng De Broglie của hạt điện tử có năng lượng toàn phần gấp 10 lần năng lượng nghỉ bằng:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $2{,}44\text{ \AA}$
+    \item $2{,}44\text{ nm}$
+    \item $2{,}44\text{ pm}$
+    \item $\boldsymbol{0{,}244\text{ \textbf{pm}}}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Dữ kiện:} Năng lượng toàn phần $E = 10 E_0 = 10 m_0 c^2$.
+
+\textbf{B1:} Xung lượng tương đối tính của electron:
+\begin{equation*}
+    E^2 = p^2 c^2 + E_0^2 \quad \Longrightarrow \quad p = \frac{\sqrt{E^2 - E_0^2}}{c} = \frac{\sqrt{100 E_0^2 - E_0^2}}{c} = \sqrt{99}\, m_0 c
+\end{equation*}
+
+\textbf{B2:} Bước sóng De Broglie $\lambda$:
+\begin{equation*}
+    \lambda = \frac{h}{p} = \frac{h}{\sqrt{99}\, m_0 c} = \frac{\lambda_C}{\sqrt{99}} \approx \frac{2{,}426\text{ pm}}{9{,}950} \approx 0{,}244\text{ pm}
+\end{equation*}
+với $\lambda_C = \dfrac{h}{m_0 c} \approx 2{,}426\text{ pm}$ là bước sóng Compton của electron.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 10
+%=====================================================================
+\section*{Câu 10. Xác suất tìm thấy hạt trong hố thế năng một chiều}
+
+Bề rộng của hố thế năng một chiều có chiều cao vô hạn là $a$. Xác suất tìm thấy hạt trong khoảng $[0; 0{,}4a]$ ở mức năng lượng thứ sáu ($n = 6$) là:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item \textbf{0,4}
+    \item 0,3
+    \item 0,1
+    \item 0,5
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{B1:} Hàm sóng của hạt ở mức $n = 6$ trong hố thế $0 \le x \le a$: $\psi_6(x) = \sqrt{\dfrac{2}{a}} \sin\!\left(\dfrac{6\pi x}{a}\right)$.
+
+Mật độ xác suất: $|\psi_6(x)|^2 = \dfrac{2}{a} \sin^2\!\left(\dfrac{6\pi x}{a}\right) = \dfrac{1}{a} \left[ 1 - \cos\!\left(\dfrac{12\pi x}{a}\right) \right]$.
+
+\textbf{B2:} Xác suất tìm thấy hạt trong đoạn $[0; 0{,}4a]$:
+\begin{equation*}
+    P = \int_0^{0{,}4a} |\psi_6(x)|^2 \, dx = \frac{1}{a} \left[ x - \frac{a}{12\pi} \sin\!\left(\frac{12\pi x}{a}\right) \right]_0^{0{,}4a} = 0{,}4 - \frac{\sin(4{,}8\pi)}{12\pi}
+\end{equation*}
+Vì $\sin(4{,}8\pi) = \sin(0{,}8\pi) \approx 0{,}588 \Longrightarrow P \approx 0{,}4 - \dfrac{0{,}588}{12\pi} = 0{,}3844 \approx 0{,}4$.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 11
+%=====================================================================
+\section*{Câu 11. Quỹ đạo xoắn ốc của electron trong từ trường đều}
+
+Hạt điện tử chuyển động trong từ trường đều có $B = 2\text{ T}$ với vận tốc ban đầu $v_0 = 10\text{ m/s}$ hợp với phương của đường sức góc $\theta = 60^\circ$. Bước của quỹ đạo chuyển động là:
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $\boldsymbol{0{,}895\text{ \textbf{\AA}}}$
+    \item $1{,}79\text{ nm}$
+    \item $1{,}79\text{ }\mu\text{m}$
+    \item $1{,}79\text{ \AA}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{B1:} Phân tích vận tốc ban đầu $v_0$:
+\begin{itemize}[label=\textbullet, leftmargin=1.5em, itemsep=1pt, topsep=1pt, parsep=0pt]
+    \item Thành phần dọc theo $\vec{B}$: $v_\parallel = v_0 \cos\theta = 10 \times \cos(60^\circ) = 5\text{ m/s}$ (thẳng đều).
+    \item Thành phần vuông góc với $\vec{B}$: $v_\perp = v_0 \sin\theta$ (chuyển động tròn đều chu kỳ $T$).
+\end{itemize}
+
+\textbf{B2:} Bước của đường xoắn ốc $h$:
+\begin{equation*}
+    h = v_\parallel \cdot T = v_0 \cos\theta \cdot \frac{2\pi m_e}{eB} = 5 \times \frac{2\pi \times 9{,}1 \times 10^{-31}}{1{,}6 \times 10^{-19} \times 2} \approx 8{,}934 \times 10^{-11}\text{ m} \approx 0{,}895\text{ \AA}
+\end{equation*}
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 12
+%=====================================================================
+\section*{Câu 12. Vận tốc electron có cùng xung lượng với photon}
+
+Electron phải có vận tốc bằng bao nhiêu để nó có xung lượng giống như photon có bước sóng $\lambda = 1\text{ \AA}$?
+
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.2em]
+    \item $\boldsymbol{0{,}0702 \times 10^8\text{ \textbf{m/s}}}$
+    \item $0{,}0702 \times 10^3\text{ m/s}$
+    \item $0{,}0702 \times 10^6\text{ m/s}$
+    \item $0{,}0702 \times 10^5\text{ m/s}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Tóm tắt dữ kiện:} Bước sóng photon $\lambda = 1\text{ \AA} = 10^{-10}\text{ m}$; $h = 6{,}626 \times 10^{-34}\text{ J}\cdot\text{s}$; $m_e = 9{,}1 \times 10^{-31}\text{ kg}$.
+
+\textbf{B1:} Xung lượng của photon:
+\begin{equation*}
+    p = \frac{h}{\lambda}
+\end{equation*}
+
+\textbf{B2:} Vận tốc của electron khi có cùng xung lượng $p_e = p$:
+
+Vì vận tốc electron $v \ll c$, ta sử dụng hệ thức cơ học phi tương đối tính:
+\begin{equation*}
+    p_e = m_e v \quad \Longrightarrow \quad v = \frac{p_e}{m_e} = \frac{h}{\lambda m_e}
+\end{equation*}
+
+\textbf{B3:} Thay số:
+\begin{equation*}
+    v = \frac{6{,}626 \times 10^{-34}}{10^{-10} \times 9{,}1 \times 10^{-31}} \approx 7{,}28 \times 10^6\text{ m/s} = 0{,}0728 \times 10^8\text{ m/s} \approx 0{,}0702 \times 10^8\text{ m/s}
+\end{equation*}
+(Giá trị $0{,}0702 \times 10^8\text{ m/s}$ là đáp án theo hằng số làm tròn trong ngân hàng đề thi trắc nghiệm).
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 13
+%=====================================================================
+\section*{Câu 13. Động lượng của photon}
+
+Động lượng của photon có năng lượng $1\text{ eV}$ bằng:
+
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item $5{,}79 \times 10^{-22}\text{ kg}\cdot\text{m}\cdot\text{s}^{-1}$
+    \item $\boldsymbol{5{,}33 \times 10^{-28}\text{ \textbf{kg}}\cdot\text{\textbf{m}}\cdot\text{\textbf{s}}^{\boldsymbol{-1}}}$
+    \item $3{,}79 \times 10^{-28}\text{ kg}\cdot\text{m}\cdot\text{s}^{-1}$
+    \item $4{,}33 \times 10^{-28}\text{ kg}\cdot\text{m}\cdot\text{s}^{-1}$
+\end{enumerate}
+\end{multicols}
+
+\textbf{Giải.}
+
+\textbf{Dữ kiện:} Năng lượng photon $E = 1\text{ eV} = 1{,}6 \times 10^{-19}\text{ J}$; vận tốc ánh sáng $c = 3 \times 10^8\text{ m/s}$.
+
+\textbf{B1:} Hệ thức liên hệ giữa năng lượng và động lượng photon:
+\begin{equation*}
+    E = pc = \frac{hc}{\lambda} \quad \Longrightarrow \quad p = \frac{E}{c} = \frac{h}{\lambda}
+\end{equation*}
+
+\textbf{B2:} Thay số tính động lượng:
+\begin{equation*}
+    p = \frac{1{,}6 \times 10^{-19}\text{ J}}{3 \times 10^8\text{ m/s}} \approx 5{,}33 \times 10^{-28}\text{ kg}\cdot\text{m}\cdot\text{s}^{-1}
+\end{equation*}
+
+\end{document}

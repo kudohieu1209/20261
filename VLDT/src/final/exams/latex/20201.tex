@@ -1,0 +1,97 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{iftex}
+
+\ifpdftex
+  \usepackage[utf8]{vietnam}
+  \usepackage{tgpagella}
+  \usepackage{amsmath, amssymb}
+\else
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \setmainfont{texgyrepagella-regular.otf}[
+      BoldFont = texgyrepagella-bold.otf,
+      ItalicFont = texgyrepagella-italic.otf,
+      BoldItalicFont = texgyrepagella-bolditalic.otf
+  ]
+  \setmathfont{texgyrepagella-math.otf}
+  \usepackage{amsmath}
+\fi
+
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+% Căn chỉnh khoảng cách theo chuẩn quy định
+\linespread{1.05}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+
+% Khoảng cách hiển thị công thức toán
+\setlength{\abovedisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{3pt plus 1pt}
+\setlength{\belowdisplayshortskip}{3pt plus 1pt}
+
+% Định dạng tiêu đề câu hỏi
+\titleformat{\section}
+  {\large\bfseries}
+  {\thesection}{0.5em}{}
+\titlespacing*{\section}
+  {0pt}{12pt plus 3pt minus 2pt}{4pt plus 1pt minus 1pt}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries ĐỀ THI CUỐI KỲ 20201}\\[0.2cm]
+    {\bfseries MÔN THI: VẬT LÝ ĐIỆN TỬ (PH3330)}\\[0.15cm]
+    \textit{(Mã lớp thi: 116629 --- Thời gian làm bài: 90 phút)}
+\end{center}
+\vspace{0.2cm}
+
+%=====================================================================
+% CÂU 1
+%=====================================================================
+\section*{Câu 1. Linh kiện thu quang}
+
+Hãy trình bày nguyên lý hoạt động, ứng dụng và ưu điểm của linh kiện thu quang.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 2
+%=====================================================================
+\section*{Câu 2. Sợi quang giật cấp đa mode}
+
+Cho sợi quang giật cấp đa mode có mức độ thay đổi chiết suất $\Delta = 0{,}02$; chiết suất của vật liệu lõi $1{,}5$. Tính độ giãn xung sáng và bề rộng dải thông cực đại khi khoảng cách truyền là $200\text{ km}$.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 3
+%=====================================================================
+\section*{Câu 3. Nồng độ hạt dẫn và mức Fermi trong Si}
+
+Tính nồng độ điện tử, lỗ trống, vị trí mức Fermi của mẫu Si chứa $5{,}5 \cdot 10^{16}\text{ nguyên tử B trên } 1\text{ cm}^3$ ở nhiệt độ $300\text{ K}$. Xác định các đại lượng trên khi pha thêm vào mẫu các nguyên tử P với nồng độ $1{,}5 \cdot 10^{17}\text{ nguyên tử trên } 1\text{ cm}^3$.
+
+Cho biết nồng độ hạt dẫn riêng trong Si ở $300\text{ K}$ là: $n_i = 1{,}45 \cdot 10^{10}\text{ cm}^{-3}$; $\Delta E_g = 1{,}12\text{ eV}$; $N_c = 2{,}8 \cdot 10^{19}\text{ cm}^{-3}$; $N_v = 1 \cdot 10^{19}\text{ cm}^{-3}$; $kT = 0{,}026\text{ eV}$.
+
+\vspace{0.5cm}
+
+%=====================================================================
+% CÂU 4
+%=====================================================================
+\section*{Câu 4. Grad điện thế và dòng cuốn trong Si}
+
+Giả sử grad điện thế trong mẫu silic tinh thể tinh khiết là $5000\text{ V/cm}$, độ linh động của điện tử và lỗ trống tương ứng là $0{,}12\text{ m}^2/\text{Vs}$ và $0{,}025\text{ m}^2/\text{Vs}$. Hãy xác định:
+
+\begin{enumerate}[label=\alph*., leftmargin=*]
+    \item Tốc độ cuốn của điện tử và lỗ trống.
+    \item Điện trở suất của silic, giả sử nồng độ hạt dẫn riêng là $2{,}1 \cdot 10^{16}\text{ m}^{-3}$.
+    \item Dòng cuốn toàn phần, nếu tiết diện ngang của mẫu là $0{,}09 \cdot 10^{-4}\text{ m}^2$.
+\end{enumerate}
+
+\end{document}

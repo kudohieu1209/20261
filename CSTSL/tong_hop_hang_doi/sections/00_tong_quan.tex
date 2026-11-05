@@ -1,0 +1,88 @@
+% =============================================================
+\section{Bức tranh tổng quan}
+% =============================================================
+
+\subsection{Các mô hình khác nhau ở đâu?}
+
+Mọi mô hình trong môn học đều mô tả cùng một thứ: \textbf{khách hàng} (gói tin, cuộc gọi, tác vụ...) đi vào, \textbf{xếp hàng} nếu các server đều bận, được \textbf{phục vụ} rồi đi ra. Các mô hình chỉ khác nhau ở bốn điểm:
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}l X X@{}}
+\toprule
+\textbf{Điểm khác} & \textbf{Ý nghĩa} & \textbf{Ảnh hưởng tới công thức} \\
+\midrule
+Số server $c$ & Bao nhiêu khách được phục vụ \emph{cùng lúc} & Tốc độ đi của trạng thái $i$ là $\min(i,c)\,\mu$ thay vì luôn bằng $\mu$ \\
+Sức chứa $K$ & Hệ thống chứa tối đa bao nhiêu khách & Có $K$ hữu hạn thì có \textbf{xác suất từ chối} $p_K$ và phải dùng \textbf{$\lambda_a$} \\
+Định nghĩa $\rho$ & $\rho = \lambda/\mu$ (1 server) hay $\rho=\lambda/(c\mu)$ ($c$ server) & Đổi điều kiện ổn định và mọi công thức phía sau \\
+Phân bố phục vụ & Mũ (M), hằng số (D), bất kỳ (G) & M/G/1 không dùng được chuỗi Markov, phải dùng công thức P-K \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection{Bảng ký hiệu dùng xuyên suốt}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}c X c@{}}
+\toprule
+\textbf{Ký hiệu} & \textbf{Ý nghĩa} & \textbf{Đơn vị} \\
+\midrule
+$\lambda$ & Tốc độ đến trung bình (của luồng Poisson) & khách/đơn vị t.gian \\
+$\mu$ & Tốc độ phục vụ của \textbf{một} server; $1/\mu = T_S$ là thời gian phục vụ trung bình & khách/đơn vị t.gian \\
+$c$ & Số server (số quầy, số nhân, số kênh) & -- \\
+$K$ & Sức chứa \textbf{toàn hệ thống} (gồm cả khách đang được phục vụ) & khách \\
+$a = \lambda/\mu$ & Cường độ tải (đơn vị \emph{Erlang}); slide viết là $c\rho$ & Erlang \\
+$\rho$ & Hệ số sử dụng của một server: $\rho=\lambda/\mu$ (1 server), $\rho = \lambda/(c\mu)$ ($c$ server) & -- \\
+$p_i$ & Xác suất trong hệ thống có đúng $i$ khách (ở trạng thái dừng) & -- \\
+$p_0$ & Xác suất hệ thống rỗng & -- \\
+$N,\ N_Q$ & Số khách trung bình trong \textbf{hệ thống}, trong \textbf{hàng đợi} & khách \\
+$T,\ T_Q$ & Thời gian trung bình ở trong \textbf{hệ thống} (trễ), ở trong \textbf{hàng đợi} (chờ) & đơn vị t.gian \\
+$\lambda_a$ & Tốc độ đến \emph{thực tế} (đã trừ khách bị từ chối): $\lambda_a = \lambda(1-p_K)$ & khách/đơn vị t.gian \\
+$P_Q$ & Xác suất khách đến phải chờ (công thức Erlang C) & -- \\
+$P_B$ & Xác suất khách bị chặn/từ chối (công thức Erlang B) & -- \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{luuy}[Hệ thống và hàng đợi khác nhau]
+\textbf{Hệ thống} = hàng đợi + các server, nên luôn có $T = T_Q + \dfrac{1}{\mu}$ và $N = N_Q + (\text{số server bận trung bình})$.\\
+Khi đề hỏi \emph{“thời gian chờ”} thì thường là $T_Q$. Khi đề hỏi \emph{“trễ”} hoặc \emph{“từ lúc vào đến lúc xong”} thì là $T$.
+\end{luuy}
+
+\subsection{Khung 5 bước dùng cho mọi mô hình}\label{sec:khung}
+
+\begin{tomtat}[Quy trình giải một bài hàng đợi]
+\begin{enumerate}[leftmargin=1.6em,label=\textbf{B\arabic*.}]
+  \item \textbf{Nhận diện mô hình} A/S/$c$/$K$ (xem bảng ở mục~\ref{sec:nhandien}). \textbf{Đổi đơn vị} về cùng một đơn vị thời gian.
+  \item \textbf{Tính tham số}: $\lambda$, $\mu$ (nếu đề cho dung lượng kênh $C$ và độ dài gói $L$ thì $\mu = C/L$), $a=\lambda/\mu$, $\rho$. Kiểm tra \textbf{điều kiện ổn định} nếu $K=\infty$.
+  \item \textbf{Vẽ chuỗi sinh--tử}, viết $p_i$ theo $p_0$ (cân bằng luồng giữa hai trạng thái kề nhau).
+  \item \textbf{Tính $p_0$} từ điều kiện $\sum p_i = 1$. Từ đó suy ra các xác suất đề hỏi: $p_K$, $P_Q$, $P_B$...
+  \item \textbf{Tính $N$ hoặc $N_Q$}, sau đó dùng \textbf{định lý Little} để ra $T$, $T_Q$. Nếu có $K$ hữu hạn thì dùng $\lambda_a$ thay cho $\lambda$.
+\end{enumerate}
+\end{tomtat}
+
+\subsection{Bản đồ quan hệ giữa các mô hình}
+
+Mô hình tổng quát nhất trong môn là \textbf{M/M/$c$/$K$}. Các mô hình còn lại là trường hợp riêng của nó:
+
+\begin{center}
+\begin{tikzpicture}[
+  box/.style={draw=accent,very thick,fill=accentsoft,rounded corners=2pt,align=center,font=\sffamily\small,minimum width=27mm,minimum height=10mm},
+  big/.style={box,fill=accent,text=white,font=\sffamily\bfseries},
+  lk/.style={-{Stealth[length=2.2mm]},thick,color=ink!70},
+  lb/.style={font=\footnotesize\itshape,fill=white,inner sep=1.5pt}]
+  \node[big] (gen) at (0,0) {M/M/$c$/$K$};
+  \node[box] (mm1k) at (-5.2,-2.2) {M/M/1/$K$};
+  \node[box] (mmcc) at (0,-2.2) {M/M/$c$/$c$\\[-1pt]\footnotesize(Erlang B)};
+  \node[box] (mmc)  at (5.2,-2.2) {M/M/$c$\\[-1pt]\footnotesize(Erlang C)};
+  \node[box] (mm1)  at (0,-4.6) {M/M/1};
+  \node[box] (mminf) at (5.2,-4.6) {M/M/$\infty$};
+  \draw[lk] (gen) -- node[lb]{$c=1$} (mm1k);
+  \draw[lk] (gen) -- node[lb]{$K=c$} (mmcc);
+  \draw[lk] (gen) -- node[lb]{$K\to\infty$} (mmc);
+  \draw[lk] (mm1k) -- node[lb]{$K\to\infty$} (mm1);
+  \draw[lk] (mmc) -- node[lb]{$c=1$} (mm1);
+  \draw[lk] (mmc) -- node[lb]{$c\to\infty$} (mminf);
+\end{tikzpicture}
+\end{center}
+
+Nhờ quan hệ này, bạn có thể \textbf{tự kiểm tra} công thức. Ví dụ: đặt $c=1$ vào công thức M/M/$c$ phải ra đúng công thức M/M/1.

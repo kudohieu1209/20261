@@ -1,0 +1,154 @@
+% =============================================================
+\section{Các mô hình nhiều server}
+% =============================================================
+
+Với $c$ server, ở trạng thái $i$ có $\min(i,c)$ server đang bận, nên tốc độ đi là $\min(i,c)\,\mu$. Hai đại lượng cần phân biệt:
+\[
+a = \frac{\lambda}{\mu}\ \ (\text{cường độ tải, Erlang}) \qquad\qquad \rho = \frac{\lambda}{c\mu} = \frac{a}{c}\ \ (\text{hệ số sử dụng \emph{mỗi} server})
+\]
+
+% -------------------------------------------------------------
+\subsection{M/M/c (nhiều server, hàng đợi vô hạn) và công thức Erlang C}
+% -------------------------------------------------------------
+
+\begin{nhandien}
+Có \textbf{$c$ server song song} (CPU nhiều nhân, ngân hàng nhiều quầy, $c$ đường truyền), chỗ chờ không giới hạn.\\
+Câu hỏi đặc trưng: \emph{xác suất phải đợi, thời gian chờ trung bình}.
+\end{nhandien}
+
+\textbf{Điều kiện ổn định:} $\rho = \dfrac{\lambda}{c\mu} < 1$.
+
+\bdchain[15mm]{0/-/-/st, 1/\lambda/\mu/st, 2/\lambda/2\mu/st, \cdots/\lambda/3\mu/dots, c{-}1/\lambda/(c{-}1)\mu/st, c/\lambda/c\mu/st, c{+}1/\lambda/c\mu/st, \cdots/\lambda/c\mu/dots}
+
+\begin{congthuc}[Công thức M/M/$c$]
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{@{}l l@{}}
+Phân bố trạng thái & $p_i = \dfrac{a^i}{i!}\,p_0\ \ (i\le c)$,\qquad $p_i = \dfrac{a^c}{c!}\,\rho^{\,i-c}\,p_0 = \dfrac{a^i}{c!\,c^{\,i-c}}\,p_0\ \ (i\ge c)$ \\
+Xác suất rỗng & $p_0 = \Bigl[\displaystyle\sum_{i=0}^{c-1}\frac{a^i}{i!} + \frac{a^c}{c!\,(1-\rho)}\Bigr]^{-1}$ \\
+\textbf{Erlang C} (xác suất phải đợi) & $P_Q = \displaystyle\sum_{i\ge c} p_i = \frac{a^c}{c!\,(1-\rho)}\,p_0$ \\
+Số khách trong hàng & $N_Q = P_Q\,\dfrac{\rho}{1-\rho}$ \\
+Thời gian chờ & $T_Q = \dfrac{N_Q}{\lambda} = \dfrac{P_Q}{c\mu-\lambda}$ \\
+Thời gian trong hệ thống & $T = \dfrac{1}{\mu} + \dfrac{P_Q}{c\mu-\lambda}$ \\
+Số khách trong hệ thống & $N = \lambda T = c\rho + \dfrac{\rho\,P_Q}{1-\rho} = a + N_Q$ \\
+\end{tabular}
+\par\smallskip
+Số server bận trung bình $= a$. Phân bố thời gian chờ: $P\{T_{\text{chờ}}>t\} = P_Q\,e^{-(c\mu-\lambda)t}$.
+\end{congthuc}
+
+\begin{luuy}[Bẫy thường gặp với M/M/$c$]
+Hay nhầm $\rho$ thành $\lambda/\mu$. Với $c$ server phải dùng $\rho = \lambda/(c\mu)$. Còn $\lambda/\mu = a$ có thể lớn hơn 1 mà hệ thống vẫn ổn định.\\
+\emph{Tự kiểm tra:} thay $c=1$ thì $p_0 = 1-\rho$, $P_Q = \rho$, $T = 1/(\mu-\lambda)$, đúng bằng công thức M/M/1.
+\end{luuy}
+
+\begin{vidu}[CPU 4 nhân, bộ nhớ đủ lớn (slide 61)]
+Tác vụ đến theo Poisson, trung bình 20 task/$\mu$s. Thời gian xử lý có phân bố mũ, trung bình 0,08 $\mu$s. CPU có 4 nhân. Tính thời gian trung bình từ lúc nhận yêu cầu đến khi hoàn thành, và số tác vụ trung bình trong RAM.
+
+\loigiai $\lambda = 20$, $\mu = 1/0{,}08 = 12{,}5$ (task/$\mu$s), $c=4$, nên $a = 1{,}6$ và $\rho = 0{,}4<1$.
+
+Bảng $a^i/i!$: \ 1;\ 1{,}6;\ 1{,}28;\ 0{,}6827;\ 0{,}2731 \ (với $i=0..4$). Tổng 4 số đầu là 4{,}5627.
+\[
+p_0 = \Bigl[4{,}5627 + \frac{0{,}2731}{0{,}6}\Bigr]^{-1} = \frac{1}{5{,}0178}\approx 0{,}1993,
+\qquad P_Q = \frac{0{,}2731}{0{,}6}\cdot 0{,}1993 \approx 0{,}0907
+\]
+\[
+N_Q = 0{,}0907\cdot\frac{0{,}4}{0{,}6}\approx 0{,}0605,\qquad
+T_Q = \frac{0{,}0605}{20} \approx 0{,}0030\ \mu\text{s},\qquad
+T = 0{,}08 + 0{,}0030 \approx \dapan{0{,}083\ \mu\text{s}}
+\]
+\[
+N = \lambda T = 1{,}6 + 0{,}0605 \approx \dapan{1{,}66 \text{ tác vụ}}
+\]
+Đề không cho dung lượng một tác vụ nên “lượng bộ nhớ” tính bằng số tác vụ.
+\end{vidu}
+
+% -------------------------------------------------------------
+\subsection{M/M/c/c (không có hàng đợi) và công thức Erlang B}
+% -------------------------------------------------------------
+
+\begin{nhandien}
+$c$ kênh/server và \textbf{không có chỗ chờ}. Khách đến lúc tất cả kênh đều bận thì bị \textbf{mất ngay}.\\
+\emph{Ví dụ kinh điển:} tổng đài điện thoại có $c$ trung kế. Câu hỏi đặc trưng: \emph{xác suất tắc nghẽn, cần bao nhiêu kênh}.
+\end{nhandien}
+
+\textbf{Không cần điều kiện ổn định.} Không có hàng đợi nên $N_Q = 0$, $T_Q=0$.
+
+\bdchain[16mm]{0/-/-/st, 1/\lambda/\mu/st, 2/\lambda/2\mu/st, \cdots/\lambda/3\mu/dots, c{-}1/\lambda/(c{-}1)\mu/st, c/\lambda/c\mu/st}
+
+\begin{congthuc}[Công thức M/M/$c$/$c$]
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{@{}l l@{}}
+Phân bố trạng thái & $p_i = \dfrac{a^i}{i!}\,p_0$,\qquad $p_0 = \Bigl[\displaystyle\sum_{i=0}^{c}\frac{a^i}{i!}\Bigr]^{-1}$,\qquad $i = 0,\dots,c$ \\
+\textbf{Erlang B} (xác suất tắc nghẽn) & $P_B = p_c = \dfrac{a^c/c!}{\displaystyle\sum_{i=0}^{c} a^i/i!}$ \\
+Tính bằng đệ quy (dễ bấm máy) & $B(0)=1,\qquad B(k) = \dfrac{a\,B(k-1)}{k + a\,B(k-1)}$,\qquad $P_B = B(c)$ \\
+Lưu lượng được phục vụ & $\lambda_a = \lambda(1-P_B)$,\qquad $N = a\,(1-P_B)$ (số kênh bận trung bình) \\
+Thời gian trong hệ thống & $T = 1/\mu$ \\
+\end{tabular}
+\end{congthuc}
+
+\begin{vidu}[tổng đài nội bộ]
+Cuộc gọi đến theo Poisson, trung bình 2 cuộc/phút. Thời gian đàm thoại trung bình 2 phút (phân bố mũ). Tổng đài có 5 kênh. (a) Tính xác suất một cuộc gọi bị chặn. (b) Cần ít nhất bao nhiêu kênh để xác suất chặn dưới 1\%?
+
+\loigiai $a = \lambda/\mu = 2\cdot 2 = 4$ Erlang.
+
+(a) $P_B = \dfrac{4^5/5!}{1+4+8+10{,}667+10{,}667+8{,}533} = \dfrac{8{,}533}{42{,}867}\approx \dapan{0{,}199}$. Khoảng 20\% cuộc gọi bị chặn.
+
+(b) Tính tiếp bằng đệ quy $B(k)$:
+\begin{center}
+\begin{tabular}{@{}c|ccccccc@{}}
+$c$ & 5 & 6 & 7 & 8 & 9 & 10 & 11\\ \hline
+$P_B$ & 0,199 & 0,117 & 0,063 & 0,030 & 0,013 & \textbf{0,0053} & 0,0019
+\end{tabular}
+\end{center}
+Vậy cần \dapan{c = 10} kênh.
+\end{vidu}
+
+% -------------------------------------------------------------
+\subsection{M/M/c/K (nhiều server, sức chứa hữu hạn): mô hình tổng quát}
+% -------------------------------------------------------------
+
+\begin{nhandien}
+$c$ server, hệ thống chứa tối đa $K$ khách ($c \le K$). Câu hỏi có \textbf{cả} “xác suất bị từ chối” \textbf{và} “xác suất phải đợi”.
+\end{nhandien}
+
+\bdchain[15mm]{0/-/-/st, 1/\lambda/\mu/st, \cdots/\lambda/2\mu/dots, c/\lambda/c\mu/st, c{+}1/\lambda/c\mu/st, \cdots/\lambda/c\mu/dots, K{-}1/\lambda/c\mu/st, K/\lambda/c\mu/st}
+
+\begin{congthuc}[Công thức M/M/$c$/$K$]
+\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{@{}l l@{}}
+Phân bố trạng thái & $p_i = \dfrac{a^i}{i!}\,p_0\ \ (0\le i\le c)$,\qquad $p_i = \dfrac{a^c}{c!}\,\rho^{\,i-c}\,p_0\ \ (c\le i\le K)$ \\
+Xác suất rỗng & $p_0 = \Bigl[\displaystyle\sum_{i=0}^{c-1}\frac{a^i}{i!} + \frac{a^c}{c!}\sum_{j=0}^{K-c}\rho^{\,j}\Bigr]^{-1}$,\qquad $\displaystyle\sum_{j=0}^{K-c}\rho^{\,j} = \frac{1-\rho^{K-c+1}}{1-\rho}$ \\
+\textbf{Xác suất từ chối} & $p_K = \dfrac{a^c}{c!}\,\rho^{\,K-c}\,p_0$ \\
+\textbf{Xác suất phải đợi} & $P_{\text{đợi}} = \displaystyle\sum_{i=c}^{K-1} p_i = \frac{a^c}{c!}\cdot\frac{1-\rho^{K-c}}{1-\rho}\cdot p_0$ \\
+Số khách trong hàng & $N_Q = \displaystyle\sum_{i=c}^{K}(i-c)\,p_i$ \\
+Các đại lượng còn lại & $\lambda_a = \lambda(1-p_K)$,\quad $N = N_Q + \dfrac{\lambda_a}{\mu}$,\quad $T = \dfrac{N}{\lambda_a}$,\quad $T_Q = \dfrac{N_Q}{\lambda_a}$ \\
+\end{tabular}
+\par\smallskip
+Khi $\rho = 1$ thì thay $\sum_{j=0}^{K-c}\rho^j$ bằng $K-c+1$. \textbf{Không cần điều kiện ổn định.}
+\end{congthuc}
+
+\begin{vidu}[CPU 4 nhân, cache tối đa 10 tác vụ (slide 61)]
+Cùng số liệu với ví dụ M/M/4 ở trên nhưng hệ thống chỉ chứa tối đa $K=10$ tác vụ. Tính xác suất một tác vụ bị từ chối và xác suất phải đợi.
+
+\loigiai $a=1{,}6$, $\rho=0{,}4$, $c=4$, $K=10$, nên $K-c = 6$.
+\[
+p_0 = \Bigl[4{,}5627 + 0{,}2731\cdot\frac{1-0{,}4^7}{0{,}6}\Bigr]^{-1} = \frac{1}{5{,}0170}\approx 0{,}1993
+\]
+\[
+p_{10} = 0{,}2731\cdot 0{,}4^6\cdot 0{,}1993 \approx \dapan{2{,}23\times10^{-4}}
+\qquad
+P_{\text{đợi}} = 0{,}2731\cdot\frac{1-0{,}4^6}{0{,}6}\cdot0{,}1993 \approx \dapan{0{,}0903}
+\]
+Nếu “10 tác vụ” chỉ là phần chờ trong cache thì $K = 10+4 = 14$. Hãy đọc kỹ đề.
+\end{vidu}
+
+% -------------------------------------------------------------
+\subsection{\texorpdfstring{M/M/$\infty$}{M/M/∞} (vô số server)}
+% -------------------------------------------------------------
+
+Mỗi khách đến đều được phục vụ ngay, không ai phải chờ.\quad $\mu_i = i\mu$.
+\begin{congthuc}[Công thức M/M/$\infty$]
+\[
+p_i = \frac{a^i}{i!}\,e^{-a}\ \ (\text{phân bố Poisson}),\qquad N = a = \frac{\lambda}{\mu},\qquad T = \frac{1}{\mu},\qquad N_Q = T_Q = 0
+\]
+\end{congthuc}
+\emph{Ứng dụng:} mô hình hóa số người dùng đang online, số phiên đang mở, khi tài nguyên coi như không giới hạn.

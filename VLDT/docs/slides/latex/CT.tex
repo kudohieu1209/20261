@@ -1,0 +1,758 @@
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[utf8]{vietnam}
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{tgpagella}
+\usepackage{microtype}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+\linespread{1.05}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3.5pt plus 1pt minus 1pt}
+
+% Khoảng cách phương trình hiển thị gọn gàng theo chuẩn học thuật
+\setlength{\abovedisplayskip}{4pt plus 1.5pt minus 1.5pt}
+\setlength{\belowdisplayskip}{4pt plus 1.5pt minus 1.5pt}
+\setlength{\abovedisplayshortskip}{2pt plus 1pt}
+\setlength{\belowdisplayshortskip}{2pt plus 1pt}
+
+% Định dạng tiêu đề mục theo phong cách học thuật trang nhã
+\titleformat{\section}
+  {\normalfont\large\bfseries}{\thesection}{1em}{}
+\titlespacing*{\section}{0pt}{12pt plus 2pt minus 2pt}{5pt plus 1pt minus 1pt}
+
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{8pt plus 1.5pt minus 1.5pt}{3pt plus 1pt minus 1pt}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{6pt plus 1pt minus 1pt}{2pt plus 1pt minus 1pt}
+
+\pagestyle{plain}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries TỔNG HỢP CÔNG THỨC VẬT LÝ ĐIỆN TỬ} \\[0.2cm]
+    {\small\textbf{HỌC PHẦN: PH3330 -- ĐẠI HỌC BÁCH KHOA HÀ NỘI}}
+\end{center}
+\vspace{0.2cm}
+
+%=============================================================================
+\section*{CHƯƠNG I. CHUYỂN ĐỘNG CỦA HẠT MANG ĐIỆN TRONG CHÂN KHÔNG}
+%=============================================================================
+
+\subsection*{1. Quỹ đạo của điện tử trong điện trường đều ($\vec{E} = \text{const}$)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Phương trình chuyển động và gia tốc:}
+  \begin{equation*}
+      m\vec{a} = m\frac{d\vec{v}}{dt} = q\vec{E} = -e\vec{E} \implies \vec{a} = -\frac{e}{m}\vec{E}
+  \end{equation*}
+
+  \item \textbf{Vận tốc tức thời:}
+  \begin{equation*}
+      \vec{v}(t) = \vec{v}_0 + \vec{a}(t - t_0) = \vec{v}_0 - \frac{e}{m}\vec{E}(t - t_0)
+  \end{equation*}
+
+  \item \textbf{Bán kính vector tọa độ:}
+  \begin{equation*}
+      \vec{r}(t) = \vec{r}_0 + \vec{v}_0(t - t_0) + \frac{1}{2}\vec{a}(t - t_0)^2 = \vec{r}_0 + \vec{v}_0(t - t_0) - \frac{e}{2m}\vec{E}(t - t_0)^2
+  \end{equation*}
+
+  \item \textbf{Quỹ đạo của điện tử trong bản lái tia tĩnh điện:}
+  Điện tử bay dọc theo trục $Ox$ với vận tốc ban đầu $v_0 = \sqrt{\dfrac{2eU_0}{m}}$ qua hai bản cực phẳng song song chiều dài $l_1$, cách nhau $d$, dưới điện thế lệch $U_k$ (điện trường $\vec{E}$ hướng theo trục $Oz$, $E = U_k/d$). Quỹ đạo chuyển động trong mặt phẳng $xOz$ ($y = 0$) là một nhánh Parabol:
+  \begin{equation*}
+      z(x) = \frac{e U_k}{2 m d v_0^2} x^2 = \boldsymbol{\frac{U_k}{4 d U_0} x^2} \qquad (0 \le x \le l_1)
+  \end{equation*}
+
+  \item \textbf{Độ lệch của chùm điện tử trên màn huỳnh quang:}
+  Màn đặt cách điểm giữa hai bản lái tia một đoạn $L = \dfrac{l_1}{2} + l_2$:
+  \begin{equation*}
+      D = z(l_1) + \left.\frac{dz}{dx}\right|_{x=l_1} \cdot l_2 = \boldsymbol{\frac{U_k l_1}{2 d U_0}\left(\frac{l_1}{2} + l_2\right) = \frac{U_k l_1 L}{2 d U_0}}
+  \end{equation*}
+
+  \item \textbf{Độ nhạy tĩnh điện của ống phóng điện tử (CRT):}
+  \begin{equation*}
+      S_E = \frac{|D|}{U_k} = \boldsymbol{\frac{l_1}{2 d U_0}\left(\frac{l_1}{2} + l_2\right) = \frac{l_1 L}{2 d U_0}} \quad (\text{đơn vị: mm/V hay m/V})
+  \end{equation*}
+\end{itemize}
+
+\subsection*{2. Quỹ đạo của điện tử trong từ trường đều ($\vec{B} = \text{const}$)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Lực từ Lorentz đóng vai trò là lực hướng tâm:}
+  Khi điện tử bay vào từ trường với $\vec{v}_0 \perp \vec{B}$, lực Lorentz $\vec{F}_L = -e(\vec{v}_0 \times \vec{B})$ có độ lớn $F_L = e v_0 B$, vuông góc với quỹ đạo:
+  \begin{equation*}
+      F_{ht} = \frac{m v_0^2}{R} = e v_0 B
+  \end{equation*}
+
+  \item \textbf{Bán kính quỹ đạo tròn của điện tử:}
+  \begin{equation*}
+      R = \frac{m v_0}{e B} = \boldsymbol{\frac{\sqrt{2 m e U_0}}{e B} = \frac{1}{B}\sqrt{\frac{2m U_0}{e}}}
+  \end{equation*}
+
+  \item \textbf{Chu kỳ, tần số và tần số góc cyclotron:}
+  \begin{equation*}
+      T = \frac{2\pi R}{v_0} = \boldsymbol{\frac{2\pi m}{e B}}, \qquad f = \frac{1}{T} = \boldsymbol{\frac{e B}{2\pi m}}, \qquad \omega = 2\pi f = \boldsymbol{\frac{e B}{m}}
+  \end{equation*}
+  *(Nhận xét: Chu kỳ và tần số cyclotron không phụ thuộc vào bán kính $R$ và vận tốc $v_0$ của hạt).*
+
+  \item \textbf{Quỹ đạo khi qua vùng từ trường hẹp bề rộng $l_1$ ($R \gg l_1$):}
+  Quỹ đạo gần đúng là cung parabol trong mặt phẳng $xOz$ ($y = 0$):
+  \begin{equation*}
+      z(x) \approx \frac{1}{2} a_z t^2 = \frac{1}{2} \frac{e B}{m v_0} x^2 = \boldsymbol{\frac{1}{2} \sqrt{\frac{e}{2 m U_0}} B x^2}
+  \end{equation*}
+
+  \item \textbf{Độ lệch trên màn huỳnh quang:}
+  \begin{equation*}
+      D = \theta \left(\frac{l_1}{2} + l_2\right) \approx \frac{l_1}{R}\left(\frac{l_1}{2} + l_2\right) = \boldsymbol{\sqrt{\frac{e}{2 m U_0}} B l_1 \left(\frac{l_1}{2} + l_2\right)}
+  \end{equation*}
+
+  \item \textbf{Độ nhạy từ trường:}
+  \begin{equation*}
+      S_M = \frac{D}{I} = \boldsymbol{\sqrt{\frac{e}{2 m U_0}} l_1 \left(\frac{l_1}{2} + l_2\right) \frac{B}{I}} \quad (\text{đơn vị: mm/A})
+  \end{equation*}
+  Với cặp cuộn dây Helmholtz bán kính $R_H$, gồm $W$ vòng dây mỗi cuộn, đặt cách nhau đoạn $R_H$:
+  \begin{equation*}
+      B = \frac{8 \mu_0 W I}{5\sqrt{5} R_H} \implies \frac{B}{I} = \frac{8 \mu_0 W}{5\sqrt{5} R_H}
+  \end{equation*}
+\end{itemize}
+
+\subsection*{3. Sự tương tự quang -- cơ (Quang học điện tử)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Hệ thức tương đương giữa chiết suất và điện thế:}
+  \begin{equation*}
+      n \sim v \sim \boldsymbol{\sqrt{U}}
+  \end{equation*}
+
+  \item \textbf{Định luật khúc xạ quang học điện tử:}
+  Khi chùm điện tử đi qua mặt phân cách giữa hai miền có điện thế $U_1$ và $U_2$:
+  \begin{equation*}
+      \boldsymbol{\frac{\sin\alpha}{\sin\beta} = \frac{v_2}{v_1} = \sqrt{\frac{U_2}{U_1}}}
+  \end{equation*}
+  ($\alpha$: góc tới; $\beta$: góc khúc xạ so với pháp tuyến của mặt đẳng thế).
+
+  \item \textbf{Điều kiện xảy ra phản xạ toàn phần ($U_2 < U_1$):}
+  \begin{equation*}
+      \sin\alpha \ge \sin\alpha_{gh} = \boldsymbol{\sqrt{\frac{U_2}{U_1}}}
+  \end{equation*}
+
+  \item \textbf{Điều kiện để điện tử rơi trên bề mặt kim loại:}
+  Điện tử có năng lượng ban đầu $eU_0$, góc tới $\alpha$. Để hạt tới được bề mặt kim loại có điện thế hãm $U_{\text{bề mặt KL}}$:
+  \begin{equation*}
+      \frac{1}{2} m v_{0z}^2 = \frac{1}{2} m v_0^2 \cos^2\alpha \ge e U_{\text{bề mặt KL}} \iff e U_0 (1 - \sin^2\alpha) \ge e U_{\text{bề mặt KL}}
+  \end{equation*}
+  \begin{equation*}
+      \implies \boldsymbol{\sin\alpha \le \sqrt{1 - \frac{U_{\text{bề mặt KL}}}{U_0}}}
+  \end{equation*}
+\end{itemize}
+
+\subsection*{4. Thấu kính tĩnh điện và Hiệu chỉnh tương đối tính}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Tiêu cự của thấu kính một màng chắn phẳng (diapham):}
+  \begin{equation*}
+      \boldsymbol{f = \frac{4 U_D}{E_2 - E_1}}
+  \end{equation*}
+  Trong đó điện trường trước và sau màng chắn:
+  \begin{equation*}
+      E_1 = \frac{U_D - U_G}{d_1}, \qquad E_2 = \frac{U_A - U_D}{d_2}
+  \end{equation*}
+  + $E_2 - E_1 > 0 \implies f > 0$: Thấu kính có tính hội tụ.\\
+  + $E_2 - E_1 < 0 \implies f < 0$: Thấu kính có tính phân kỳ.
+
+  \item \textbf{Công thức thấu kính mỏng (công thức Gauss):}
+  \begin{equation*}
+      \boldsymbol{\frac{1}{f} = \frac{1}{d} + \frac{1}{d'}}
+  \end{equation*}
+
+  \item \textbf{Hệ hai thấu kính đồng trục cách nhau khoảng $L$:}
+  \begin{equation*}
+      \frac{1}{f_1} = \frac{1}{d_1} + \frac{1}{d_1'}, \qquad \frac{1}{f_2} = \frac{1}{d_2} + \frac{1}{d_2'} \quad \text{với } d_2 = L - d_1'
+  \end{equation*}
+
+  \item \textbf{Khối lượng tương đối tính khi vận tốc tiệm cận tốc độ ánh sáng ($v \to c$):}
+  \begin{equation*}
+      \boldsymbol{m = \frac{m_0}{\sqrt{1 - \dfrac{v^2}{c^2}}} = \gamma m_0}
+  \end{equation*}
+
+  \item \textbf{Vận tốc hạt được gia tốc bởi hiệu điện thế $U$ (thuyết tương đối):}
+  Động năng $T = (m - m_0)c^2 = eU \implies mc^2 = m_0 c^2 + eU$:
+  \begin{equation*}
+      \boldsymbol{v = c \sqrt{1 - \frac{1}{\left(1 + \dfrac{eU}{m_0 c^2}\right)^2}}}
+  \end{equation*}
+  + Khi hiệu điện thế nhỏ ($eU \ll m_0 c^2 \approx 511\text{ keV}$): $v \approx \boldsymbol{\sqrt{\dfrac{2eU}{m_0}}}$.
+
+  \item \textbf{Chiết suất hiệu dụng tương đối tính của quang học điện tử:}
+  \begin{equation*}
+      n \sim p = \frac{\sqrt{T(T + 2m_0 c^2)}}{c} = \boldsymbol{\sqrt{\frac{2m_0 e U}{c^2}\left(1 + \frac{eU}{2m_0 c^2}\right)}} \propto \boldsymbol{\sqrt{U\left(1 + \frac{eU}{2m_0 c^2}\right)}}
+  \end{equation*}
+\end{itemize}
+
+\vspace{0.3cm}
+
+%=============================================================================
+\section*{CHƯƠNG II. VẬT LÝ LƯỢNG TỬ}
+%=============================================================================
+
+\subsection*{1. Hiện tượng quang điện ngoài}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Công thức Einstein cho hiện tượng quang điện:}
+  \begin{equation*}
+      h\nu = \varphi + W_{\text{đ}\max} \iff \frac{hc}{\lambda} = \varphi + \frac{1}{2} m v_{0\max}^2
+  \end{equation*}
+
+  \item \textbf{Động năng ban đầu cực đại và thế hãm $U_h$:}
+  \begin{equation*}
+      \boldsymbol{T_{\max} = W_{\text{đ}\max} = h\nu - \varphi = \frac{hc}{\lambda} - \varphi = e U_h}
+  \end{equation*}
+
+  \item \textbf{Giới hạn quang điện (bước sóng ngưỡng):}
+  \begin{equation*}
+      \boldsymbol{\lambda_0 = \frac{hc}{\varphi}} \qquad (\text{ĐK xảy ra quang điện: } \lambda \le \lambda_0 \text{ hay } \nu \ge \nu_0 = \frac{\varphi}{h})
+  \end{equation*}
+\end{itemize}
+
+\subsection*{2. Hiệu ứng Compton (Tán xạ photon trên electron tự do)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Định luật bảo toàn năng lượng toàn phần:}
+  \begin{equation*}
+      \boldsymbol{\frac{hc}{\lambda} + m_0 c^2 = \frac{hc}{\lambda'} + mc^2 = \frac{hc}{\lambda'} + \sqrt{p_e^2 c^2 + m_0^2 c^4}}
+  \end{equation*}
+
+  \item \textbf{Độ biến thiên bước sóng tán xạ (Hệ thức Compton):}
+  \begin{equation*}
+      \boldsymbol{\Delta\lambda = \lambda' - \lambda = \lambda_C (1 - \cos\theta) = 2\lambda_C \sin^2\frac{\theta}{2}}
+  \end{equation*}
+  Trong đó bước sóng Compton của electron:
+  \begin{equation*}
+      \boldsymbol{\lambda_C = \frac{h}{m_0 c} \approx 0{,}02426\text{ \AA} = 2{,}426 \cdot 10^{-12}\text{ m}}
+  \end{equation*}
+  + Tán xạ góc $\theta = 90^\circ$: $\Delta\lambda = \lambda_C \approx 0{,}0243\text{ \AA}$.\\
+  + Tán xạ ngược cực đại $\theta = 180^\circ$: $\Delta\lambda_{\max} = 2\lambda_C \approx 0{,}0485\text{ \AA}$.
+
+  \item \textbf{Động năng của electron giật lùi:}
+  \begin{equation*}
+      \boldsymbol{T_e = E - E' = hc\left(\frac{1}{\lambda} - \frac{1}{\lambda'}\right)} = E \frac{\alpha (1 - \cos\theta)}{1 + \alpha (1 - \cos\theta)} \quad \left(\text{với } \alpha = \frac{E}{m_0 c^2}\right)
+  \end{equation*}
+\end{itemize}
+
+\subsection*{3. Bảng đối chiếu Lưỡng tính sóng -- hạt (Tương quan Quang -- Cơ)}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{l >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\textbf{Đại lượng vật lý} & \textbf{Photon (Trường bức xạ)} & \textbf{Hạt vi mô (Sóng de Broglie)} \\
+\midrule
+Vận tốc & $v = c = \lambda \nu$ & $v < c$ \\
+Khối lượng nghỉ & $m_0 = 0$ & $m_0 > 0$ \\
+Năng lượng toàn phần & $E = h\nu = \hbar\omega = \dfrac{hc}{\lambda}$ & $E = \dfrac{p^2}{2m}$ (cổ điển) hoặc $E = \sqrt{p^2 c^2 + m_0^2 c^4}$ \\
+Động lượng & $p = \dfrac{E}{c} = \dfrac{h}{\lambda} = \hbar k$ & $p = mv = \dfrac{h}{\lambda} = \hbar k$ \\
+Bước sóng liên kết & $\lambda = \dfrac{c}{\nu} = \dfrac{hc}{E}$ & $\lambda = \boldsymbol{\dfrac{h}{p} = \dfrac{h}{mv}}$ (Hệ thức de Broglie) \\
+Hằng số Dirac & $\hbar = \dfrac{h}{2\pi} \approx 1{,}055 \cdot 10^{-34}\text{ J}\cdot\text{s}$ & $\hbar = \dfrac{h}{2\pi} \approx 6{,}582 \cdot 10^{-16}\text{ eV}\cdot\text{s}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\subsection*{4. Nhiễu xạ sóng de Broglie, Hệ thức Bragg và Cường độ bức xạ}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Điều kiện cực đại phản xạ Bragg (Nhiễu xạ sóng vật chất trên tinh thể):}
+  \begin{equation*}
+      \boldsymbol{2d \sin\theta = n\lambda} \qquad (n = 1, 2, 3\dots)
+  \end{equation*}
+  ($d$: khoảng cách giữa các mặt phẳng song song của mạng tinh thể; $\theta$: góc trượt Bragg).
+
+  \item \textbf{Bước sóng de Broglie của electron được gia tốc bởi điện thế $U$:}
+  \begin{equation*}
+      \boldsymbol{\lambda = \frac{h}{\sqrt{2m_0 e U}} \approx \frac{12{,}27}{\sqrt{U\text{ (V)}}}\text{ (\AA)} = \sqrt{\frac{150}{U\text{ (V)}}}\text{ (\AA)}}
+  \end{equation*}
+
+  \item \textbf{Cường độ bức xạ và thời gian hấp thụ quang điện cổ điển:}
+  + Cường độ bức xạ tại khoảng cách $R$ từ nguồn công suất bức xạ $P_b$:
+  \begin{equation*}
+      I = \frac{P_b}{S} = \frac{P_b}{4\pi R^2} \quad (\text{W/m}^2)
+  \end{equation*}
+  + Công suất nguyên tử tiết diện $S_a = \dfrac{\pi d^2}{4}$ hấp thụ:
+  \begin{equation*}
+      P_a = I \cdot S_a = \frac{P_b}{4\pi R^2} \cdot \frac{\pi d^2}{4} = \frac{P_b d^2}{16 R^2}
+  \end{equation*}
+  + Thời gian tích lũy đủ công thoát $\varphi$:
+  \begin{equation*}
+      \boldsymbol{t = \frac{\varphi}{P_a} = \frac{16 R^2 \varphi}{P_b d^2}}
+  \end{equation*}
+\end{itemize}
+
+\subsection*{5. Hệ thức Năng lượng -- Động lượng và Nguyên lý bất định Heisenberg}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Mối liên hệ giữa Năng lượng toàn phần và Động lượng (Thuyết tương đối):}
+  \begin{equation*}
+      \boldsymbol{E^2 = p^2 c^2 + E_0^2 \iff (m c^2)^2 = (p c)^2 + (m_0 c^2)^2}
+  \end{equation*}
+  Trong đó $E = mc^2 = m_0 c^2 + T$, với $T$ là động năng. Động lượng:
+  \begin{equation*}
+      \boldsymbol{p = \frac{\sqrt{E^2 - E_0^2}}{c} = \frac{\sqrt{T(T + 2m_0 c^2)}}{c}}
+  \end{equation*}
+
+  \item \textbf{Nguyên lý bất định Heisenberg:}
+  + Đối với tọa độ $x$ và hình chiếu động lượng $p_x$:
+  \begin{equation*}
+      \boldsymbol{\Delta x \cdot \Delta p_x \ge \frac{\hbar}{2} = \frac{h}{4\pi}} \qquad \left(\text{dạng thực hành xấp xỉ: } \Delta x \cdot \Delta p_x \ge \frac{h}{2\pi} = \hbar\right)
+  \end{equation*}
+  + Đối với năng lượng $E$ và thời gian sống $\Delta t$:
+  \begin{equation*}
+      \boldsymbol{\Delta E \cdot \Delta t \ge \frac{\hbar}{2} = \frac{h}{4\pi}} \implies \Delta\nu \approx \frac{1}{2\pi \Delta t} \quad (\text{độ rộng tự nhiên của vạch quang phổ})
+  \end{equation*}
+\end{itemize}
+
+\subsection*{6. Bài toán Giếng thế năng và Hiệu ứng đường ngầm xuyên hầm}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Giếng thế năng một chiều sâu vô hạn bề rộng $a$ ($0 \le x \le a$):}
+  + Mức năng lượng lượng tử hóa của hạt khối lượng $m$:
+  \begin{equation*}
+      \boldsymbol{E_n = \frac{n^2 \pi^2 \hbar^2}{2 m a^2} = \frac{n^2 h^2}{8 m a^2}} \qquad (n = 1, 2, 3\dots)
+  \end{equation*}
+  + Hàm sóng trạng thái dừng đã chuẩn hóa:
+  \begin{equation*}
+      \boldsymbol{\psi_n(x) = \sqrt{\frac{2}{a}} \sin\left(\frac{n\pi x}{a}\right)}
+  \end{equation*}
+  + Mật độ xác suất tìm thấy hạt tại vị trí $x$:
+  \begin{equation*}
+      \boldsymbol{W_n(x) = |\psi_n(x)|^2 = \frac{2}{a} \sin^2\left(\frac{n\pi x}{a}\right)}
+  \end{equation*}
+
+  \item \textbf{Bước sóng de Broglie qua hàng rào thế chữ nhật chiều cao $U_0$:}
+  + Miền I ($x < 0$, $U = 0$) và Miền III ($x > a$, $U = 0$):
+  \begin{equation*}
+      \boldsymbol{\lambda_{\text{I, III}} = \frac{h}{p} = \frac{h}{\sqrt{2mE}}}
+  \end{equation*}
+  + Miền II trên đỉnh rào thế ($0 < x < a$, $U = U_0$, khi $E > U_0$):
+  \begin{equation*}
+      \boldsymbol{\lambda_{\text{II}} = \frac{h}{p_{\text{II}}} = \frac{h}{\sqrt{2m(E - U_0)}}}
+  \end{equation*}
+
+  \item \textbf{Hiệu ứng đường ngầm xuyên hầm (Tunneling effect khi $E < U_0$):}
+  Hệ số thẩm thấu (hệ số truyền qua hàng rào thế chữ nhật bề rộng $a$):
+  \begin{equation*}
+      \boldsymbol{D \approx \exp\left(-\frac{2a}{\hbar}\sqrt{2m(U_0 - E)}\right)}
+  \end{equation*}
+\end{itemize}
+
+\vspace{0.3cm}
+
+%=============================================================================
+\section*{CHƯƠNG III. PHỔ NĂNG LƯỢNG CỦA CÁC HỆ HẠT LƯỢNG TỬ}
+%=============================================================================
+
+\subsection*{1. Công thức Rydberg cho nguyên tử Hydro}
+
+Bước sóng của photon phát xạ hoặc hấp thụ khi electron dịch chuyển giữa hai mức lượng tử $n_1$ và $n_2$ ($n_2 > n_1$):
+\begin{equation*}
+    \boldsymbol{\frac{1}{\lambda} = R \left(\frac{1}{n_1^2} - \frac{1}{n_2^2}\right)}
+\end{equation*}
+Trong đó hằng số Rydberg:
+\begin{equation*}
+    \boldsymbol{R = \frac{m_0 e^4}{8 \varepsilon_0^2 h^3 c} \approx 1{,}09737 \cdot 10^7\text{ m}^{-1} = 1{,}09737 \cdot 10^{-3}\text{ \AA}^{-1}}
+\end{equation*}
+
+\subsection*{2. Bảng các dãy phổ của nguyên tử Hydro}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabularx}{\textwidth}{l c c l >{\centering\arraybackslash}X >{\centering\arraybackslash}X}
+\toprule
+\textbf{Tên dãy} & $\boldsymbol{n_1}$ & $\boldsymbol{n_2}$ & \textbf{Vùng quang phổ} & \textbf{Vạch dài nhất ($\boldsymbol{\lambda_{\max}}$)} & \textbf{Vạch ngắn nhất ($\boldsymbol{\lambda_{\min}}$)} \\
+\midrule
+\textbf{Lyman} & 1 & $2, 3, 4\dots$ & Tử ngoại (UV) & $\lambda_{2\to 1} = \dfrac{4}{3R}$ \newline $\approx \boldsymbol{1216\text{ \AA}}$ & $\lambda_{\infty\to 1} = \dfrac{1}{R}$ \newline $\approx \boldsymbol{912\text{ \AA}}$ \\
+\addlinespace[2pt]
+\textbf{Balmer} & 2 & $3, 4, 5\dots$ & Khả kiến / Gần UV & $\lambda_{3\to 2} = \dfrac{36}{5R}$ \newline $\approx \boldsymbol{6563\text{ \AA}}$ & $\lambda_{\infty\to 2} = \dfrac{4}{R}$ \newline $\approx \boldsymbol{3646\text{ \AA}}$ \\
+\addlinespace[2pt]
+\textbf{Paschen} & 3 & $4, 5, 6\dots$ & Hồng ngoại gần & $\lambda_{4\to 3} = \dfrac{144}{7R}$ \newline $\approx \boldsymbol{18751\text{ \AA}}$ & $\lambda_{\infty\to 3} = \dfrac{9}{R}$ \newline $\approx \boldsymbol{8204\text{ \AA}}$ \\
+\addlinespace[2pt]
+\textbf{Brackett}& 4 & $5, 6, 7\dots$ & Hồng ngoại & $\lambda_{5\to 4} = \dfrac{400}{9R}$ \newline $\approx \boldsymbol{40512\text{ \AA}}$ & $\lambda_{\infty\to 4} = \dfrac{16}{R}$ \newline $\approx \boldsymbol{14585\text{ \AA}}$ \\
+\addlinespace[2pt]
+\textbf{Pfund} & 5 & $6, 7, 8\dots$ & Hồng ngoại xa & $\lambda_{6\to 5} = \dfrac{900}{11R}$ \newline $\approx \boldsymbol{74578\text{ \AA}}$ & $\lambda_{\infty\to 5} = \dfrac{25}{R}$ \newline $\approx \boldsymbol{22789\text{ \AA}}$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item Năng lượng của mức lượng tử $n$:
+  \begin{equation*}
+      \boldsymbol{E_n = -\frac{hcR}{n^2} = -\frac{13{,}6}{n^2}\text{ (eV)}} \qquad (n = 1, 2, 3\dots)
+  \end{equation*}
+  \item Năng lượng ion hóa nguyên tử Hydro từ trạng thái cơ bản ($n=1$):
+  \begin{equation*}
+      \boldsymbol{E_i = |E_1| = hcR = 13{,}6\text{ eV}}
+  \end{equation*}
+\end{itemize}
+
+\vspace{0.3cm}
+
+%=============================================================================
+\section*{CHƯƠNG IV. VẬT LÝ BÁN DẪN (PHẦN I: TRẠNG THÁI CÂN BẰNG)}
+%=============================================================================
+
+\subsection*{1. Nồng độ hạt dẫn cân bằng nhiệt và Hàm phân bố Fermi -- Dirac}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Hàm phân bố xác suất Fermi -- Dirac:}
+  Xác suất để một trạng thái năng lượng $E$ được điện tử chiếm giữ ở nhiệt độ $T$:
+  \begin{equation*}
+      \boldsymbol{f_0(E) = f_{FD}(E) = \frac{1}{1 + \exp\left(\dfrac{E - E_f}{kT}\right)}}
+  \end{equation*}
+  ($E_f$: mức năng lượng Fermi; $k = 1{,}38 \cdot 10^{-23}\text{ J/K} = 8{,}617 \cdot 10^{-5}\text{ eV/K}$).
+
+  \item \textbf{Mật độ trạng thái lượng tử trong các vùng:}
+  + Trong vùng dẫn ($E \ge E_c$):
+  \begin{equation*}
+      g_c(E) = \frac{1}{2\pi^2}\left(\frac{2m_n^*}{\hbar^2}\right)^{3/2}\sqrt{E - E_c} = \boldsymbol{4\pi\left(\frac{2m_n^*}{h^2}\right)^{3/2}\sqrt{E - E_c}}
+  \end{equation*}
+  + Trong vùng hóa trị ($E \le E_v$):
+  \begin{equation*}
+      g_v(E) = \frac{1}{2\pi^2}\left(\frac{2m_p^*}{\hbar^2}\right)^{3/2}\sqrt{E_v - E} = \boldsymbol{4\pi\left(\frac{2m_p^*}{h^2}\right)^{3/2}\sqrt{E_v - E}}
+  \end{equation*}
+
+  \item \textbf{Nồng độ điện tử trong vùng dẫn (Bán dẫn không suy biến, $E_c - E_f > 3kT$):}
+  \begin{equation*}
+      n_0 = \int_{E_c}^{\infty} f_0(E) g_c(E) dE = \boldsymbol{N_c \exp\left(-\frac{E_c - E_f}{kT}\right)}
+  \end{equation*}
+  Trong đó mật độ trạng thái hiệu dụng của vùng dẫn:
+  \begin{equation*}
+      \boldsymbol{N_c = 2\left(\frac{2\pi m_n^* k T}{h^2}\right)^{3/2}}
+  \end{equation*}
+
+  \item \textbf{Nồng độ lỗ trống trong vùng hóa trị (Bán dẫn không suy biến, $E_f - E_v > 3kT$):}
+  \begin{equation*}
+      p_0 = \int_{-\infty}^{E_v} [1 - f_0(E)] g_v(E) dE = \boldsymbol{N_v \exp\left(-\frac{E_f - E_v}{kT}\right)}
+  \end{equation*}
+  Trong đó mật độ trạng thái hiệu dụng của vùng hóa trị:
+  \begin{equation*}
+      \boldsymbol{N_v = 2\left(\frac{2\pi m_p^* k T}{h^2}\right)^{3/2}}
+  \end{equation*}
+
+  \item \textbf{Định luật tác dụng khối lượng:}
+  Đối với bán dẫn không suy biến ở trạng thái cân bằng nhiệt, tích số $n_0 p_0$ là một đại lượng không đổi ở nhiệt độ xác định, độc lập với loại và nồng độ tạp chất:
+  \begin{equation*}
+      \boldsymbol{n_0 p_0 = N_c N_v \exp\left(-\frac{E_c - E_v}{kT}\right) = N_c N_v \exp\left(-\frac{\Delta E_g}{kT}\right) = n_i^2}
+  \end{equation*}
+  ($\Delta E_g = E_c - E_v$: bề rộng vùng cấm).
+\end{itemize}
+
+\subsection*{2. Bán dẫn riêng (Bán dẫn tinh khiết)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Nồng độ hạt dẫn nội sinh:}
+  \begin{equation*}
+      \boldsymbol{n_0 = p_0 = n_i = \sqrt{N_c N_v} \exp\left(-\frac{\Delta E_g}{2kT}\right)}
+  \end{equation*}
+
+  \item \textbf{Vị trí mức Fermi nội sinh ($E_{fi}$):}
+  \begin{equation*}
+      \boldsymbol{E_{fi} = \frac{E_c + E_v}{2} + \frac{kT}{2} \ln\left(\frac{N_v}{N_c}\right) = \frac{E_c + E_v}{2} + \frac{3kT}{4} \ln\left(\frac{m_p^*}{m_n^*}\right)}
+  \end{equation*}
+  + Nếu khối lượng hiệu dụng của electron và lỗ trống bằng nhau ($m_n^* = m_p^*$):
+  \begin{equation*}
+      \boldsymbol{E_{fi} = \frac{E_c + E_v}{2}} \qquad (\text{nằm chính giữa vùng cấm})
+  \end{equation*}
+\end{itemize}
+
+\subsection*{3. Bán dẫn pha tạp một loại tạp chất}
+
+\subsubsection*{a) Bán dẫn loại n (Pha tạp Donor nhóm V: P, As, Sb... với nồng độ $N_d$)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Vùng nhiệt độ ion hóa hoàn toàn ($150\text{ K} \le T \le 450\text{ K}$):}
+  Toàn bộ donor bị ion hóa cung cấp điện tử cho vùng dẫn:
+  \begin{equation*}
+      \boldsymbol{n_0 \approx N_d = N_c \exp\left(-\frac{E_c - E_f}{kT}\right)}
+  \end{equation*}
+  Vị trí mức Fermi:
+  \begin{equation*}
+      \boldsymbol{E_f = E_c - kT \ln\left(\frac{N_c}{N_d}\right) = E_c + kT \ln\left(\frac{N_d}{N_c}\right) = E_v + \Delta E_g - kT \ln\left(\frac{N_c}{N_d}\right)}
+  \end{equation*}
+  Nồng độ hạt dẫn thiểu số (lỗ trống):
+  \begin{equation*}
+      \boldsymbol{p_0 = \frac{n_i^2}{n_0} \approx \frac{n_i^2}{N_d}}
+  \end{equation*}
+
+  \item \textbf{Vùng nhiệt độ thấp ($T < 150\text{ K}$, ion hóa một phần / đóng băng tạp):}
+  \begin{equation*}
+      \boldsymbol{n_0 = \sqrt{\frac{N_d N_c}{2}} \exp\left(-\frac{\Delta E_d}{2kT}\right)} \qquad (\text{với } \Delta E_d = E_c - E_d)
+  \end{equation*}
+  Vị trí mức Fermi:
+  \begin{equation*}
+      \boldsymbol{E_f = \frac{E_c + E_d}{2} + \frac{kT}{2} \ln\left(\frac{N_d}{2 N_c}\right)}
+  \end{equation*}
+
+  \item \textbf{Vùng nhiệt độ cao ($T > 450\text{ K}$, vùng chuyển sang nội sinh):}
+  Nồng độ hạt dẫn do nhiệt phá vỡ liên kết vượt trội nồng độ tạp chất:
+  \begin{equation*}
+      n_0 \approx p_0 \approx n_i
+  \end{equation*}
+\end{itemize}
+
+\subsubsection*{b) Bán dẫn loại p (Pha tạp Acceptor nhóm III: B, Al, Ga, In... với nồng độ $N_a$)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Vùng nhiệt độ ion hóa hoàn toàn ($T \sim 300\text{ K}$):}
+  Toàn bộ acceptor nhận điện tử từ vùng hóa trị, tạo ra lỗ trống:
+  \begin{equation*}
+      \boldsymbol{p_0 \approx N_a = N_v \exp\left(-\frac{E_f - E_v}{kT}\right)}
+  \end{equation*}
+  Vị trí mức Fermi:
+  \begin{equation*}
+      \boldsymbol{E_f = E_v + kT \ln\left(\frac{N_v}{N_a}\right) = E_v - kT \ln\left(\frac{N_a}{N_v}\right) = E_c - \Delta E_g - kT \ln\left(\frac{N_a}{N_v}\right)}
+  \end{equation*}
+  Nồng độ hạt dẫn thiểu số (điện tử):
+  \begin{equation*}
+      \boldsymbol{n_0 = \frac{n_i^2}{p_0} \approx \frac{n_i^2}{N_a}}
+  \end{equation*}
+
+  \item \textbf{Vùng nhiệt độ thấp ($T < 150\text{ K}$, ion hóa một phần):}
+  \begin{equation*}
+      \boldsymbol{p_0 = \sqrt{\frac{N_a N_v}{2}} \exp\left(-\frac{\Delta E_a}{2kT}\right)} \qquad (\text{với } \Delta E_a = E_a - E_v)
+  \end{equation*}
+  Vị trí mức Fermi:
+  \begin{equation*}
+      \boldsymbol{E_f = \frac{E_v + E_a}{2} - \frac{kT}{2} \ln\left(\frac{N_a}{2 N_v}\right)}
+  \end{equation*}
+
+  \item \textbf{Vùng nhiệt độ cao:} Chuyển sang tính chất nội sinh: $p_0 \approx n_0 \approx n_i$.
+\end{itemize}
+
+\subsection*{4. Bán dẫn bù trừ (Chứa đồng thời cả Donor $N_d$ và Acceptor $N_a$)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Trường hợp bù trừ hoàn toàn ($N_d = N_a$):}
+  Số donor và acceptor triệt tiêu lẫn nhau, bán dẫn xử sự như bán dẫn riêng:
+  \begin{equation*}
+      n_0 = p_0 = n_i, \qquad E_f \approx E_{fi}
+  \end{equation*}
+
+  \item \textbf{Trường hợp $N_d > N_a$ (Bán dẫn loại n có bù trừ):}
+  Nồng độ donor hiệu dụng: $N_d' = N_d - N_a$.
+  \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt, parsep=0pt]
+    \item \textit{Ở vùng nhiệt độ ion hóa:}
+    \begin{align*}
+        n_0 &\approx N_d' = \boldsymbol{N_d - N_a} \\
+        E_f &= \boldsymbol{E_c - kT \ln\left(\frac{N_c}{N_d'}\right) = E_c + kT \ln\left(\frac{N_d'}{N_c}\right)}
+    \end{align*}
+    \item \textit{Ở vùng nhiệt độ thấp:}
+    \begin{align*}
+        n_0 &= \boldsymbol{\frac{N_d'}{2 N_a} N_c \exp\left(-\frac{\Delta E_d}{kT}\right)} \\
+        E_f &= \boldsymbol{E_d + kT \ln\left(\frac{N_d'}{2 N_a}\right)}
+    \end{align*}
+    \item \textit{Ở vùng nhiệt độ cao hơn cả:} Chuyển sang tính chất nội sinh ($n_0 \approx p_0 \approx n_i$).
+  \end{itemize}
+
+  \item \textbf{Trường hợp $N_a > N_d$ (Bán dẫn loại p có bù trừ):}
+  Nồng độ acceptor hiệu dụng: $N_a' = N_a - N_d$.
+  \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt, parsep=0pt]
+    \item \textit{Ở vùng nhiệt độ ion hóa:}
+    \begin{align*}
+        p_0 &\approx N_a' = \boldsymbol{N_a - N_d} \\
+        E_f &= \boldsymbol{E_v + kT \ln\left(\frac{N_v}{N_a'}\right) = E_v - kT \ln\left(\frac{N_a'}{N_v}\right)}
+    \end{align*}
+    \item \textit{Ở vùng nhiệt độ thấp:}
+    \begin{align*}
+        p_0 &= \boldsymbol{\frac{N_a'}{2 N_d} N_v \exp\left(-\frac{\Delta E_a}{kT}\right)} \\
+        E_f &= \boldsymbol{E_a - kT \ln\left(\frac{N_a'}{2 N_d}\right)}
+    \end{align*}
+    \item \textit{Ở vùng nhiệt độ cao hơn cả:} Chuyển sang tính chất nội sinh ($p_0 \approx n_0 \approx n_i$).
+  \end{itemize}
+\end{itemize}
+
+\subsection*{5. Bán dẫn suy biến (Nồng độ tạp chất rất cao)}
+
+Khi nồng độ tạp chất lớn ($N_d, N_a > 10^{19}\text{ cm}^{-3}$), mức Fermi đi vào bên trong vùng cho phép ($E_f > E_c$ đối với loại n, hoặc $E_f < E_v$ đối với loại p). Ta sử dụng gần đúng khí Fermi suy biến ($T \to 0\text{ K}$):
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Với bán dẫn loại n suy biến ($E_f > E_c$):}
+  \begin{equation*}
+      n_0 = \frac{8\pi}{3}\left(\frac{2m_n^*}{h^2}\right)^{3/2}(E_f - E_c)^{3/2} \implies \boldsymbol{E_f = E_c + \frac{h^2}{2m_n^*}\left(\frac{3n_0}{8\pi}\right)^{2/3}}
+  \end{equation*}
+
+  \item \textbf{Với bán dẫn loại p suy biến ($E_f < E_v$):}
+  \begin{equation*}
+      p_0 = \frac{8\pi}{3}\left(\frac{2m_p^*}{h^2}\right)^{3/2}(E_v - E_f)^{3/2} \implies \boldsymbol{E_f = E_v - \frac{h^2}{2m_p^*}\left(\frac{3p_0}{8\pi}\right)^{2/3}}
+  \end{equation*}
+\end{itemize}
+
+\subsection*{6. Độ dẫn điện của chất bán dẫn}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Vận tốc trôi trung bình của điện tử và lỗ trống dưới điện trường $E$:}
+  \begin{equation*}
+      \boldsymbol{v_{dn} = \mu_n E}, \qquad \boldsymbol{v_{dp} = \mu_p E}
+  \end{equation*}
+  ($\mu_n, \mu_p$: độ linh động của điện tử và lỗ trống, đơn vị $\text{cm}^2/(\text{V}\cdot\text{s})$ hay $\text{m}^2/(\text{V}\cdot\text{s})$).
+
+  \item \textbf{Mật độ dòng điện trôi tổng cộng:}
+  \begin{equation*}
+      \boldsymbol{J = J_n + J_p = \sigma E = \frac{I}{S}} \quad (\text{đơn vị: A/m}^2 \text{ hay A/cm}^2)
+  \end{equation*}
+  + Dòng do điện tử: $J_n = e n v_{dn} = \boldsymbol{e n \mu_n E}$.\\
+  + Dòng do lỗ trống: $J_p = e p v_{dp} = \boldsymbol{e p \mu_p E}$.
+
+  \item \textbf{Độ dẫn điện và Điện trở suất của bán dẫn:}
+  \begin{equation*}
+      \boldsymbol{\sigma = \sigma_n + \sigma_p = e(n \mu_n + p \mu_p)}, \qquad \boldsymbol{\rho = \frac{1}{\sigma} = \frac{1}{e(n \mu_n + p \mu_p)}}
+  \end{equation*}
+  + Bán dẫn riêng: $\sigma_i = e n_i (\mu_n + \mu_p)$.\\
+  + Bán dẫn loại n ($n_0 \approx N_d \gg p_0$): $\sigma_n \approx e N_d \mu_n \implies \rho_n \approx \dfrac{1}{e N_d \mu_n}$.\\
+  + Bán dẫn loại p ($p_0 \approx N_a \gg n_0$): $\sigma_p \approx e N_a \mu_p \implies \rho_p \approx \dfrac{1}{e N_a \mu_p}$.
+\end{itemize}
+
+\subsection*{7. Các hiện tượng phát xạ điện tử và Hiệu ứng tiếp xúc p -- n}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Công thoát điện tử ($\Phi$) và Hiệu công thoát ($\Delta\Phi$):}
+  \begin{equation*}
+      \boldsymbol{\Phi = -E_f} \quad (\text{so với mức chân không } E_{vac} = 0), \qquad \boldsymbol{\Delta\Phi = \Phi_2 - \Phi_1 = E_{f1} - E_{f2}}
+  \end{equation*}
+
+  \item \textbf{Hàng rào thế năng tiếp xúc p -- n (Điện thế khuếch tán $U_k$):}
+  \begin{equation*}
+      e U_k = \Delta\Phi = E_{fn} - E_{fp} \implies \boldsymbol{U_k = \frac{kT}{e} \ln\left(\frac{N_a N_d}{n_i^2}\right)}
+  \end{equation*}
+
+  \item \textbf{Bề dày của lớp chuyển tiếp p -- n (vùng nghèo $W$):}
+  + Ở trạng thái cân bằng nhiệt ($U = 0$):
+  \begin{equation*}
+      \boldsymbol{W = \sqrt{\frac{2\varepsilon \varepsilon_0 (N_a + N_d) U_k}{e N_a N_d}}}
+  \end{equation*}
+  + Khi đặt điện áp ngoài $U$:
+  \begin{equation*}
+      \boldsymbol{W = \sqrt{\frac{2\varepsilon \varepsilon_0 (N_a + N_d)(U_k \pm U)}{e N_a N_d}}}
+  \end{equation*}
+  *(Dấu $+$ khi phân cực ngược $U_R$, làm dãn rộng vùng nghèo; Dấu $-$ khi phân cực thuận $U_F$, làm thu hẹp vùng nghèo).*
+
+  \item \textbf{Điều kiện xảy ra hiệu ứng xuyên hầm Zener (đánh thủng Zener):}
+  Cường độ điện trường cực đại tại mặt tiếp xúc:
+  \begin{equation*}
+      \boldsymbol{E_{\max} \approx \frac{U_k + U_R}{W} \ge E_c} \qquad (E_c \sim 10^6\text{ V/cm})
+  \end{equation*}
+
+  \item \textbf{Điện dung của lớp chuyển tiếp (Điện dung rào $C$):}
+  \begin{equation*}
+      \boldsymbol{C = \frac{\varepsilon \varepsilon_0 S}{W} = S \sqrt{\frac{e \varepsilon \varepsilon_0 N_a N_d}{2(N_a + N_d)(U_k \pm U)}}}
+  \end{equation*}
+\end{itemize}
+
+\vspace{0.3cm}
+
+%=============================================================================
+\section*{CHƯƠNG V. XỬ LÝ TÍN HIỆU QUANG \& LINH KIỆN QUANG ĐIỆN TỬ}
+%=============================================================================
+
+\subsection*{1. Sợi quang học (Optical Fiber)}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Khẩu độ số (Numerical Aperture -- $NA$):}
+  Khẩu độ số đặc trưng cho khả năng thu nhận ánh sáng của sợi quang theo điều kiện phản xạ toàn phần:
+  \begin{equation*}
+      \boldsymbol{NA = \sin\theta_{i,\max} = \sqrt{n_1^2 - n_2^2}}
+  \end{equation*}
+  ($\theta_{i,\max}$: nửa góc mở cực đại ở mặt đầu sợi quang; $n_1$: chiết suất lõi core; $n_2$: chiết suất vỏ cladding, $n_1 > n_2$).
+
+  \item \textbf{Độ chênh chiết suất tương đối $\Delta$ (khi $\Delta \ll 1$):}
+  \begin{equation*}
+      \Delta = \frac{n_1 - n_2}{n_1} \implies n_2 = n_1(1 - \Delta) \implies \boldsymbol{NA \approx n_1 \sqrt{2\Delta}}
+  \end{equation*}
+
+  \item \textbf{Sợi quang giật cấp đa mode (Step-Index Multimode Fiber):}
+  + Độ giãn xung do tán sắc mode (chênh lệch thời gian giữa tia truyền trục và tia truyền xiên cực đại):
+  \begin{equation*}
+      \boldsymbol{\Delta t = \tau \left(\frac{n_1 - n_2}{n_2}\right) = \frac{L}{c}\frac{n_1}{n_2}(n_1 - n_2) \approx \frac{L n_1 \Delta}{c}}
+  \end{equation*}
+  Trong đó $\tau = \dfrac{L n_1}{c}$ là thời gian truyền dọc trục, $L$ là chiều dài sợi quang.\\
+  + Độ rộng dải thông cực đại (Tốc độ truyền bit cực đại không chồng lấn xung):
+  \begin{equation*}
+      \boldsymbol{B \le \frac{1}{4\Delta t}} \quad (\text{bit/s hay bps})
+  \end{equation*}
+
+  \item \textbf{Sợi quang giật cấp đơn mode (Step-Index Single-Mode Fiber):}
+  + Tần số chuẩn hóa (tham số $V$):
+  \begin{equation*}
+      \boldsymbol{V = \frac{2\pi a}{\lambda_0}\sqrt{n_1^2 - n_2^2} = \frac{\pi d}{\lambda_0}\sqrt{n_1^2 - n_2^2}}
+  \end{equation*}
+  ($a$: bán kính lõi; $d = 2a$: đường kính lõi; $\lambda_0$: bước sóng ánh sáng trong chân không).\\
+  + Điều kiện để sợi chỉ dẫn một mode cơ bản duy nhất ($\text{HE}_{11}$):
+  \begin{equation*}
+      \boldsymbol{V \le 2{,}405}
+  \end{equation*}
+  + Bước sóng cắt (Cut-off wavelength $\lambda_c$ -- để hoạt động đơn mode thì $\lambda \ge \lambda_c$):
+  \begin{equation*}
+      \boldsymbol{\lambda_c = \frac{2\pi a}{2{,}405}\sqrt{n_1^2 - n_2^2} = \frac{\pi d}{2{,}405}\sqrt{n_1^2 - n_2^2}}
+  \end{equation*}
+\end{itemize}
+
+\subsection*{2. Linh kiện phát quang và thu quang bán dẫn}
+
+\begin{itemize}[leftmargin=*, topsep=1.5pt, itemsep=1.5pt, parsep=0pt]
+  \item \textbf{Tần số và Bước sóng ngưỡng hấp thụ quang học riêng:}
+  Để photon kích thích electron nhảy qua vùng cấm $\Delta E_g$:
+  \begin{equation*}
+      \boldsymbol{\nu_0 = \frac{\Delta E_g}{h}}, \qquad \boldsymbol{\lambda_{ng} = \frac{hc}{\Delta E_g} \approx \frac{1{,}24}{\Delta E_g\text{ (eV)}}} \quad (\mu\text{m})
+  \end{equation*}
+
+  \item \textbf{Định luật hấp thụ ánh sáng Beer -- Lambert:}
+  + Công suất quang truyền qua mẫu bán dẫn bề dày $d$ (có phản xạ bề mặt $R$):
+  \begin{equation*}
+      \boldsymbol{\Phi_t = \Phi_0 (1 - R) e^{-\alpha d}}
+  \end{equation*}
+  + Công suất quang bị hấp thụ trong mẫu bán dẫn:
+  \begin{equation*}
+      \boldsymbol{\Phi_a = \Phi_0 (1 - R)(1 - e^{-\alpha d})}
+  \end{equation*}
+  ($\Phi_0$: công suất chiếu tới; $R$: hệ số phản xạ bề mặt; $\alpha$: hệ số hấp thụ, $\text{cm}^{-1}$; $d$: bề dày mẫu).
+
+  \item \textbf{Tỉ lệ phần trăm năng lượng photon chuyển thành nhiệt khi $h\nu > \Delta E_g$:}
+  \begin{equation*}
+      \boldsymbol{\beta = \frac{h\nu - \Delta E_g}{h\nu} = 1 - \frac{\Delta E_g}{h\nu}}
+  \end{equation*}
+
+  \item \textbf{Tốc độ phát sinh photon do tái hợp bức xạ:}
+  \begin{equation*}
+      \boldsymbol{n_{ph} = \frac{P_{nh}}{\Delta E_g}} \quad (\text{đơn vị: photon/s})
+  \end{equation*}
+  ($P_{nh}$: công suất quang bức xạ tái hợp).
+
+  \item \textbf{Hiện tượng quang dẫn (Quang trở):}
+  + Dòng điện chạy qua mẫu bán dẫn kích thước $L \times W \times D$ (chiều dài $L$, bề rộng $W$, bề dày $D$) dưới điện trường $E = U/L$:
+  \begin{equation*}
+      \boldsymbol{I = \sigma E W D = \sigma \frac{U}{L} (W \cdot D)}
+  \end{equation*}
+  + Độ biến thiên dòng quang dẫn khi được chiếu sáng:
+  \begin{equation*}
+      \boldsymbol{\Delta I = \Delta\sigma \cdot E (W \cdot D) = e(\mu_n + \mu_p)\delta n \frac{U}{L}(W \cdot D)}
+  \end{equation*}
+  + Quá trình suy giảm hạt dẫn dư sau khi ngắt nguồn sáng:
+  \begin{equation*}
+      \boldsymbol{\delta n(t) = \delta n_0 e^{-t/\tau}}
+  \end{equation*}
+  ($\delta n_0$: nồng độ hạt dẫn dư dừng; $\tau$: thời gian sống của hạt dẫn).\\
+  + Xác định thời gian sống $\tau$ từ tốc độ giảm dòng ban đầu:
+  \begin{equation*}
+      \boldsymbol{\tau = \frac{I_0}{\left|\left.\dfrac{dI}{dt}\right|_{t=0}\right|}}
+  \end{equation*}
+\end{itemize}
+
+\end{document}
+

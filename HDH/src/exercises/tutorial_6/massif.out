@@ -1,0 +1,95 @@
+desc: --massif-out-file=massif.out
+cmd: ./memory_fixed
+time_unit: i
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=156224
+mem_heap_B=20
+mem_heap_extra_B=20
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=157312
+mem_heap_B=4116
+mem_heap_extra_B=28
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=157595
+mem_heap_B=4120
+mem_heap_extra_B=48
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=158228
+mem_heap_B=4160
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=158268
+mem_heap_B=4160
+mem_heap_extra_B=64
+mem_stacks_B=0
+heap_tree=peak
+n2: 4160 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 4096 0x48FAA0B: _IO_file_doallocate (filedoalloc.c:91)
+  n1: 4096 0x490BF85: _IO_doallocbuf (genops.c:373)
+   n1: 4096 0x4909638: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:779)
+    n1: 4096 0x490A232: _IO_new_file_xsputn (fileops.c:1305)
+     n1: 4096 0x490A232: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1258)
+      n1: 4096 0x48D3C8D: __printf_buffer_flush_to_file (printf_buffer_to_file.c:59)
+       n1: 4096 0x48D3C8D: __printf_buffer_to_file_done (printf_buffer_to_file.c:120)
+        n1: 4096 0x48DF773: __vfprintf_internal (vfprintf-internal.c:1549)
+         n1: 4096 0x48D3132: printf (printf.c:33)
+          n0: 4096 0x4001242: main (memory_fixed.c:31)
+ n0: 64 in 3 places, all below massif's threshold (1.00%)
+#-----------
+snapshot=6
+#-----------
+time=158268
+mem_heap_B=4140
+mem_heap_extra_B=44
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=158300
+mem_heap_B=4136
+mem_heap_extra_B=24
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=158332
+mem_heap_B=4096
+mem_heap_extra_B=8
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=161352
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty

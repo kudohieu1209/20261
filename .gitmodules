@@ -1,0 +1,15 @@
+[submodule "DA2"]
+	path = DA2
+	url = https://github.com/kudohieu1209/ET1-DA2.git
+[submodule "HDH/src/exercises/exercise_4/xv6-riscv"]
+	path = HDH/src/exercises/exercise_4/xv6-riscv
+	url = https://github.com/mit-pdos/xv6-riscv.git
+[submodule "HDH/src/exercises/tutorial_4/xv6-riscv"]
+	path = HDH/src/exercises/tutorial_4/xv6-riscv
+	url = https://github.com/mit-pdos/xv6-riscv.git
+[submodule "HDH/src/subproject/web"]
+	path = HDH/src/subproject/web
+	url = https://github.com/kudohieu1209/hedieuhanh-web.git
+[submodule "HDH/src/subproject/xv6-tty"]
+	path = HDH/src/subproject/xv6-tty
+	url = https://github.com/kudohieu1209/hedieuhanh-hust.git
