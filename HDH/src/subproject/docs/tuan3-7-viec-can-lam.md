@@ -55,7 +55,18 @@ Mỗi tuần chụp ảnh trong đúng tuần đó. Nếu chạy ra khác chú t
 3. Xoá dòng tô vàng.
 4. Hoàng và Tuấn Anh đọc lại đoạn "Member" của mình ở mục 3 (viết theo kế hoạch), sai chỗ nào thì sửa.
 
-## 4. Sau khi sửa một file báo cáo: cập nhật web
+## 4. Đưa báo cáo lên OneDrive để cả nhóm tải
+
+1. Tải file `.docx` lên OneDrive. Bấm chuột phải vào file → **Share** (Chia sẻ) → đổi quyền thành **Anyone with the link can view** (Bất kỳ ai có liên kết đều xem được) → **Copy link**.
+2. Gửi link cho Claude, hoặc tự dán vào `web/src/data/initialWeeks.ts`, mục `REPORT_LINKS` ở đầu file:
+   ```ts
+   3: 'https://1drv.ms/w/...',
+   ```
+3. Commit và push repo web. Vercel tự deploy, nút "Tải báo cáo" ở trang Lộ trình và trang Tài liệu sẽ mở link OneDrive.
+
+Lưu ý: chỉnh sửa trực tiếp trên web (nút "Chỉnh sửa tuần này", kéo thẻ Kanban…) chỉ lưu trong trình duyệt của người sửa, vì web không có máy chủ dữ liệu. Muốn cả nhóm cùng thấy thì phải sửa trong mã nguồn rồi push.
+
+## 5. Sau khi sửa một file báo cáo: cập nhật nội dung trên web
 
 ```bash
 cd ~/…/HDH/src/subproject/web
@@ -67,7 +78,7 @@ git add -A && git commit -m "bao cao tuan 3 da nop" && git push
 
 Khi nộp xong một tuần, đổi trạng thái tuần đó trong `src/data/initialWeeks.ts`: `status: 'reported'`, đánh dấu `completed: true` cho các mục checklist đã xong, và tăng `currentWeek` / `nextReportDate` trong `src/data/initialSettings.ts`. Nếu thầy có nhận xét thì ghi đúng lời thầy vào `lecturerFeedback`.
 
-## 5. Không bắt buộc
+## 6. Không bắt buộc
 
 - **Email của Hoàng và Tuấn Anh** trên web đang để trống (`src/data/initialMembers.ts`). Điền nếu muốn.
 - **Giao diện mới của tab "Báo cáo (Mẫu Word HUST)"** bị hỏng trong bản sửa dở trước đây nên đang dùng bản cũ. Bản hỏng vẫn còn trong git: `git show 22ac92f:src/components/report/WeeklyProgressReportTab.tsx`.
