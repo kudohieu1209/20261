@@ -64,7 +64,7 @@ Mỗi tuần chụp ảnh trong đúng tuần đó. Nếu chạy ra khác chú t
    ```
 3. Commit và push repo web. Vercel tự deploy, nút "Tải báo cáo" ở trang Lộ trình và trang Tài liệu sẽ mở link OneDrive.
 
-Lưu ý: chỉnh sửa trực tiếp trên web (nút "Chỉnh sửa tuần này", kéo thẻ Kanban…) chỉ lưu trong trình duyệt của người sửa, vì web không có máy chủ dữ liệu. Muốn cả nhóm cùng thấy thì phải sửa trong mã nguồn rồi push.
+Lưu ý: web giờ **chỉ để xem** (không có đăng nhập, không có máy chủ dữ liệu). Mọi thay đổi (trạng thái tuần, checklist, link, nội dung) đều sửa trong mã nguồn `web/src/data/` rồi commit + push, Vercel tự cập nhật cho cả nhóm.
 
 ## 5. Sau khi sửa một file báo cáo: cập nhật nội dung trên web
 
