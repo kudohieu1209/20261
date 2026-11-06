@@ -62,7 +62,7 @@ Mỗi tuần chụp ảnh trong đúng tuần đó. Nếu chạy ra khác chú t
    ```ts
    3: 'https://1drv.ms/w/...',
    ```
-3. Commit và push repo web. Vercel tự deploy, nút "Tải báo cáo" ở trang Lộ trình và trang Tài liệu sẽ mở link OneDrive.
+3. Commit và push repo web. Vercel tự deploy, nút "Xem báo cáo tuần N (OneDrive)" ở trang Lộ trình sẽ mở link đó.
 
 Lưu ý: web giờ **chỉ để xem** (không có đăng nhập, không có máy chủ dữ liệu). Mọi thay đổi (trạng thái tuần, checklist, link, nội dung) đều sửa trong mã nguồn `web/src/data/` rồi commit + push, Vercel tự cập nhật cho cả nhóm.
 
