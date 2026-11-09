@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useAnnotations } from '../hooks/useAnnotations'
+import { useBookSearch } from '../hooks/useBookSearch'
 import { usePageTurnControls } from '../hooks/usePageTurnControls'
 import { usePaginator } from '../hooks/usePaginator'
 import { useReader } from '../hooks/useReader'
@@ -13,7 +14,7 @@ import {
 import type { LocalNote } from '../lib/localDb'
 import { useGlobalPageCount, type MeasureParams } from '../lib/pageCounts'
 
-type TocTab = 'chapters' | 'bookmarks' | 'notes'
+type TocTab = 'chapters' | 'bookmarks' | 'notes' | 'search'
 
 const HIGHLIGHT_COLORS = [
   { id: 'yellow', name: 'Vàng', bg: 'var(--color-highlight-yellow)' },
@@ -30,6 +31,10 @@ export default function ReaderPage() {
   const [tocOpen, setTocOpen] = useState(false)
   const [tocTab, setTocTab] = useState<TocTab>('chapters')
   const [toolbarOpen, setToolbarOpen] = useState(false)
+
+  // Tìm kiếm toàn văn
+  const search = useBookSearch(r.book?.id)
+  const [searchHit, setSearchHit] = useState<{ chapterIndex: number; start: number; end: number } | null>(null)
 
   // Thanh chọn chữ (Highlight / Ghi chú)
   const [selectedRange, setSelectedRange] = useState<TextSelectionRange | null>(null)
@@ -184,14 +189,22 @@ export default function ReaderPage() {
   const chapterHighlights: HighlightRange[] = useMemo(() => {
     if (!r.chapter) return []
     const notes = annotations.notesForChapter(r.chapter.index)
-    return notes.map((n) => ({
+    const list: HighlightRange[] = notes.map((n) => ({
       start: n.char_start,
       end: n.char_end,
       noteId: n.id,
       color: n.color,
       content: n.content,
     }))
-  }, [annotations, r.chapter])
+    if (searchHit && searchHit.chapterIndex === r.chapter.index) {
+      list.push({
+        start: searchHit.start,
+        end: searchHit.end,
+        isSearchHit: true,
+      })
+    }
+    return list
+  }, [annotations, r.chapter, searchHit])
 
   if (r.error) return <div style={{ padding: '2rem', color: 'var(--color-danger)' }} role="alert">{r.error}</div>
   if (r.loading || !r.book || !r.toc || !r.chapter) {
@@ -394,6 +407,21 @@ export default function ReaderPage() {
                 }}
               >
                 {segments.map((seg, idx) => {
+                  if (seg.isSearchHit) {
+                    return (
+                      <mark
+                        key={idx}
+                        style={{
+                          backgroundColor: 'var(--color-highlight-active)',
+                          borderRadius: '2px',
+                          padding: '0 2px',
+                          color: 'inherit',
+                        }}
+                      >
+                        {seg.text}
+                      </mark>
+                    )
+                  }
                   if (seg.color) {
                     const colorDef = HIGHLIGHT_COLORS.find((c) => c.id === seg.color)?.bg || 'var(--color-highlight-yellow)'
                     return (
@@ -751,6 +779,7 @@ export default function ReaderPage() {
                     { id: 'chapters', label: 'Chương' },
                     { id: 'bookmarks', label: `Dấu trang (${annotations.bookmarks.length})` },
                     { id: 'notes', label: `Ghi chú (${annotations.notes.length})` },
+                    { id: 'search', label: 'Tìm' },
                   ] as const
                 ).map((t) => (
                   <button
@@ -953,6 +982,77 @@ export default function ReaderPage() {
                       })}
                     </ul>
                   )}
+                </div>
+              )}
+
+              {/* Tab 4: Tìm kiếm toàn văn trong cả sách */}
+              {tocTab === 'search' && (
+                <div>
+                  <div style={{ marginBottom: 'var(--space-3)' }}>
+                    <input
+                      type="search"
+                      value={search.query}
+                      onChange={(e) => search.setQuery(e.target.value)}
+                      placeholder="Tìm trong cả sách (gõ không dấu)..."
+                      style={{
+                        width: '100%',
+                        padding: '10px 14px',
+                        borderRadius: 'var(--radius-md)',
+                        border: '1px solid var(--color-border)',
+                        background: 'var(--color-surface)',
+                        fontSize: 'var(--text-sm)',
+                        boxSizing: 'border-box',
+                        outline: 'none',
+                      }}
+                    />
+                    {search.searching && (
+                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', marginTop: '6px' }}>
+                        Đang quét dữ liệu sách…
+                      </div>
+                    )}
+                    {!search.searching && search.query.trim() && (
+                      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-secondary)', marginTop: '6px' }}>
+                        Tìm thấy {search.total} kết quả
+                      </div>
+                    )}
+                  </div>
+
+                  {search.results.length === 0 && !search.searching && search.query.trim() && (
+                    <p style={{ textAlign: 'center', color: 'var(--color-text-tertiary)', padding: '2rem 1rem', fontSize: 'var(--text-sm)' }}>
+                      Không tìm thấy kết quả nào phù hợp.
+                    </p>
+                  )}
+
+                  <ul style={{ margin: 0, padding: 0, listStyle: 'none' }}>
+                    {search.results.map((item, idx) => {
+                      const ch = r.toc!.chapters[item.chapterIndex]
+                      return (
+                        <li
+                          key={idx}
+                          onClick={() => {
+                            setSearchHit({ chapterIndex: item.chapterIndex, start: item.offset, end: item.offset + item.length })
+                            r.goToChapter(item.chapterIndex, item.offset)
+                            setTocOpen(false)
+                            setTimeout(() => setSearchHit(null), 5000)
+                          }}
+                          style={{
+                            padding: '10px 12px',
+                            borderRadius: 'var(--radius-md)',
+                            background: 'var(--color-surface)',
+                            marginBottom: 'var(--space-2)',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <div style={{ fontSize: 'var(--text-xs)', fontWeight: 600, color: 'var(--color-text)', marginBottom: '3px' }}>
+                            {ch?.label || `Chương ${item.chapterIndex + 1}`}
+                          </div>
+                          <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-secondary)', lineHeight: 1.4 }}>
+                            {item.snippet}
+                          </div>
+                        </li>
+                      )
+                    })}
+                  </ul>
                 </div>
               )}
             </div>
