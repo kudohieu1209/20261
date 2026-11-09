@@ -14,3 +14,6 @@
 	path = HDH/src/subproject/xv6-tty
 	url = https://github.com/kudohieu1209/hedieuhanh-hust.git
 
+[submodule "doc-sach"]
+	path = doc-sach
+	url = https://github.com/kudohieu1209/doc-sach.git
