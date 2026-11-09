@@ -10,8 +10,8 @@ export interface ReaderState {
   chapter: ChapterMeta | null
   /** Đoạn văn của chương hiện tại, kèm vị trí ký tự đầu đoạn */
   paragraphs: { start: number; text: string }[]
-  /** Vị trí ký tự cần cuộn/lật tới khi vừa mở chương (null = đầu chương) */
-  restoreOffset: number | null
+  /** Vị trí ký tự cần cuộn/lật tới khi vừa mở chương (null = đầu chương, 'end' = trang cuối) */
+  restoreOffset: number | 'end' | null
   /** 0..1 trên toàn sách */
   percent: number
   loading: boolean
@@ -27,7 +27,7 @@ export function useReader(bookId: string) {
   const [toc, setToc] = useState<Toc | null>(null)
   const [chapterIndex, setChapterIndex] = useState<number | null>(null)
   const [text, setText] = useState('')
-  const [restoreOffset, setRestoreOffset] = useState<number | null>(null)
+  const [restoreOffset, setRestoreOffset] = useState<number | 'end' | null>(null)
   const [percent, setPercent] = useState(0)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -88,18 +88,19 @@ export function useReader(bookId: string) {
   )
 
   const goToChapter = useCallback(
-    (index: number, offset: number | null = null) => {
+    (index: number, offset: number | 'end' | null = null) => {
       if (!toc || index < 0 || index >= toc.chapters.length) return
       setRestoreOffset(offset)
       setChapterIndex(index)
       const b = bookRef.current
-      if (b) void saveProgress(b, toc.chapters[index], offset ?? 0).then((r) => setPercent(r.percent))
+      const numericOffset = typeof offset === 'number' ? offset : 0
+      if (b) void saveProgress(b, toc.chapters[index], numericOffset).then((r) => setPercent(r.percent))
     },
     [toc],
   )
 
-  const nextChapter = useCallback(() => chapterIndex !== null && goToChapter(chapterIndex + 1), [chapterIndex, goToChapter])
-  const prevChapter = useCallback(() => chapterIndex !== null && goToChapter(chapterIndex - 1), [chapterIndex, goToChapter])
+  const nextChapter = useCallback(() => chapterIndex !== null && goToChapter(chapterIndex + 1, 0), [chapterIndex, goToChapter])
+  const prevChapter = useCallback(() => chapterIndex !== null && goToChapter(chapterIndex - 1, 'end'), [chapterIndex, goToChapter])
 
   const isLastChapter = toc !== null && chapterIndex === toc.chapters.length - 1
 

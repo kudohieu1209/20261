@@ -83,12 +83,23 @@
   --glass-bg: rgb(255 255 255 / 0.72);
   --glass-blur: saturate(180%) blur(20px);
 
-  /* ── Chuyển động ── */
+  /* ── Chuyển động (Phong cách Apple: Spring & Ease-out mượt mà) ── */
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
-  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
-  --duration-fast: 150ms;
+  --ease-apple: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-fast: 180ms;
   --duration: 250ms;
-  --duration-slow: 400ms;
+  --duration-slow: 360ms;
+  --duration-page-turn: 320ms;
+  --duration-sheet: 360ms;
+  --scale-active: 0.97;
+
+  /* ── Màu Highlight / Ghi chú (4 mức xám/vàng rất nhạt) ── */
+  --color-highlight-yellow: #fef08a;
+  --color-highlight-amber: #fed7aa;
+  --color-highlight-gray: #e5e7eb;
+  --color-highlight-slate: #cbd5e1;
+  --color-highlight-active: #bae6fd;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -96,6 +107,8 @@
     --duration-fast: 0ms;
     --duration: 0ms;
     --duration-slow: 0ms;
+    --duration-page-turn: 0ms;
+    --duration-sheet: 0ms;
   }
 }
 
@@ -114,4 +127,47 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Phản hồi tương tác phong cách Apple ── */
+button,
+[role="button"] {
+  transition: transform var(--duration-fast) var(--ease-apple), opacity var(--duration-fast) var(--ease-apple);
+  user-select: none;
+}
+
+button:active:not(:disabled),
+[role="button"]:active:not([aria-disabled="true"]) {
+  transform: scale(var(--scale-active));
+}
+
+/* Sheet & Modal trượt lên mềm mại */
+.apple-sheet {
+  animation: appleSheetSlideUp var(--duration-sheet) var(--ease-apple) forwards;
+  will-change: transform, opacity;
+}
+
+.apple-fade-in {
+  animation: appleFadeIn var(--duration) var(--ease-apple) forwards;
+  will-change: opacity;
+}
+
+@keyframes appleSheetSlideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes appleFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
