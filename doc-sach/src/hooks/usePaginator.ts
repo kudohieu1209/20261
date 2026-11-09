@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
+/** Bề rộng tối thiểu (px) của vùng đọc để bật chế độ 2 trang (màn ngang). */
+const SPREAD_MIN_WIDTH = 900
+
 export interface PageRange {
   start: number
   end: number
@@ -68,11 +71,18 @@ export function usePaginator({
     const container = containerRef.current
     if (!container) return null
 
-    const width = container.clientWidth
-    const height = container.clientHeight
+    // Đo vùng nội dung thật (trừ padding), nếu không cột sẽ cao/rộng hơn vùng nhìn thấy
+    const cs = getComputedStyle(container)
+    const padX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight)
+    const padY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)
+    const width = container.clientWidth - padX
+    const height = container.clientHeight - padY
     if (width <= 0 || height <= 0) return null
 
-    const spread = width >= 900 && width > height
+    // Quyết định 1/2 trang theo khoảng trống của phần tử cha, không theo chính container:
+    // container bị giới hạn maxWidth theo chế độ hiện tại, đo nó sẽ khoá cứng ở 1 trang.
+    const available = container.parentElement?.clientWidth ?? container.clientWidth
+    const spread = available >= SPREAD_MIN_WIDTH && available > container.clientHeight
     const colGap = spread ? 48 : 32
     const colWidth = spread ? (width - colGap) / 2 : width
 
@@ -280,6 +290,8 @@ export function usePaginator({
       remeasure()
     })
     ro.observe(container)
+    // Container bị maxWidth chặn nên có thể không đổi kích thước khi cửa sổ rộng ra
+    if (container.parentElement) ro.observe(container.parentElement)
 
     if (typeof document !== 'undefined' && document.fonts) {
       void document.fonts.ready.then(() => remeasure())
