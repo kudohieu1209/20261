@@ -55,9 +55,13 @@ create table public.bookmarks (
   chapter_index int  not null,
   char_offset   int  not null,
   label         text,
-  created_at    timestamptz not null default now()
+  created_at    timestamptz not null default now(),
+  updated_at    timestamptz not null default now()
 );
 create index bookmarks_book_idx on public.bookmarks (book_id, chapter_index, char_offset);
+create index bookmarks_user_updated_idx on public.bookmarks (user_id, updated_at desc);
+create trigger bookmarks_touch before update on public.bookmarks
+  for each row execute function public.touch_updated_at();
 
 -- ── Ghi chú / highlight ────────────────────────────────────────────────────
 create table public.notes (
@@ -74,8 +78,20 @@ create table public.notes (
   updated_at    timestamptz not null default now()
 );
 create index notes_book_idx on public.notes (book_id, chapter_index, char_start);
+create index notes_user_updated_idx on public.notes (user_id, updated_at desc);
 create trigger notes_touch before update on public.notes
   for each row execute function public.touch_updated_at();
+
+-- ── Hàm giữ Supabase không ngủ (Keepalive) ─────────────────────────────────
+create or replace function public.keepalive()
+returns timestamptz
+language sql
+security definer
+as $$
+  select now();
+$$;
+
+grant execute on function public.keepalive() to anon, authenticated;
 
 -- ── Nhật ký đọc (thống kê theo ngày) ───────────────────────────────────────
 create table public.reading_logs (

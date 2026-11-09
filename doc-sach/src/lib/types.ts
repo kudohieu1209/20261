@@ -62,3 +62,30 @@ export interface ParsedBook {
   chapters: Chapter[]
   totalChars: number
 }
+
+/** Một dòng trong bảng `bookmarks`. */
+export interface Bookmark {
+  id: string
+  user_id: string
+  book_id: string
+  chapter_index: number
+  char_offset: number
+  label: string | null
+  created_at: string
+  updated_at: string
+}
+
+/** Một dòng trong bảng `notes`. */
+export interface Note {
+  id: string
+  user_id: string
+  book_id: string
+  chapter_index: number
+  char_start: number
+  char_end: number
+  quote: string
+  content: string | null
+  color: string
+  created_at: string
+  updated_at: string
+}

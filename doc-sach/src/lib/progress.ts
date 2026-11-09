@@ -1,9 +1,7 @@
 import { localDb, type LocalProgress } from './localDb'
 import { supabase } from './supabase'
+import { flushOutbox, queueOutbox, scheduleOutboxFlush, startSync } from './sync'
 import type { Book, Progress } from './types'
-
-const SYNC_DELAY_MS = 3000
-let timer: ReturnType<typeof setTimeout> | undefined
 
 /** Lấy tiến độ mới nhất giữa bản trên máy và bản trên server. */
 export async function getProgress(bookId: string): Promise<Progress | null> {
@@ -25,7 +23,7 @@ export async function getProgress(bookId: string): Promise<Progress | null> {
 }
 
 /**
- * Lưu vị trí đọc. Ghi vào máy ngay, đẩy lên server sau vài giây
+ * Lưu vị trí đọc. Ghi vào máy ngay, xếp vào outbox và đẩy lên server sau vài giây
  * (gộp nhiều lần lật trang thành một lần gửi).
  */
 export async function saveProgress(
@@ -34,48 +32,31 @@ export async function saveProgress(
   charOffset: number,
 ): Promise<LocalProgress> {
   const percent = Math.min(1, Math.max(0, (chapter.charStart + charOffset) / Math.max(1, book.total_chars)))
+  const updatedAt = new Date().toISOString()
   const rec: LocalProgress = {
     book_id: book.id,
     chapter_index: chapter.index,
     char_offset: charOffset,
     percent,
-    updated_at: new Date().toISOString(),
+    updated_at: updatedAt,
     synced: 0,
   }
   await localDb.progress.put(rec)
-  clearTimeout(timer)
-  timer = setTimeout(() => void flushProgress(), SYNC_DELAY_MS)
+
+  // Xếp vào outbox đồng bộ chung
+  const { synced: _synced, ...payload } = rec
+  await queueOutbox('progress', 'upsert', book.id, payload as unknown as Record<string, unknown>)
+  scheduleOutboxFlush(3000)
+
   return rec
 }
 
-/** Đẩy mọi tiến độ chưa đồng bộ lên server. */
+/** Đẩy mọi tiến độ và thay đổi trong outbox lên server. */
 export async function flushProgress(): Promise<void> {
-  clearTimeout(timer)
-  const pending = await localDb.progress.where('synced').equals(0).toArray()
-  if (pending.length === 0) return
-  const rows = pending.map(({ synced: _synced, ...p }) => p)
-  const { error } = await supabase.from('progress').upsert(rows, { onConflict: 'book_id' })
-  if (error) return // thử lại lần sau (khi có mạng / khi lưu tiếp)
-  await localDb.transaction('rw', localDb.progress, async () => {
-    for (const p of pending) {
-      const cur = await localDb.progress.get(p.book_id)
-      // chỉ đánh dấu đã đồng bộ nếu không có bản mới hơn được ghi trong lúc gửi
-      if (cur && cur.updated_at === p.updated_at) await localDb.progress.update(p.book_id, { synced: 1 })
-    }
-  })
+  await flushOutbox()
 }
 
 /** Gọi một lần khi app khởi động: đồng bộ khi có mạng lại hoặc khi rời tab. */
 export function startProgressSync(): () => void {
-  const onOnline = () => void flushProgress()
-  const onHide = () => {
-    if (document.visibilityState === 'hidden') void flushProgress()
-  }
-  window.addEventListener('online', onOnline)
-  document.addEventListener('visibilitychange', onHide)
-  void flushProgress()
-  return () => {
-    window.removeEventListener('online', onOnline)
-    document.removeEventListener('visibilitychange', onHide)
-  }
+  return startSync()
 }

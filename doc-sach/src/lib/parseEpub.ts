@@ -1,6 +1,8 @@
 import { strFromU8, unzipSync } from 'fflate'
-import { isHanLine, matchChapter, matchVolume } from './parseTxt'
+import { isHanLine, matchChapter, matchVolume, PARSER_VERSION } from './parseTxt'
 import type { Chapter, ParsedBook, Volume } from './types'
+
+export { PARSER_VERSION }
 
 export interface ParsedEpub extends ParsedBook {
   title: string | null
@@ -29,7 +31,7 @@ function resolvePath(base: string, href: string): string {
   return out.join('/')
 }
 
-const clean = (s: string | null | undefined) => (s ?? '').replace(/\s+/g, ' ').trim()
+const clean = (s: string | null | undefined) => (s ?? '').normalize('NFC').replace(/\s+/g, ' ').trim()
 
 function parseXml(text: string): Document {
   return new DOMParser().parseFromString(text, 'application/xml')
@@ -143,7 +145,7 @@ export async function parseEpub(
   const chapters: Chapter[] = []
   const parser = new DOMParser()
 
-  const useVolume = (label: string, volTitle = '') => {
+  const ensureVolume = (label: string, volTitle = '') => {
     const last = volumes[volumes.length - 1]
     if (last && last.label === label) return last.index
     volumes.push({ index: volumes.length, label, title: volTitle, originalTitle: null })
@@ -183,7 +185,7 @@ export async function parseEpub(
     const tocVolume = entry?.parent ? (matchVolume(entry.parent) ?? { label: entry.parent, title: '' }) : null
     const markerVolume = before.map((el) => matchVolume(clean(el.textContent))).find(Boolean) ?? null
     const vol = tocVolume ?? markerVolume
-    if (vol) volumeIndex = useVolume(vol.label, vol.title)
+    if (vol) volumeIndex = ensureVolume(vol.label, vol.title)
 
     // Chương
     const rawTitle = (entry?.label || clean(heading?.textContent) || docTitle || `Mục ${chapters.length + 1}`)

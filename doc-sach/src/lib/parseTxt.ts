@@ -4,7 +4,7 @@ import type { Chapter, ParsedBook, Volume } from './types'
  * Tăng số này mỗi khi đổi cách tách chương: chỉ số chương thay đổi
  * thì ghi chú/tiến độ (neo theo chapter_index) có thể lệch.
  */
-export const PARSER_VERSION = 1
+export const PARSER_VERSION = 2
 
 const MAX_HEADING_LEN = 120
 
@@ -125,7 +125,7 @@ export function parseTxt(raw: string): ParsedBook {
   }
 
   for (const rawLine of lines) {
-    const line = rawLine.trim()
+    const line = rawLine.trim().normalize('NFC')
     if (!line) continue
 
     if (awaitingOriginal && isHanLine(line)) {
