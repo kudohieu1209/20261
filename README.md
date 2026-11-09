@@ -18,6 +18,7 @@ Thư mục làm việc của học kỳ **2026.1** tại Đại học Bách khoa
 | [VLDT/](VLDT/) | Vật lý điện tử: slide, bài tập, lời giải, đề giữa kỳ và cuối kỳ |
 | [GPLX/](GPLX/) | Ôn lý thuyết giấy phép lái xe: bộ 600 câu, biển báo, app web và Android |
 | [TOEIC/](TOEIC/) | App luyện đề TOEIC Listening & Reading (ETS), có bản Android |
+| [doc-sach/](doc-sach/) | Web app đọc sách cá nhân (EPUB/TXT, kiểu sách in), React + Supabase |
 | [LICH_HOC_VA_CONG_VIEC.md](LICH_HOC_VA_CONG_VIEC.md) | Lịch học cố định, việc linh hoạt, mẫu tự học và lộ trình từng môn |
 
 Một số thư mục con là git repo riêng, được quản lý độc lập. Thư mục gốc `2026.1/` không phải git repo.
