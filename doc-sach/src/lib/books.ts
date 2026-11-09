@@ -15,6 +15,16 @@ export interface Toc {
 }
 
 // ── nén / giải nén (file TXT nén gzip còn khoảng 1/3) ───────────────────────
+async function requestPersistentStorage(): Promise<void> {
+  if (typeof navigator !== 'undefined' && navigator.storage?.persist) {
+    try {
+      await navigator.storage.persist()
+    } catch {
+      // Trình duyệt không hỗ trợ hoặc từ chối cấp quyền persist
+    }
+  }
+}
+
 async function gzip(data: Uint8Array<ArrayBuffer>): Promise<Blob> {
   const stream = new Blob([data]).stream().pipeThrough(new CompressionStream('gzip'))
   return new Response(stream).blob()
@@ -120,6 +130,7 @@ export async function importBook(
 
   await cacheParsed(id, parsed)
   await localDb.books.put(book)
+  void requestPersistentStorage()
   return book
 }
 
@@ -191,6 +202,7 @@ export async function ensureBookCached(book: Book): Promise<void> {
   if (error) throw error
   const bytes = book.file_path.endsWith('.gz') ? await gunzip(data) : new Uint8Array(await data.arrayBuffer())
   await cacheParsed(book.id, await parseFile(book.file_format, bytes))
+  void requestPersistentStorage()
 }
 
 export async function getToc(bookId: string): Promise<Toc> {

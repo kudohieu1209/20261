@@ -1,6 +1,7 @@
 // PLACEHOLDER UI — agy thiết kế lại phần trình bày, giữ nguyên dữ liệu từ useLibrary().
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { useInstallPrompt } from '../hooks/useInstallPrompt'
 import { useLibrary } from '../hooks/useLibrary'
 import { signOut } from '../lib/auth'
 import type { ImportStage } from '../lib/books'
@@ -21,12 +22,18 @@ const STATUS_LABEL: Record<BookStatus, string> = {
 
 export default function LibraryPage() {
   const { items, loading, importing, error, importFile, changeStatus, remove } = useLibrary()
+  const { canInstall, promptInstall } = useInstallPrompt()
   const fileInput = useRef<HTMLInputElement>(null)
 
   return (
     <main>
       <header>
         <h1>Thư viện</h1>
+        {canInstall && (
+          <button type="button" onClick={() => void promptInstall()} title="Cài ứng dụng để đọc offline">
+            Cài app
+          </button>
+        )}
         <button onClick={() => fileInput.current?.click()} disabled={importing !== null}>
           {importing
             ? `${STAGE_LABEL[importing.stage]}${importing.total ? ` ${importing.done}/${importing.total}` : ''}…`
