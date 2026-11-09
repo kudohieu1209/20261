@@ -5,6 +5,7 @@ import { useBookSearch } from '../hooks/useBookSearch'
 import { usePageTurnControls } from '../hooks/usePageTurnControls'
 import { usePaginator } from '../hooks/usePaginator'
 import { useReader } from '../hooks/useReader'
+import { useTts } from '../hooks/useTts'
 import {
   segmentParagraph,
   selectionToRange,
@@ -36,6 +37,9 @@ export default function ReaderPage() {
   const search = useBookSearch(r.book?.id)
   const [searchHit, setSearchHit] = useState<{ chapterIndex: number; start: number; end: number } | null>(null)
 
+  // Đọc to TTS
+  const [ttsBarOpen, setTtsBarOpen] = useState(false)
+
   // Thanh chọn chữ (Highlight / Ghi chú)
   const [selectedRange, setSelectedRange] = useState<TextSelectionRange | null>(null)
   const [selectionRect, setSelectionRect] = useState<{ top: number; left: number } | null>(null)
@@ -58,6 +62,9 @@ export default function ReaderPage() {
     onReportPosition: r.reportPosition,
     onMarkFinished: r.markFinished,
   })
+
+  // Đọc to bằng giọng nói tiếng Việt
+  const tts = useTts(r, paginator)
 
   // Điều khiển lật trang
   usePageTurnControls({
@@ -203,8 +210,15 @@ export default function ReaderPage() {
         isSearchHit: true,
       })
     }
+    if (tts.playing && tts.current) {
+      list.push({
+        start: tts.current.start,
+        end: tts.current.end,
+        ttsActive: true,
+      })
+    }
     return list
-  }, [annotations, r.chapter, searchHit])
+  }, [annotations, r.chapter, searchHit, tts])
 
   if (r.error) return <div style={{ padding: '2rem', color: 'var(--color-danger)' }} role="alert">{r.error}</div>
   if (r.loading || !r.book || !r.toc || !r.chapter) {
@@ -306,6 +320,29 @@ export default function ReaderPage() {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+          {tts.supported && (
+            <button
+              onClick={() => {
+                setTtsBarOpen((v) => !v)
+                if (!tts.playing) {
+                  tts.play()
+                }
+              }}
+              style={{
+                padding: '6px 12px',
+                borderRadius: 'var(--radius-md)',
+                background: tts.playing ? 'var(--color-accent)' : 'var(--color-surface)',
+                color: tts.playing ? 'var(--color-on-accent)' : 'var(--color-text)',
+                border: 'none',
+                fontSize: 'var(--text-sm)',
+                fontWeight: 500,
+                cursor: 'pointer',
+              }}
+            >
+              {tts.playing ? '■ Dừng đọc' : '▶ Đọc to'}
+            </button>
+          )}
+
           <button
             onClick={() => {
               setTocTab('chapters')
@@ -325,6 +362,122 @@ export default function ReaderPage() {
           </button>
         </div>
       </header>
+
+      {/* ── Thanh điều khiển Đọc to (TTS Floating Player) ── */}
+      {(ttsBarOpen || tts.playing) && tts.supported && (
+        <div
+          className="apple-sheet"
+          style={{
+            position: 'absolute',
+            top: '64px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 45,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 'var(--space-3)',
+            padding: '8px 16px',
+            background: 'var(--glass-bg)',
+            backdropFilter: 'var(--glass-blur)',
+            WebkitBackdropFilter: 'var(--glass-blur)',
+            borderRadius: 'var(--radius-full)',
+            boxShadow: 'var(--shadow-md)',
+            border: '1px solid var(--color-border)',
+          }}
+        >
+          <button
+            onClick={() => (tts.playing ? tts.pause() : tts.play())}
+            style={{
+              padding: '6px 12px',
+              borderRadius: 'var(--radius-full)',
+              background: 'var(--color-accent)',
+              color: 'var(--color-on-accent)',
+              border: 'none',
+              fontSize: 'var(--text-xs)',
+              fontWeight: 600,
+              cursor: 'pointer',
+            }}
+          >
+            {tts.playing ? 'Tạm dừng' : 'Tiếp tục'}
+          </button>
+
+          <button
+            onClick={tts.stop}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-text-secondary)',
+              fontSize: 'var(--text-xs)',
+              cursor: 'pointer',
+              padding: '4px',
+            }}
+          >
+            Dừng
+          </button>
+
+          {/* Tốc độ đọc */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            {[0.8, 1.0, 1.2, 1.5].map((speed) => (
+              <button
+                key={speed}
+                onClick={() => tts.setRate(speed)}
+                style={{
+                  background: tts.rate === speed ? 'var(--color-surface)' : 'transparent',
+                  border: 'none',
+                  borderRadius: 'var(--radius-sm)',
+                  padding: '2px 6px',
+                  fontSize: '11px',
+                  fontWeight: tts.rate === speed ? 700 : 400,
+                  cursor: 'pointer',
+                  color: 'inherit',
+                }}
+              >
+                {speed}x
+              </button>
+            ))}
+          </div>
+
+          {/* Chọn giọng nếu có nhiều giọng */}
+          {tts.voices.length > 1 && (
+            <select
+              value={tts.voice?.voiceURI || ''}
+              onChange={(e) => {
+                const found = tts.voices.find((v) => v.voiceURI === e.target.value)
+                if (found) tts.setVoice(found)
+              }}
+              style={{
+                fontSize: '11px',
+                padding: '2px 6px',
+                borderRadius: 'var(--radius-sm)',
+                border: '1px solid var(--color-border)',
+                background: 'transparent',
+                outline: 'none',
+                maxWidth: '120px',
+              }}
+            >
+              {tts.voices.map((v) => (
+                <option key={v.voiceURI} value={v.voiceURI}>
+                  {v.name}
+                </option>
+              ))}
+            </select>
+          )}
+
+          <button
+            onClick={() => setTtsBarOpen(false)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'var(--color-text-tertiary)',
+              cursor: 'pointer',
+              padding: '2px 4px',
+              fontSize: '12px',
+            }}
+          >
+            ✕
+          </button>
+        </div>
+      )}
 
       {/* ── Khung nhìn trang sách (Lật 1 hoặc 2 trang) ── */}
       <main
@@ -407,7 +560,7 @@ export default function ReaderPage() {
                 }}
               >
                 {segments.map((seg, idx) => {
-                  if (seg.isSearchHit) {
+                  if (seg.ttsActive || seg.isSearchHit) {
                     return (
                       <mark
                         key={idx}
