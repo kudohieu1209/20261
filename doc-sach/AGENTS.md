@@ -6,7 +6,7 @@ App đọc sách cá nhân: React 19 + TypeScript + Vite, Supabase (auth + Postg
 
 | Thư mục | Ai sửa | Ghi chú |
 |---|---|---|
-| `src/lib/`, `src/hooks/`, `supabase/` | Phần logic | Agent giao diện **không sửa**, ghi yêu cầu vào mục 5 của `docs/UI_BRIEF.md` |
+| `src/lib/`, `src/hooks/`, `src/workers/`, `supabase/` | Phần logic | Agent giao diện **không sửa**, ghi yêu cầu vào mục 5 của `docs/UI_BRIEF.md` |
 | `src/pages/`, `src/components/`, `src/styles/` | Agent giao diện | Làm theo **`docs/UI_BRIEF.md`** |
 
 ## Lệnh
