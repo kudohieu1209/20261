@@ -1,0 +1,98 @@
+% =============================================================
+\section{Kiến thức nền tảng}
+% =============================================================
+
+\subsection{Tiến trình Poisson và phân bố mũ}
+
+Chữ \textbf{M} (Markov, \emph{không nhớ}) trong ký hiệu Kendall đều dựa trên hai sự kiện sau.
+
+\begin{congthuc}[Định lý 1: số lần đến trong khoảng $t$ có phân bố Poisson]
+\[
+P\{N(t)=k\} = \frac{(\lambda t)^k}{k!}\,e^{-\lambda t},\qquad k=0,1,2,\dots \qquad E[N(t)] = \lambda t
+\]
+\end{congthuc}
+
+\begin{congthuc}[Định lý 2: khoảng thời gian giữa hai lần đến có phân bố mũ]
+\[
+P\{X \le t\} = 1-e^{-\lambda t},\qquad P\{X > t\} = e^{-\lambda t},\qquad E[X]=\frac{1}{\lambda}
+\]
+\end{congthuc}
+
+\textbf{Các tính chất hay dùng:}
+\begin{itemize}
+  \item \textbf{Không nhớ:} $P\{X > s+t \mid X > s\} = P\{X>t\}$. Đã chờ bao lâu thì thời gian \emph{còn lại} vẫn có cùng phân bố mũ như lúc đầu.
+  \item \textbf{Ghép luồng:} gộp các luồng Poisson độc lập $\lambda_1,\lambda_2,\dots$ được một luồng Poisson với tốc độ $\sum\lambda_i$.
+  \item \textbf{Rẽ luồng:} mỗi khách được đưa sang nhánh $j$ với xác suất $p_j$ (độc lập nhau) thì nhánh $j$ là luồng Poisson với tốc độ $p_j\lambda$.
+\end{itemize}
+
+\begin{vidu}[xe buýt]
+Xe buýt đến bến theo tiến trình Poisson, trung bình \textbf{5 phút/chuyến}. Một người vừa nhỡ một chuyến. Tính xác suất người đó đợi chuyến tiếp theo \textbf{ít hơn 3 phút}.
+\loigiai “5 phút/chuyến” là khoảng cách \emph{trung bình} giữa hai chuyến, nên $\lambda = 1/5 = 0{,}2$ chuyến/phút. Nhờ tính không nhớ, “vừa nhỡ xe” nghĩa là bắt đầu chờ lại từ đầu:
+\[
+P\{X<3\} = 1-e^{-0{,}2\cdot 3} = 1-e^{-0{,}6} \approx \dapan{0{,}451}
+\]
+\end{vidu}
+
+\subsection{Định lý Little}
+
+\begin{congthuc}[Định lý Little: đúng cho mọi hệ thống ổn định]
+\[
+N = \lambda\,T \qquad\qquad N_Q = \lambda\,T_Q \qquad\qquad N_S = \lambda\cdot\frac{1}{\mu}
+\]
+Nếu hệ thống \textbf{từ chối khách} ($K$ hữu hạn) thì thay $\lambda$ bằng \textbf{$\lambda_a=\lambda(1-p_K)$}:\quad $N=\lambda_a T$, $N_Q = \lambda_a T_Q$.
+\end{congthuc}
+
+Định lý \emph{không} phụ thuộc vào phân bố đến, phân bố phục vụ, số server hay quy tắc phục vụ. Biết 2 trong 3 đại lượng (số lượng, tốc độ, thời gian) là suy ra được đại lượng còn lại.
+
+\subsection{Ký hiệu Kendall}
+
+Slide viết đầy đủ là \textbf{A/S/m/[B]/[K]/[SD]}. Tài liệu này dùng dạng rút gọn \textbf{A/S/$c$/$K$}, trong đó $K$ là \emph{sức chứa hệ thống}.
+
+\begin{center}
+\begin{tabularx}{\linewidth}{@{}c l X@{}}
+\toprule
+\textbf{Vị trí} & \textbf{Ý nghĩa} & \textbf{Giá trị thường gặp} \\
+\midrule
+A & Tiến trình đến & M (Poisson/mũ), D (tất định), $E_r$ (Erlang bậc $r$), $H_r$ (siêu mũ), G (tổng quát) \\
+S & Tiến trình phục vụ & M, D, $E_r$, $H_r$, G (như trên) \\
+$c$ & Số server & $1, 2, \dots, \infty$ \\
+$K$ & Sức chứa hệ thống & Mặc định $\infty$. Có $c$ server và $B$ chỗ chờ thì $K = B + c$ \\
+-- & Kích thước quần thể & Mặc định $\infty$ (nguồn khách vô hạn) \\
+SD & Quy tắc phục vụ & Mặc định FCFS (FIFO). Ngoài ra có LCFS, SIRO, RR, PS... \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\needspace{14\baselineskip}
+\subsection{Quá trình sinh--tử: gốc của mọi công thức M/M}
+
+Trạng thái của hệ thống là \textbf{số khách $i$}. Một khách đến (\emph{sinh}) đưa trạng thái từ $i$ lên $i+1$ với tốc độ $\lambda_i$. Một khách đi (\emph{tử}) đưa trạng thái từ $i$ về $i-1$ với tốc độ $\mu_i$.
+
+\bdchain{0/-/-/st, 1/\lambda_0/\mu_1/st, 2/\lambda_1/\mu_2/st, \cdots/\lambda_2/\mu_3/dots, i/\lambda_{i-1}/\mu_i/st, i{+}1/\lambda_i/\mu_{i+1}/st, \cdots/\lambda_{i+1}/\mu_{i+2}/dots}
+
+\begin{congthuc}[Phương trình cân bằng và nghiệm tổng quát]
+Ở trạng thái dừng, luồng đi qua giữa hai trạng thái kề nhau phải cân bằng:
+\[
+\lambda_{i}\,p_{i} = \mu_{i+1}\,p_{i+1}
+\quad\Longrightarrow\quad
+p_i = p_0\prod_{k=0}^{i-1}\frac{\lambda_k}{\mu_{k+1}},
+\qquad
+p_0 = \Bigl[\,1+\sum_{i\ge 1}\prod_{k=0}^{i-1}\frac{\lambda_k}{\mu_{k+1}}\Bigr]^{-1}
+\]
+\end{congthuc}
+
+\textbf{Mọi mô hình M/M/\dots{} chỉ khác nhau ở cách chọn $\lambda_i$, $\mu_i$:}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Mô hình} & \textbf{$\lambda_i$ (tốc độ đến ở trạng thái $i$)} & \textbf{$\mu_i$ (tốc độ đi ở trạng thái $i$)} \\
+\midrule
+M/M/1 & $\lambda$ với mọi $i$ & $\mu$ \\
+M/M/1/$K$ & $\lambda$ nếu $i<K$, bằng $0$ nếu $i=K$ & $\mu$ \\
+M/M/$c$ & $\lambda$ & $\min(i,c)\,\mu$ \\
+M/M/$c$/$c$ & $\lambda$ nếu $i<c$, bằng $0$ nếu $i=c$ & $i\,\mu$ \\
+M/M/$c$/$K$ & $\lambda$ nếu $i<K$, bằng $0$ nếu $i=K$ & $\min(i,c)\,\mu$ \\
+M/M/$\infty$ & $\lambda$ & $i\,\mu$ \\
+\bottomrule
+\end{tabular}
+\end{center}

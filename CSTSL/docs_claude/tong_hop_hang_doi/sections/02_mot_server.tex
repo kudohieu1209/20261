@@ -1,0 +1,101 @@
+% =============================================================
+\section{Các mô hình một server}
+% =============================================================
+
+% -------------------------------------------------------------
+\subsection{M/M/1 (một server, hàng đợi vô hạn)}
+% -------------------------------------------------------------
+
+\begin{nhandien}
+Khách đến theo Poisson, thời gian phục vụ có phân bố mũ, \textbf{một} quầy/đường truyền/CPU, chỗ chờ “đủ lớn” hoặc “không giới hạn”.\\
+\emph{Ví dụ:} một cổng ra của router có bộ đệm lớn, một quầy thu ngân.
+\end{nhandien}
+
+\textbf{Tham số:} $\lambda$, $\mu$. \quad \textbf{Hệ số sử dụng:} $\rho = \lambda/\mu$. \quad \textbf{Điều kiện ổn định:} $\rho<1$ (tức $\lambda<\mu$).
+
+\bdchain{0/-/-/st, 1/\lambda/\mu/st, 2/\lambda/\mu/st, \cdots/\lambda/\mu/dots, i/\lambda/\mu/st, i{+}1/\lambda/\mu/st, \cdots/\lambda/\mu/dots}
+
+\begin{congthuc}[Công thức M/M/1]
+\renewcommand{\arraystretch}{2.1}
+\begin{tabular}{@{}l l@{}}
+Phân bố trạng thái & $p_i = (1-\rho)\,\rho^{\,i}$,\qquad $p_0 = 1-\rho$,\qquad $P\{\text{có} \ge k \text{ khách}\} = \rho^{\,k}$ \\
+Số khách trong hệ thống & $N = \dfrac{\rho}{1-\rho} = \dfrac{\lambda}{\mu-\lambda}$ \\
+Thời gian trong hệ thống & $T = \dfrac{N}{\lambda} = \dfrac{1}{\mu-\lambda} = \dfrac{1}{\mu}\cdot\dfrac{1}{1-\rho}$ \\
+Thời gian chờ trong hàng & $T_Q = T - \dfrac{1}{\mu} = \dfrac{\rho}{\mu-\lambda}$ \\
+Số khách trong hàng & $N_Q = \lambda T_Q = \dfrac{\rho^2}{1-\rho}$ \\
+Xác suất server bận & $1-p_0 = \rho$ \\
+\end{tabular}
+\end{congthuc}
+
+\begin{congthuc}[Phân bố của thời gian (với quy tắc FCFS)]
+Thời gian một khách ở trong \textbf{hệ thống} có phân bố mũ với tham số $\mu-\lambda$:
+\[
+P\{T_{ht}\le t\} = 1-e^{-(\mu-\lambda)t}
+\qquad\qquad
+P\{T_{\text{chờ}} > t\} = \rho\, e^{-(\mu-\lambda)t}
+\]
+\end{congthuc}
+
+\begin{vidu}[quầy tính tiền siêu thị mini]
+Khách đến quầy theo Poisson, trung bình \textbf{40 người/giờ}. Thời gian phục vụ có phân bố mũ, trung bình \textbf{1 phút}. Có một quầy, chỗ xếp hàng đủ cho mọi người. Tìm (a) thời gian chờ trung bình; (b) xác suất từ lúc vào hàng đến lúc trả tiền xong không quá 1,5 phút.
+
+\loigiai Đổi về phút: $\lambda = 40/60 = 2/3$ khách/phút, $\mu = 1$ khách/phút, nên $\rho = 2/3 < 1$ (ổn định).
+
+(a) $T = \dfrac{1}{\mu-\lambda} = \dfrac{1}{1/3} = 3$ phút. Thời gian \emph{chờ trong hàng} là $T_Q = T - 1/\mu = \dapan{2 \text{ phút}}$. Nếu thầy hiểu “thời gian chờ” là $T$ thì đáp án là 3 phút.
+
+(b) $P\{T_{ht}\le 1{,}5\} = 1-e^{-(1/3)(1{,}5)} = 1-e^{-0{,}5} \approx \dapan{0{,}393}$
+\end{vidu}
+
+% -------------------------------------------------------------
+\subsection{M/M/1/K (một server, sức chứa hữu hạn)}
+% -------------------------------------------------------------
+
+\begin{nhandien}
+Một server, bộ đệm \textbf{có giới hạn}: “tối đa $K$ gói”, “bộ đệm chứa $B$ gói”. Khách đến khi hệ thống đầy thì \textbf{bị từ chối/mất}.\\
+Câu hỏi đặc trưng: \emph{xác suất mất gói, xác suất bị từ chối, thông lượng thực tế}.
+\end{nhandien}
+
+\textbf{Tham số:} $\lambda$, $\mu$, $K$ (sức chứa \emph{tính cả} khách đang phục vụ, bộ đệm có $K-1$ chỗ). \quad $\rho=\lambda/\mu$.\\
+\textbf{Không cần điều kiện ổn định}, vì số trạng thái hữu hạn. $\rho\ge1$ vẫn tính được.
+
+\bdchain{0/-/-/st, 1/\lambda/\mu/st, 2/\lambda/\mu/st, \cdots/\lambda/\mu/dots, K{-}1/\lambda/\mu/st, K/\lambda/\mu/st}
+
+\begin{congthuc}[Công thức M/M/1/$K$ (với $\rho \ne 1$)]
+\renewcommand{\arraystretch}{2.1}
+\begin{tabular}{@{}l l@{}}
+Phân bố trạng thái & $p_i = \rho^{\,i}\,p_0$,\qquad $p_0 = \dfrac{1-\rho}{1-\rho^{K+1}}$,\qquad $i=0,\dots,K$ \\
+\textbf{Xác suất từ chối} & $p_K = \dfrac{(1-\rho)\,\rho^{K}}{1-\rho^{K+1}}$ \\
+Tốc độ đến thực tế & $\lambda_a = \lambda\,(1-p_K)$\qquad (kiểm tra: $\lambda_a = \mu(1-p_0)$) \\
+Số khách trong hệ thống & $N = \dfrac{\rho}{1-\rho} - \dfrac{(K+1)\,\rho^{K+1}}{1-\rho^{K+1}}$ \\
+Số khách trong hàng & $N_Q = N - (1-p_0)$ \\
+Thời gian & $T = \dfrac{N}{\lambda_a} = \dfrac{1}{\lambda}\cdot\dfrac{1}{1-p_K}\cdot N$,\qquad $T_Q = \dfrac{N_Q}{\lambda_a}$ \\
+\end{tabular}
+\par\medskip
+\textbf{Trường hợp $\rho=1$:}\quad $p_i = \dfrac{1}{K+1}$,\quad $N = \dfrac{K}{2}$.
+\end{congthuc}
+
+\begin{luuy}[Bẫy thường gặp với M/M/1/$K$]
+\begin{itemize}[leftmargin=1.2em]
+  \item Dùng định lý Little thì phải dùng \textbf{$\lambda_a$}, không dùng $\lambda$. Khách bị từ chối không vào hệ thống.
+  \item Đề cho “bộ đệm chứa $B$ gói” và có 1 server thì $K = B+1$.
+  \item $N_Q \ne N - \rho$. Ở đây số server bận trung bình là $1-p_0$, không phải $\rho$.
+\end{itemize}
+\end{luuy}
+
+\begin{vidu}[router có bộ đệm nhỏ]
+Một cổng router nhận gói theo Poisson với $\lambda = 90$ gói/s. Thời gian truyền mỗi gói có phân bố mũ với $\mu=100$ gói/s. Router chứa tối đa $K=5$ gói (tính cả gói đang truyền). Tính xác suất mất gói, thông lượng, $N$, $T$, $T_Q$.
+
+\loigiai $\rho = 0{,}9$.\quad $p_0 = \dfrac{1-0{,}9}{1-0{,}9^6} = \dfrac{0{,}1}{0{,}4686} \approx 0{,}2134$.
+\[
+p_5 = 0{,}9^5\,p_0 \approx \dapan{0{,}126}\ \ (\text{mất }12{,}6\%\text{ số gói}),
+\qquad \lambda_a = 90(1-0{,}126) \approx 78{,}66 \text{ gói/s}
+\]
+\[
+N = \frac{0{,}9}{0{,}1} - \frac{6\cdot0{,}9^6}{1-0{,}9^6} \approx 2{,}195 \text{ gói},\qquad
+T = \frac{N}{\lambda_a} \approx \dapan{27{,}9\text{ ms}}
+\]
+\[
+N_Q = N-(1-p_0) \approx 1{,}408 \text{ gói},\qquad T_Q = \frac{N_Q}{\lambda_a}\approx \dapan{17{,}9\text{ ms}}
+\]
+\emph{Kiểm tra:} $T - T_Q = 10$ ms $= 1/\mu$, khớp.
+\end{vidu}
