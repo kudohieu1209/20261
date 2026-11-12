@@ -70,6 +70,23 @@ output/
 *.swo
 *~
 ~$*
+*preview*.png
+
+# ==========================================
+# LaTeX Build Artifacts
+# ==========================================
+*.aux
+*.out
+*.toc
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
 
 # ==========================================
 # OS & IDE Files

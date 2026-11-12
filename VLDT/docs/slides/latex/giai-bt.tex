@@ -10,11 +10,13 @@
   \usepackage{fontspec}
   \usepackage{unicode-math}
   \setmainfont{texgyrepagella-regular.otf}[
+      Path = fonts/,
       BoldFont = texgyrepagella-bold.otf,
       ItalicFont = texgyrepagella-italic.otf,
       BoldItalicFont = texgyrepagella-bolditalic.otf
   ]
-  \setmathfont{texgyrepagella-math.otf}
+  \setmathfont{texgyrepagella-math.otf}[Path=fonts/]
+  \renewcommand{\boldsymbol}[1]{\symbf{#1}}
   \usepackage{amsmath}
 \fi
 
@@ -22,8 +24,10 @@
 \usepackage{microtype}
 \usepackage{titlesec}
 \usepackage{enumitem}
+\usepackage{needspace}
 \usepackage{multicol}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 
@@ -46,6 +50,18 @@
   {0pt}{14pt plus 3pt minus 2pt}{6pt plus 1pt minus 1pt}
 
 \pagestyle{plain}
+\clubpenalty=10000
+\widowpenalty=10000
+
+\input{debai-chuan.tex}
+\let\DeBaiOriginal\DeBai
+\renewcommand{\DeBai}[1]{\par\Needspace{5\baselineskip}\DeBaiOriginal{#1}}
+\newcommand{\PhanCachBai}{%
+  \par\Needspace{7\baselineskip}%
+  \addvspace{6pt}%
+  {\color{black!40}\hrule height 0.4pt}%
+  \nobreak\vspace{7pt}\nobreak
+}
 
 \begin{document}
 
@@ -55,21 +71,20 @@
 \end{center}
 \vspace{0.2cm}
 
-%=====================================================================
-% CHƯƠNG I
-%=====================================================================
+
 \section*{Chương I. Chuyển động của hạt tích điện trong chân không}
 
-\textbf{Bài 1-1.} Tìm biểu thức và xác định độ nhạy của một ống tia điện tử của máy dao động ký có các thông số sau: Hiệu điện thế tăng tốc chùm điện tử là $900\text{ V}$, khoảng cách từ điểm giữa bản lái tia đến màn huỳnh quang bằng $20\text{ cm}$, chiều dài các bản lái tia bằng $2\text{ cm}$, khoảng cách giữa hai bản lái tia bằng $0{,}5\text{ cm}$.
+\DeBai{1-1}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $U_0 = 900\text{ V}$, $l_1 = 2\text{ cm} = 0{,}02\text{ m}$, $L = \dfrac{l_1}{2} + l_2 = 20\text{ cm} = 0{,}2\text{ m}$, $d = 0{,}5\text{ cm} = 5 \cdot 10^{-3}\text{ m}$. Cần tìm: $S$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.62\textwidth]{images/fig_1_1_crt.png}\\[0.1cm]
   \textit{Hình 1.1: Quỹ đạo làm lệch của chùm điện tử qua hai bản lái tia.}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} Thiết lập CT tính độ lệch của chùm điện tử trên màn:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
@@ -104,24 +119,19 @@ Thay số:
     S = \frac{0{,}02 \times 0{,}2}{2 \times (5 \cdot 10^{-3}) \times 900} = \boldsymbol{4{,}44 \cdot 10^{-4}\text{ m/V}} \approx \boldsymbol{4{,}5 \cdot 10^{-4}\text{ m/V}} = \boldsymbol{0{,}45\text{ mm/V}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 1-2.} Tìm biểu thức và xác định độ nhạy của một ống tia điện tử của máy dao động ký có các thông số sau: Hiệu điện thế tăng tốc chùm điện tử là $900\text{ V}$. Khoảng cách giữa tâm của vùng từ trường làm lệch tia điện tử đến màn huỳnh quang bằng $35\text{ cm}$. Hệ thống lái tia gồm hai cuộn dây Helmholtz hình tròn có bán kính $R = 2{,}5\text{ cm}$ đặt cách nhau một khoảng cách $2z = 5\text{ cm}$. Số vòng dây trên mỗi cuộn là $200$ vòng. Kích thước vùng tác dụng của từ trường là $2R$, trong đó từ trường được xem là đều.
+\DeBai{1-2}
 
-\textit{Chú ý:} Cường độ từ trường trong cuộn Helmholtz được tính bởi công thức:
-\begin{equation*}
-    H = \frac{i}{2}\frac{WR^2}{(R^2+z^2)^{3/2}}
-\end{equation*}
-Độ từ thẩm của chân không $\mu_0 = 1{,}26 \cdot 10^{-6}\text{ T}\cdot\text{m/A}$; $i$ là dòng điện trong cuộn dây, $W$ là số vòng dây của cả hai cuộn.
-
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $U_0 = 900\text{ V}$, $R = 2{,}5\text{ cm} = 0{,}025\text{ m}$, khoảng cách $2z = 5\text{ cm} \implies z = 2{,}5\text{ cm} = R$, bề rộng vùng từ trường $l_1 = 2R = 5\text{ cm} = 0{,}05\text{ m}$, khoảng cách từ tâm vùng từ trường đến màn $L = \dfrac{l_1}{2} + l_2 = 35\text{ cm} = 0{,}35\text{ m}$, $W = 2 \times 200 = 400\text{ vòng}$, $\mu_0 = 1{,}26 \cdot 10^{-6}\text{ T}\cdot\text{m/A}$, $e = 1{,}6 \cdot 10^{-19}\text{ C}$, $m = 9{,}1 \cdot 10^{-31}\text{ kg}$. Cần tìm: $S = \dfrac{D}{i}$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.55\textwidth]{images/fig_1_2_helmholtz.png}\\[0.1cm]
   \textit{Hình 1.2: Độ lệch của chùm điện tử dưới tác dụng của từ trường cuộn Helmholtz.}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} Cảm ứng từ $B$ bên trong hệ cuộn Helmholtz:
 \begin{equation*}
@@ -153,31 +163,14 @@ Thay số:
     S &= 9{,}88 \cdot 10^3 \times 0{,}05 \times 0{,}35 \times 3{,}56 \cdot 10^{-3} \approx \boldsymbol{0{,}618\text{ m/A}} = \boldsymbol{618\text{ mm/A}}
 \end{align*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 1-3.} Trên đường đi của chùm điện tử người ta đặt một hệ gồm hai lưới có dạng mặt cầu đồng tâm bán kính trung bình là $R = 3\text{ cm}$. Điện thế lưới ngoài là $U_1 = 300\text{ V}$, điện thế lưới trong là $U_2 = 500\text{ V}$ (so với catot phát xạ điện tử). Chứng minh rằng hệ hai lưới này có tính hội tụ đối với chùm điện tử. Tính tiêu cự của hệ.
+\DeBai{1-3}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $R = 3\text{ cm} = 0{,}03\text{ m}$, $U_1 = 300\text{ V}$, $U_2 = 500\text{ V}$. Cần tìm: $f$.
-
-\begin{center}
-\begin{tikzpicture}[scale=1.1, >=Stealth]
-  \draw[dashdotted, thick, gray!80] (-3,0) -- (3.2,0);
-  \filldraw (1.5,0) circle (1.5pt) node[below] {$O$};
-  \draw[very thick] ([shift=(150:2.5)] 1.5,0) arc (150:210:2.5);
-  \draw[very thick] ([shift=(150:2.62)] 1.5,0) arc (150:210:2.62);
-  \draw[->, thick] (1.5,0) -- ++(162:2.5) node[midway, above right=-2pt] {$R$};
-  \draw (-2.6, 0.45) circle (0.1) node {\tiny $-$};
-  \draw[->, thick] (-2.48, 0.45) -- (-0.95, 0.45) node[above left] {$A$};
-  \draw[->, thick] (-0.95, 0.45) -- (2.7, 0) node[below] {$B$};
-  \draw[dashed, thin, gray] (1.5,0) -- (-1.8, 0.6);
-  \node at (-1.3, 0.6) {\scriptsize $\theta_1$};
-  \node at (-0.3, 0.28) {\scriptsize $\theta_2$};
-  \draw[<->, thin] (-2.2, 0) -- (-2.2, 0.45) node[midway, left] {$z$};
-\end{tikzpicture}\\[0.1cm]
-\textit{Hình 1.3: Sơ đồ hệ hai lưới cầu đồng tâm cho bài tập (1-3).}
-\end{center}
 
 \textbf{B1:} Chứng minh tính hội tụ:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
@@ -206,34 +199,14 @@ Thay số:
   \end{equation*}
 \end{itemize}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 1-4.} Một hệ quang học điện tử gồm một catot phẳng $K$, một lưới tăng tốc $G$ có điện thế $U_G$ bằng $200\text{ V}$, một tấm ngăn (diapham) có điện thế $U_D$ và một anot $A$ được nối với diapham. Xác định điện thế $U_D$ (so với catot) để chùm điện tử song song hội tụ lên anot. Cho biết khoảng cách giữa lưới tăng tốc đến diapham là $0{,}5\text{ cm}$, khoảng cách giữa diapham đến anot là $0{,}8\text{ cm}$.
+\DeBai{1-4}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $U_G = 200\text{ V}$, $d_1 = 0{,}5\text{ cm} = 5 \cdot 10^{-3}\text{ m}$, $d_2 = 0{,}8\text{ cm} = 8 \cdot 10^{-3}\text{ m}$, $U_A = U_D$. Cần tìm: $U_D$.
-
-\begin{center}
-\begin{tikzpicture}[scale=0.92, >=Stealth]
-  \draw[dashdotted, thick, gray!80] (-0.5,0) -- (4.5,0);
-  \draw[very thick] (0,-1.1) -- (0,1.1) node[above] {$K$};
-  \draw[thick, dashed] (0.8,-1.1) -- (0.8,1.1) node[above] {$G$};
-  \draw[very thick] (2,0.35) -- (2,1.1);
-  \draw[very thick] (2,-0.35) -- (2,-1.1);
-  \node[above] at (2,1.1) {$D$};
-  \draw[very thick] (4,-1.1) -- (4,1.1) node[above] {$A$};
-  \draw[thick] (2,1.1) -- (4,1.1);
-  \draw[thick] (2,-1.1) -- (4,-1.1);
-  \draw[thick, blue!80!black] (0,0.28) -- (2,0.28) -- (4,0);
-  \draw[thick, blue!80!black] (0,-0.28) -- (2,-0.28) -- (4,0);
-  \draw[->, thick, blue!80!black] (0.9,0.28) -- (1.1,0.28);
-  \draw[->, thick, blue!80!black] (2.9,0.15) -- (3.1,0.13);
-  \draw[<->, thin] (0.8,-1.5) -- (2,-1.5) node[midway, below] {$d_1$};
-  \draw[<->, thin] (2,-1.5) -- (4,-1.5) node[midway, below] {$d_2$};
-\end{tikzpicture}\\[0.1cm]
-\textit{Hình 1.4: Sơ đồ hệ quang học điện tử một diapham cho bài tập (1-4).}
-\end{center}
 
 \textbf{B1:} AD CT tính tiêu cự thấu kính diapham tròn:
 \begin{equation*}
@@ -263,15 +236,16 @@ Thay số với $d_1 = 0{,}5\text{ cm}$, $d_2 = 0{,}8\text{ cm}$, $U_G = 200\tex
     U_D = \frac{0{,}8}{4 \times 0{,}5 + 0{,}8} \times 200 = \frac{0{,}8}{2{,}8} \times 200 = \boldsymbol{57{,}14\text{ V}} \approx \boldsymbol{57\text{ V}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 1-5.} Xét một hệ quang học điện tử gồm một catot $K$, hai diapham $D_1, D_2$ và một anot $A$. Khoảng cách giữa các điện cực đó bằng nhau và bằng $1\text{ cm}$. Điện thế của diapham thứ nhất $D_1$ bằng điện thế anot $A$ và bằng $U_1 = 100\text{ V}$ (so với điện thế catot $K$). Xác định điện thế của diapham thứ hai $D_2$ để cho chùm điện tử song song đi qua hệ hội tụ ở anot $A$.
+\DeBai{1-5}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $U_K = 0$, $U_{D1} = U_A = U_1 = 100\text{ V}$, $d = 1\text{ cm} = 0{,}01\text{ m}$. Cần tìm: $U_2 = U_{D2}$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
 \begin{tikzpicture}[scale=0.9, >=Stealth]
   \draw[dashdotted, thick, gray!80] (-0.5,0) -- (5.2,0);
   \draw[very thick] (0,-1.1) -- (0,1.1) node[above] {$K$};
@@ -287,7 +261,7 @@ Thay số với $d_1 = 0{,}5\text{ cm}$, $d_2 = 0{,}8\text{ cm}$, $U_G = 200\tex
   \draw[<->, thin] (3.2,-1.5) -- (4.8,-1.5) node[midway, below] {$d$};
 \end{tikzpicture}\\[0.1cm]
 \textit{Hình 1.5: Sơ đồ hệ quang học điện tử hai diapham cho bài tập (1-5).}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} Xác định tiêu cự của hai thấu kính diapham:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
@@ -321,26 +295,25 @@ Thay $f_1 = \dfrac{4 U_1 d}{U_2 - 2 U_1}$ và $f_2 = -\dfrac{2 U_2 d}{U_2 - U_1}
 \end{equation*}
 Giải PT bậc 2 ta được 2 nghiệm thỏa mãn:
 \begin{equation*}
-    U_2^{(1)} \approx \boldsymbol{432{,}28\text{ V}} \approx \boldsymbol{432\text{ V}}, \qquad U_2^{(2)} \approx \boldsymbol{27{,}72\text{ V}} \approx \boldsymbol{28\text{ V}}
+    U_2^{(1)} \approx \boldsymbol{432{,}24\text{ V}} \approx \boldsymbol{432\text{ V}}, \qquad U_2^{(2)} \approx \boldsymbol{27{,}76\text{ V}} \approx \boldsymbol{28\text{ V}}
 \end{equation*}
 
-\vspace{0.5cm}
+\vspace{0.45cm}
 
-%=====================================================================
-% CHƯƠNG II
-%=====================================================================
+
 \section*{Chương II. Một số vấn đề vật lý lượng tử}
 
-\textbf{Bài 2-1.} Một mặt bằng kali ở cách ngọn đèn $100\text{ W}$ là $75\text{ cm}$. Giả thiết năng lượng bức xạ của đèn trong đơn vị thời gian chỉ bằng $5\%$ công suất định mức. Nếu coi mỗi nguyên tử kali có dạng một đĩa dẹt đường kính $1\text{ \AA}$, hãy xác định thời gian cần thiết để mỗi nguyên tử đó hấp thụ một năng lượng bằng công thoát của nó $\varphi_K \cong 2\text{ eV}$, theo mẫu sóng ánh sáng. Rút ra nhận xét.
+\DeBai{2-1}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{Dữ kiện:} $P = 100\text{ W}$, $P_b = 5\% P = 5\text{ W}$, $R = 75\text{ cm} = 0{,}75\text{ m}$, $d = 1\text{ \AA} = 10^{-10}\text{ m}$, $\varphi_K = 2\text{ eV} = 3{,}2 \cdot 10^{-19}\text{ J}$ (hoặc $\varphi_K = 2{,}2\text{ eV} = 3{,}52 \cdot 10^{-19}\text{ J}$). Cần tìm: $t$.
+\textbf{Dữ kiện:} $P = 100\text{ W}$, $P_b = 5\% P = 5\text{ W}$, $R = 75\text{ cm} = 0{,}75\text{ m}$, $d = 1\text{ \AA} = 10^{-10}\text{ m}$, $\varphi_K = 2\text{ eV} = 3{,}2 \cdot 10^{-19}\text{ J}$ . Cần tìm: $t$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.38\textwidth]{images/fig_2_1_potassium.png}\\[0.1cm]
   \textit{Hình 2.1: Mô hình bức xạ cầu từ nguồn sáng đến đĩa dẹt nguyên tử Kali.}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} Cường độ bức xạ ánh sáng tại vị trí đặt tấm Kali cách nguồn sáng khoảng $R$:
 \begin{equation*}
@@ -357,25 +330,25 @@ Coi nguyên tử Kali là một đĩa tròn diện tích $S_a = \pi \left(\dfrac
 \begin{equation*}
     t = \frac{\varphi_K}{P_a} = \frac{16 R^2 \varphi_K}{P_b d^2}
 \end{equation*}
-Thay số với $\varphi_K = 2{,}2\text{ eV} = 2{,}2 \times 1{,}6 \cdot 10^{-19}\text{ J}$:
+Thay số với $\varphi_K = 2\text{ eV} = 3{,}2\cdot10^{-19}\text{ J}$:
 \begin{equation*}
-    t = \frac{16 \times (0{,}75)^2 \times (2{,}2 \times 1{,}6 \cdot 10^{-19})}{5 \times (10^{-10})^2} \approx \boldsymbol{57{,}6\text{ s}}
+    t = \frac{16 \times (0{,}75)^2 \times (2 \times 1{,}6 \cdot 10^{-19})}{5 \times (10^{-10})^2} \approx \boldsymbol{57{,}6\text{ s}}
 \end{equation*}
-(Nếu lấy $\varphi_K = 2\text{ eV}$ thì $t = \boldsymbol{52{,}4\text{ s}}$).
 
 \textbf{Nhận xét:} Theo quan điểm sóng cổ điển, thời gian tích lũy năng lượng kéo dài tới gần 1 phút. Tuy nhiên, thực nghiệm quang điện chứng minh electron phát ra tức thời ($\sim 10^{-9}\text{ s}$). Mẫu sóng cổ điển không thể giải thích được hiện tượng quang điện, đòi hỏi thuyết lượng tử photon của Einstein.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-2.} Người ta chiếu kali bằng tia cực tím bước sóng $2500\text{ \AA}$. Biết công thoát của kali là $2{,}2\text{ eV}$, tính động năng cực đại của các electron phát ra. Nếu cường độ bức xạ tới là $2\text{ W/m}^2$, tính số điện tử do một đơn vị diện tích phát ra trong một đơn vị thời gian.
+\DeBai{2-2}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $\lambda = 2500\text{ \AA} = 2{,}5 \cdot 10^{-7}\text{ m}$, $\varphi_K = 2{,}2\text{ eV}$, $I = 2\text{ W/m}^2$. Cần tìm: $T_{\max}$, $J_e$.
 
 \textbf{B1:} AD PT Einstein cho hiện tượng quang điện, tính động năng cực đại:
 \begin{equation*}
-    T_{\max} = \frac{h c}{\lambda} - \varphi_K = \frac{6{,}626 \cdot 10^{-34} \times 3 \cdot 10^8}{2{,}5 \cdot 10^{-7} \times 1{,}6 \cdot 10^{-19}} - 2{,}2 = 4{,}969\text{ eV} - 2{,}2\text{ eV} = \boldsymbol{2{,}77\text{ eV}} \approx \boldsymbol{2{,}75\text{ eV}}
+    T_{\max} = \frac{h c}{\lambda} - \varphi_K = \frac{6{,}626 \cdot 10^{-34} \times 3 \cdot 10^8}{2{,}5 \cdot 10^{-7} \times 1{,}6 \cdot 10^{-19}} - 2{,}2 = 4{,}969\text{ eV} - 2{,}2\text{ eV} = \boldsymbol{2{,}77\text{ eV}} 
 \end{equation*}
 Đổi ra Jun: $T_{\max} \approx \boldsymbol{4{,}43 \cdot 10^{-19}\text{ J}}$.
 
@@ -388,18 +361,19 @@ Giả sử hiệu suất lượng tử $100\%$ (mỗi photon hấp thụ bứt r
     J_e = N_e = N_{ph} \approx \boldsymbol{2{,}52 \cdot 10^{18}\text{ e}/(\text{m}^2\cdot\text{s})}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-3.} Một photon có năng lượng $0{,}3\text{ MeV}$ va chạm với một electron đứng yên và tán xạ ngược ($180^\circ$). Xác định vận tốc của electron giật lùi.
+\DeBai{2-3}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $E_{ph} = 0{,}3\text{ MeV}$, góc tán xạ $\theta = 180^\circ$, năng lượng nghỉ electron $E_0 = m_0 c^2 = 0{,}511\text{ MeV}$. Cần tìm: $v$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.68\textwidth]{images/fig_2_3_compton.png}\\[0.1cm]
   \textit{Hình 2.2: Sơ đồ va chạm tán xạ Compton ngược ($180^\circ$).}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} AD định luật bảo toàn năng lượng và động lượng (tán xạ ngược $\theta = 180^\circ$):
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
@@ -424,10 +398,23 @@ Vận tốc của electron giật lùi:
     v = 0{,}65 c \approx \boldsymbol{1{,}95 \cdot 10^8\text{ m/s}}
 \end{equation*}
 
-\vspace{0.45cm}
 
-\textbf{Bài 2-4.} Tìm hiệu điện thế $U$ cần thiết để electron có bước sóng de Broglie bằng $1\text{ \AA}$.
+\textbf{B3:} Kiểm tra bằng công thức Compton cho tán xạ ngược:
+\[
+\lambda'-\lambda=\frac{2h}{m_ec}
+\quad\Rightarrow\quad
+E_\gamma'=\frac{E_\gamma}{1+2E_\gamma/(m_ec^2)}
+=\frac{0{,}3}{1+0{,}6/0{,}511}\simeq0{,}138\text{ MeV}.
+\]
+Electron nhận động năng $T=E_\gamma-E_\gamma'\simeq0{,}162\text{ MeV}$.
+Từ $\gamma=1+T/(m_ec^2)$, suy ra
+$v/c=\sqrt{1-\gamma^{-2}}\simeq0{,}651$, trùng kết quả bảo toàn năng lượng và động lượng.
 
+\PhanCachBai
+
+\DeBai{2-4}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $\lambda = 1\text{ \AA} = 10^{-10}\text{ m}$. Cần tìm: $U$.
@@ -442,10 +429,11 @@ Vận tốc của electron giật lùi:
     U = \left(\frac{12{,}27}{\lambda\text{ (\AA)}}\right)^2 = \left(\frac{12{,}27}{1}\right)^2 \approx \boldsymbol{151\text{ V}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-5.} Hãy chứng minh rằng bước sóng de Broglie của một hạt tương đối tính có động năng rất lớn so với năng lượng nghỉ của nó ($E \gg E_0$) sẽ bằng bước sóng của photon có cùng năng lượng.
+\DeBai{2-5}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Năng lượng toàn phần của hạt tương đối tính:
@@ -464,13 +452,14 @@ Khi $E \gg E_0$ (trường hợp siêu tương đối tính): $E \approx p c \im
 \end{equation*}
 Như vậy: $\lambda_{\text{hạt}} \approx \lambda_{\text{photon}} = \boldsymbol{\dfrac{h c}{E}}$ (đpcm).
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-6.} Hãy tìm mối liên hệ giữa vận tốc pha $v_f$ và vận tốc nhóm $v_g$ của sóng de Broglie đối với một hạt tự do có vận tốc $v$.
+\DeBai{2-6}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Vận tốc pha $v_f$:
+\textbf{B1:} Vận tốc pha $v_f$ (dùng năng lượng toàn phần $E=\gamma m_0c^2$ và $m=\gamma m_0$):
 \begin{equation*}
     v_f = \frac{\omega}{k} = \frac{E}{p} = \frac{m c^2}{m v} = \boldsymbol{\frac{c^2}{v}}
 \end{equation*}
@@ -487,18 +476,56 @@ Vận tốc nhóm của gói sóng de Broglie:
 \end{equation*}
 (Vận tốc nhóm trùng với vận tốc chuyển động thực của hạt). Ta cũng có hệ thức: $v_f \cdot v_g = c^2$.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-8.} Trong một thí nghiệm giao thoa khe Young cho chùm hạt có thông số: $h = 6{,}625 \cdot 10^{-3}\text{ J}\cdot\text{s}$, $m = 66{,}25 \cdot 10^{-3}\text{ kg}$, vận tốc hạt $v = 5\text{ m/s}$, khoảng cách giữa hai khe $d = 0{,}6\text{ m}$, khoảng cách từ khe tới màn $L = 12\text{ m}$. Tính khoảng vân giao thoa $\Delta y$.
+\DeBai{2-7}
 
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+\textbf{B1:} Tính bước sóng de Broglie của electron.
+Động năng $T=60\text{ keV}$ đã bằng khoảng $0{,}117$ năng lượng nghỉ
+$m_ec^2=511\text{ keV}$, nên dùng hệ thức tương đối tính:
+\[
+pc=\sqrt{T(T+2m_ec^2)},\qquad
+\lambda=\frac{hc}{\sqrt{T(T+2m_ec^2)}}.
+\]
+Với $hc=12{,}3984\text{ keV}\cdot\text{\AA}$:
+\[
+\lambda=\frac{12{,}3984}{\sqrt{60(60+2\times511)}}
+\simeq\boldsymbol{0{,}04866\text{ \AA}}.
+\]
+
+\textbf{B2:} Áp dụng điều kiện Bragg bậc nhất:
+\[
+2d\sin\theta=\lambda
+\quad\Rightarrow\quad
+\theta=\arcsin\frac{0{,}04866}{2\times4{,}08}
+\simeq5{,}963\cdot10^{-3}\text{ rad}.
+\]
+Góc lệch của tia nhiễu xạ so với tia tới là $2\theta$, không phải $\theta$.
+Màng đa tinh thể tạo các tia cùng góc lệch ở nhiều phương, nên ảnh trên màn là một vòng tròn.
+
+\textbf{B3:} Với khoảng cách màn $L=40\text{ cm}$, bán kính vòng nhiễu xạ:
+\[
+R=L\tan(2\theta)\simeq L\frac{\lambda}{d}
+=40\frac{0{,}04866}{4{,}08}\text{ cm}
+\simeq\boldsymbol{0{,}477\text{ cm}=4{,}77\text{ mm}}.
+\]
+
+\PhanCachBai
+
+\DeBai{2-8}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $h = 6{,}625 \cdot 10^{-3}\text{ J}\cdot\text{s}$, $m = 66{,}25 \cdot 10^{-3}\text{ kg}$, $v = 5\text{ m/s}$, $d = 0{,}6\text{ m}$, $L = 12\text{ m}$. Cần tìm: $\Delta y$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.52\textwidth]{images/fig_2_8_doubleslit.png}\\[0.1cm]
   \textit{Hình 2.3: Giao thoa sóng vật chất qua hai khe hẹp.}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} Bước sóng de Broglie của chùm hạt:
 \begin{equation*}
@@ -510,25 +537,24 @@ Vận tốc nhóm của gói sóng de Broglie:
     \Delta y = \frac{\lambda L}{d} = \frac{h L}{m v d} = \frac{6{,}625 \cdot 10^{-3} \times 12}{66{,}25 \cdot 10^{-3} \times 5 \times 0{,}6} = \boldsymbol{0{,}4\text{ m}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-9.} Áp dụng hệ thức bất định Heisenberg $\Delta x \cdot \Delta p_x \ge \hbar = \dfrac{h}{2\pi}$. Biết độ bất định tương đối về xung lượng là $\dfrac{\Delta p}{p} = 10^{-3}$. Hãy xác định độ bất định tọa độ $\Delta x$ đối với:
-\begin{enumerate}[label=\alph*)]
-  \item Một hạt bụi có khối lượng $m = 5\text{ mg}$ chuyển động với vận tốc $v = 2\text{ m/s}$.
-  \item Một electron chuyển động với vận tốc $v = 1{,}8 \cdot 10^8\text{ m/s}$.
-\end{enumerate}
+\DeBai{2-9}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Đối với hạt bụi (vật lý cổ điển):
+Dùng ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$ theo quy ước các bài bất định của môn học. Nếu dùng độ lệch chuẩn với $\sigma_x\sigma_p\ge\hbar/2$, các giới hạn vị trí bên dưới giảm một nửa.
+
+\textbf{B1:} Đối với hạt khối lượng $10\text{ mg}$:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
-  \item Xung lượng: $p = m v = (5 \cdot 10^{-6}\text{ kg}) \times 2\text{ m/s} = 10^{-5}\text{ kg}\cdot\text{m/s}$.
-  \item Độ bất định xung lượng: $\Delta p = 10^{-3} p = 10^{-8}\text{ kg}\cdot\text{m/s}$.
+  \item Xung lượng: $p = m v = (10^{-5}\text{ kg}) \times 2\text{ m/s} = 2 \cdot 10^{-5}\text{ kg}\cdot\text{m/s}$.
+  \item Độ bất định xung lượng: $\Delta p = 10^{-3} p = 2 \cdot 10^{-8}\text{ kg}\cdot\text{m/s}$.
   \item Độ bất định tọa độ:
   \begin{equation*}
-      \Delta x \ge \frac{h}{2\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{2\pi \times 10^{-8}} \approx 1{,}055 \cdot 10^{-26}\text{ m} = \boldsymbol{1{,}056 \cdot 10^{-16}\text{ \AA}}
+      \Delta x \gtrsim \frac{h}{2\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{2\pi \times 2 \cdot 10^{-8}} \approx 5{,}27 \cdot 10^{-27}\text{ m} = \boldsymbol{5{,}27 \cdot 10^{-17}\text{ \AA}}
   \end{equation*}
-  (Độ bất định tọa độ vô cùng nhỏ so với kích thước hạt bụi, có thể xem hạt chuyển động theo quỹ đạo xác định).
+  (Độ bất định tọa độ vô cùng nhỏ so với kích thước hạt, có thể xem hạt chuyển động theo quỹ đạo xác định).
 \end{itemize}
 
 \textbf{B2:} Đối với electron ($v = 1{,}8 \cdot 10^8\text{ m/s} = 0{,}6c$):
@@ -540,69 +566,131 @@ Vận tốc nhóm của gói sóng de Broglie:
   \item Độ bất định xung lượng: $\Delta p = 10^{-3} p = 2{,}0475 \cdot 10^{-25}\text{ kg}\cdot\text{m/s}$.
   \item Độ bất định tọa độ:
   \begin{equation*}
-      \Delta x \ge \frac{h}{2\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{2\pi \times 2{,}0475 \cdot 10^{-25}} \approx 5{,}15 \cdot 10^{-10}\text{ m} \approx \boldsymbol{5{,}14\text{ \AA}}
+      \Delta x \gtrsim \frac{h}{2\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{2\pi \times 2{,}0475 \cdot 10^{-25}} \approx 5{,}15 \cdot 10^{-10}\text{ m} \approx \boldsymbol{5{,}14\text{ \AA}}
   \end{equation*}
   (Độ bất định tọa độ lớn hơn kích thước nguyên tử ($\sim 1\text{ \AA}$), chứng tỏ electron trong thang vi mô không có khái niệm quỹ đạo cổ điển).
 \end{itemize}
 
-\vspace{0.45cm}
 
-\textbf{Bài 2-10.} Một nguyên tử bức xạ ánh sáng có bước sóng $\lambda = 2500\text{ \AA}$ với độ rộng vạch $\Delta\lambda = 1\text{ \AA}$. Tính thời gian sống tối thiểu của trạng thái kích thích.
+\PhanCachBai
 
+\DeBai{2-10}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} AD hệ thức bất định năng lượng -- thời gian:
-\begin{equation*}
-    \Delta E \cdot \Delta t \ge \frac{h}{2\pi} \implies \Delta t \ge \frac{h}{2\pi \Delta E}
-\end{equation*}
+\textbf{B1:} Đổi đơn vị:
+$\lambda=4000\text{ \AA}=4\cdot10^{-7}\text{ m}$,
+$\Delta\lambda=10^{-4}\text{ \AA}=10^{-14}\text{ m}$.
+Vì $\Delta\lambda\ll\lambda$, độ rộng tần số là
+\[
+\Delta\nu\simeq\left|\frac{d(c/\lambda)}{d\lambda}\right|\Delta\lambda
+=\frac{c\,\Delta\lambda}{\lambda^2}
+=\frac{3\cdot10^8\times10^{-14}}{(4\cdot10^{-7})^2}
+=1{,}875\cdot10^7\text{ Hz}.
+\]
 
-\textbf{B2:} Năng lượng photon $E = \dfrac{h c}{\lambda} \implies \Delta E \approx \dfrac{h c}{\lambda^2} \Delta\lambda$. Suy ra:
-\begin{equation*}
-    \Delta t \ge \frac{h}{2\pi \dfrac{h c}{\lambda^2}\Delta\lambda} = \frac{\lambda^2}{2\pi c \Delta\lambda}
-\end{equation*}
-Thay số với $\lambda = 2500\text{ \AA} = 2{,}5 \cdot 10^{-7}\text{ m}$ và $\Delta\lambda = 1\text{ \AA} = 10^{-10}\text{ m}$:
-\begin{equation*}
-    \Delta t \ge \frac{(2{,}5 \cdot 10^{-7})^2}{2\pi \times 3 \cdot 10^8 \times 10^{-10}} \approx \boldsymbol{8{,}49 \cdot 10^{-9}\text{ s}} \approx \boldsymbol{8{,}5\text{ ns}}
-\end{equation*}
+\textbf{B2:} Coi độ rộng đã cho là độ rộng tự nhiên ở nửa cực đại (FWHM),
+với mức dưới có thời gian sống rất dài. Mức trên có xác suất tồn tại
+$P(t)=e^{-t/\tau}$ tạo vạch Lorentz có độ rộng
+$\Delta\nu=1/(2\pi\tau)$.
+Suy ra thời gian sống trung bình:
+\[
+\tau=\frac1{2\pi\Delta\nu}
+=\frac{\lambda^2}{2\pi c\,\Delta\lambda}
+\simeq\boldsymbol{8{,}49\cdot10^{-9}\text{ s}=8{,}49\text{ ns}}.
+\]
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-11.} Hãy tìm độ bất định về tọa độ của một hạt nếu độ bất định về xung lượng bằng chính xung lượng của nó ($\Delta p = p$).
+\DeBai{2-11}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Xung lượng hạt liên hệ với bước sóng de Broglie: $p = \dfrac{h}{\lambda} \implies \Delta p = \dfrac{h}{\lambda}$.
 
-\textbf{B2:} AD hệ thức bất định Heisenberg $\Delta x \cdot \Delta p \ge \dfrac{h}{2\pi}$:
+\textbf{B2:} Theo quy ước ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$ của môn học:
 \begin{equation*}
-    \Delta x \ge \frac{h}{2\pi \Delta p} = \frac{h}{2\pi \dfrac{h}{\lambda}} = \boldsymbol{\frac{\lambda}{2\pi}}
+    \Delta x \gtrsim \frac{h}{2\pi \Delta p} = \frac{h}{2\pi \dfrac{h}{\lambda}} = \boldsymbol{\frac{\lambda}{2\pi}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-13.} Đánh giá động năng cực tiểu của một hạt khối lượng $m$ bị giam giữ trong một miền không gian có kích thước tuyến tính $L$.
+\DeBai{2-12}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Hạt bị giam giữ trong miền có kích thước $L$, độ bất định tọa độ $\Delta x \approx L$. AD hệ thức Heisenberg:
-\begin{equation*}
-    \Delta p_x \ge \frac{h}{2\pi L}
-\end{equation*}
+\textbf{B1:} Viết năng lượng theo xung lượng: $E=p^2/(2m)$.
+Với một khoảng xung lượng nhỏ quanh $p=mv$:
+\[
+\Delta E\simeq\left|\frac{dE}{dp}\right|\Delta p
+=\frac{|p|}{m}\Delta p=v\Delta p,
+\]
+trong đó $v$ là độ lớn vận tốc.
 
-\textbf{B2:} Động năng cực tiểu của hạt:
-\begin{equation*}
-    T_{\min} \approx \frac{(\Delta p_x)^2}{2m} = \boldsymbol{\frac{h^2}{8\pi^2 m L^2}}
-\end{equation*}
-(Áp dụng cho nucleon trong hạt nhân kích thước $L \sim 10^{-14}\text{ m}$, ta thu được $T_{\min} \approx \boldsymbol{9{,}35\text{ MeV}}$).
+\textbf{B2:} Dùng $\Delta t=\Delta x/v$:
+\[
+\Delta E\,\Delta t\simeq
+v\Delta p\frac{\Delta x}{v}=\Delta x\,\Delta p.
+\]
+Với quy ước ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$
+được dùng trong yêu cầu của bài, suy ra
+\[
+\boldsymbol{\Delta E\,\Delta t\gtrsim\hbar=\frac{h}{2\pi}}.
+\]
+Nếu $\Delta x$ và $\Delta p$ được định nghĩa là độ lệch chuẩn, hệ thức chính xác là
+$\sigma_x\sigma_p\ge\hbar/2$; phép suy luận trên khi đó cho hệ số $\hbar/2$.
+Vì vậy kết quả với hệ số $h/(2\pi)$ trong đề là một ước lượng theo quy ước độ rộng,
+không phải bất đẳng thức độ lệch chuẩn với hệ số tối ưu.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-15.} Một hạt có khối lượng $m = 10^{-14}\text{ kg}$ chuyển động trong một giếng thế năng một chiều sâu vô hạn có bề rộng $L = 0{,}1\text{ mm}$.
-\begin{enumerate}[label=\alph*)]
-  \item Tính vận tốc nhỏ nhất của hạt.
-  \item Xác định số lượng tử $n$ của mức năng lượng khi hạt chuyển động với vận tốc $v = 10^{-5}\text{ m/s}$.
-\end{enumerate}
+\DeBai{2-13}
 
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+Với ước lượng $\Delta x\sim L$ và hệ thức độ lệch chuẩn
+$\Delta x\,\Delta p\ge\hbar/2$, động lượng đặc trưng nhỏ nhất có bậc
+$p_{\min}\sim\hbar/(2L)$. Trong gần đúng phi tương đối tính:
+\[
+E_{\min}\sim\frac{p_{\min}^2}{2m}
+=\frac{\hbar^2}{8mL^2}=\frac{h^2}{32\pi^2mL^2}.
+\]
+Đây là ước lượng từ bất định; năng lượng cơ bản chính xác còn phụ thuộc mô hình thế giam giữ.
+
+Với điện tử trong hạt nhân có $L=10^{-14}\text{ m}$, $p_{\min}c\simeq9{,}87\text{ MeV}$
+lớn hơn nhiều so với $m_ec^2=0{,}511\text{ MeV}$, nên phải dùng công thức tương đối tính:
+\[
+T_{\min}\sim\sqrt{(p_{\min}c)^2+(m_ec^2)^2}-m_ec^2
+\simeq\boldsymbol{9{,}37\text{ MeV}}.
+\]
+Ước lượng này dùng hệ thức độ lệch chuẩn với hệ số $\hbar/2$;
+năng lượng cực tiểu chính xác còn phụ thuộc điều kiện biên của mô hình giam giữ.
+
+\PhanCachBai
+
+\DeBai{2-14}
+
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+Đặt $\hat L\psi=\ell\psi$. Khi đó
+\[
+i\frac{d\psi}{dx}=\ell\psi
+\quad\Rightarrow\quad \psi_\ell(x)=C e^{-i\ell x}.
+\]
+Trên toàn trục, $\ell$ có thể nhận mọi giá trị thực. Vì
+$\hat p_x=-i\hbar\,d/dx=-\hbar\hat L$, trị riêng xung lượng là
+$p_x=-\hbar\ell$, cũng nhận mọi giá trị thực. Phổ xung lượng của hạt tự do là liên tục.
+Các sóng phẳng là hàm riêng suy rộng, không chuẩn hóa bình phương trên toàn trục.
+
+\PhanCachBai
+
+\DeBai{2-15}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $m = 10^{-14}\text{ kg}$, $L = 0{,}1\text{ mm} = 10^{-4}\text{ m}$.
@@ -623,73 +711,49 @@ Vận tốc nhỏ nhất tương ứng:
 \end{equation*}
 Số lượng tử $n$ vô cùng lớn, chứng tỏ trong thế giới vĩ mô các mức năng lượng san sát nhau tạo thành phổ liên tục (nguyên lý tương ứng Bohr).
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 2-16.} Chứng minh rằng phổ trị riêng của toán tử hình chiếu xung lượng $\hat{p}_x = -i\hbar \dfrac{d}{dx}$ của hạt tự do là phổ liên tục.
+\DeBai{2-16}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Phương trình trị riêng của toán tử xung lượng $\hat{p}_x \Psi(x) = p_x \Psi(x)$:
-\begin{equation*}
-    -i\hbar \frac{d\Psi}{dx} = p_x \Psi \implies \frac{d\Psi}{\Psi} = \frac{i p_x}{\hbar} dx
-\end{equation*}
+\textbf{B1:} Trong rào, $U_0-E=20\text{ eV}$ và hàm sóng có dạng
+$\psi=B e^{\kappa x}+C e^{-\kappa x}$, với
+\[
+\kappa=\frac{\sqrt{2m_e(U_0-E)}}{\hbar}
+\simeq\boldsymbol{2{,}29\cdot10^{10}\text{ m}^{-1}}.
+\]
+Ghép liên tục $\psi$ và $d\psi/dx$ tại hai mặt rào, với thế năng bằng nhau ở hai phía,
+cho hệ số truyền chính xác:
+\[
+D=\left[1+\frac{U_0^2}{4E(U_0-E)}\sinh^2(\kappa L)\right]^{-1}.
+\]
+Tỉ số năng lượng trong ngoặc có thể tính trực tiếp bằng eV:
+$U_0^2/[4E(U_0-E)]=70^2/(4\times50\times20)=1{,}225$.
 
-\textbf{B2:} Lấy tích phân ta được hàm riêng:
-\begin{equation*}
-    \Psi(x) = C e^{i p_x x / \hbar}
-\end{equation*}
-Vì hạt chuyển động tự do trên toàn bộ trục $-\infty < x < +\infty$, hàm riêng $\Psi(x)$ liên tục, đơn trị và bị chặn (hữu hạn) với \textbf{mọi giá trị thực} của $p_x$. Do đó, xung lượng của hạt tự do có thể nhận bất kỳ giá trị thực nào, tức là phổ trị riêng của xung lượng hạt tự do là \textbf{phổ liên tục} (không bị lượng tử hóa).
+\textbf{B2:} Với $L=1{,}0\text{ nm}$, $\kappa L\simeq22{,}91$:
+\[
+D_a=\frac1{1+1{,}225\sinh^2(22{,}91)}
+\simeq\boldsymbol{4{,}1\cdot10^{-20}}.
+\]
+Với $L=0{,}1\text{ nm}$, $\kappa L\simeq2{,}291$:
+\[
+D_b=\frac1{1+1{,}225\sinh^2(2{,}291)}
+\simeq\boldsymbol{0{,}033=3{,}3\%}.
+\]
 
-\vspace{0.45cm}
+\textbf{B3:} Nếu chỉ lấy thừa số suy giảm mũ để ước lượng,
+$D\sim e^{-2\kappa L}$, hai giá trị tương ứng là
+$1{,}26\cdot10^{-20}$ và $1{,}02\cdot10^{-2}$.
+Ước lượng này bỏ hệ số do ghép biên; khi cần xác suất truyền của rào chữ nhật, dùng kết quả ở B2.
 
-\textbf{Bài 2-17.} Hạt electron có năng lượng $E = 50\text{ eV}$ gặp một hàng rào thế năng chữ nhật cao $U_0 = 70\text{ eV}$. Tính hệ số thẩm thấu đường ngầm $D$ khi bề rộng của hàng rào là: a) $L = 1\text{ nm}$; b) $L = 0{,}1\text{ nm}$.
+\PhanCachBai
 
+\DeBai{2-17}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
-
-\textbf{Dữ kiện:} $E = 50\text{ eV}$, $U_0 = 70\text{ eV} \implies U_0 - E = 20\text{ eV} = 3{,}2 \cdot 10^{-18}\text{ J}$, $m = 9{,}1 \cdot 10^{-31}\text{ kg}$.
-
-\begin{center}
-  \includegraphics[width=0.48\textwidth]{images/fig_2_17_barrier.png}\\[0.1cm]
-  \textit{Hình 2.4: Hiệu ứng đường ngầm xuyên qua hàng rào thế năng chữ nhật ($E < U_0$).}
-\end{center}
-
-\textbf{B1:} AD CT tính hệ số thẩm thấu đường ngầm cho hàng rào thế chữ nhật:
-\begin{equation*}
-    D \approx \exp\left(-\frac{2 L}{\hbar}\sqrt{2 m(U_0 - E)}\right)
-\end{equation*}
-Số hạng trong hàm mũ:
-\begin{equation*}
-    \frac{2\sqrt{2 m (U_0 - E)}}{\hbar} = \frac{2 \times \sqrt{2 \times 9{,}1 \cdot 10^{-31} \times 3{,}2 \cdot 10^{-18}}}{1{,}055 \cdot 10^{-34}} \approx 4{,}575 \cdot 10^{10}\text{ m}^{-1}
-\end{equation*}
-
-\textbf{B2:} Tính giá trị cho từng trường hợp bề rộng rào:
-\begin{enumerate}[label=\alph*)]
-  \item Khi $L = 1\text{ nm} = 10^{-9}\text{ m}$:
-  \begin{equation*}
-      D = e^{-4{,}575 \cdot 10^{10} \times 10^{-9}} = e^{-45{,}75} \approx \boldsymbol{1{,}3 \cdot 10^{-20}}
-  \end{equation*}
-  (Xác suất xuyên hầm cực kỳ nhỏ, hạt hầu như bị phản xạ hoàn toàn).
-  \item Khi $L = 0{,}1\text{ nm} = 10^{-10}\text{ m}$:
-  \begin{equation*}
-      D = e^{-4{,}575 \cdot 10^{10} \times 10^{-10}} = e^{-4{,}575} \approx \boldsymbol{1{,}03 \cdot 10^{-2}} \approx \boldsymbol{0{,}01} = \boldsymbol{1\%}
-  \end{equation*}
-  (Khi bề rộng rào mỏng cỡ kích thước nguyên tử, hiệu ứng đường ngầm xuất hiện rõ rệt).
-\end{enumerate}
-
-\vspace{0.45cm}
-
-\textbf{Bài 2-18.} Một electron chuyển động trong giếng thế năng 1 chiều sâu vô hạn bề rộng $L = 10^{-10}\text{ m} = 1\text{ \AA}$.
-\begin{enumerate}[label=\alph*)]
-  \item Chuẩn hóa hàm sóng của electron trong giếng thế: $\Psi_n(x) = A_n \sin\left(\dfrac{n\pi x}{L}\right)$.
-  \item Xác định các giá trị năng lượng ở 3 mức thấp nhất ($n = 1, 2, 3$) và bước sóng của photon phát ra khi electron chuyển từ mức $n = 2$ về mức $n = 1$.
-\end{enumerate}
-
-\textbf{Giải.}
-
-\begin{center}
-  \includegraphics[width=0.36\textwidth]{images/fig_2_18_well.png}\\[0.1cm]
-  \textit{Hình 2.5: Giếng thế năng một chiều sâu vô hạn.}
-\end{center}
 
 \textbf{B1:} Chuẩn hóa hàm sóng $\Psi_n(x)$:
 AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
@@ -700,7 +764,19 @@ AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
     \implies A_n = \boldsymbol{\sqrt{\frac{2}{L}}}
 \end{equation*}
 
-\textbf{B2:} Năng lượng ở 3 mức đầu tiên ($E_n = n^2 E_1$):
+\PhanCachBai
+
+\DeBai{2-18}
+
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+\begin{center}\begin{minipage}{\linewidth}\centering
+  \includegraphics[width=0.36\textwidth]{images/fig_2_18_well.png}\\[0.1cm]
+  \textit{Hình 2.5: Giếng thế năng một chiều sâu vô hạn.}
+\end{minipage}\end{center}
+
+\textbf{B1:} Năng lượng ở 3 mức đầu tiên ($E_n = n^2 E_1$):
 \begin{equation*}
     E_1 = \frac{h^2}{8 m L^2} = \frac{(6{,}625 \cdot 10^{-34})^2}{8 \times 9{,}1 \cdot 10^{-31} \times (10^{-10})^2} \approx 6{,}03 \cdot 10^{-18}\text{ J} = \boldsymbol{37{,}7\text{ eV}}
 \end{equation*}
@@ -708,7 +784,7 @@ AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
     E_2 = 2^2 E_1 = 4 \times 37{,}7\text{ eV} = \boldsymbol{151\text{ eV}}, \qquad E_3 = 3^2 E_1 = 9 \times 37{,}7\text{ eV} = \boldsymbol{339\text{ eV}}
 \end{equation*}
 
-\textbf{B3:} Bước sóng photon phát ra khi chuyển từ mức $n = 2$ về $n = 1$:
+\textbf{B2:} Bước sóng photon phát ra khi chuyển từ mức $n = 2$ về $n = 1$:
 \begin{equation*}
     \Delta E = E_2 - E_1 = 151\text{ eV} - 37{,}7\text{ eV} = 113{,}3\text{ eV} = 113{,}3 \times 1{,}6 \cdot 10^{-19}\text{ J} \approx 1{,}813 \cdot 10^{-17}\text{ J}
 \end{equation*}
@@ -716,15 +792,14 @@ AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
     \lambda = \frac{h c}{\Delta E} = \frac{6{,}625 \cdot 10^{-34} \times 3 \cdot 10^8}{1{,}813 \cdot 10^{-17}} \approx \boldsymbol{1{,}1 \cdot 10^{-8}\text{ m}} = \boldsymbol{11\text{ nm}}
 \end{equation*}
 
-\vspace{0.5cm}
+\vspace{0.45cm}
 
-%=====================================================================
-% CHƯƠNG III
-%=====================================================================
-\section*{Chương III. Cấu trúc nguyên tử và quang phổ nguyên tử}
 
-\textbf{Bài 3-1.} Tính bước sóng ngắn nhất và bước sóng dài nhất (bằng $\text{\AA}$) đối với dãy Lyman của nguyên tử hydro.
+\section*{Chương III. Cấu trúc nguyên tử và phổ nguyên tử}
 
+\DeBai{3-1}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} Dãy Lyman tương ứng $n_1 = 1$, hằng số Rydberg $R \approx 1{,}097 \cdot 10^7\text{ m}^{-1} = 1{,}097 \cdot 10^{-3}\text{ \AA}^{-1}$.
@@ -746,10 +821,11 @@ AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
   \end{equation*}
 \end{itemize}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 3-2.} Tính năng lượng ion hoá của nguyên tử hydro biết rằng bước sóng ngắn nhất của dãy Balmer là $3650\text{ \AA}$.
+\DeBai{3-2}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} Dãy Balmer có $n_1 = 2$, bước sóng ngắn nhất ứng với $n_2 \to \infty$ là $\lambda_{\min} = 3650\text{ \AA}$.
@@ -768,10 +844,11 @@ Thay số:
     E_i = \frac{4 \times 6{,}625 \cdot 10^{-34} \times 3 \cdot 10^8}{3650 \cdot 10^{-10} \times 1{,}6 \cdot 10^{-19}} \approx \boldsymbol{13{,}6\text{ eV}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 3-3.} Trong một ống phóng điện các nguyên tử hydro chịu tác dụng của một dòng điện tử năng lượng $12{,}2\text{ eV}$. Tìm bước sóng của các vạch do hydro phát ra.
+\DeBai{3-3}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} Năng lượng chùm electron kích thích $E_e = 12{,}2\text{ eV}$. Ban đầu nguyên tử ở trạng thái cơ bản $E_1 = -13{,}6\text{ eV}$.
@@ -784,9 +861,9 @@ Năng lượng kích thích:
 \begin{equation*}
     \implies 1 - \frac{1}{n^2} \le \frac{12{,}2}{13{,}6} \approx 0{,}897 \implies \frac{1}{n^2} \ge 0{,}103 \implies n^2 \le 9{,}7 \implies n_{\max} = 3
 \end{equation*}
-Do đó, nguyên tử được kích thích lên mức $n = 3$.
+Do đó, mức kích thích cao nhất có thể đạt là $n=3$; các nguyên tử cũng có thể được kích thích lên $n=2$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
 \begin{tikzpicture}[scale=0.9, >=Stealth]
   \draw[very thick] (0, 2.4) -- (5, 2.4) node[right] {$n = 3 \quad (E_3 = -1{,}51\text{ eV})$};
   \draw[very thick] (0, 1.2) -- (5, 1.2) node[right] {$n = 2 \quad (E_2 = -3{,}40\text{ eV})$};
@@ -796,9 +873,9 @@ Do đó, nguyên tử được kích thích lên mức $n = 3$.
   \draw[->, very thick, purple] (4.0, 1.2) -- (4.0, 0) node[midway, right] {$\lambda_3$};
 \end{tikzpicture}\\[0.1cm]
 \textit{Hình 3.1: Các bước dịch chuyển mức năng lượng và vạch phát xạ của nguyên tử Hydro.}
-\end{center}
+\end{minipage}\end{center}
 
-\textbf{B2:} Khi trở về trạng thái cơ bản, nguyên tử phát ra 3 vạch quang phổ tương ứng:
+\textbf{B2:} Tập hợp các nguyên tử kích thích có thể phát ra 3 vạch quang phổ; mỗi nguyên tử có thể trở về trực tiếp hoặc qua các mức trung gian:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
   \item Chuyển mức $3 \to 1$:
   \begin{equation*}
@@ -814,16 +891,17 @@ Do đó, nguyên tử được kích thích lên mức $n = 3$.
   \end{equation*}
 \end{itemize}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 3-4.} Tính mômen từ của một điện tử chuyển động xung quanh một proton trên một quỹ đạo tròn bán kính $r$ (theo vật lý cổ điển).
+\DeBai{3-4}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.28\textwidth]{images/fig_3_4_orbit.png}\\[0.1cm]
   \textit{Hình 3.2: Chuyển động tròn của electron tạo thành dòng điện kín sinh ra mômen từ.}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} Cường độ dòng điện tương đương do electron chuyển động tròn chu kỳ $T$ tạo ra:
 \begin{equation*}
@@ -844,10 +922,13 @@ Diện tích giới hạn bởi quỹ đạo tròn: $A = \pi r^2$. Mômen từ c
     |\vec{M}| = \frac{1}{2} e r^2 \sqrt{\frac{k e^2}{m r^3}} = \boldsymbol{\frac{e^2}{2}\sqrt{\frac{k r}{m}}} = \boldsymbol{\frac{e^2}{2}\sqrt{\frac{r}{4\pi\varepsilon_0 m}}}
 \end{equation*}
 
-\vspace{0.45cm}
+Mômen từ có hướng ngược với mômen động lượng quỹ đạo: $\vec\mu=-\dfrac{e}{2m}\vec L$.
 
-\textbf{Bài 3-5.} Áp dụng kết quả của cơ học lượng tử tính các giá trị có thể có của mômen từ đối với mức $n = 3$. Biết công thức liên hệ giữa mômen động lượng và mômen từ: $\vec{\mu}_l = -\dfrac{e}{2m}\vec{M}_l$.
+\PhanCachBai
 
+\DeBai{3-5}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Với số lượng tử chính $n = 3$, số lượng tử quỹ đạo nhận các giá trị: $l = 0, 1, 2$.
@@ -870,28 +951,42 @@ Các giá trị có thể có của mômen từ đối với mức $n = 3$:
     \mu_l = \boldsymbol{0}, \qquad \mu_l = \boldsymbol{\sqrt{2}\mu_B} = \boldsymbol{\frac{e\hbar\sqrt{2}}{2m}}, \qquad \mu_l = \boldsymbol{\sqrt{6}\mu_B} = \boldsymbol{\frac{e\hbar\sqrt{6}}{2m}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 3-6.} Biểu diễn các cách định hướng có thể có của mômen động lượng $\vec{M}_l$ với $l = 0, 1, 2, 3$ và $4$ bằng hình vẽ.
+\DeBai{3-6}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Định hướng không gian lượng tử hóa:
 Hình chiếu của $\vec{M}_l$ lên trục $Oz$ nhận các giá trị gián đoạn $M_{lz} = m_l \hbar$ với số lượng tử từ $m_l = -l, -l+1, \dots, +l$ (tổng cộng $2l + 1$ hướng).
-Góc hợp bởi $\vec{M}_l$ và trục $Oz$:
+Với $l>0$, góc hợp bởi $\vec{M}_l$ và trục $Oz$:
 \begin{equation*}
     \cos\varphi = \frac{M_{lz}}{M_l} = \frac{m_l}{\sqrt{l(l+1)}}
 \end{equation*}
 
-\begin{center}
-  \includegraphics[width=0.92\textwidth]{images/fig_3_6_quantization.png}\\[0.1cm]
-  \textit{Hình 3.3: Sự lượng tử hóa không gian của véctơ mômen động lượng quỹ đạo với $l = 0, 1, 2, 3, 4$.}
-\end{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=0.78,>=Stealth]
+\foreach \l/\x in {1/0,2/4,3/8} {
+  \draw[->] (\x,-3.4)--(\x,3.6) node[above] {$M_{lz}/\hbar$};
+  \node at (\x+1.25,-4) {$l=\l$};
+  \pgfmathsetmacro{\rad}{sqrt(\l*(\l+1))}
+  \foreach \m in {-\l,...,\l} {
+    \pgfmathsetmacro{\xx}{sqrt(\rad*\rad-\m*\m)}
+    \draw[->,thick] (\x,0)--(\x+\xx,\m);
+    \draw[dotted] (\x,\m)--(\x+\xx,\m);
+    \node[left] at (\x,\m) {\scriptsize $\m$};
+  }
+}
+\end{tikzpicture}\\[2pt]
+\textit{Các định hướng với $l=1,2,3$. Với $l=0$, $M_l=0$ nên không có hướng xác định.}
+\end{minipage}\end{center}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 3-7.} Trong vật lý thiên văn người ta dùng vạch phổ có bước sóng $21\text{ cm}$ để thăm dò vũ trụ. Vạch này được tạo bởi photon phát ra từ nguyên tử hydro của thiên hà khi hướng của spin của điện tử chuyển từ trạng thái song song sang trạng thái phản song song với spin của proton. Tìm giá trị từ trường tác dụng lên điện tử.
+\DeBai{3-7}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $\lambda = 21\text{ cm} = 0{,}21\text{ m}$, magneton Bohr $\mu_B = \dfrac{e\hbar}{2m} \approx 9{,}27 \cdot 10^{-24}\text{ J/T}$. Cần tìm: $B$.
@@ -914,10 +1009,11 @@ Thay số:
     B = \frac{6{,}625 \cdot 10^{-34} \times 3 \cdot 10^8}{2 \times (9{,}27 \cdot 10^{-24}) \times 0{,}21} \approx \boldsymbol{0{,}051\text{ T}} = \boldsymbol{51\text{ mT}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 3-8.} Chứng minh rằng các nguyên tử gồm các lớp điền đầy hoàn toàn sẽ có một trạng thái cơ bản $^1S_0$.
+\DeBai{3-8}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Khi một phân lớp hoặc lớp electron được điền đầy hoàn toàn:
@@ -933,15 +1029,42 @@ Thay số:
 \end{itemize}
 Kết hợp lại, số hạng phổ của trạng thái cơ bản là $^{2S+1}L_J = \boldsymbol{^1S_0}$ (đpcm).
 
-\vspace{0.5cm}
+\PhanCachBai
 
-%=====================================================================
-% CHƯƠNG IV
-%=====================================================================
+\DeBai{3-9}
+
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+Năm khí trơ đầu tiên theo số hiệu nguyên tử tăng dần là He, Ne, Ar, Kr và Xe.
+Điền electron theo thứ tự năng lượng các phân lớp, mỗi obitan chứa tối đa
+hai electron có spin ngược nhau:
+\begin{center}
+\begin{tabular}{ccl}
+\hline
+Nguyên tử & $Z$ & Cấu hình electron ở trạng thái cơ bản \\
+\hline
+He & 2  & $1s^2$ \\
+Ne & 10 & $[\mathrm{He}]\,2s^2\,2p^6$ \\
+Ar & 18 & $[\mathrm{Ne}]\,3s^2\,3p^6$ \\
+Kr & 36 & $[\mathrm{Ar}]\,3d^{10}\,4s^2\,4p^6$ \\
+Xe & 54 & $[\mathrm{Kr}]\,4d^{10}\,5s^2\,5p^6$ \\
+\hline
+\end{tabular}
+\end{center}
+Ký hiệu trong ngoặc vuông biểu diễn toàn bộ cấu hình của khí trơ đứng trước.
+He có lớp ngoài cùng $1s^2$ đã đầy; các nguyên tử còn lại có lớp ngoài cùng $ns^2np^6$.
+Các phân lớp điền đầy có tổng mômen quỹ đạo và tổng spin bằng không,
+nên cả năm nguyên tử đều có trạng thái cơ bản $\boldsymbol{{}^1S_0}$.
+
+\vspace{0.45cm}
+
+
 \section*{Chương IV. Một số vấn đề vật lý bán dẫn}
 
-\textbf{Bài 4-1.} Nồng độ hạt dẫn trong bán dẫn riêng thay đổi như thế nào khi nhiệt độ chất bán dẫn thay đổi từ $200\text{ K}$ đến $300\text{ K}$ và bề rộng vùng cấm giả thiết thay đổi theo quy luật $\Delta E_g(T) = (0{,}785 - \alpha T)\text{ eV}$.
+\DeBai{4-1}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $T_1 = 200\text{ K}$, $T_2 = 300\text{ K}$, $\Delta E_g(T) = \Delta E_g(0) - \alpha T$ với $\Delta E_g(0) = 0{,}785\text{ eV}$.
@@ -969,10 +1092,47 @@ Thay số với $\Delta E_g(0) = 0{,}785\text{ eV}$ và $k = 8{,}617 \cdot 10^{-
 \end{equation*}
 Nồng độ hạt dẫn riêng tăng xấp xỉ $\boldsymbol{3600\text{ lần}}$.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 4-3.} Tính nồng độ điện tử, lỗ trống, vị trí mức Fermi (so với đỉnh vùng hóa trị) của silic chứa $1{,}1 \cdot 10^{16}\text{ nguyên tử B trên } 1\text{ cm}^3$ ở nhiệt độ $300\text{ K}$. Các đại lượng trên sẽ thay đổi như thế nào khi pha thêm vào mẫu các nguyên tử photpho với nồng độ $9 \cdot 10^{15}\text{ nguyên tử P trên } 1\text{ cm}^3$.
+\DeBai{4-2}
 
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+\textbf{B1:} Trong gần đúng bán dẫn tinh khiết không suy biến, khối lượng hiệu dụng
+không thay đổi đáng kể theo nhiệt độ:
+\[
+n_i(T)=A T^{3/2}\exp\left[-\frac{\Delta E_g(T)}{2kT}\right].
+\]
+Thay $\Delta E_g(T)=\Delta E_g(0)-\alpha T$, ta có
+\[
+n_i(T)=A e^{\alpha/(2k)}T^{3/2}
+\exp\left[-\frac{\Delta E_g(0)}{2kT}\right].
+\]
+
+\textbf{B2:} Lấy tỉ số tại $T_2=400\text{ K}$ và $T_1=350\text{ K}$.
+Hai hệ số $A$ và $e^{\alpha/(2k)}$ triệt tiêu:
+\[
+\ln\frac{n_i(T_2)}{n_i(T_1)}
+=\frac32\ln\frac{T_2}{T_1}
++\frac{\Delta E_g(0)}{2k}\left(\frac1{T_1}-\frac1{T_2}\right).
+\]
+Suy ra
+\[
+\Delta E_g(0)=
+\frac{2k\left[\ln\dfrac{1{,}3\cdot10^{16}}{6{,}2\cdot10^{15}}
+-\dfrac32\ln\dfrac{400}{350}\right]}{1/350-1/400}.
+\]
+Với $k=8{,}617\cdot10^{-5}\text{ eV/K}$:
+\[
+\boldsymbol{\Delta E_g(0)\simeq0{,}261\text{ eV}}.
+\]
+
+\PhanCachBai
+
+\DeBai{4-3}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $N_c = 2{,}8 \cdot 10^{19}\text{ cm}^{-3}$, $N_v = 1 \cdot 10^{19}\text{ cm}^{-3}$, $n_i = 1{,}45 \cdot 10^{10}\text{ cm}^{-3}$, $kT = 0{,}026\text{ eV}$ ở $300\text{ K}$.
@@ -1004,24 +1164,22 @@ Photpho là tạp chất nhóm V (donor). Vì $N_a > N_d$ nên mẫu vẫn là b
   \end{equation*}
   \item Vị trí mức Fermi mới:
   \begin{equation*}
-      E_f' = E_v + kT \ln\left(\frac{N_v}{N_a - N_d}\right) = E_v + 0{,}026 \ln\left(\frac{10^{19}}{2 \cdot 10^{15}}\right) \approx \boldsymbol{E_v + 0{,}277\text{ eV}}
+      E_f' = E_v + kT \ln\left(\frac{N_v}{N_a - N_d}\right) = E_v + 0{,}026 \ln\left(\frac{10^{19}}{2 \cdot 10^{15}}\right) \approx \boldsymbol{E_v + 0{,}221\text{ eV}}
   \end{equation*}
 \end{itemize}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 4-4.} Hãy chứng minh công thức nồng độ điện tử trong bán dẫn suy biến loại $n$:
-\begin{equation*}
-    n = \frac{8\pi}{3}\left(\frac{2m_n^*}{h^2}\right)^{3/2}(E_f - E_c)^{3/2}
-\end{equation*}
+\DeBai{4-4}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Trong tinh thể, electron dẫn được xem như tự do với khối lượng hiệu dụng $m_n^*$. Theo nguyên lý bất định Heisenberg đối với không gian 3 chiều:
+\textbf{B1:} Trong tinh thể, electron dẫn được xem như tự do với khối lượng hiệu dụng $m_n^*$. Theo cách đếm ô trạng thái trong không gian pha mà đề sử dụng, một trạng thái quỹ đạo chiếm thể tích $h^3$:
 \begin{equation*}
-    \Delta p_x \Delta x \ge h, \quad \Delta p_y \Delta y \ge h, \quad \Delta p_z \Delta z \ge h \implies \Delta V_p = \Delta p_x \Delta p_y \Delta p_z \ge \frac{h^3}{V}
+    \Delta x\,\Delta p_x=h,\quad \Delta y\,\Delta p_y=h,\quad \Delta z\,\Delta p_z=h\quad\Rightarrow\quad \delta V_p=\frac{h^3}{V}
 \end{equation*}
-Trong thể tích $V = 1$ đơn vị, mỗi trạng thái lượng tử chiếm một ô thể tích $h^3$ trong không gian xung lượng $\vec{p}$. Mỗi trạng thái lượng tử chứa tối đa 2 electron có spin đối song.
+Trong thể tích không gian thực $V$, mật độ trạng thái quỹ đạo trong không gian xung lượng là $V/h^3$. Mỗi trạng thái quỹ đạo chứa tối đa 2 electron có spin đối song. Đây là quy tắc đếm trạng thái, khác với hệ thức độ lệch chuẩn $\sigma_x\sigma_p\ge\hbar/2$.
 
 \textbf{B2:} Ở nhiệt độ thấp ($T \to 0\text{ K}$), trong bán dẫn suy biến loại n, tất cả các mức năng lượng từ đáy vùng dẫn $E_c$ đến mức Fermi $E_f$ bị điền đầy hoàn toàn. Trong không gian xung lượng, các electron chiếm đầy một hình cầu Fermi bán kính $p_F$:
 \begin{equation*}
@@ -1038,13 +1196,14 @@ Thể tích hình cầu Fermi đó là:
 \end{equation*}
 Đây chính là hệ thức cần chứng minh.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 4-5.} Giả sử bán dẫn Si loại $n^+$ với $N_d = 10^{17}\text{ cm}^{-3}$ tiếp xúc với Si loại $n$ với $N_d = 10^{14}\text{ cm}^{-3}$ (hoặc Si loại $p$ với $N_a = 10^{14}\text{ cm}^{-3}$). Hãy tính mức Fermi trong từng vật liệu và vẽ sơ đồ vùng năng lượng tiếp xúc.
+\DeBai{4-5}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{Dữ kiện:} $N_c = 2{,}8 \cdot 10^{19}\text{ cm}^{-3}$, $N_v = 10^{19}\text{ cm}^{-3}$, $\Delta E_g = 1{,}12\text{ eV}$, $kT = 0{,}026\text{ eV}$.
+Lấy $T=300\text{ K}$, tương ứng với các mật độ trạng thái đã cho: $kT\simeq0{,}026\text{ eV}$. Khi đổi mức Fermi của mẫu loại $p$ sang mốc $E_c$, dùng bề rộng vùng cấm của Si ở nhiệt độ này $E_g\simeq1{,}12\text{ eV}$.
 
 \textbf{B1:} Xác định mức Fermi trong từng vật liệu riêng biệt:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
@@ -1062,15 +1221,16 @@ Thể tích hình cầu Fermi đó là:
   \end{equation*}
 \end{itemize}
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.72\textwidth]{images/fig_4_5_band_diagram.png}\\[0.1cm]
   \textit{Hình 4.1: Sơ đồ vùng năng lượng tiếp xúc $n^+ - n$ và tiếp xúc $n^+ - p$ ở trạng thái cân bằng.}
-\end{center}
+\end{minipage}\end{center}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 4-6.} Tính độ dẫn của silic tinh khiết ở $300\text{ K}$. Biết $n_i = 1{,}45 \cdot 10^{10}\text{ cm}^{-3}$, $\mu_n = 1450\text{ cm}^2/\text{V}\cdot\text{s}$, $\mu_p = 450\text{ cm}^2/\text{V}\cdot\text{s}$. Tính độ dẫn khi pha tạp $N_d = 10^{14}\text{ cm}^{-3}$ và $N_a = 10^{17}\text{ cm}^{-3}$.
+\DeBai{4-6}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Độ dẫn của Si tinh khiết:
@@ -1085,16 +1245,17 @@ Thể tích hình cầu Fermi đó là:
 \end{equation*}
 Điện trở suất: $\rho_n = \dfrac{1}{\sigma_n} \approx \boldsymbol{43{,}1\text{ }\Omega\cdot\text{cm}}$.
 
-\textbf{B3:} Khi pha tạp acceptor $N_a = 10^{17}\text{ cm}^{-3}$ ($p_0 \approx N_a \gg n_0$):
+\textbf{B3:} Pha thêm nhôm vào mẫu đã có asen: $N_a=10^{17}\text{ cm}^{-3}$, $N_d=10^{14}\text{ cm}^{-3}$. Do đó $p_0\simeq N_a-N_d=9{,}99\cdot10^{16}\text{ cm}^{-3}\simeq N_a$; gần đúng:
 \begin{equation*}
     \sigma_p \approx e N_a \mu_p = 1{,}6 \cdot 10^{-19} \times 10^{17} \times 450 = \boldsymbol{7{,}2\text{ }\Omega^{-1}\text{cm}^{-1}}
 \end{equation*}
 Điện trở suất: $\rho_p = \dfrac{1}{\sigma_p} \approx \boldsymbol{0{,}139\text{ }\Omega\cdot\text{cm}}$.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 4-7.} Tính hiệu công thoát điện tử giữa hai mẫu silic, mẫu thứ nhất pha tạp loại $n$ với $N_d = 1 \cdot 10^{15}\text{ cm}^{-3}$, mẫu thứ hai pha tạp loại $p$ với $N_a = 1 \cdot 10^{17}\text{ cm}^{-3}$ (hoặc $10^{15}\text{ cm}^{-3}$). Cho biết $\Delta E_g = 1{,}12\text{ eV}$, $kT = 0{,}026\text{ eV}$, $N_c = 2{,}8 \cdot 10^{19}\text{ cm}^{-3}$, $N_v = 1 \cdot 10^{19}\text{ cm}^{-3}$.
+\DeBai{4-7}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{B1:} Mức Fermi trong từng mẫu so với bờ vùng:
@@ -1103,40 +1264,158 @@ Thể tích hình cầu Fermi đó là:
   \begin{equation*}
       E_{f1} = E_c - kT \ln\left(\frac{N_c}{N_d}\right) = E_c - 0{,}026 \ln\left(\frac{2{,}8 \cdot 10^{19}}{10^{15}}\right) \approx \boldsymbol{E_c - 0{,}266\text{ eV}}
   \end{equation*}
-  \item Mẫu 2 (loại $p$ với $N_a = 10^{17}\text{ cm}^{-3}$):
+  \item Mẫu 2 (loại $p$ với $N_a = 10^{15}\text{ cm}^{-3}$):
   \begin{equation*}
-      E_{f2} = E_v + kT \ln\left(\frac{N_v}{N_a}\right) = E_v + 0{,}026 \ln\left(\frac{10^{19}}{10^{17}}\right) \approx \boldsymbol{E_v + 0{,}119\text{ eV}}
+      E_{f2} = E_v + kT \ln\left(\frac{N_v}{N_a}\right) = E_v + 0{,}026 \ln\left(\frac{10^{19}}{10^{15}}\right) \approx \boldsymbol{E_v + 0{,}239\text{ eV}}
   \end{equation*}
 \end{itemize}
 
 \textbf{B2:} Hiệu công thoát $\Delta\Phi$ và điện thế tiếp xúc $U_k$:
 Vì công thoát $\Phi = E_0 - E_f$ (với $E_0$ là mức chân không):
 \begin{equation*}
-    \Delta\Phi = \Phi_2 - \Phi_1 = E_{f1} - E_{f2} = (E_c - 0{,}266) - (E_v + 0{,}119) = \Delta E_g - 0{,}385\text{ eV}
+    \Delta\Phi = \Phi_2 - \Phi_1 = E_{f1} - E_{f2} = (E_c - 0{,}266) - (E_v + 0{,}239) = \Delta E_g - 0{,}505\text{ eV}
 \end{equation*}
 \begin{equation*}
-    \Delta\Phi = 1{,}12\text{ eV} - 0{,}385\text{ eV} = \boldsymbol{0{,}735\text{ eV}} \implies U_k = \boldsymbol{0{,}735\text{ V}}
+    \Delta\Phi = 1{,}12\text{ eV} - 0{,}505\text{ eV} = \boldsymbol{0{,}615\text{ eV}} \implies U_k = \boldsymbol{0{,}615\text{ V}}
 \end{equation*}
 
-\vspace{0.5cm}
 
-%=====================================================================
-% CHƯƠNG V
-%=====================================================================
-\section*{Chương V. Xử lý tín hiệu quang -- Quang điện tử}
+\PhanCachBai
 
-\textbf{Bài 5-1.} Chứng minh công thức tính khẩu độ số ($NA$ -- Numerical Aperture) của sợi quang:
-\begin{equation*}
-    NA = \sin\theta_{i,\max} = \sqrt{n_1^2 - n_2^2} \approx n_1 \sqrt{2\Delta}
-\end{equation*}
-trong đó $n_1, n_2$ là chiết suất của lõi và vỏ; $\Delta = \dfrac{n_1 - n_2}{n_1}$ là độ chênh chiết suất tương đối.
+\DeBai{4-8}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\begin{center}
+\textbf{B1:} Đổi hàng rào năng lượng sang điện thế:
+$eU_k=0{,}5\text{ eV}\Rightarrow U_k=0{,}5\text{ V}$.
+Khi đặt thiên áp ngược, tổng độ giảm điện thế trên miền nghèo là
+$V_j=U_k+U_{\mathrm{ng}}=20{,}5\text{ V}$.
+Hằng số điện môi tuyệt đối:
+\[
+\varepsilon_s=\varepsilon\varepsilon_0
+=16\times8{,}854\cdot10^{-12}
+=1{,}417\cdot10^{-10}\text{ F/m}.
+\]
+
+\textbf{B2:} Với tiếp giáp đột ngột, pha tạp đều và tạp chất ion hóa hoàn toàn,
+điều kiện trung hòa điện tích là $N_a x_p=N_d x_n$.
+Tích phân phương trình Poisson cho
+\[
+V_j=\frac{e}{2\varepsilon_s}(N_a x_p^2+N_d x_n^2).
+\]
+Đặt $W=x_p+x_n$, suy ra
+\[
+W=\sqrt{\frac{2\varepsilon_s}{e}
+\left(\frac1{N_a}+\frac1{N_d}\right)V_j}.
+\]
+Thay số:
+\[
+W=\sqrt{\frac{2\times1{,}417\cdot10^{-10}}{1{,}602\cdot10^{-19}}
+\left(\frac1{4\cdot10^{21}}+\frac1{2\cdot10^{21}}\right)20{,}5}
+\simeq\boldsymbol{5{,}21\,\mu\text{m}}.
+\]
+Miền nghèo mở rộng về hai phía:
+\[
+x_p=\frac{N_d}{N_a+N_d}W\simeq1{,}74\,\mu\text{m},\qquad
+x_n=\frac{N_a}{N_a+N_d}W\simeq3{,}48\,\mu\text{m}.
+\]
+
+\textbf{B3:} Điện dung vi phân của lớp chuyển tiếp tại thiên áp đã cho:
+\[
+C=\frac{\varepsilon_s S}{W}
+=\frac{1{,}417\cdot10^{-10}\times10^{-6}}{5{,}21\cdot10^{-6}}
+\simeq\boldsymbol{2{,}72\cdot10^{-11}\text{ F}=27{,}2\text{ pF}}.
+\]
+
+\PhanCachBai
+
+\DeBai{4-9}
+
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+\textbf{B1:} Đổi điện trường tới hạn sang hệ SI:
+\[
+\mathcal E_c=10^7\text{ V/cm}=10^9\text{ V/m}.
+\]
+Trong mô hình tiếp giáp đột ngột, điện trường cực đại ở mặt tiếp giáp là
+\[
+\mathcal E_{\max}=\frac{eN_a x_p}{\varepsilon_s}
+=\frac{eN_d x_n}{\varepsilon_s},\qquad
+\varepsilon_s=16\varepsilon_0.
+\]
+Vì phân bố điện trường trong miền nghèo là tam giác:
+\[
+U_k+U_{\mathrm{ng}}=\frac12\mathcal E_{\max}(x_p+x_n)
+=\frac{\varepsilon_s\mathcal E_{\max}^2}{2e}
+\left(\frac1{N_a}+\frac1{N_d}\right).
+\]
+
+\textbf{B2:} Tại ngưỡng, đặt $\mathcal E_{\max}=\mathcal E_c$ và bỏ qua $U_k$ như đề yêu cầu:
+\[
+U_{\mathrm{ng}}\simeq
+\frac{16\times8{,}854\cdot10^{-12}\times(10^9)^2}{2\times1{,}602\cdot10^{-19}}
+\left(\frac1{5\cdot10^{22}}+\frac1{10^{22}}\right)
+\simeq\boldsymbol{5{,}31\cdot10^4\text{ V}}.
+\]
+Kết quả này là điện áp tính theo mô hình miền nghèo và đúng giá trị
+$10^7\text{ V/cm}$ của đề; mô hình không xét các cơ chế đánh thủng khác có thể xảy ra trước ngưỡng đó.
+
+\PhanCachBai
+
+\DeBai{4-10}
+
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+\textbf{B1:} Độ lớn điện trường là
+$\mathcal E=|\operatorname{grad}V|=400\text{ V/cm}=4\cdot10^4\text{ V/m}$.
+Vận tốc cuốn có độ lớn:
+\[
+v_n=\mu_n\mathcal E=0{,}12\times4\cdot10^4
+=\boldsymbol{4{,}8\cdot10^3\text{ m/s}},
+\]
+\[
+v_p=\mu_p\mathcal E=0{,}025\times4\cdot10^4
+=\boldsymbol{1{,}0\cdot10^3\text{ m/s}}.
+\]
+Electron cuốn ngược chiều điện trường; lỗ trống cuốn cùng chiều điện trường.
+
+\textbf{B2:} Với silic tinh khiết, $n=p=n_i$ nên
+\[
+\sigma=e n_i(\mu_n+\mu_p)
+\simeq1{,}6\cdot10^{-19}\times2{,}5\cdot10^{16}(0{,}12+0{,}025)
+=5{,}80\cdot10^{-4}\text{ S/m}.
+\]
+Do đó điện trở suất:
+\[
+\rho=\frac1\sigma\simeq\boldsymbol{1{,}72\cdot10^3\,\Omega\cdot\text{m}}.
+\]
+
+\textbf{B3:} Tiết diện ngang
+$S=0{,}03\cdot10^{-4}\text{ m}^2=3\cdot10^{-6}\text{ m}^2$.
+Hai loại hạt dẫn đóng góp dòng điện cùng chiều điện trường:
+\[
+I=\sigma\mathcal E S
+=5{,}80\cdot10^{-4}\times4\cdot10^4\times3\cdot10^{-6}
+=\boldsymbol{6{,}96\cdot10^{-5}\text{ A}=69{,}6\,\mu\text{A}}.
+\]
+
+\vspace{0.45cm}
+
+
+\section*{Chương V. Xử lý tín hiệu quang -- Quang điện tử}
+
+\DeBai{5-1}
+
+\Needspace{4\baselineskip}
+\textbf{Giải.}
+
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.55\textwidth]{images/fig_5_1_fiber_na.png}\\[0.1cm]
   \textit{Hình 5.1: Đường truyền tia sáng và điều kiện phản xạ toàn phần trong sợi quang.}
-\end{center}
+\end{minipage}\end{center}
 
 \textbf{B1:} AD định luật khúc xạ tại mặt đầu sợi quang (từ không khí $n_0 = 1$ vào lõi chiết suất $n_1$):
 \begin{equation*}
@@ -1166,100 +1445,180 @@ Mặt khác: $n_1^2 - n_2^2 = (n_1 - n_2)(n_1 + n_2) \approx (n_1\Delta)(2n_1) =
 \end{equation*}
 Đây chính là hệ thức cần chứng minh.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 5-2.} Từ điều kiện các mode dẫn truyền trong sợi quang giật cấp đa mode, bỏ qua sự dịch chuyển pha do phản xạ ở mặt phân cách lõi -- vỏ, đánh giá số lượng các mode đó cho $d = 10\lambda_0$, $n_1 = 1{,}5$, độ chênh chiết suất $\Delta = 0{,}02$.
+\DeBai{5-2}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $d = 10\lambda_0$, $n_1 = 1{,}5$, $\Delta = 0{,}02$.
 
-\begin{center}
+\begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.55\textwidth]{images/fig_5_2_fiber_modes.png}\\[0.1cm]
   \textit{Hình 5.2: Phản xạ zigzag của mode dẫn truyền trong sợi quang phẳng.}
-\end{center}
+\end{minipage}\end{center}
 
-\textbf{B1:} Điều kiện dẫn truyền mode sóng trong sợi quang:
+\textbf{B1:} Đếm các bậc giao thoa ngang trong mô hình dẫn sóng phẳng, bỏ dịch pha phản xạ như đề yêu cầu:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
   \item ĐK phản xạ toàn phần: $\sin\varphi_m \ge \dfrac{n_2}{n_1}$.
   \item ĐK can nhiễu đồng pha sau hai lần phản xạ liên tiếp:
   \begin{equation*}
-      d \sin\theta_c \ge m \frac{\lambda}{2} = m \frac{\lambda_0}{2 n_1}, \qquad (m = 0, 1, 2, \dots, N-1)
+      d \sin\theta_c \ge m \frac{\lambda}{2} = m \frac{\lambda_0}{2 n_1}, \qquad (m=1,2,\dots)
   \end{equation*}
 \end{itemize}
 
 \textbf{B2:} Mode bậc cao nhất ứng với góc tới hạn $\sin\theta_c = \sin\theta_{i,\max}/n_1 \approx \sqrt{2\Delta}$:
 \begin{equation*}
-    N \le \frac{2 d}{\lambda_0} n_1 \sin\theta_c = \frac{2 d}{\lambda_0} n_1 \sqrt{2\Delta}
+    N \simeq \frac{2 d}{\lambda_0} n_1 \sin\theta_c = \frac{2 d}{\lambda_0} n_1 \sqrt{2\Delta}
 \end{equation*}
 Thay số:
 \begin{equation*}
-    N \le 2 \times 10 \times 1{,}5 \times \sqrt{2 \times 0{,}02} = 30 \times \sqrt{0{,}04} = 30 \times 0{,}2 = \boldsymbol{6\text{ mode}}
+    N \simeq 2 \times 10 \times 1{,}5 \times \sqrt{2 \times 0{,}02} = 30 \times \sqrt{0{,}04} = 30 \times 0{,}2 = \boldsymbol{6\text{ mode}}
 \end{equation*}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 5-4.} Cho một bán dẫn vùng cấm thẳng tinh khiết có bề rộng vùng cấm $\Delta E_g = 1{,}5\text{ eV}$, giả sử khối lượng hiệu dụng của điện tử và lỗ trống là đẳng hướng, bằng nhau và bằng $\frac{m_0}{10} = 9{,}1 \cdot 10^{-32}\text{ kg}$.
-\begin{enumerate}[label=\alph*)]
-  \item Tính bước sóng ngưỡng hấp thụ quang học riêng.
-  \item Khi chiếu sáng mạnh làm nồng độ hạt dẫn tăng cao, ngưỡng hấp thụ thay đổi như thế nào? (Hiệu ứng Burstein-Moss).
-\end{enumerate}
+\DeBai{5-3}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Bước sóng ngưỡng hấp thụ của bán dẫn tinh khiết ban đầu:
-\begin{equation*}
-    \lambda_{th} = \frac{h c}{\Delta E_g} = \frac{1{,}24}{\Delta E_g\text{ (eV)}}\text{ }\mu\text{m} = \frac{1{,}24}{1{,}5} \approx \boldsymbol{0{,}827\text{ }\mu\text{m}}
-\end{equation*}
+\textbf{B1:} Với $\Delta=(n_1-n_2)/n_1=0{,}01$:
+\[
+n_2=n_1(1-\Delta)=1{,}5\times0{,}99=1{,}485.
+\]
+Bỏ qua tán sắc vật liệu, tia dọc trục đến sớm nhất với thời gian
+$t_{\min}=n_1L/c$. Tia xiên giới hạn có $\cos\theta_{\max}=n_2/n_1$,
+nên thời gian truyền là $t_{\max}=n_1^2L/(cn_2)$.
+Độ giãn xung do tán sắc mode:
+\[
+\Delta t=t_{\max}-t_{\min}
+=\frac{n_1L}{c}\frac{n_1-n_2}{n_2}
+\simeq\frac{n_1L\Delta}{c}.
+\]
+Với $L=10\text{ km}=10^4\text{ m}$:
+\[
+\Delta t\simeq\frac{1{,}5\times10^4\times0{,}01}{3\cdot10^8}
+=\boldsymbol{5{,}0\cdot10^{-7}\text{ s}=0{,}50\,\mu\text{s}}.
+\]
+Nếu giữ nguyên $n_2$ trong mẫu số, kết quả là $0{,}505\,\mu\text{s}$.
 
-\textbf{B2:} Khi chiếu sáng mạnh, mật độ electron quang sinh trong vùng dẫn và lỗ trống trong vùng hóa trị tăng rất cao. Theo nguyên lý loại trừ Pauli, các trạng thái năng lượng thấp ở đáy vùng dẫn bị lấp đầy tới mức cận Fermi $E_{fn}^*$, và đỉnh vùng hóa trị bị lấp đầy tới mức $E_{fp}^*$.
+\textbf{B2:} Dùng quy ước đánh giá tốc độ bit của môn học $B\lesssim1/(4\Delta t)$:
+\[
+B\lesssim\frac1{4\times5{,}0\cdot10^{-7}}
+=\boldsymbol{5{,}0\cdot10^5\text{ bit/s}=0{,}50\text{ Mbit/s}}.
+\]
+Đây là ước lượng giới hạn tốc độ truyền theo độ giãn xung; băng thông $-3\text{ dB}$
+cụ thể còn phụ thuộc dạng đáp ứng xung và cách kích thích các mode.
 
-Photon tới chỉ có thể kích thích electron từ trạng thái hóa trị chưa bị chiếm lên trạng thái dẫn còn trống. Điều kiện hấp thụ dịch chuyển vùng cấm quang học:
-\begin{equation*}
-    h\nu \ge \Delta E_g + \Delta E_n + \Delta E_p
-\end{equation*}
-Do đó ngưỡng năng lượng hấp thụ tăng lên, tương ứng bước sóng ngưỡng quang học bị \textbf{dịch về phía sóng ngắn} (hiệu ứng Burstein-Moss): $\lambda_{th}' \approx \boldsymbol{0{,}788\text{ }\mu\text{m}}$.
+\textbf{B3:} Khẩu độ số và nửa góc thu nhận cực đại ở đầu sợi trong không khí:
+\[
+NA=\sqrt{n_1^2-n_2^2}
+=\sqrt{1{,}5^2-1{,}485^2}\simeq\boldsymbol{0{,}212},
+\]
+\[
+\theta_{i,\max}=\arcsin(NA)\simeq\boldsymbol{12{,}2^\circ}.
+\]
+Gần đúng $NA\simeq n_1\sqrt{2\Delta}$ cũng cho $NA\simeq0{,}212$.
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 5-5.} Một mẫu bán dẫn đơn tinh thể silic có bề dày $0{,}25\text{ }\mu\text{m}$ được chiếu sáng bằng ánh sáng đơn sắc có $h\nu = 3\text{ eV}$ với công suất $10\text{ mW}$. Tìm năng lượng tổng cộng mà mẫu hấp thụ trong $1$ giây, năng lượng nhiệt truyền cho mạng tinh thể trong $1\text{ s}$ và số photon sinh ra do tái hợp bức xạ riêng (vùng -- vùng). Cho hệ số hấp thụ $\alpha = 4 \cdot 10^4\text{ cm}^{-1}$, $\Delta E_g = 1{,}12\text{ eV}$.
+\DeBai{5-4}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{Dữ kiện:} $d = 0{,}25\text{ }\mu\text{m} = 0{,}25 \cdot 10^{-4}\text{ cm}$, $P_0 = 10\text{ mW} = 10^{-2}\text{ W}$, $h\nu = 3\text{ eV}$, $\Delta E_g = 1{,}12\text{ eV}$, $\alpha = 4 \cdot 10^4\text{ cm}^{-1}$.
+\textbf{a) Ngưỡng hấp thụ ban đầu.}
+Đối với chuyển mức vùng -- vùng của bán dẫn vùng cấm thẳng,
+$h\nu\ge E_g$. Bước sóng ngưỡng là
+\[
+\lambda_{th}=\frac{hc}{E_g}\simeq\frac{1{,}24}{1{,}5}
+=\boldsymbol{0{,}827\,\mu\text{m}}.
+\]
 
-\textbf{B1:} Năng lượng ánh sáng bị mẫu hấp thụ trong thời gian $1\text{ s}$:
-\begin{equation*}
-    \Delta\Phi = P_0 (1 - e^{-\alpha d}) = 10^{-2} \times \left[1 - \exp(-4 \cdot 10^4 \times 0{,}25 \cdot 10^{-4})\right] = 10^{-2}(1 - e^{-1}) \approx \boldsymbol{6{,}32 \cdot 10^{-3}\text{ J}}
-\end{equation*}
-(Công suất hấp thụ tương ứng là $\boldsymbol{6{,}3\text{ mW}}$).
+\textbf{b) Khi kích thích mạnh.}
+Electron quang sinh chiếm các trạng thái gần đáy vùng dẫn, còn lỗ trống làm mất electron
+ở các trạng thái gần đỉnh vùng hóa trị. Hấp thụ đòi hỏi trạng thái đầu có electron
+và trạng thái cuối còn trống. Khi các trạng thái biên bị chặn bởi sự điền đầy,
+photon năng lượng đúng $E_g$ không còn tạo được chuyển mức như ban đầu.
+Trong gần đúng khí hạt dẫn suy biến và bỏ qua tương tác nhiều hạt,
+ngưỡng hấp thụ chuyển sang năng lượng cao hơn, tức bước sóng ngắn hơn.
 
-\textbf{B2:} Năng lượng nhiệt truyền cho mạng tinh thể trong $1\text{ s}$:
-Mỗi photon hấp thụ giải phóng một cặp điện tử -- lỗ trống có dư năng lượng $h\nu - \Delta E_g$. Năng lượng dư này nhanh chóng hồi phục nhiệt truyền cho dao động mạng tinh thể (phonon):
-\begin{equation*}
-    \eta_T = \frac{h\nu - \Delta E_g}{h\nu} = \frac{3 - 1{,}12}{3} = \frac{1{,}88}{3} \approx 62{,}67\%
-\end{equation*}
-Năng lượng nhiệt truyền cho mạng trong $1\text{ s}$:
-\begin{equation*}
-    Q_T = \Delta\Phi \times \eta_T = 6{,}32 \cdot 10^{-3} \times 62{,}67\% \approx \boldsymbol{3{,}9 \cdot 10^{-3}\text{ J}} = \boldsymbol{3{,}9\text{ mJ}}
-\end{equation*}
+\textbf{c) Ngưỡng khi $n=p=10^{18}\text{ cm}^{-3}$.}
+Đổi nồng độ: $n=p=10^{24}\text{ m}^{-3}$.
+Đặt $\epsilon_n=E_{fn}-E_c$, $\epsilon_p=E_v-E_{fp}$.
+Tích phân đúng hàm mật độ trạng thái được cho trong đề, trong gần đúng điền đầy kiểu bậc thang:
+\[
+n=\int_{E_c}^{E_c+\epsilon_n}g(E)\,dE
+=\frac{4\pi}{3}\left(\frac{2m^*}{h^2}\right)^{3/2}\epsilon_n^{3/2}.
+\]
+Suy ra
+\[
+\epsilon_n=\frac{h^2}{2m^*}\left(\frac{3n}{4\pi}\right)^{2/3}
+\simeq\boldsymbol{0{,}0580\text{ eV}}.
+\]
+Vì $m_n^*=m_p^*$ và $n=p$, ta có $\epsilon_p=\epsilon_n$.
+Chuyển mức thẳng bảo toàn xung lượng nên ngưỡng năng lượng là
+\[
+E_{th}'=E_g+\epsilon_n+\epsilon_p
+\simeq1{,}5+2\times0{,}0580=1{,}616\text{ eV}.
+\]
+Do đó
+\[
+\boldsymbol{\lambda_{th}'\simeq\frac{1{,}24}{1{,}616}
+=0{,}767\,\mu\text{m}}.
+\]
 
-\textbf{B3:} Năng lượng tái hợp bức xạ riêng và số photon phát ra:
-\begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
-  \item Năng lượng bức xạ tái hợp trong $1\text{ s}$:
-  \begin{equation*}
-      Q_{\text{rad}} = \Delta\Phi - Q_T = 6{,}32 \cdot 10^{-3} - 3{,}96 \cdot 10^{-3} \approx \boldsymbol{2{,}4 \cdot 10^{-3}\text{ J}}
-  \end{equation*}
-  \item Mỗi photon tái hợp vùng -- vùng mang năng lượng $\Delta E_g = 1{,}12\text{ eV} = 1{,}12 \times 1{,}6 \cdot 10^{-19}\text{ J}$:
-  \begin{equation*}
-      N_{\text{photon}} = \frac{Q_{\text{rad}}}{\Delta E_g} = \frac{2{,}4 \cdot 10^{-3}}{1{,}12 \times 1{,}6 \cdot 10^{-19}} \approx \boldsymbol{1{,}3 \cdot 10^{16}\text{ photon/s}}
-  \end{equation*}
-\end{itemize}
+\PhanCachBai
 
-\vspace{0.45cm}
+\DeBai{5-5}
 
-\textbf{Bài 5-6.} Một mẫu GaAs được chiếu sáng bởi ánh sáng có bước sóng $\lambda = 0{,}6\text{ }\mu\text{m}$. Công suất tia tới là $15\text{ mW}$. Nếu $1/3$ công suất đó bị phản xạ trở lại và $1/3$ thoát ra từ mặt sau của mẫu thì bề dày của mẫu bằng bao nhiêu? Tìm năng lượng nhiệt được truyền cho mạng tinh thể trong một giây. Biết hệ số hấp thụ $\alpha(0{,}6\text{ }\mu\text{m}) = 5 \cdot 10^4\text{ cm}^{-1}$, $\Delta E_g = 1{,}42\text{ eV}$.
+\Needspace{4\baselineskip}
+\textbf{Giải.}
 
+Lấy mô hình hấp thụ Beer -- Lambert, bỏ qua phản xạ mặt ngoài vì đề không cho hệ số phản xạ.
+Trong mô hình tái hợp bức xạ của bài, mỗi photon hấp thụ tạo một cặp electron -- lỗ trống
+và mỗi cặp tái hợp vùng -- vùng phát một photon.
+
+\textbf{B1:} Với $d=0{,}25\,\mu\text{m}=2{,}5\cdot10^{-5}\text{ cm}$,
+ta có $\alpha d=4\cdot10^4\times2{,}5\cdot10^{-5}=1$.
+Công suất hấp thụ:
+\[
+P_{abs}=P_0(1-e^{-\alpha d})
+=10^{-2}(1-e^{-1})\simeq6{,}32\cdot10^{-3}\text{ W}.
+\]
+Năng lượng hấp thụ trong $t=1\text{ s}$:
+\[
+Q_{abs}=P_{abs}t\simeq\boldsymbol{6{,}32\cdot10^{-3}\text{ J}}.
+\]
+
+\textbf{B2:} Sau khi được kích thích, mỗi cặp truyền phần năng lượng
+$h\nu-E_g$ cho mạng tinh thể khi hồi phục về biên vùng:
+\[
+Q_T=Q_{abs}\frac{h\nu-E_g}{h\nu}
+=6{,}32\cdot10^{-3}\frac{3-1{,}12}{3}
+\simeq\boldsymbol{3{,}96\cdot10^{-3}\text{ J}}.
+\]
+
+\textbf{B3:} Năng lượng còn lại phát dưới dạng bức xạ tái hợp:
+\[
+Q_{rad}=Q_{abs}\frac{E_g}{h\nu}
+\simeq\boldsymbol{2{,}36\cdot10^{-3}\text{ J}}.
+\]
+Số photon tái hợp sinh ra trong $1\text{ s}$ bằng số cặp được tạo:
+\[
+N_\gamma=\frac{Q_{rad}}{E_g}
+=\frac{Q_{abs}}{h\nu}
+=\frac{6{,}32\cdot10^{-3}}{3\times1{,}602\cdot10^{-19}}
+\simeq\boldsymbol{1{,}32\cdot10^{16}\text{ photon}}.
+\]
+
+\PhanCachBai
+
+\DeBai{5-6}
+
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} $\lambda = 0{,}6\text{ }\mu\text{m}$, $P_0 = 15\text{ mW}$, $P_{\text{phản xạ}} = \dfrac{1}{3} P_0$, $P_{\text{thoát}} = \dfrac{1}{3} P_0$, $\alpha = 5 \cdot 10^4\text{ cm}^{-1}$, $\Delta E_g = 1{,}42\text{ eV}$.
@@ -1292,56 +1651,58 @@ Thay số:
   \end{equation*}
   \item Năng lượng nhiệt truyền cho mạng tinh thể trong $1\text{ s}$:
   \begin{equation*}
-      Q_T = P_{\text{hấp thụ}} \times \eta_T = 5\text{ mW} \times 31{,}3\% \approx \boldsymbol{1{,}56\text{ mW}} = \boldsymbol{1{,}56 \cdot 10^{-3}\text{ J}}
+      Q_T=P_{\text{hấp thụ}}\eta_T\,t=5\cdot10^{-3}\times0{,}313\times1\text{ J}\simeq\boldsymbol{1{,}56\cdot10^{-3}\text{ J}}
   \end{equation*}
 \end{itemize}
 
-\vspace{0.45cm}
+\PhanCachBai
 
-\textbf{Bài 5-7.} Một quang dẫn có kích thước $L = 6\text{ mm}$, $W = 2\text{ mm}$, $D = 1\text{ mm}$ được chiếu bởi bức xạ đồng đều. Do hấp thụ ánh sáng dòng điện tăng lên $2{,}83\text{ mA}$. Điện áp đặt lên $2$ cực là $10\text{ V}$. Khi ngắt nguồn sáng đột ngột dòng điện giảm với vận tốc ban đầu là $23{,}6\text{ A/s}$. Cho biết $\mu_n = 3600\text{ cm}^2/\text{V}\cdot\text{s}$, $\mu_p = 1700\text{ cm}^2/\text{V}\cdot\text{s}$.
-\begin{enumerate}[label=\alph*)]
-  \item Tính nồng độ hạt dẫn dư dừng.
-  \item Tính thời gian sống của các hạt dẫn.
-  \item Tìm nồng độ hạt dẫn sau khi ngắt nguồn sáng một khoảng thời gian $t = 10^{-3}\text{ s}$.
-\end{enumerate}
+\DeBai{5-7}
 
+\Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{Dữ kiện:} $L = 6\text{ mm} = 6 \cdot 10^{-3}\text{ m}$, $W = 2\text{ mm} = 2 \cdot 10^{-3}\text{ m}$, $D = 1\text{ mm} = 10^{-3}\text{ m}$, $U = 10\text{ V}$, $\Delta I = 2{,}83\text{ mA} = 2{,}83 \cdot 10^{-3}\text{ A}$, $\left|\dfrac{dI}{dt}\right|_{t=0} = 23{,}6\text{ A/s}$, $\mu_n = 3600\text{ cm}^2/\text{V}\cdot\text{s} = 0{,}36\text{ m}^2/\text{V}\cdot\text{s}$, $\mu_p = 1700\text{ cm}^2/\text{V}\cdot\text{s} = 0{,}17\text{ m}^2/\text{V}\cdot\text{s}$.
+Đổi độ linh động sang SI: $\mu_n=0{,}36\text{ m}^2/(\text{V}\cdot\text{s})$,
+$\mu_p=0{,}17\text{ m}^2/(\text{V}\cdot\text{s})$.
+Thể tích mẫu $V=LWD=1{,}2\cdot10^{-8}\text{ m}^3$.
+Lấy các hạt dư phân bố đều, với $\Delta n=\Delta p=n_{st}$.
 
-\textbf{B1:} Nồng độ hạt dẫn dư dừng $n_{st}$:
-Mật độ dòng điện quang dẫn:
-\begin{equation*}
-    J = \sigma E = e n_{st}(\mu_n + \mu_p) \frac{U}{L}
-\end{equation*}
-Dòng điện qua tiết diện $S = W \cdot D$:
-\begin{equation*}
-    \Delta I = J \cdot S = e n_{st}(\mu_n + \mu_p) \frac{U}{L} (W \cdot D)
-\end{equation*}
-Suy ra nồng độ hạt dẫn dư dừng:
-\begin{equation*}
-    n_{st} = \frac{\Delta I \cdot L}{e (\mu_n + \mu_p) U W D}
-\end{equation*}
-Thay số:
-\begin{align*}
-    n_{st} &= \frac{2{,}83 \cdot 10^{-3} \times 6 \cdot 10^{-3}}{1{,}6 \cdot 10^{-19} \times (0{,}36 + 0{,}17) \times 10 \times (2 \cdot 10^{-3} \times 10^{-3})} \\
-    &= \frac{1{,}698 \cdot 10^{-5}}{1{,}696 \cdot 10^{-24}} \approx \boldsymbol{10^{19}\text{ m}^{-3}} = \boldsymbol{10^{13}\text{ cm}^{-3}}
-\end{align*}
+\textbf{a) Hạt dẫn dư trong chế độ dừng.}
+Dòng điện tăng do quang dẫn thỏa mãn
+\[
+\Delta I=e n_{st}(\mu_n+\mu_p)\frac{U}{L}WD.
+\]
+Suy ra
+\[
+n_{st}=\frac{\Delta I L}{e(\mu_n+\mu_p)UWD}
+=\frac{2{,}83\cdot10^{-3}\times6\cdot10^{-3}}
+{1{,}6\cdot10^{-19}\times0{,}53\times10\times2\cdot10^{-6}}
+\simeq\boldsymbol{10^{19}\text{ m}^{-3}=10^{13}\text{ cm}^{-3}}.
+\]
+Số electron dư và số lỗ trống dư:
+\[
+\Delta N_e=\Delta N_p=n_{st}V\simeq\boldsymbol{1{,}2\cdot10^{11}}.
+\]
+Đó là $1{,}2\cdot10^{11}$ cặp electron -- lỗ trống,
+tương ứng tổng cộng $2{,}4\cdot10^{11}$ hạt dẫn dư.
 
-\textbf{B2:} Thời gian sống của hạt dẫn $\tau$:
-Sau khi ngắt nguồn sáng, dòng điện giảm theo quy luật hàm mũ:
-\begin{equation*}
-    I(t) = I_0 e^{-t/\tau} \implies \left.\frac{dI}{dt}\right|_{t=0} = -\frac{I_0}{\tau} \implies \tau = \frac{I_0}{\left|\dfrac{dI}{dt}\right|_{t=0}}
-\end{equation*}
-Thay số với $I_0 = 2{,}83 \cdot 10^{-3}\text{ A}$ và tốc độ giảm ban đầu $23{,}6\text{ A/s}$:
-\begin{equation*}
-    \tau = \frac{2{,}83 \cdot 10^{-3}}{23{,}6} \approx \boldsymbol{0{,}12 \cdot 10^{-3}\text{ s}} = \boldsymbol{0{,}12\text{ ms}}
-\end{equation*}
+\textbf{b) Thời gian sống.}
+Sau khi tắt sáng, phần dòng điện quang dẫn giảm theo
+$\Delta I(t)=\Delta I_0e^{-t/\tau}$.
+Do đó $|d(\Delta I)/dt|_{t=0}=\Delta I_0/\tau$, và
+\[
+\tau=\frac{\Delta I_0}{|d(\Delta I)/dt|_{t=0}}
+=\frac{2{,}83\cdot10^{-3}}{23{,}6}
+\simeq\boldsymbol{1{,}20\cdot10^{-4}\text{ s}=0{,}120\text{ ms}}.
+\]
 
-\textbf{B3:} Nồng độ hạt dẫn sau khi ngắt nguồn sáng $t = 10^{-3}\text{ s}$:
-\begin{align*}
-    n(t) &= n_{st} e^{-t/\tau} = 10^{13} \times \exp\left(-\frac{10^{-3}}{0{,}12 \cdot 10^{-3}}\right) \\
-    &= 10^{13} \times e^{-8{,}333} \approx 10^{13} \times 2{,}40 \cdot 10^{-4} \approx \boldsymbol{2{,}4 \cdot 10^9\text{ cm}^{-3}}
-\end{align*}
+\textbf{c) Nồng độ hạt dẫn dư sau $1\text{ ms}$.}
+\[
+\Delta n(t)=\Delta p(t)=n_{st}e^{-t/\tau}
+\simeq10^{13}\exp\left(-\frac{10^{-3}}{1{,}20\cdot10^{-4}}\right)
+\simeq\boldsymbol{2{,}4\cdot10^9\text{ cm}^{-3}}.
+\]
+
+\vspace{0.45cm}
 
 \end{document}
