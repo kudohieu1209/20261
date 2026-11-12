@@ -1,0 +1,383 @@
+% Tờ A4 mang vào phòng thi giữa kỳ VLĐT (PH3330) - Chương 1, 2, 3
+% Biên dịch: xelatex a4-giua-ky.tex  (in 2 mặt, tỉ lệ 100%, không "fit to page")
+\documentclass[10pt,a4paper]{article}
+\usepackage{fontspec}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\setmainfont{texgyrepagella-regular.otf}[BoldFont=texgyrepagella-bold.otf,ItalicFont=texgyrepagella-italic.otf,BoldItalicFont=texgyrepagella-bolditalic.otf]
+\setmathfont{texgyrepagella-math.otf}
+\usepackage[a4paper,left=7mm,right=7mm,top=6.5mm,bottom=6.5mm]{geometry}
+\usepackage{multicol}
+\usepackage{microtype}
+
+% Cỡ chữ nền: đổi 2 số dưới đây nếu muốn chữ to/nhỏ hơn
+\newcommand{\basesize}{7.3}
+\newcommand{\baselead}{8.45}
+\makeatletter
+\renewcommand\normalsize{\@setfontsize\normalsize{\basesize}{\baselead}%
+  \abovedisplayskip=1.2pt plus .6pt minus .6pt \belowdisplayskip=\abovedisplayskip
+  \abovedisplayshortskip=0pt plus .5pt \belowdisplayshortskip=.8pt plus .5pt}
+\makeatother
+\DeclareMathSizes{\basesize}{\basesize}{5.4}{4.5}
+\DeclareMathSizes{8}{8}{5.8}{4.8}
+\normalsize
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.9pt plus .3pt}
+\setlength{\columnsep}{3.2mm}
+\setlength{\columnseprule}{0.25pt}
+\setlength{\fboxsep}{1.1pt}
+\setlength{\fboxrule}{0.35pt}
+\setlength{\multicolsep}{0pt}
+\pagestyle{empty}
+\raggedright
+\raggedbottom
+\hyphenpenalty=10000
+\thinmuskip=1.5mu \medmuskip=2mu plus 1mu minus 2mu \thickmuskip=3mu plus 1mu minus 1mu
+
+% --- Lệnh trình bày ---
+\newcommand{\chap}[1]{\par\vspace{2.6pt}\hrule height .7pt\vspace{1.3pt}%
+  {\bfseries\fontsize{8}{8.8}\selectfont #1}\par\vspace{.8pt}\hrule height .7pt\vspace{1.6pt}}
+\newcommand{\sect}[1]{\par\vspace{2pt}{\bfseries #1}\par\vspace{-.4pt}\hrule height .3pt\vspace{1.3pt}}
+\newcommand{\h}[1]{\textbf{#1}}                 % nhãn đầu dòng
+\newcommand{\bx}[1]{\fbox{$#1$}}                % công thức dùng nhiều nhất
+\newcommand{\tr}{\textbf{[!]}~}                 % bẫy hay gặp
+\newcommand{\lt}{\textbf{[LT]}~}                % ý lý thuyết / hiện tượng
+\newcommand{\U}[1]{\,\mathrm{#1}}
+\newcommand{\dd}{\mathrm d}
+\newcommand{\e}[1]{\!\cdot\!10^{#1}}
+\newcommand{\s}{\;\textbullet\;}
+\newcommand{\A}{\text{Å}}
+
+\begin{document}
+\begin{multicols*}{3}[{\fontsize{8}{8.8}\selectfont\textbf{VLĐT PH3330 -- GIỮA KỲ: CHƯƠNG 1, 2, 3}\hfill
+25 câu trắc nghiệm / 60 phút ($\approx$ 2,4 phút/câu)\hfill Họ tên: \makebox[3.6cm]{\dotfill}\ MSSV: \makebox[1.9cm]{\dotfill}}\vspace{1.5pt}]
+
+%==========================================================================
+\sect{0. HẰNG SỐ -- ĐỔI ĐƠN VỊ -- SỐ TÍNH NHANH}
+$e=1{,}602\e{-19}\U{C}$ \s $m_e=9{,}109\e{-31}\U{kg}$ \s $m_p=1{,}673\e{-27}\U{kg}=1836\,m_e$ \s
+$c=2{,}998\e{8}\U{m/s}$ \s $h=6{,}626\e{-34}\U{J\,s}=4{,}136\e{-15}\U{eV\,s}$ \s
+$\hbar=h/2\pi=1{,}055\e{-34}\U{J\,s}=6{,}582\e{-16}\U{eV\,s}$ \s $\varepsilon_0=8{,}854\e{-12}\U{F/m}$ \s
+$1/4\pi\varepsilon_0=8{,}99\e{9}$ \s $\mu_0=4\pi\e{-7}=1{,}257\e{-6}\U{T\,m/A}$ \s
+$k_B=1{,}381\e{-23}\U{J/K}=8{,}617\e{-5}\U{eV/K}$.
+
+\h{Tổ hợp:} $e/m_e=1{,}759\e{11}\U{C/kg}$ \s $m_ec^2=0{,}511\U{MeV}$ \s
+\bx{hc=12400\U{eV\,\A}=1240\U{eV\,nm}} $=1{,}986\e{-25}\U{J\,m}$ \s $\hbar c=1973\U{eV\,\A}$ \s
+$\lambda_C=h/m_ec=2{,}426\U{pm}=0{,}02426\U{\A}$ \s $\mu_B=e\hbar/2m_e=9{,}274\e{-24}\U{J/T}=5{,}79\e{-5}\U{eV/T}$ \s
+$R=1{,}097\e{7}\U{m^{-1}}$, $hcR=13{,}6\U{eV}$ \s $a_0=0{,}529\U{\A}$ \s $\hbar^2/2m_e=3{,}81\U{eV\,\A^2}$.
+
+\h{Đổi:} $1\U{eV}=1{,}602\e{-19}\U J$ \s $1\U{\A}=10^{-10}\U m=0{,}1\U{nm}$ \s $1\U{pm}=10^{-12}\U m$ \s
+$1\,\mu\mathrm{m}=10^{-6}\U m$ \s $1\U{cm}=10^{-2}\U m$ \s $1\U{G}=10^{-4}\U T$ \s
+$1\U{eV}\leftrightarrow\nu=2{,}418\e{14}\U{Hz}\leftrightarrow T=11\,605\U K$ \s ánh sáng nhìn thấy: $3800$--$7600\U{\A}$ ($1{,}6$--$3{,}3\U{eV}$).
+
+\h{Electron, tính nhanh} ($U$: V; $B$: T; $a$: Å; năng lượng: eV):
+$v=5{,}93\e{5}\sqrt U\U{m/s}$ ($U\lesssim5\U{kV}$) \s $\lambda=12{,}27/\sqrt U\U{\A}$ \s
+$R_{\text{tròn}}=3{,}37\e{-6}\sqrt U/B\U m$ \s $T_c=3{,}57\e{-11}/B\U s$ \s $f_c=28B\U{GHz}$ \s
+hố thế: $E_1=37{,}6/a^2$ \s đường ngầm: $D=\exp\!\big(-1{,}025\,a\sqrt{U_0-E}\big)$ \s
+photon: $E=12400/\lambda[\A]$.
+
+\tr Đề cũ làm tròn $h=6{,}625$; $m_e=9{,}1$; $e=1{,}6$; $c=3$ $\Rightarrow$ đáp án lệch 1--3\% là bình thường: chọn số gần nhất, soi \emph{bậc 10} và \emph{đơn vị} trước.
+
+%==========================================================================
+\chap{CHƯƠNG 1. HẠT MANG ĐIỆN TRONG CHÂN KHÔNG -- QUANG HỌC ĐIỆN TỬ}
+
+\sect{1.1 Lực, năng lượng}
+$\vec F=q\vec E+q\,\vec v\times\vec B$; electron $q=-e$: lực điện ngược $\vec E$, lực từ ngược $\vec v\times\vec B$.
+Tăng tốc qua $U$: \bx{\tfrac12mv^2=eU\Rightarrow v=\sqrt{2eU/m}}.
+
+\lt Điện trường làm đổi động năng; \emph{từ trường tĩnh không sinh công}: chỉ đổi hướng, $|\vec v|$ và động năng giữ nguyên. Ống tia điện tử: súng điện tử (catốt, lưới, anốt tăng tốc) -- hệ lái tia (bản tụ hoặc cuộn dây) -- màn huỳnh quang.
+
+\sect{1.2 Điện trường đều -- lái tia tĩnh điện (CRT)}
+Bản dài $l_1$, cách nhau $d$, điện áp lệch $U_k$ ($E=U_k/d$), thế tăng tốc $U_0$, từ mép bản đến màn $l_2$, $L=\tfrac{l_1}2+l_2$ (từ \emph{giữa} bản đến màn).
+
+Quỹ đạo parabol: $z=\dfrac{eU_k}{2mdv_0^2}x^2=\dfrac{U_k}{4dU_0}x^2$; ra khỏi bản: $\tan\theta=\dfrac{U_kl_1}{2dU_0}$.
+
+Độ lệch: $D=\dfrac{U_kl_1L}{2dU_0}$; độ nhạy \bx{S_E=\dfrac D{U_k}=\dfrac{l_1L}{2dU_0}} [m/V].
+
+\lt Quỹ đạo trong điện trường tĩnh \emph{không phụ thuộc} $e,m$ $\Rightarrow$ không tách được hạt theo $e/m$; nhân $U_k,U_0$ cùng một hệ số thì quỹ đạo không đổi; tăng $U_0$ thì $S_E$ giảm.
+
+\sect{1.3 Từ trường đều}
+$\vec v\perp\vec B$: tròn đều \bx{R=\dfrac{mv}{eB}=\dfrac1B\sqrt{\dfrac{2mU_0}e}}\;, \bx{T=\dfrac{2\pi m}{eB}}\;, $\omega_c=\dfrac{eB}m$ ($T,\omega_c$ không phụ thuộc $v,R$).
+
+$(\vec v,\vec B)=\alpha$: xoắn ốc, $v_\perp=v\sin\alpha$, $v_\parallel=v\cos\alpha$; $R=\dfrac{mv\sin\alpha}{eB}$; bước xoắn \bx{h=v_\parallel T=\dfrac{2\pi mv\cos\alpha}{eB}}.
+
+\h{Lái tia từ} (vùng từ trường rộng $l_1\ll R$; $L$: từ \emph{tâm} vùng từ trường đến màn; đề hay cho $l_1=2R_{\text{cuộn}}$): $z\approx\dfrac{x^2}{2R}=\dfrac12\sqrt{\dfrac e{2mU_0}}\,Bx^2$;
+$D=\sqrt{\dfrac e{2mU_0}}\,Bl_1L$; \bx{S_M=\dfrac DI=\sqrt{\dfrac e{2mU_0}}\;l_1L\,\dfrac BI} [m/A].
+
+Hai cuộn tròn bán kính $R$, cách nhau $2d$, $N$ = \emph{tổng} số vòng: $H=\dfrac I2\dfrac{NR^2}{(R^2+d^2)^{3/2}}$, $B=\mu_0H$.
+Helmholtz chuẩn ($2d=R$, $W$ vòng \emph{mỗi} cuộn): $B=\dfrac{8\mu_0WI}{5\sqrt5\,R}$.
+
+\lt Quỹ đạo trong từ trường \emph{phụ thuộc} $e/m$ $\Rightarrow$ từ trường tách được hạt (khối phổ kế). $S_M\propto1/\sqrt{U_0}$, còn $S_E\propto1/U_0$.
+
+\sect{1.4 Có đồng thời $\vec E$ và $\vec B$ đều}
+$\vec E\parallel\vec B$: xoắn ốc bước tăng dần, $R=mv_\perp/qB$, $v_z=v_{0\parallel}+\dfrac{qE}mt$.
+
+$\vec E\perp\vec B$: quỹ đạo \emph{cycloit} (magnetron), $R_0=\dfrac{mE}{qB^2}$, vận tốc trôi $v_d=E/B$ ($\perp\vec E,\vec B$), các điểm chạm cách nhau $2\pi R_0$. Bay thẳng (lọc vận tốc) khi $v=E/B$.
+
+\sect{1.5 Tương tự quang -- cơ}
+Fermat $\delta\!\int\!n\,\dd s=0$ $\leftrightarrow$ tác dụng cực tiểu $\delta\!\int\!\sqrt U\,\dd s=0$ $\Rightarrow$ \bx{n\sim v\sim\sqrt U}.
+
+$U=\text{const}$: đi thẳng. Phản xạ trên mặt đẳng thế: góc phản xạ = góc tới.
+
+Khúc xạ từ vùng $U_1$ sang $U_2$ (góc so với \emph{pháp tuyến} mặt đẳng thế): \bx{\dfrac{\sin\alpha}{\sin\beta}=\sqrt{\dfrac{U_2}{U_1}}}; $U_2>U_1$: tia gập về pháp tuyến.
+
+Phản xạ toàn phần ($U_2<U_1$): $\sin\alpha\ge\sqrt{U_2/U_1}$. Electron năng lượng $eU_0$, tới bề mặt có thế hãm $U_c$: chạm được khi $eU_0\cos^2\alpha\ge eU_c$; bị phản xạ lại khi $\sin\alpha>\sqrt{1-U_c/U_0}$.
+
+\sect{1.6 Tương đối tính ($v\to c$)}
+$m=\gamma m_0$, $\gamma=1/\sqrt{1-v^2/c^2}$; $T=(\gamma-1)m_0c^2=eU$; $E=\gamma m_0c^2=m_0c^2+T$;
+\bx{E^2=p^2c^2+m_0^2c^4}; $pc=\sqrt{T(T+2m_0c^2)}$; $p=\gamma m_0v$.
+
+$v=c\sqrt{1-\Big(1+\dfrac{eU}{m_0c^2}\Big)^{-2}}$; electron: $\dfrac m{m_0}=1+\dfrac{U}{511\U{kV}}$ ($U=511\U{kV}\Rightarrow m=2m_0$).
+
+$n\sim p\sim\sqrt{U\big(1+eU/2m_0c^2\big)}$; trong từ trường: $R=p/qB=\gamma m_0v/qB$.
+
+\tr Dùng CT tương đối tính khi $v\gtrsim0{,}1c$ hoặc $T\gtrsim1\%\,m_0c^2$ (electron: $U\gtrsim5\U{kV}$).
+
+\sect{1.7 Thấu kính tĩnh điện}
+\lt Điện trường \emph{không đều, đối xứng trục}; hội tụ hoặc phân kỳ; quỹ đạo không phụ thuộc $e,m$; nhân mọi điện thế với cùng hệ số thì quỹ đạo không đổi; biết thế trên trục $U_0(z)$ là biết quỹ đạo.
+
+PT cơ bản: $r''+\dfrac{U_0'}{2U_0}r'+\dfrac{U_0''}{4U_0}r=0$. Thấu kính mỏng, yếu: $\dfrac1{f_2}=\dfrac1{4\sqrt{U_2}}\displaystyle\int\!\dfrac{U_0''}{\sqrt{U_0}}\dd z$; $\dfrac{f_1}{f_2}=\sqrt{\dfrac{U_1}{U_2}}$; $U_0''>0$: hội tụ, $U_0''<0$: phân kỳ.
+
+\h{Diapham (lỗ tròn) ở thế $U_D$:} \bx{f=\dfrac{4U_D}{E_2-E_1}}, $E_1=\dfrac{U_D-U_{\text{trước}}}{d_1}$, $E_2=\dfrac{U_{\text{sau}}-U_D}{d_2}$ (độ dốc thế trước/sau lỗ, thế tính từ catốt); $f>0$ hội tụ, $f<0$ phân kỳ.
+
+Thấu kính mỏng: $\dfrac1f=\dfrac1d+\dfrac1{d'}$; chùm tới song song $\Rightarrow$ hội tụ tại $d'=f$.
+
+\h{K -- lưới $G$ ($U_G$) --$d_1$-- diapham $D$ --$d_2$-- anốt nối với $D$} ($E_2=0$), hội tụ ở anốt: $f=d_2\Rightarrow U_D=\dfrac{d_2U_G}{4d_1+d_2}$.
+
+\h{Hai diapham:} K --$d_1$-- $D_1(U_1)$ --$d_2$-- $D_2(U_2)$ --$d_3$-- A$(U_A)$, chùm tới song song, hội tụ ở A:
+$f_1=\dfrac{4U_1}{\frac{U_2-U_1}{d_2}-\frac{U_1}{d_1}}$, $f_2=\dfrac{4U_2}{\frac{U_A-U_2}{d_3}-\frac{U_2-U_1}{d_2}}$, \bx{\dfrac1{f_2}=\dfrac1{d_2-f_1}+\dfrac1{d_3}}
+$\Rightarrow$ PT bậc 2 theo $U_2$ (2 nghiệm). \emph{Trắc nghiệm: thay ngược từng đáp án} ($d$ đổi ra m).
+
+Lưới cầu bán kính $R$ ($U_1\to U_2$): $f=\dfrac R{1-\sqrt{U_1/U_2}}$.
+
+\sect{1.8 Thấu kính từ (cuộn dây ngắn)}
+Từ trường không đều, đối xứng trục. $r''+\dfrac{e}{8mU_0}B_z^2\,r=0$;
+\bx{\dfrac1f=\dfrac e{8mU_0}\int_{-\infty}^{\infty}\!B_z^2\,\dd z}.
+
+\lt \emph{Luôn hội tụ} ($f>0$, đổi chiều dòng không đổi dấu $f$); ảnh bị \emph{quay} góc $\varphi=\sqrt{\dfrac e{8mU_0}}\displaystyle\int\!B_z\dd z$; phụ thuộc $e/m$; không làm đổi động năng.
+
+%==========================================================================
+\chap{CHƯƠNG 2. VẬT LÝ LƯỢNG TỬ}
+
+\sect{2.1 Photon -- bức xạ}
+\bx{E=h\nu=\hbar\omega=\dfrac{hc}\lambda}, \bx{p=\dfrac Ec=\dfrac h\lambda=\hbar k}, $m_0=0$, $k=2\pi/\lambda$.
+
+Nguồn điểm công suất $P$: $I=\dfrac P{4\pi r^2}$ [W/m$^2$]; số photon/s: $P/h\nu$; thông lượng photon: $I/h\nu$ [m$^{-2}$s$^{-1}$].
+
+Thời gian tích lũy kiểu cổ điển (nguyên tử đường kính $d$, cách nguồn $r$): $t=\dfrac{A}{I\,\pi d^2/4}=\dfrac{16r^2A}{Pd^2}$ (ra hàng chục giây $\Rightarrow$ mô hình sóng thất bại).
+
+\sect{2.2 Quang điện ngoài}
+\bx{h\nu=\dfrac{hc}\lambda=A+T_{\max}}, $T_{\max}=\tfrac12mv_{\max}^2=eU_h$; giới hạn đỏ $\lambda_0=\dfrac{hc}A$, xảy ra khi $\lambda\le\lambda_0$.
+
+Số electron bật ra/(m$^2$\,s) $=\eta\,I/h\nu$; mật độ dòng $j=e\,\eta\,I/h\nu$.
+
+\lt Tăng cường độ $\Rightarrow$ tăng \emph{số} electron (dòng bão hòa), không tăng $T_{\max}$; $T_{\max}$, $U_h$ chỉ phụ thuộc $\nu$ và $A$ ($eU_h=h\nu-A$: tuyến tính theo $\nu$); gần như tức thời ($\sim10^{-9}\U s$) dù ánh sáng yếu.
+
+\sect{2.3 Compton (photon -- electron tự do đứng yên)}
+\bx{\Delta\lambda=\lambda'-\lambda=\lambda_C(1-\cos\theta)=2\lambda_C\sin^2\tfrac\theta2}; $\theta$: góc tán xạ của \emph{photon}. $\theta=90^\circ$: $\lambda_C$; $180^\circ$: $2\lambda_C$.
+
+\bx{E'=\dfrac E{1+\frac E{m_0c^2}(1-\cos\theta)}}, $T_e=E-E'=hc\Big(\dfrac1\lambda-\dfrac1{\lambda'}\Big)$; $T_{e,\max}$ ở $\theta=180^\circ$.
+
+Góc bay của electron: $\tan\varphi=\dfrac{\cot(\theta/2)}{1+E/m_0c^2}$. Bảo toàn: $E+m_0c^2=E'+\sqrt{p_e^2c^2+m_0^2c^4}$; $p_e^2=p^2+p'^2-2pp'\cos\theta$.
+
+\lt Thuyết sóng: tia tán xạ cùng tần số tia tới; thực nghiệm (Compton, 1923): có thêm đỉnh $\lambda'>\lambda$; $\Delta\lambda$ chỉ phụ thuộc $\theta$ $\Rightarrow$ va chạm hạt--hạt.
+
+\tr $E$ cỡ keV--MeV $\Rightarrow$ electron giật lùi phải tính tương đối tính: $\gamma=1+T_e/m_0c^2$, $v=c\sqrt{1-\gamma^{-2}}$.
+
+\sect{2.4 Sóng de Broglie}
+\bx{\lambda=h/p}. Phi tương đối: $\lambda=\dfrac h{mv}=\dfrac h{\sqrt{2mT}}=\dfrac h{\sqrt{2meU}}$ (electron $12{,}27/\sqrt U\U{\A}$, slide ghi $12{,}2$; proton $0{,}286/\sqrt U\U{\A}$).
+
+Tương đối tính: $\lambda=\dfrac{hc}{\sqrt{T(T+2m_0c^2)}}$; nếu $E=nE_0$: \bx{\lambda=\dfrac{\lambda_C}{\sqrt{n^2-1}}}; nếu $v=\beta c$: $\lambda=\dfrac{\lambda_C\sqrt{1-\beta^2}}{\beta}$; siêu tương đối: $\lambda\approx hc/E$. Chuyển động nhiệt: $\lambda=h/\sqrt{3mk_BT}$.
+
+Cùng $\lambda$ với photon $\Leftrightarrow$ cùng động lượng: $v_e=h/(m_e\lambda)$.
+
+\lt Sóng phẳng $\Psi=Ae^{-i(\omega t-\vec k\vec r)}$, $E=\hbar\omega$, $\vec p=\hbar\vec k$. \emph{Phẳng}: mặt đồng pha là mặt phẳng $\perp$ phương truyền; \emph{đơn sắc}: một tần số. $v_{\text{pha}}=\dfrac\omega k=\dfrac Ep=\dfrac{c^2}v>c$ (không truyền năng lượng, tín hiệu; photon: $c$; nếu lấy $E=p^2/2m$: $v/2$); $v_{\text{nhóm}}=\dfrac{\dd\omega}{\dd k}=\dfrac{\dd E}{\dd p}=v$ (bằng vận tốc hạt). $|\Psi|^2$: mật độ xác suất. Sóng de Broglie của photon là sóng điện từ, của electron thì không. Hạt vi mô không có quỹ đạo xác định.
+
+\lt Thực nghiệm: quang điện, Compton $\Rightarrow$ tính \emph{hạt} của ánh sáng; nhiễu xạ electron (Davisson--Germer 1927: phản xạ trên tinh thể Ni; Thomson: truyền qua màng mỏng, vân tròn đồng tâm) $\Rightarrow$ tính \emph{sóng} của hạt. Nguyên lý bổ sung (Bohr): không quan sát được đồng thời tính sóng và tính hạt. Con mèo Schrödinger: trạng thái \emph{chồng chất} cho đến khi đo.
+
+\sect{2.5 Nhiễu xạ -- giao thoa}
+Bragg: \bx{2d\sin\theta=n\lambda} ($\theta$: góc \emph{trượt} giữa tia và mặt mạng; tia lệch $2\theta$); vòng nhiễu xạ trên màn cách $L$: $r=L\tan2\theta\approx nL\lambda/d$.
+Young: khoảng vân $i=\lambda L/d=hL/(mvd)$. Khe rộng $b$: cực tiểu $b\sin\theta=k\lambda$.
+
+\sect{2.6 Hệ thức bất định Heisenberg}
+\bx{\Delta x\,\Delta p_x\ge\hbar},\ \bx{\Delta E\,\Delta t\ge\hbar}\ (ngân hàng đề cũ + đề cương: $\hbar=h/2\pi$); slide ghi $h/4\pi=\hbar/2$.
+\tr Tính với $\hbar$ trước; không khớp đáp án nào thì chia đôi.
+
+$\Delta p/p=\delta\Rightarrow\Delta x=\dfrac\hbar{\delta\,p}$, với $p=\gamma m_0v$ nếu $v$ lớn; $\Delta v=\Delta p/m$. Nếu $\Delta p=p$: $\Delta x=\lambda/2\pi$.
+
+Độ rộng vạch phổ: $\Delta E=\dfrac{hc}{\lambda^2}\Delta\lambda$ $\Rightarrow$ thời gian sống \bx{\tau=\dfrac\hbar{\Delta E}=\dfrac{\lambda^2}{2\pi c\,\Delta\lambda}}; $\Delta\nu=1/(2\pi\tau)$.
+
+Hạt giam trong vùng $L$: $p\sim\hbar/L$, $T_{\min}\sim\hbar^2/2mL^2$. Electron trong hạt nhân ($L\sim10^{-14}\U m$): $pc\approx20\U{MeV}\gg0{,}511$ $\Rightarrow$ phải dùng $T=\sqrt{p^2c^2+m_0^2c^4}-m_0c^2$ $\Rightarrow$ electron không tồn tại trong hạt nhân.
+
+\lt Tọa độ và động lượng không xác định đồng thời. Năng lượng xác định ($\Delta E=0$) $\Leftrightarrow$ trạng thái bền ($\tau=\infty$); trạng thái sống ngắn $\Rightarrow$ vạch rộng.
+
+\sect{2.7 Hàm sóng -- xác suất}
+Chuẩn hóa \bx{\int|\psi|^2\dd V=1}; $P(a,b)=\displaystyle\int_a^b\!|\psi|^2\dd x$; $|\psi|^2=\psi^*\psi$. ĐK: \emph{đơn trị, liên tục, hữu hạn} ($\psi'$ liên tục khi $U$ hữu hạn).
+$\langle A\rangle=\displaystyle\int\!\psi^*\hat A\psi\,\dd x$.
+
+Chuẩn hóa đa thức: $\displaystyle\int_0^a\!x^m(a-x)^n\dd x=\dfrac{m!\,n!}{(m+n+1)!}a^{m+n+1}$; $\psi=Ax(a-x)\Rightarrow A=\sqrt{30/a^5}$ (với $a=2L$: $\sqrt{15/16L^5}$).
+
+\sect{2.8 Toán tử}
+$\hat A\psi=a\psi$ ($\psi$ hàm riêng, $a$ trị riêng). Tuyến tính: $\hat L(c_1\psi_1+c_2\psi_2)=c_1\hat L\psi_1+c_2\hat L\psi_2$. \emph{Hermit}: trị riêng \emph{thực}, hàm riêng \emph{trực giao} $\int\psi_n^*\psi_m\dd V=\delta_{mn}$.
+
+$\hat x=x$; \bx{\hat p_x=-i\hbar\,\partial/\partial x}; $\hat T=-\dfrac{\hbar^2}{2m}\Delta$; \bx{\hat H=-\dfrac{\hbar^2}{2m}\Delta+U}; $\Delta=\partial_x^2+\partial_y^2+\partial_z^2$.
+
+$\hat L_x=-i\hbar(y\partial_z-z\partial_y)$, $\hat L_y=-i\hbar(z\partial_x-x\partial_z)$, $\hat L_z=-i\hbar(x\partial_y-y\partial_x)=-i\hbar\,\partial/\partial\varphi$; $\hat L^2=\hat L_x^2+\hat L_y^2+\hat L_z^2$.
+
+Trị riêng: \bx{L_z=m\hbar} (hàm riêng $Ce^{im\varphi}$, $m=0,\pm1,\dots$); \bx{L^2=\hbar^2l(l+1)}, $l=0,1,2\dots$
+Hàm riêng của $\hat p_x$: $Ce^{ip_xx/\hbar}$ (phổ liên tục); của $i\,\dd/\dd x$: $Ce^{-iax}$.
+
+\h{Giao hoán} $[\hat A,\hat B]=\hat A\hat B-\hat B\hat A$ (cho tác dụng lên hàm thử): $[\hat x,\hat p_x]=i\hbar$; $[\hat x,\hat p_y]=0$; $[\hat p_x,f(x)]=-i\hbar f'$; $[\hat x,\hat p_x^2]=2i\hbar\hat p_x$.
+
+$[\hat L_x,\hat L_y]=i\hbar\hat L_z$, $[\hat L_y,\hat L_z]=i\hbar\hat L_x$, $[\hat L_z,\hat L_x]=i\hbar\hat L_y$; $[\hat L^2,\hat L_{x,y,z}]=0$.
+$\hat L_\pm=\hat L_x\pm i\hat L_y$: \bx{[\hat L_+,\hat L_-]=2\hbar\hat L_z}; $[\hat L_z,\hat L_\pm]=\pm\hbar\hat L_\pm$; $\hat L_+\hat L_-=\hat L^2-\hat L_z^2+\hbar\hat L_z$.
+
+Quy tắc: $[A,B]=-[B,A]$; $[A,B+C]=[A,B]+[A,C]$; $[A,BC]=[A,B]C+B[A,C]$; $[AB,C]=A[B,C]+[A,C]B$. Giao hoán $\Leftrightarrow$ đo được đồng thời (có chung hàm riêng).
+
+\sect{2.9 Phương trình Schrödinger}
+Tổng quát: $i\hbar\dfrac{\partial\Psi}{\partial t}=\hat H\Psi$. Trạng thái dừng ($U$ không phụ thuộc $t$): \bx{\Delta\psi+\dfrac{2m}{\hbar^2}(E-U)\psi=0}, $\Psi=\psi\,e^{-iEt/\hbar}$, $|\Psi|^2$ không đổi theo $t$.
+
+Hạt tự do ($U=0$): $\psi=A_1e^{ikx}+A_2e^{-ikx}$, $k=\sqrt{2mE}/\hbar$, $E=\hbar^2k^2/2m$: phổ \emph{liên tục}.
+
+Kiểm tra ``có là nghiệm?'': tính $\psi''$, thế vào, rút gọn về 0 (hệ số nhân phía trước \emph{không} ảnh hưởng).
+
+\sect{2.10 Hố thế một chiều sâu vô hạn, bề rộng $a$ ($0<x<a$)}
+\bx{E_n=\dfrac{n^2\pi^2\hbar^2}{2ma^2}=\dfrac{n^2h^2}{8ma^2}},\ $n=1,2,3\dots$; \bx{\psi_n=\sqrt{\dfrac2a}\sin\dfrac{n\pi x}a}; ngoài hố $\psi=0$; phổ \emph{gián đoạn}, $E_1\ne0$.
+
+$E_n=n^2E_1$; $E_{n+1}-E_n=(2n+1)E_1$; photon chuyển mức: $\dfrac{hc}\lambda=(n_i^2-n_f^2)E_1$.
+
+\bx{P(x_1,x_2)=\dfrac{x_2-x_1}a-\dfrac1{2n\pi}\Big[\sin\dfrac{2n\pi x_2}a-\sin\dfrac{2n\pi x_1}a\Big]} (máy tính để \textbf{rad}).
+
+$|\psi_n|^2$ cực đại tại $x=\dfrac{(2k+1)a}{2n}$ ($n$ cực đại), bằng 0 tại $x=\dfrac{ka}n$ ($n-1$ nút trong hố); $\langle x\rangle=a/2$; $v_{\min}=h/2ma$; $n\approx2mav/h$.
+Electron, $a=1\U{\A}$: $E_{1,2,3}=37{,}6;\ 150{,}4;\ 338{,}4\U{eV}$; chuyển $2\to1$: $112{,}8\U{eV}$, $\lambda=110\U{\A}$.
+
+Hố 3 chiều: $E=\dfrac{\pi^2\hbar^2}{2m}\Big(\dfrac{n_1^2}{a^2}+\dfrac{n_2^2}{b^2}+\dfrac{n_3^2}{c^2}\Big)$.
+
+\h{Hố sâu hữu hạn $U_0$:} $E<U_0$: phổ gián đoạn, số mức hữu hạn, hàm sóng \emph{lan ra ngoài} hố (suy giảm theo $e^{-\kappa x}$); $E>U_0$: phổ liên tục, hàm sóng hình sin ở mọi vùng, trong hố $\lambda=h/\sqrt{2mE}$, ngoài hố $\lambda=h/\sqrt{2m(E-U_0)}$.
+
+\sect{2.11 Hàng rào thế -- hiệu ứng đường ngầm}
+Rào chữ nhật cao $U_0$, rộng $a$, $E<U_0$: \bx{D=\exp\!\Big[-\dfrac{2a}\hbar\sqrt{2m(U_0-E)}\Big]}; hệ số phản xạ $R=1-D$.
+
+Chính xác: $D=\Big[1+\dfrac{U_0^2\,\mathrm{sh}^2(k_2a)}{4E(U_0-E)}\Big]^{-1}$, $k_2=\dfrac{\sqrt{2m(U_0-E)}}\hbar$. Rào bất kỳ: $D=C\exp\!\Big[-\dfrac2\hbar\displaystyle\int_{x_1}^{x_2}\!\!\sqrt{2m(U(x)-E)}\,\dd x\Big]$.
+
+$E>U_0$: bước sóng trên rào $\lambda_{II}=\dfrac h{\sqrt{2m(E-U_0)}}$, hai bên $\lambda_{I,III}=\dfrac h{\sqrt{2mE}}$; vẫn có phản xạ (thuần lượng tử).
+
+Ví dụ electron $E=50$, $U_0=70\U{eV}$: $a=1\U{\A}\to D\approx10^{-2}$; $a=10\U{\A}\to D\approx1{,}3\e{-20}$.
+
+\tr Trong căn là $U_0-E$ (không phải $U_0$); dùng $\hbar$ (không phải $h$); đổi eV$\to$J. $D$ giảm theo \emph{hàm mũ} của $a$ và $\sqrt m$.
+
+\sect{2.12 Dao động tử điều hòa -- quay tử rắn}
+$U=\tfrac12kx^2=\tfrac12m\omega^2x^2$, $\omega=\sqrt{k/m}$: \bx{E_n=\hbar\omega\big(n+\tfrac12\big)},\ $n=0,1,2\dots$; cách đều $\hbar\omega$; năng lượng điểm không \bx{E_0=\tfrac12\hbar\omega}\,$\ne0$.
+
+$\psi_0=\Big(\dfrac{m\omega}{\pi\hbar}\Big)^{1/4}e^{-m\omega x^2/2\hbar}$ ($E_0$); $\psi_1\propto x\,e^{-m\omega x^2/2\hbar}$ ($E_1=\tfrac32\hbar\omega$). Đặt $\alpha=m\omega/\hbar$: $\psi_0''=(\alpha^2x^2-\alpha)\psi_0$.
+
+Quay tử: \bx{E_l=\dfrac{\hbar^2}{2J}l(l+1)=B_0\,l(l+1)},\ $l=0,1,2\dots$; $J=\mu R^2$, $\mu=\dfrac{m_1m_2}{m_1+m_2}$; $E_l-E_{l-1}=\hbar^2l/J$ (không cách đều); bậc suy biến $2l+1$.
+
+\tr Hố thế: $n$ từ \textbf{1}, $E\propto n^2$ \s dao động tử: $n$ từ \textbf{0}, cách đều \s quay tử: $l$ từ \textbf{0}, $\propto l(l+1)$ \s hydro: $\propto-1/n^2$.
+
+%==========================================================================
+\chap{CHƯƠNG 3. PHỔ NĂNG LƯỢNG CỦA HỆ HẠT LƯỢNG TỬ}
+
+\sect{3.1 Nguyên tử hydro -- dãy phổ}
+\bx{E_n=-\dfrac{hcR}{n^2}=-\dfrac{13{,}6}{n^2}\U{eV}} (ion tương tự hydro: nhân $Z^2$); $E_n=-\dfrac{me^4}{8\varepsilon_0^2h^2n^2}$; $R=\dfrac{me^4}{8\varepsilon_0^2h^3c}$; $r_n=n^2a_0$; $v_n=2{,}19\e6/n\U{m/s}$. $E_n<0$: liên kết; $n$ lớn thì mức cao, sát nhau dần về 0.
+
+\bx{\dfrac1\lambda=R\Big(\dfrac1{n_f^2}-\dfrac1{n_i^2}\Big)},\ $n_i>n_f$; $h\nu=E_{n_i}-E_{n_f}$.
+
+\begin{tabular}{@{}l@{\ \,}c@{\ \,}l@{\ \,}r@{\ \,}r@{}}
+\textbf{Dãy} & $n_f$ & \textbf{vùng} & $\lambda_{\max}$\,(Å) & $\lambda_{\min}$\,(Å)\\
+Lyman & 1 & tử ngoại & 1216 & 912\\
+Balmer & 2 & nhìn thấy & 6563 & 3646\\
+Paschen & 3 & hồng ngoại & 18\,751 & 8204\\
+Brackett & 4 & hồng ngoại & 40\,512 & 14\,585\\
+Pfund & 5 & hồng ngoại xa & 74\,578 & 22\,789\\
+\end{tabular}
+
+$\lambda_{\max}$: $n_i=n_f+1$ (chênh mức \emph{nhỏ} nhất); $\lambda_{\min}$: $n_i\to\infty$, $\lambda_{\min}=n_f^2/R$. Tính nhanh: $\lambda=911{,}6\U{\A}\big/\big(\tfrac1{n_f^2}-\tfrac1{n_i^2}\big)$.
+Balmer: H$_\alpha$ 6563, H$_\beta$ 4861, H$_\gamma$ 4340, H$_\delta$ 4102 Å. Lyman: 1216, 1026, 972 Å.
+
+Ion hóa từ mức $n$: $13{,}6/n^2\U{eV}$ (từ giới hạn Balmer: $E_{\text{ion}}=4hc/\lambda_{\min}$).
+Kích thích từ $n=1$ lên $n=2,3,4,5$ cần $10{,}20$; $12{,}09$; $12{,}75$; $13{,}06\U{eV}$.
+
+Electron bắn phá có động năng $K$: lên được mức $n$ cao nhất thỏa $13{,}6(1-1/n^2)\le K$; số vạch phát ra khi về: \bx{n(n-1)/2}. Ví dụ $K=12{,}2\U{eV}\Rightarrow n=3$: 3 vạch 1026, 1216, 6563 Å.
+
+\sect{3.2 Bốn số lượng tử}
+$n=1,2,\dots$ (lớp K, L, M, N) \s $l=0,1,\dots,n-1$ ($s,p,d,f$) \s $m_l=-l,\dots,+l$ ($2l+1$ giá trị) \s $m_s=\pm\tfrac12$.
+
+Số trạng thái: phân lớp $2(2l+1)$ ($s$\,2, $p$\,6, $d$\,10, $f$\,14); lớp $n$: \bx{2n^2} (2, 8, 18, 32); bậc suy biến mức $E_n$ của hydro: $n^2$ (kể spin $2n^2$).
+
+\sect{3.3 Mômen động lượng -- mômen từ -- spin}
+\bx{|\vec L|=\hbar\sqrt{l(l+1)}},\ \bx{L_z=m_l\hbar}; $\cos\theta=\dfrac{m_l}{\sqrt{l(l+1)}}$.
+$l=1$: $45^\circ,90^\circ,135^\circ$ \s $l=2$: $35{,}3^\circ$; $65{,}9^\circ$; $90^\circ$; $114{,}1^\circ$; $144{,}7^\circ$ \s $l=3$: $30^\circ$; $54{,}7^\circ$; $73{,}2^\circ$; $90^\circ$\dots\ \s $l=0$: $\vec L=0$, không có hướng.
+
+Mômen từ quỹ đạo: $\vec\mu_l=-\dfrac e{2m}\vec L$; \bx{|\mu_l|=\mu_B\sqrt{l(l+1)}}; $\mu_{lz}=-m_l\mu_B$; $\mu_B=\dfrac{e\hbar}{2m}$.
+Mức $n=3$: $|\mu_l|=0;\ \sqrt2\mu_B;\ \sqrt6\mu_B$.
+
+Cổ điển (quỹ đạo tròn bán kính $r$): $\mu=IS=\dfrac{evr}2=\dfrac{e^2}2\sqrt{\dfrac r{4\pi\varepsilon_0m}}$ (từ $\dfrac{mv^2}r=\dfrac{e^2}{4\pi\varepsilon_0r^2}$).
+
+Spin: $s=\tfrac12$; $|\vec S|=\hbar\sqrt{s(s+1)}=\tfrac{\sqrt3}2\hbar$; $S_z=\pm\tfrac\hbar2$; $\vec\mu_s=-\dfrac em\vec S$; $\mu_{sz}=\mp\mu_B$; $|\mu_s|=\sqrt3\mu_B$ (tỉ số từ--cơ của spin $e/m$ gấp đôi của quỹ đạo $e/2m$). Toàn phần: $j=l\pm\tfrac12$, $|\vec J|=\hbar\sqrt{j(j+1)}$.
+
+Trong từ trường: \bx{E_B=-\vec\mu\cdot\vec B}; quỹ đạo: tách $2l+1$ mức cách đều $\mu_BB$ (Zeeman); spin: 2 mức, \bx{\Delta E=2\mu_BB=h\nu}.
+Vạch 21 cm: $B=\dfrac{hc}{2\mu_B\lambda}\approx0{,}051\U T$.
+
+\sect{3.4 Nguyên tử nhiều electron}
+\h{Pauli:} không có 2 electron cùng cả 4 số $(n,l,m_l,m_s)$. \h{Hund:} trong một phân lớp, điền sao cho tổng spin lớn nhất.
+Thứ tự điền: $1s\,2s\,2p\,3s\,3p\,4s\,3d\,4p\,5s\,4d\,5p\,6s\,4f\,5d\,6p$.
+
+Khí trơ: He\,(2) $1s^2$ \s Ne\,(10) $1s^22s^22p^6$ \s Ar\,(18) [Ne]$3s^23p^6$ \s Kr\,(36) [Ar]$3d^{10}4s^24p^6$ \s Xe\,(54) [Kr]$4d^{10}5s^25p^6$.
+
+Số hạng phổ \bx{{}^{2S+1}L_J}: $L=0,1,2,3\leftrightarrow S,P,D,F$; $J=|L-S|,\dots,L+S$. Lớp/phân lớp đầy: $L=S=J=0\Rightarrow{}^1S_0$; kim loại kiềm (1 electron $s$): ${}^2S_{1/2}$. Quy tắc chọn lọc: $\Delta l=\pm1$, $\Delta m_l=0,\pm1$.
+
+\sect{3.5 Mô hình hai mức -- laser}
+\lt \h{Hấp thụ:} $E_1\to E_2$ khi nhận photon $h\nu=E_2-E_1$.
+\h{Phát xạ tự phát:} $E_2\to E_1$ ngẫu nhiên; pha, hướng, phân cực bất kỳ (không kết hợp).
+\h{Phát xạ kích thích (cưỡng bức):} photon tới $h\nu=E_2-E_1$ làm phát thêm photon \emph{giống hệt} (cùng tần số, pha, phân cực, hướng) $\Rightarrow$ khuếch đại; số chuyển mức $\propto N_2$ và mật độ năng lượng bức xạ.
+Cân bằng nhiệt: $N_2/N_1=e^{-(E_2-E_1)/k_BT}<1$.
+
+\lt \h{Laser} = khuếch đại ánh sáng bằng bức xạ cưỡng bức. Cần: (1) \emph{nghịch đảo mật độ} $N_2>N_1$ (hoạt chất + bơm quang học hoặc bơm điện; cần mức siêu bền, hệ $\ge3$ mức); (2) \emph{buồng cộng hưởng} Fabry--Perot (gương phản xạ toàn phần + bán phản xạ, phản hồi dương): \bx{L=m\lambda/2}, khoảng cách mode $\Delta\nu=c/2L$.
+Ruby (Al$_2$O$_3$:Cr$^{3+}$): rắn, 3 mức, bơm quang (đèn xenon), 694,3 nm. He--Ne: khí, bơm điện, He truyền năng lượng cho Ne qua va chạm, 632,8 nm.
+
+\sect{3.6 Điện tử trong từ trường -- cộng hưởng từ}
+Mức Landau: $E=E_c+\dfrac{\hbar^2k_z^2}{2m^*}+\hbar\omega_c\big(n+\tfrac12\big)$, $\omega_c=\dfrac{eB}{m^*}$.
+Cộng hưởng \emph{cyclotron}: $\omega=\omega_c$ (đo $m^*$) \s cộng hưởng \emph{spin điện tử}: $h\nu=g_e\mu_BB$ ($g_e\approx2$; 28 GHz/T) \s cộng hưởng \emph{từ hạt nhân}: $h\nu=g\mu_NB$, $\mu_N=\dfrac{e\hbar}{2M_p}=5{,}05\e{-27}\U{J/T}$ (proton 42,6 MHz/T; ứng dụng: chụp MRI, cấu trúc phân tử).
+
+%==========================================================================
+\chap{TOÁN -- BẪY -- ĐỀ CŨ}
+
+\sect{T. Toán hay dùng}
+$\sin^2u=\tfrac12(1-\cos2u)$; $\cos^2u=\tfrac12(1+\cos2u)$; $e^{i\varphi}=\cos\varphi+i\sin\varphi$, $|e^{i\varphi}|=1$; $\mathrm{sh}\,x=\tfrac12(e^x-e^{-x})$; $(1+x)^n\approx1+nx$.
+
+$\displaystyle\int\!\sin^2kx\,\dd x=\dfrac x2-\dfrac{\sin2kx}{4k}$; $\displaystyle\int_0^a\!\sin^2\dfrac{n\pi x}a\dd x=\dfrac a2$; $\displaystyle\int_0^a\!x\sin^2\dfrac{n\pi x}a\dd x=\dfrac{a^2}4$.
+
+$\displaystyle\int_{-\infty}^{\infty}\!e^{-\alpha x^2}\dd x=\sqrt{\dfrac\pi\alpha}$; $\displaystyle\int_{-\infty}^{\infty}\!x^2e^{-\alpha x^2}\dd x=\dfrac1{2\alpha}\sqrt{\dfrac\pi\alpha}$; $\displaystyle\int_0^\infty\!xe^{-\alpha x^2}\dd x=\dfrac1{2\alpha}$; $\displaystyle\int_0^\infty\!x^ne^{-\beta x}\dd x=\dfrac{n!}{\beta^{n+1}}$.
+
+$(uv)''=u''v+2u'v'+uv''$; $\big(e^{-\alpha x^2/2}\big)'=-\alpha x\,e^{-\alpha x^2/2}$.
+
+\sect{B. Bẫy và cách làm bài}
+1. Đổi hết về SI \emph{hoặc} dùng trọn bộ eV--Å; đã dùng eV thì không nhân thêm $e$.\\
+2. Chữ $E$: điện trường (V/m) hay năng lượng; $T$: động năng hay chu kỳ; $U$: điện thế hay thế năng.\\
+3. ``Năng lượng toàn phần gấp $n$ lần năng lượng nghỉ'': $E=nE_0$; ``động năng'' thì $E=E_0+T$.\\
+4. $\lambda$ dài nhất $\leftrightarrow$ chênh mức nhỏ nhất; phát xạ $h\nu=E_{\text{cao}}-E_{\text{thấp}}>0$.\\
+5. Hỏi \emph{độ lớn} mômen: $\sqrt{l(l+1)}$; hỏi \emph{hình chiếu}: $m_l$.\\
+6. Xác suất luôn $\in[0,1]$; đáp án làm tròn (0,384 $\to$ 0,4).\\
+7. Loại nhanh bằng đơn vị (m/A $\ne$ A/m) và bậc độ lớn (Å, nm, pm).\\
+8. Máy tính: \textbf{rad} cho $\sin(n\pi x/a)$; \textbf{độ} cho góc Compton, Bragg, góc xoắn.\\
+9. Vòng 1: câu 1 công thức + lý thuyết; vòng 2: câu 2--3 bước; câu thấu kính 2 diapham để cuối (thay ngược đáp án).
+
+\sect{Đ. 13 câu đề cũ (dạng $\to$ CT $\to$ đáp số)}
+1. Compton $E=10^4\U{eV}$, $\theta=60^\circ$ $\to$ $T_e=E-E'$ = \textbf{96,8 eV}.\\
+2. Hai diapham $U_A=230$, $U_1=130\U V$; $d=1;2;0{,}5\U{cm}$ $\to$ $U_2$ = \textbf{46,5 V hoặc 822,3 V}.\\
+3. Độ nhạy lái tia từ ($U_0=10^3\U V$, $L=40\U{cm}$, $R=d=3\U{cm}$, $N=600$) $\to$ $S_M$ = \textbf{1,0 m/A}.\\
+4. $\psi\propto e^{-m\omega x^2/2\hbar}$ là nghiệm PT dao động tử với $E=\tfrac12\hbar\omega$ $\to$ \textbf{Đúng}.\\
+5. $\psi=Ax(2L-x)$, $0\le x\le2L$ $\to$ $A=$ \textbf{$\sqrt{15/16L^5}$}.\\
+6. $[\hat L_+,\hat L_-]$ = \textbf{$2\hbar\hat L_z$}.\\
+7. Vạch $4500\U{\A}$ rộng $5\e{-6}\U{\A}$ $\to$ $\tau=\lambda^2/2\pi c\Delta\lambda$ = \textbf{$2{,}15\e{-7}$ s}.\\
+8. $v=1{,}5\e8\U{m/s}$, $\Delta p/p=25\%$ $\to$ $\Delta x=\hbar/(0{,}25\,\gamma m_0v)$ = \textbf{$2{,}68\e{-12}$ m}.\\
+9. $E=10E_0$ $\to$ $\lambda=\lambda_C/\sqrt{99}$ = \textbf{0,244 pm}.\\
+10. Hố thế, $n=6$, khoảng $[0;0{,}4a]$ $\to$ $P=0{,}384\approx$ \textbf{0,4}.\\
+11. $B=2\U T$, $v_0=10\U{m/s}$, $60^\circ$ $\to$ bước xoắn $h$ = \textbf{0,895 Å}.\\
+12. Electron cùng xung lượng với photon $1\U{\A}$ $\to$ $v=h/m\lambda=7{,}28\e6$; đáp án đề: \textbf{$0{,}0702\e8$ m/s}.\\
+13. Photon $1\U{eV}$ $\to$ $p=E/c$ = \textbf{$5{,}33\e{-28}$ kg\,m/s}.
+
+
+\sect{Ghi thêm (viết tay)}
+\end{multicols*}
+\end{document}
