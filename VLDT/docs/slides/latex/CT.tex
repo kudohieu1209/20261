@@ -14,10 +14,10 @@
   \usepackage{amsmath}
 \fi
 \usepackage[a4paper,margin=2.5cm]{geometry}
-\usepackage{microtype,enumitem,array,booktabs,tabularx,titlesec,needspace}
+\usepackage{microtype,enumitem,array,booktabs,tabularx,titlesec,needspace,multicol,etoolbox}
 \usepackage[unicode,hidelinks,pdfencoding=auto,pdfstartview=FitH]{hyperref}
 \hypersetup{pdftitle={Cong thuc theo dang bai tap Vat ly dien tu},
-  pdfsubject={PH3330 - Bai tap chuong I-V va tra cuu giua ky}}
+  pdfsubject={PH3330 - Tra cuu cong thuc theo dang bai chuong I-V}}
 \linespread{1.05}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{4pt plus 1pt minus 1pt}
@@ -34,23 +34,131 @@
 \clubpenalty=10000
 \widowpenalty=10000
 \newcommand{\muc}[3]{\Needspace{6\baselineskip}%
-  \pdfbookmark[1]{#1 -- #2}{#3}%
-  \subsection*{#1\hfill{\normalfont\small #2}}%
+  \ifstrempty{#2}{\pdfbookmark[\topicdepth]{#1}{#3}}{\pdfbookmark[\topicdepth]{#1 -- #2}{#3}}%
+  \subsubsection*{#1\hfill{\normalfont\small #2}}%
   \phantomsection\label{ct:#3}}
 \newcommand{\dang}[3]{\muc{#1}{Bài #2}{#3}}
 \newcommand{\chuong}[3]{\clearpage\pdfbookmark[0]{Chương #1. #2}{#3}%
   \section*{CHƯƠNG #1. #2}\phantomsection\label{ct:#3}}
 \newcommand{\dd}{\mathrm d}
+\newcommand{\Wd}{W_{\text{đ}}}
 \newcommand{\trangct}[1]{\hyperref[ct:#1]{\pageref*{ct:#1}}}
 
-\begin{document}
-\pdfbookmark[0]{Tra cứu nhanh và hằng số}{lookup}
-\begin{center}
-  {\Large\bfseries CÔNG THỨC THEO DẠNG BÀI TẬP}\\[3pt]
-  {\bfseries VẬT LÝ ĐIỆN TỬ -- PH3330}
-\end{center}
 
-\textbf{Hằng số và đổi đơn vị}
+\newcommand{\topicdepth}{1}
+\titleformat{\subsubsection}{\normalsize\bfseries}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{9pt}{4pt}
+\newcommand{\cum}[2]{\Needspace{8\baselineskip}%
+  \renewcommand{\topicdepth}{2}\pdfbookmark[1]{#1}{#2}%
+  \subsection*{\large #1}\phantomsection\label{ct:#2}}
+
+\begin{document}
+\pdfbookmark[0]{Tra cứu nội dung và dạng bài}{lookup}
+\begin{center}
+{\Large\bfseries CÔNG THỨC VÀ DẠNG BÀI TẬP}\\[3pt]
+{\bfseries VẬT LÝ ĐIỆN TỬ -- PH3330}
+\end{center}
+\subsection*{Tra cứu theo nội dung và dạng bài}
+\begingroup\small
+\setlength{\columnsep}{22pt}\renewcommand{\arraystretch}{1.08}
+\begin{multicols}{2}
+\par\textbf{Nền tảng chung}\hfill\trangct{common}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Hằng số, ký hiệu và đơn vị & \trangct{constants}\\
+Năng lượng, động lượng; Lorentz & \trangct{debroglie}\\
+Chọn công thức từ năng lượng & \trangct{regime-choice}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\par\textbf{I. Hạt tích điện}\hfill\trangct{ch1}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Điện thế, công và lực điện từ & \trangct{charged-motion}\\
+Quỹ đạo tròn và xoắn ốc & \trangct{magnetic-helix}\\
+Lái tia bằng điện trường & \trangct{crt-electric}\\
+Cuộn dây và độ nhạy lệch từ & \trangct{crt-magnetic}\\
+Thấu kính: vật, ảnh và dấu & \trangct{thin-lens-basics}\\
+Một diapham: điện thế hội tụ & \trangct{one-diaphragm}\\
+Hai lưới cầu: tiêu cự & \trangct{spherical-grids}\\
+Hai diapham: tạo ảnh tại anot & \trangct{two-diaphragms}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\par\textbf{II. Photon và lượng tử}\hfill\trangct{ch2}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Photon: năng lượng, số photon & \trangct{photon-basics}\\
+Sóng de Broglie; bước sóng & \trangct{wavelength-choice}\\
+Nhận biết từ bước sóng; Compton & \trangct{wavelength-regime}\\
+Đổi dữ kiện; điện thế gia tốc & \trangct{wavelength-data}\\
+Vận tốc pha và vận tốc nhóm & \trangct{wave-velocities}\\
+Hấp thụ theo mô hình sóng cổ điển & \trangct{classical-absorption}\\
+Quang điện: động năng, dòng phát xạ & \trangct{photoelectric}\\
+Tán xạ Compton & \trangct{compton}\\
+Electron cùng động lượng photon & \trangct{photon-momentum}\\
+Bragg; bán kính vòng nhiễu xạ & \trangct{bragg-ring}\\
+Giao thoa hai khe & \trangct{matter-interference}\\
+Hàm sóng, xác suất, chuẩn hóa & \trangct{wave-normalization}\\
+Bất định vị trí và xung lượng & \trangct{uncertainty}\\
+Bất định năng lượng và thời gian & \trangct{energy-time}\\
+Độ rộng vạch và thời gian sống & \trangct{linewidth-lifetime}\\
+Giam giữ hạt: ước lượng năng lượng & \trangct{confinement-estimate}\\
+Đại lượng, toán tử, trạng thái riêng & \trangct{operators}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\par\columnbreak
+\par\textbf{II. Photon và lượng tử (tiếp)}\hfill\trangct{ch2}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Hàm riêng của toán tử đạo hàm & \trangct{eigenfunctions}\\
+Schrödinger: kiểm tra nghiệm & \trangct{schrodinger-check}\\
+Giếng vô hạn: năng lượng, vận tốc & \trangct{infinite-well}\\
+Giếng vô hạn: xác suất trên đoạn & \trangct{well-probability}\\
+Dao động tử điều hòa & \trangct{harmonic-oscillator}\\
+Rào thế và xuyên hầm & \trangct{rectangular-barrier}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\par\textbf{III. Nguyên tử}\hfill\trangct{ch3}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Số lượng tử, mômen quỹ đạo, spin & \trangct{angular-basics}\\
+Giao hoán; toán tử nâng và hạ & \trangct{commutators}\\
+Mômen từ quỹ đạo cổ điển & \trangct{classical-moment}\\
+Mômen từ và định hướng lượng tử & \trangct{quantized-moment}\\
+Đảo spin trong từ trường & \trangct{spin-flip}\\
+Lớp điền đầy; cấu hình khí trơ & \trangct{closed-shells}\\
+Hydro: mức năng lượng và phổ & \trangct{hydrogen}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\par\textbf{IV. Bán dẫn}\hfill\trangct{ch4}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Vùng năng lượng và mức Fermi & \trangct{band-basics}\\
+Nồng độ riêng và nhiệt độ & \trangct{intrinsic-temperature}\\
+Pha tạp, pha bù, mức Fermi & \trangct{doping-fermi}\\
+Bán dẫn suy biến: đếm trạng thái & \trangct{degenerate}\\
+Độ dẫn, điện trở suất, dòng điện & \trangct{conductivity}\\
+Công thoát và thế tiếp xúc & \trangct{contact-potential}\\
+Tiếp giáp: miền nghèo, điện dung & \trangct{pn-junction}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\par\textbf{V. Sợi quang và quang điện tử}\hfill\trangct{ch5}\par\nobreak\noindent
+\begin{tabularx}{\linewidth}{@{}Xr@{}}
+Khẩu độ số và góc thu nhận & \trangct{numerical-aperture}\\
+Mode dẫn & \trangct{mode-orders}\\
+Giãn xung và tốc độ truyền & \trangct{modal-dispersion}\\
+Ngưỡng hấp thụ vùng--vùng & \trangct{absorption-threshold}\\
+Bề dày hấp thụ, nhiệt, số photon & \trangct{optical-absorption}\\
+Điền đầy vùng và ngưỡng hấp thụ & \trangct{absorption-edge}\\
+Quang dẫn và thời gian sống & \trangct{photoconductivity}\\
+\bottomrule
+\end{tabularx}\par
+\smallskip
+\end{multicols}
+\endgroup
+
+\clearpage\pdfbookmark[0]{Nền tảng chung}{common}
+\section*{NỀN TẢNG CHUNG}\phantomsection\label{ct:common}
+\muc{Hằng số, ký hiệu và đổi đơn vị}{}{constants}
 \[
 \begin{aligned}
 e&=1{,}602\cdot10^{-19}\text{ C},&m_e&=9{,}109\cdot10^{-31}\text{ kg},&c&=2{,}998\cdot10^8\text{ m/s},\\
@@ -66,43 +174,93 @@ k&=8{,}617\cdot10^{-5}\text{ eV/K},&\varepsilon_0&=8{,}854\cdot10^{-12}\text{ F/
 \end{gathered}
 \]
 $e>0$ là độ lớn điện tích electron; $q_e=-e$. Ký hiệu $m$ là khối lượng nghỉ,
-$K$ là động năng, $E=K+mc^2$ là năng lượng toàn phần.
+$\Wd$ là động năng, $E=\Wd+mc^2$ là năng lượng toàn phần.
 Trong hệ SI, $k_B=1{,}381\cdot10^{-23}\text{ J/K}$.
 Khi đề cho một hằng số riêng, dùng giá trị đó trong phép tính.
 
-\subsection*{Tra cứu nhanh theo câu hỏi giữa kỳ}
+\muc{Năng lượng toàn phần và hệ số Lorentz}{Bài 2-4, 2-5}{debroglie}
+\textbf{Năng lượng toàn phần:} $m$ là khối lượng nghỉ, $E_0=mc^2$ là năng lượng nghỉ.
+\begin{itemize}
+\item $\boxed{E=\Wd+mc^2}$: tổng động năng và năng lượng nghỉ.
+\item $\boxed{E=\sqrt{p^2c^2+m^2c^4}}$: tính theo động lượng $p$ và khối lượng nghỉ $m$.
+\end{itemize}
+Các hệ thức năng lượng trên đúng ở cả tốc độ nhỏ và lớn ($v<c$),
+với $p$ là động lượng tương đối tính của hạt.
+
+\textbf{Hệ số Lorentz:} $\gamma$ phụ thuộc tốc độ $v<c$ của hạt:
+\[
+\boxed{\gamma=\frac1{\sqrt{1-v^2/c^2}}=\frac{E}{mc^2}=1+\frac{\Wd}{mc^2}}.
+\]
+\[
+\boxed{p=\gamma mv},\qquad E=\gamma mc^2,\qquad \Wd=(\gamma-1)mc^2.
+\]
+Khi $v\ll c$, $\gamma\simeq1$ và $p\simeq mv$.
+Khi $v$ tiến gần $c$, $\gamma$ tăng mạnh; không bỏ hệ số này.
+
+\muc{Chọn công thức khi biết năng lượng}{}{regime-choice}
+Với hạt có khối lượng nghỉ $m>0$, đặt
+\[
+\boxed{E_0=mc^2},\qquad \boxed{r=\frac{\Wd}{E_0}=\gamma-1}.
+\]
 \begin{center}
-\renewcommand{\arraystretch}{1.16}
-\begin{tabularx}{\linewidth}{@{}cXr@{}}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\linewidth}{@{}Xl@{}}
 \toprule
-Câu GK & Dữ kiện / đại lượng cần tìm & Trang \\
+Dữ kiện & Đổi về $r$ \\
 \midrule
-1 & Photon tán xạ góc bất kỳ; động năng electron & \trangct{compton} \\
-2 & Hai diapham; khoảng cách và điện thế khác nhau & \trangct{two-diaphragms} \\
-3 & Hai cuộn dây; độ nhạy lệch từ của ống tia & \trangct{crt-magnetic} \\
-4 & Cho $\psi(x)$, kiểm tra phương trình Schrödinger & \trangct{schrodinger-check} \\
-5 & Cho dạng hàm sóng, tìm hệ số chuẩn hóa & \trangct{wave-normalization} \\
-6 & Ngoặc giao hoán; toán tử $L_x,L_y,L_z,L_+,L_-$ & \trangct{commutators} \\
-7 & Độ rộng bước sóng, tìm thời gian sống & \trangct{linewidth-lifetime} \\
-8 & Sai số xung lượng, tìm độ bất định vị trí & \trangct{uncertainty} \\
-9 & Năng lượng toàn phần, tìm bước sóng de Broglie & \trangct{debroglie} \\
-10 & Xác suất trên một đoạn trong giếng vô hạn & \trangct{well-probability} \\
-11 & Vận tốc nghiêng với từ trường; bán kính, bước xoắn & \trangct{magnetic-helix} \\
-12 & Electron có cùng động lượng với photon & \trangct{photon-momentum} \\
-13 & Năng lượng photon, tìm động lượng & \trangct{photon-momentum} \\
+Động năng $\Wd$ & $r=\Wd/E_0$ \\
+Năng lượng toàn phần $E$ & $r=E/E_0-1$ \\
+Electron từ nghỉ, tăng tốc qua $U$ & $r=eU/(m_ec^2)$ \\
 \bottomrule
 \end{tabularx}
 \end{center}
-\textbf{Theo chương:} I -- hạt tích điện (tr.\ \trangct{ch1});
-II -- lượng tử (tr.\ \trangct{ch2}); III -- nguyên tử (tr.\ \trangct{ch3});
-IV -- bán dẫn (tr.\ \trangct{ch4}); V -- quang điện tử (tr.\ \trangct{ch5}).
+\textbf{Quy tắc 4\% cho bài tính động lượng hoặc bước sóng từ động năng:}
+\begin{itemize}
+\item $r\le0{,}04$: có thể dùng cổ điển nếu chấp nhận sai số khoảng $1\%$ trở xuống.
+\item $r>0{,}04$: dùng công thức tương đối tính để giữ mức chính xác đó.
+\end{itemize}
+Với electron, $E_0\simeq511\text{ keV}$.
+Khi $E\gg E_0$, hạt ở miền siêu tương đối tính và $p\simeq E/c$.
 
-\clearpage
-\pdfbookmark[0]{Chương I. Quang học điện tử}{ch1}
-\section*{CHƯƠNG I. CHUYỂN ĐỘNG CỦA HẠT TÍCH ĐIỆN}
-\phantomsection\label{ct:ch1}
+\chuong{I}{CHUYỂN ĐỘNG CỦA HẠT TÍCH ĐIỆN}{ch1}
+\cum{A. Chuyển động trong điện trường và từ trường}{g1-motion}
+\muc{Điện thế, công của lực điện và chuyển động của hạt}{}{charged-motion}
+Điện thế là $V$; điện trường là $\vec{\mathcal E}=-\operatorname{grad}V$.
+Hạt mang điện tích $q$ đi từ điện thế $V_1$ đến $V_2$:
+\[
+\boxed{W_{\text{đ},2}-W_{\text{đ},1}=q(V_1-V_2)}.
+\]
+Với electron $q=-e$, đặt $U=V_2-V_1>0$ là hiệu điện thế gia tốc:
+\[
+\boxed{W_{\text{đ},2}=W_{\text{đ},1}+eU},\qquad
+W_{\text{đ},1}=0\ \Longrightarrow\ W_{\text{đ},2}=eU.
+\]
+Lực Lorentz và gia tốc khi hạt chuyển động phi tương đối tính:
+\[
+\vec F=q(\vec{\mathcal E}+\vec v\times\vec B),\qquad
+\vec a=\frac{\vec F}{m}.
+\]
+Trong điện trường đều, $\vec a$ không đổi và
+$\vec v=\vec v_0+\vec at$, $\vec x=\vec x_0+\vec v_0t+\vec at^2/2$.
+Trong từ trường riêng lẻ, lực luôn vuông góc vận tốc nên không làm đổi tốc độ.
 
-\dang{Lái tia bằng điện trường}{1-1}{crt-electric}
+\muc{Quỹ đạo tròn và xoắn ốc trong từ trường đều}{}{magnetic-helix}
+\textbf{Nhận dạng:} từ trường đều, chỉ có lực từ; góc $\theta$ đo giữa $\vec v$ và $\vec B$.
+Lực Lorentz $\vec F=q\vec v\times\vec B$ không sinh công nên tốc độ không đổi.
+\[
+v_\parallel=v\cos\theta,\qquad v_\perp=v\sin\theta,\qquad
+\boxed{r=\frac{mv_\perp}{|q|B}},\qquad \boxed{T=\frac{2\pi m}{|q|B}}.
+\]
+\[
+\boxed{b=|v_\parallel|T=\frac{2\pi mv|\cos\theta|}{|q|B}}.
+\]
+$b$ là bước xoắn, khác với bán kính $r$. Với $0<\theta<90^\circ$:
+$b/r=2\pi\cot\theta$. $\theta=90^\circ$ cho đường tròn; $\theta=0$ cho đường thẳng.
+Các công thức trên dùng khi $v\ll c$. Khi tương đối tính, thay $m$ bằng $\gamma m$,
+$\gamma=(1-v^2/c^2)^{-1/2}$; riêng $r=p_\perp/(|q|B)$.
+
+\cum{B. Lái tia và độ nhạy của ống tia}{g1-deflection}
+\muc{Lái tia bằng điện trường}{Bài 1-1}{crt-electric}
 \textbf{Dữ kiện:} điện thế tăng tốc $U_a$, chiều dài bản $\ell$, khoảng cách hai bản $d$,
 điện thế lệch $U_d$. $L$ đo từ \emph{tâm bản} đến màn; $b$ đo từ mép ra đến màn:
 $L=\ell/2+b$.
@@ -113,7 +271,8 @@ v_0=\sqrt{\frac{2eU_a}{m_e}},\qquad |D|=\frac{|U_d|\ell L}{2dU_a},\qquad
 Tính theo SI cho $S_E$ đơn vị m/V; nhân $10^3$ để đổi sang mm/V.
 Áp dụng khi electron phi tương đối tính, điện trường đều và chùm tia lệch góc nhỏ.
 
-\dang{Lái tia bằng từ trường và hai cuộn dây}{1-2}{crt-magnetic}
+\newpage
+\muc{Lái tia bằng từ trường và hai cuộn dây}{Bài 1-2}{crt-magnetic}
 Đặt $\ell_B$ là chiều dài vùng từ trường, $L$ đo từ tâm vùng này đến màn.
 \[
 r_q=\frac{m_ev_0}{eB},\qquad |D|\simeq\sqrt{\frac{e}{2m_eU_a}}B\ell_B L,\qquad
@@ -129,38 +288,25 @@ $N$ vòng \emph{mỗi cuộn}, $W_\Sigma=2N$ vòng của cả hai:
 Ở bài 1-2, $z=R$ và $\ell_B=2R$.
 Điều kiện: $r_q\gg\ell_B$, từ trường được coi đều trong vùng tác dụng.
 
-\muc{Quỹ đạo tròn và xoắn ốc trong từ trường đều}{GK 11}{magnetic-helix}
-\textbf{Nhận dạng:} từ trường đều, chỉ có lực từ; góc $\theta$ đo giữa $\vec v$ và $\vec B$.
-Lực Lorentz $\vec F=q\vec v\times\vec B$ không sinh công nên tốc độ không đổi.
+\cum{C. Hội tụ và tạo ảnh}{g1-lenses}
+\muc{Thấu kính điện tử mỏng và quy ước ảnh}{}{thin-lens-basics}
+$a$ là khoảng vật, $b$ là khoảng ảnh, $f$ là tiêu cự có dấu:
 \[
-v_\parallel=v\cos\theta,\qquad v_\perp=v\sin\theta,\qquad
-\boxed{r=\frac{mv_\perp}{|q|B}},\qquad \boxed{T=\frac{2\pi m}{|q|B}}.
+\boxed{\frac1a+\frac1b=\frac1f},\qquad
+\boxed{b=\left(\frac1f-\frac1a\right)^{-1}}.
 \]
-\[
-\boxed{b=|v_\parallel|T=\frac{2\pi mv|\cos\theta|}{|q|B}}.
-\]
-$b$ là bước xoắn, khác với bán kính $r$. Với $0<\theta<90^\circ$:
-$b/r=2\pi\cot\theta$. $\theta=90^\circ$ cho đường tròn; $\theta=0$ cho đường thẳng.
-Các công thức trên dùng khi $v\ll c$. Khi tương đối tính, thay $m$ bằng $\gamma m$,
-$\gamma=(1-v^2/c^2)^{-1/2}$; riêng $r=p_\perp/(|q|B)$.
+Vật thật ở phía tia tới: $a>0$; vật ảo: $a<0$.
+Ảnh thật ở phía tia ra: $b>0$; ảnh ảo: $b<0$.
+Thấu kính hội tụ có $f>0$, phân kỳ có $f<0$.
+Chùm tới song song có $a\to\infty$, nên $b=f$.
 
-\newpage
-\dang{Hội tụ qua hai lưới cầu}{1-3}{spherical-grids}
-Chùm tới song song trục, hai miền điện thế $U_1,U_2>0$ tính so với catot,
-bán kính mặt lưới $R$. Góc $\alpha,\beta$ đều đo so với pháp tuyến.
+Với hai thấu kính cách nhau $d$, ảnh của thấu kính thứ nhất trở thành vật của thấu kính thứ hai:
 \[
-\sqrt{U_1}\sin\alpha=\sqrt{U_2}\sin\beta,\qquad
-\frac{\beta}{\alpha}\simeq\sqrt{\frac{U_1}{U_2}}.
+\boxed{a_2=d-b_1},\qquad \frac1{a_2}+\frac1{b_2}=\frac1{f_2}.
 \]
-Với chiều cong như hình của bài 1-3 và tia gần trục:
-\[
-\boxed{f=\frac{R}{1-\sqrt{U_1/U_2}}}.
-\]
-$U_2>U_1$ cho $f>0$: hội tụ. Độ cao tia tới $y\ll R$,
-$\alpha\simeq y/R$ và góc lệch $\varphi\simeq\alpha-\beta$;
-từ đó $f\simeq y/\varphi$.
+Tính lần lượt từng thấu kính và giữ dấu các khoảng cách khi thay số.
 
-\dang{Một diapham: tìm điện thế để hội tụ}{1-4}{one-diaphragm}
+\muc{Một diapham: tìm điện thế để hội tụ}{Bài 1-4}{one-diaphragm}
 Gọi $g_-,g_+$ là \emph{đạo hàm điện thế dọc trục} trước và sau diapham,
 khác với thành phần điện trường $\mathcal E_x=-\dd U/\dd x$.
 Trong gần đúng thấu kính mỏng:
@@ -177,7 +323,22 @@ f=\frac{4U_Dd_1}{U_G-U_D},\qquad f=d_2\quad\Longrightarrow\quad
 Điều kiện hội tụ: $f>0$; trong cấu hình này cần $0<U_D<U_G$.
 
 \newpage
-\muc{Hai diapham: khoảng cách và điện thế bất kỳ}{Bài 1-5; GK 2}{two-diaphragms}
+\muc{Hội tụ qua hai lưới cầu}{Bài 1-3}{spherical-grids}
+Chùm tới song song trục, hai miền điện thế $U_1,U_2>0$ tính so với catot,
+bán kính mặt lưới $R$. Góc $\alpha,\beta$ đều đo so với pháp tuyến.
+\[
+\sqrt{U_1}\sin\alpha=\sqrt{U_2}\sin\beta,\qquad
+\frac{\beta}{\alpha}\simeq\sqrt{\frac{U_1}{U_2}}.
+\]
+Với chiều cong như hình của bài 1-3 và tia gần trục:
+\[
+\boxed{f=\frac{R}{1-\sqrt{U_1/U_2}}}.
+\]
+$U_2>U_1$ cho $f>0$: hội tụ. Độ cao tia tới $y\ll R$,
+$\alpha\simeq y/R$ và góc lệch $\varphi\simeq\alpha-\beta$;
+từ đó $f\simeq y/\varphi$.
+
+\muc{Hai diapham: khoảng cách và điện thế bất kỳ}{Bài 1-5}{two-diaphragms}
 \textbf{Nhận dạng:} $K\to D_1\to D_2\to A$;
 các khoảng cách lần lượt là $d_1,d_2,d_3>0$.
 $U_1,U_2,U_A>0$ là điện thế so với catot $U_K=0$.
@@ -216,9 +377,119 @@ f_1=\frac{4U_1d}{U_2-2U_1},\qquad f_2=-\frac{2U_2d}{U_2-U_1}.
 \]
 $b_2>0$ cho ảnh thật phía sau $D_2$; mẫu số bằng không cho chùm ra song song.
 
-\chuong{II}{MỘT SỐ VẤN ĐỀ VẬT LÝ LƯỢNG TỬ}{ch2}
+\chuong{II}{PHOTON, SÓNG VẬT CHẤT VÀ CƠ HỌC LƯỢNG TỬ}{ch2}
+\cum{A. Photon và sóng vật chất}{g2-waves}
+\muc{Photon: năng lượng, động lượng và số photon}{}{photon-basics}
+Photon trong chân không có tần số $\nu$, bước sóng $\lambda_\gamma$,
+năng lượng $E_\gamma$ và động lượng $p_\gamma$:
+\[
+\boxed{E_\gamma=h\nu=\frac{hc}{\lambda_\gamma}},\qquad
+\boxed{p_\gamma=\frac{E_\gamma}{c}=\frac{h}{\lambda_\gamma}},\qquad
+c=\lambda_\gamma\nu.
+\]
+Nguồn đơn sắc có công suất $P$, phát năng lượng $Q=Pt$ trong thời gian $t$:
+\[
+\boxed{N_\gamma=\frac{Q}{E_\gamma}},\qquad
+\boxed{\dot N_\gamma=\frac{P}{E_\gamma}}.
+\]
+Khi $P$ bằng W, $Q$ bằng J thì $E_\gamma$ phải dùng J.
+Nếu chỉ biết phần năng lượng hấp thụ, thay $Q$ bằng $Q_{\mathrm{abs}}$ để đếm photon hấp thụ.
 
-\dang{Thời gian hấp thụ theo mô hình sóng cổ điển}{2-1}{classical-absorption}
+\muc{Sóng de Broglie và công thức bước sóng tổng quát}{Bài 2-4, 2-5}{wavelength-choice}
+\textbf{Công thức gốc:} $\boxed{\lambda=h/p}$.
+Các dạng dưới đây đều suy ra bằng cách thay biểu thức của $p$.
+
+\textbf{Công thức tổng quát theo dữ kiện đề cho:}
+\begin{center}
+\renewcommand{\arraystretch}{1.65}
+\begin{tabularx}{\linewidth}{@{}Xl@{}}
+\toprule
+Đề cho gì? & Tính bước sóng \\
+\midrule
+Động lượng $p$ & $\lambda=h/p$ \\
+Vận tốc $v$ và khối lượng nghỉ $m$ & $\lambda=h/(\gamma mv)$ \\
+Động năng $\Wd$ và khối lượng nghỉ $m$ & $\lambda=hc/\sqrt{\Wd(\Wd+2mc^2)}$ \\
+Năng lượng toàn phần $E$ và khối lượng nghỉ $m$ & $\lambda=hc/\sqrt{E^2-m^2c^4}$ \\
+Photon trong chân không có năng lượng $E_\gamma$ & $\lambda_\gamma=hc/E_\gamma$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Ở hàng cho $v$, tính $\gamma=(1-v^2/c^2)^{-1/2}$ trước.
+Các hàng cho $v,\Wd,E$ áp dụng cho hạt có $m>0$, dùng được cả khi tốc độ nhỏ và lớn.
+Phân biệt $E=\Wd+E_0$ với $\Wd$; $E_0=mc^2$.
+
+\muc{Nhận biết miền chuyển động từ bước sóng}{}{wavelength-regime}
+Với hạt có khối lượng nghỉ $m>0$:
+\[
+\boxed{\lambda_C=\frac{h}{mc}},\qquad
+\boxed{\frac{\lambda_C}{\lambda}=\frac{p}{mc}},\qquad
+\boxed{r=\sqrt{1+\left(\frac{\lambda_C}{\lambda}\right)^2}-1}.
+\]
+$\lambda_C$ là bước sóng Compton của hạt, chỉ phụ thuộc khối lượng nghỉ;
+$\lambda=h/p$ là bước sóng de Broglie của hạt đang chuyển động.
+Theo cùng mốc $r=4\%$:
+\[
+\boxed{\lambda\gtrsim3{,}50\lambda_C\ \Rightarrow\ \text{có thể dùng cổ điển}},\qquad
+\lambda<3{,}50\lambda_C\ \Rightarrow\ \text{dùng tương đối tính}.
+\]
+$\lambda\gg\lambda_C$ cho miền cổ điển;
+$\lambda\ll\lambda_C$ cho miền siêu tương đối tính ($p\simeq E/c$).
+Với electron, $\lambda_C\simeq2{,}426\text{ pm}=0{,}02426\text{ \AA}$.
+Bài 2-4: $\lambda=1\text{ \AA}\simeq41{,}2\lambda_C$, dùng cổ điển.
+Bài 2-7: $\Wd=60\text{ keV}$, $r\simeq11{,}7\%$, dùng tương đối tính.
+
+\newpage
+\muc{Tính theo dữ kiện và điện thế gia tốc}{Bài 2-4, 2-5}{wavelength-data}
+\textbf{Dạng rút gọn khi chấp nhận sai số bước sóng khoảng 1\%:}
+\begin{center}
+\renewcommand{\arraystretch}{1.45}
+\begin{tabularx}{\linewidth}{@{}Xl@{}}
+\toprule
+Từ dữ kiện, tự kiểm tra & Có thể rút gọn thành \\
+\midrule
+Biết $v$: tính $\gamma$; nếu $\gamma-1\le0{,}01$ & $\lambda\simeq h/(mv)$ \\
+Biết $\Wd$: tính $r=\Wd/E_0$; nếu $r\le0{,}04$ & $\lambda\simeq h/\sqrt{2m\Wd}$ \\
+Biết $E$: tính $E/E_0$; nếu $E/E_0\ge7{,}1$ & $\lambda\simeq hc/E$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Nếu chưa kiểm tra được điều kiện rút gọn, dùng bảng tổng quát ở trang~\trangct{wavelength-choice}.
+
+\textbf{Electron tăng tốc từ nghỉ qua hiệu điện thế $U>0$:}
+Thay $m=m_e$ vào hàng cho động năng của bảng tổng quát, rồi thay $\Wd=eU$:
+\[
+\lambda=\frac{hc}{\sqrt{\Wd(\Wd+2m_ec^2)}}
+\quad\xrightarrow{\ \Wd=eU\ }\quad
+\boxed{\lambda=\frac{hc}{\sqrt{eU(eU+2m_ec^2)}}}.
+\]
+Nếu đã có động năng ban đầu $W_{\text{đ}0}$ thì thay $\Wd=W_{\text{đ}0}+eU$.
+Khi dùng công thức cổ điển cho electron xuất phát từ nghỉ:
+\[
+\boxed{p\simeq\sqrt{2m_eeU}},\qquad
+\lambda[\text{\AA}]\simeq\frac{12{,}27}{\sqrt{U[\text{V}]}},\qquad
+\boxed{U\simeq\frac{h^2}{2m_ee\lambda^2}}.
+\]
+Để tìm $U$ bằng công thức tổng quát, tính $p=h/\lambda$ rồi
+$eU=\sqrt{p^2c^2+m_e^2c^4}-m_ec^2$.
+
+\textbf{Đề cho năng lượng toàn phần gấp $\eta$ lần năng lượng nghỉ:}
+\[
+E=\eta mc^2\ (\eta>1)\quad\Longrightarrow\quad
+p=mc\sqrt{\eta^2-1},\qquad \boxed{\lambda=\frac{h}{mc\sqrt{\eta^2-1}}}.
+\]
+Khi đó $\gamma=\eta$ và $\Wd=(\eta-1)mc^2$.
+
+\muc{Vận tốc pha và vận tốc nhóm}{Bài 2-6}{wave-velocities}
+Với pha sóng chứa \emph{năng lượng toàn phần} $E=\hbar\omega$ và $p=\hbar k$:
+\[
+\boxed{v_{\text{pha}}=\frac\omega k=\frac Ep=\frac{c^2}{v}},\qquad
+\boxed{v_{\text{nhóm}}=\frac{\dd\omega}{\dd k}=\frac{\dd E}{\dd p}=v}.
+\]
+$v_{\text{pha}}v_{\text{nhóm}}=c^2$. Vận tốc truyền của gói sóng là $v_{\text{nhóm}}$.
+
+\newpage
+\cum{B. Các hiện tượng dùng năng lượng và động lượng}{g2-phenomena}
+\muc{Thời gian hấp thụ theo mô hình sóng cổ điển}{Bài 2-1}{classical-absorption}
 Nguồn phát đều theo mọi hướng, công suất đèn $P$, phần phát thành bức xạ $f$;
 nguyên tử là đĩa đường kính $d$, cách nguồn $R$.
 \[
@@ -231,10 +502,10 @@ P_b=fP\quad\longrightarrow\quad I=\frac{P_b}{4\pi R^2}
 $\Phi$ là công thoát, phải đổi sang J khi $P_a$ tính bằng W.
 Không thay công thoát của bài bằng giá trị ở bài khác.
 
-\dang{Quang điện: động năng và số electron phát ra}{2-2}{photoelectric}
+\muc{Quang điện: động năng và số electron phát ra}{Bài 2-2}{photoelectric}
 \[
 E_\gamma=h\nu=\frac{hc}{\lambda},\qquad
-\boxed{K_{\max}=E_\gamma-\Phi},\qquad eU_h=K_{\max}.
+\boxed{W_{\text{đ},\max}=E_\gamma-\Phi},\qquad eU_h=W_{\text{đ},\max}.
 \]
 Quang điện xảy ra khi $E_\gamma\ge\Phi$, hay $\lambda\le\lambda_0=hc/\Phi$.
 Với cường độ tới $I$ (W/m$^2$), hiệu suất photon tới tạo electron là $\eta$:
@@ -246,15 +517,15 @@ Nếu dùng mô hình một photon tới tạo một electron, lấy $\eta=1$.
 Dùng $E_\gamma$ bằng J khi $I$ tính bằng W/m$^2$.
 Mật độ dòng điện phát xạ: $j_e=e\dot N_e/S$ (A/m$^2$).
 
-\dang{Compton: năng lượng photon và vận tốc electron}{2-3}{compton}
+\muc{Compton: năng lượng photon và vận tốc electron}{Bài 2-3}{compton}
 Electron ban đầu đứng yên; $\theta$ là góc tán xạ của photon.
 \[
 \boxed{\lambda'-\lambda=\frac{h}{m_ec}(1-\cos\theta)},\qquad
 E_\gamma'=\frac{E_\gamma}{1+\dfrac{E_\gamma}{m_ec^2}(1-\cos\theta)}.
 \]
 \[
-K_e=E_\gamma-E_\gamma'\quad\longrightarrow\quad
-\gamma_e=1+\frac{K_e}{m_ec^2}\quad\longrightarrow\quad
+W_{\text{đ},e}=E_\gamma-E_\gamma'\quad\longrightarrow\quad
+\gamma_e=1+\frac{W_{\text{đ},e}}{m_ec^2}\quad\longrightarrow\quad
 \boxed{v=c\sqrt{1-\gamma_e^{-2}}}.
 \]
 Va chạm trực diện với photon tán xạ ngược: $\theta=\pi$,
@@ -267,7 +538,7 @@ E_\gamma+m_ec^2=E_\gamma'+\gamma_em_ec^2,\qquad
 Đặt $A=(1+2E_\gamma/(m_ec^2))^2$ thì $v/c=(A-1)/(A+1)$.
 
 \newpage
-\muc{Động lượng photon và electron cùng động lượng}{GK 12, 13}{photon-momentum}
+\muc{Electron có cùng động lượng với photon}{}{photon-momentum}
 Photon trong chân không có năng lượng $E_\gamma$, bước sóng $\lambda_\gamma$:
 \[
 \boxed{p_\gamma=\frac{E_\gamma}{c}=\frac{h}{\lambda_\gamma}}.
@@ -281,50 +552,11 @@ Khi electron có cùng động lượng: $p_e=p_\gamma=p$,
 Hai hạt cùng động lượng có cùng bước sóng de Broglie;
 năng lượng của electron phải tính bằng $E_e^2=p^2c^2+m_e^2c^4$.
 
-\dang{Động lượng, bước sóng và điện thế tăng tốc}{2-4, 2-5}{debroglie}
-\textbf{Chọn năng lượng:} $K$ là động năng; $E=K+mc^2$ là năng lượng toàn phần.
+\muc{Vòng nhiễu xạ qua màng đa tinh thể}{Bài 2-7}{bragg-ring}
+Đường tính: $\Wd\to\lambda\to\theta\to R$.
+Với electron $\Wd$ tính bằng keV:
 \[
-E^2=p^2c^2+m^2c^4,\qquad p=\frac{\sqrt{K(K+2mc^2)}}c,\qquad\boxed{\lambda=\frac hp}.
-\]
-\begin{center}
-\renewcommand{\arraystretch}{1.35}
-\begin{tabularx}{\linewidth}{@{}lXX@{}}
-\toprule
-Miền năng lượng & Động lượng & Bước sóng \\
-\midrule
-$K\ll mc^2$ & $p\simeq\sqrt{2mK}$ & $\lambda\simeq h/\sqrt{2mK}$ \\
-Tương đối tính & $p=\sqrt{K(K+2mc^2)}/c$ & $\lambda=hc/\sqrt{K(K+2mc^2)}$ \\
-$E\gg mc^2$ & $p\simeq E/c$ & $\lambda\simeq hc/E$ \\
-\bottomrule
-\end{tabularx}
-\end{center}
-Electron tăng tốc từ nghỉ: $K=eU$. Khi phi tương đối tính:
-\[
-\lambda[\text{\AA}]\simeq\frac{12{,}27}{\sqrt{U[\text{V}]}},\qquad
-\boxed{U=\frac{h^2}{2m_ee\lambda^2}}.
-\]
-Khi cần hiệu chỉnh tương đối tính, dùng $p=h/\lambda$ rồi
-$eU=\sqrt{p^2c^2+m_e^2c^4}-m_ec^2$.
-Nếu đề cho $E=\eta mc^2$ với $\eta>1$ thì
-\[
-\boxed{p=mc\sqrt{\eta^2-1}},\qquad
-\boxed{\lambda=\frac{h}{mc\sqrt{\eta^2-1}}},\qquad K=(\eta-1)mc^2.
-\]
-
-\dang{Vận tốc pha và vận tốc nhóm}{2-6}{wave-velocities}
-Với pha sóng chứa \emph{năng lượng toàn phần} $E=\hbar\omega$ và $p=\hbar k$:
-\[
-\boxed{v_{\text{pha}}=\frac\omega k=\frac Ep=\frac{c^2}{v}},\qquad
-\boxed{v_{\text{nhóm}}=\frac{\dd\omega}{\dd k}=\frac{\dd E}{\dd p}=v}.
-\]
-$v_{\text{pha}}v_{\text{nhóm}}=c^2$. Vận tốc truyền của gói sóng là $v_{\text{nhóm}}$.
-
-\newpage
-\dang{Vòng nhiễu xạ qua màng đa tinh thể}{2-7}{bragg-ring}
-Đường tính: $K\to\lambda\to\theta\to R$.
-Với electron $K$ tính bằng keV:
-\[
-\boxed{\lambda[\text{\AA}]=\frac{12{,}3984}{\sqrt{K[\text{keV}](K[\text{keV}]+1022)}}}.
+\boxed{\lambda[\text{\AA}]=\frac{12{,}3984}{\sqrt{\Wd[\text{keV}](\Wd[\text{keV}]+1022)}}}.
 \]
 \[
 2d\sin\theta=n\lambda\quad\longrightarrow\quad
@@ -335,7 +567,7 @@ $d$ là khoảng cách mặt mạng, $L$ là khoảng cách màng--màn;
 $\theta$ đo giữa tia tới và mặt mạng, góc lệch chùm nhiễu xạ là $2\theta$.
 Gần đúng cuối dùng khi $n\lambda\ll d$; bậc nhất lấy $n=1$.
 
-\dang{Giao thoa hai khe với sóng vật chất}{2-8}{matter-interference}
+\muc{Giao thoa hai khe với sóng vật chất}{Bài 2-8}{matter-interference}
 Hai khe kết hợp cách nhau $d$, màn cách mặt phẳng khe $L$ và $L\gg d$:
 \[
 \lambda=\frac{h}{mv}\quad\longrightarrow\quad
@@ -344,69 +576,11 @@ Hai khe kết hợp cách nhau $d$, màn cách mặt phẳng khe $L$ và $L\gg d
 $i$ là khoảng cách hai cực đại liên tiếp trên màn, không phải khoảng cách hai khe.
 Dùng $h$ giả định mà đề bài 2-8 cho và đổi khối lượng từ g sang kg.
 
-\dang{Bất định vị trí và xung lượng}{2-9, 2-11}{uncertainty}
-\begin{center}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{@{}XX@{}}
-\toprule
-Độ lệch chuẩn của phân bố & Ước lượng độ rộng theo bậc độ lớn \\
-\midrule
-$\sigma_x\sigma_{p_x}\ge\hbar/2$ & $\Delta x\,\Delta p_x\sim\hbar$ \\
-$\sigma_{x,\min}=\hbar/(2\sigma_{p_x})$ & $\Delta x\sim\hbar/\Delta p_x$ \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\textbf{Bài 2-9:} độ chính xác tương đối $r=\Delta p/p$ cho $\Delta p=rp$.
-\[
-p=mv\quad(v\ll c),\qquad p=\frac{mv}{\sqrt{1-v^2/c^2}}\quad(\text{tương đối tính}).
-\]
-Sau đó dùng công thức vị trí ứng với định nghĩa độ bất định đã chọn.
-\textbf{Bài 2-11:} khi độ bất định xung lượng bằng $p=h/\lambda$:
-\[
-\sigma_{x,\min}=\frac\lambda{4\pi}\quad(\text{độ lệch chuẩn}),\qquad
-\Delta x\sim\frac\lambda{2\pi}\quad(\text{ước lượng độ rộng}).
-\]
-Hai cách định nghĩa khác nhau về hệ số; $\hbar$ không thay thế $\hbar/2$
-trong bất đẳng thức độ lệch chuẩn có hệ số tối ưu.
-
 \newpage
-\dang{Độ rộng vạch và thời gian sống}{2-10}{linewidth-lifetime}
-Với $\Delta\lambda\ll\lambda$, đổi độ rộng bước sóng sang độ rộng tần số:
-\[
-\Delta\nu\simeq\frac{c\,\Delta\lambda}{\lambda^2}.
-\]
-Nếu $\Delta\nu$ là độ rộng tự nhiên ở nửa cực đại (FWHM), mức dưới sống rất lâu
-và mức trên có xác suất tồn tại $P(t)=e^{-t/\tau}$:
-\[
-\boxed{\tau=\frac1{2\pi\Delta\nu}=\frac{\lambda^2}{2\pi c\,\Delta\lambda}}.
-\]
-Đổi cả $\lambda$ và $\Delta\lambda$ sang m; không coi FWHM là độ lệch chuẩn.
+\cum{C. Hàm sóng, xác suất và bất định}{g2-probability}
+\muc{Hàm sóng, mật độ xác suất và chuẩn hóa}{Bài 2-17}{wave-normalization}
+Hàm sóng $\psi(x)$ mô tả trạng thái; mật độ xác suất là $\rho(x)=|\psi(x)|^2$. Xác suất trong một đoạn bằng tích phân mật độ xác suất trên đoạn đó.
 
-\dang{Liên hệ bất định năng lượng và thời gian chuyển động}{2-12}{energy-time}
-Với $K=p^2/(2m)$, độ rộng động lượng nhỏ quanh $p=mv$:
-\[
-\Delta K\simeq\left|\frac{\dd K}{\dd p}\right|\Delta p=v\Delta p,\qquad
-\Delta t=\frac{\Delta x}{v}\quad\Longrightarrow\quad
-\Delta K\,\Delta t\simeq\Delta x\,\Delta p.
-\]
-Thế quy ước $\Delta x\,\Delta p\sim\hbar$ để có ước lượng theo hệ số của đề.
-Nếu dùng độ lệch chuẩn, hệ số của bất đẳng thức vị trí--xung lượng là $\hbar/2$.
-
-\dang{Ước lượng năng lượng khi hạt bị giam giữ}{2-13}{confinement-estimate}
-Độ dài miền giam giữ $L$ cho độ rộng vị trí cỡ $L$.
-Với cách ước lượng $p_*\sim\hbar/(2L)$:
-\[
-\boxed{K_*\sim\frac{p_*^2}{2m}=\frac{h^2}{32\pi^2mL^2}}\quad(p_*\ll mc).
-\]
-Nếu $p_*c$ so sánh được hoặc lớn hơn $mc^2$, phải dùng
-\[
-\boxed{K_*\sim\sqrt{p_*^2c^2+m^2c^4}-mc^2}.
-\]
-Đây là ước lượng từ bất định; năng lượng cơ bản của giếng vô hạn được tính bằng
-$E_1=h^2/(8mL^2)$ khi đề chỉ rõ hai vách cứng.
-
-\newpage
-\muc{Chuẩn hóa và xác suất với hàm sóng bất kỳ}{Bài 2-17; GK 5}{wave-normalization}
 \textbf{Nhận dạng:} đề cho $\psi(x)=Af(x)$ trên miền $\Omega$.
 Chuẩn hóa trên \emph{toàn miền tồn tại}, rồi mới tính xác suất trên đoạn cần hỏi:
 \[
@@ -437,29 +611,83 @@ f(x)&=e^{-\alpha x^2/2},\quad x\in\mathbb R,\ \alpha>0:
 Nếu miền là $[0,2L]$, thay $\ell=2L$ vào mẫu đa thức.
 Trong một chiều, $|\psi|^2$ có đơn vị nghịch đảo chiều dài.
 
-\muc{Kiểm tra nghiệm phương trình Schrödinger}{GK 4}{schrodinger-check}
-Với trạng thái dừng và thế năng $V(x)$:
+\muc{Bất định vị trí và xung lượng}{Bài 2-9, 2-11}{uncertainty}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}XX@{}}
+\toprule
+Độ lệch chuẩn của phân bố & Ước lượng độ rộng theo bậc độ lớn \\
+\midrule
+$\sigma_x\sigma_{p_x}\ge\hbar/2$ & $\Delta x\,\Delta p_x\sim\hbar$ \\
+$\sigma_{x,\min}=\hbar/(2\sigma_{p_x})$ & $\Delta x\sim\hbar/\Delta p_x$ \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\textbf{Bài 2-9:} độ chính xác tương đối $r=\Delta p/p$ cho $\Delta p=rp$.
 \[
-\boxed{-\frac{\hbar^2}{2m}\psi''(x)+V(x)\psi(x)=E\psi(x)}.
+p=mv\quad(v\ll c),\qquad p=\frac{mv}{\sqrt{1-v^2/c^2}}\quad(\text{tương đối tính}).
 \]
-\textbf{Cách kiểm tra:} tính $\psi',\psi''$; thay vào phương trình, rút gọn vế trái
-trừ $E\psi$ về không với mọi $x$ trong miền. Kiểm tra thêm điều kiện biên.
-Hệ số nhân không đổi không ảnh hưởng việc thỏa phương trình;
-chuẩn hóa là điều kiện cần kiểm tra riêng.
+Sau đó dùng công thức vị trí ứng với định nghĩa độ bất định đã chọn.
+\textbf{Bài 2-11:} khi độ bất định xung lượng bằng $p=h/\lambda$:
+\[
+\sigma_{x,\min}=\frac\lambda{4\pi}\quad(\text{độ lệch chuẩn}),\qquad
+\Delta x\sim\frac\lambda{2\pi}\quad(\text{ước lượng độ rộng}).
+\]
+Hai cách định nghĩa khác nhau về hệ số; $\hbar$ không thay thế $\hbar/2$
+trong bất đẳng thức độ lệch chuẩn có hệ số tối ưu.
 
-\textbf{Dạng Gaussian của dao động tử điều hòa:}
-$V(x)=m\omega^2x^2/2$, $\psi=Ae^{-\alpha x^2/2}$:
+\newpage
+\muc{Liên hệ bất định năng lượng và thời gian chuyển động}{Bài 2-12}{energy-time}
+Với $\Wd=p^2/(2m)$, độ rộng động lượng nhỏ quanh $p=mv$:
 \[
-\psi'=-\alpha x\psi,\qquad \psi''=(\alpha^2x^2-\alpha)\psi,
+\Delta \Wd\simeq\left|\frac{\dd \Wd}{\dd p}\right|\Delta p=v\Delta p,\qquad
+\Delta t=\frac{\Delta x}{v}\quad\Longrightarrow\quad
+\Delta \Wd\,\Delta t\simeq\Delta x\,\Delta p.
 \]
-\[
-\boxed{\alpha=\frac{m\omega}{\hbar}},\qquad
-\boxed{E_0=\frac{\hbar\omega}{2}},\qquad
-A=\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}\ \text{nếu chuẩn hóa}.
-\]
-Các mức dao động tử: $E_j=(j+\tfrac12)\hbar\omega$, $j=0,1,2,\ldots$.
+Thế quy ước $\Delta x\,\Delta p\sim\hbar$ để có ước lượng theo hệ số của đề.
+Nếu dùng độ lệch chuẩn, hệ số của bất đẳng thức vị trí--xung lượng là $\hbar/2$.
 
-\dang{Hàm riêng và trị riêng của toán tử đạo hàm}{2-14}{eigenfunctions}
+\muc{Độ rộng vạch và thời gian sống}{Bài 2-10}{linewidth-lifetime}
+Với $\Delta\lambda\ll\lambda$, đổi độ rộng bước sóng sang độ rộng tần số:
+\[
+\Delta\nu\simeq\frac{c\,\Delta\lambda}{\lambda^2}.
+\]
+Nếu $\Delta\nu$ là độ rộng tự nhiên ở nửa cực đại (FWHM), mức dưới sống rất lâu
+và mức trên có xác suất tồn tại $P(t)=e^{-t/\tau}$:
+\[
+\boxed{\tau=\frac1{2\pi\Delta\nu}=\frac{\lambda^2}{2\pi c\,\Delta\lambda}}.
+\]
+Đổi cả $\lambda$ và $\Delta\lambda$ sang m; không coi FWHM là độ lệch chuẩn.
+
+\muc{Ước lượng năng lượng khi hạt bị giam giữ}{Bài 2-13}{confinement-estimate}
+Độ dài miền giam giữ $L$ cho độ rộng vị trí cỡ $L$.
+Với cách ước lượng $p_*\sim\hbar/(2L)$:
+\[
+\boxed{W_{\text{đ},*}\sim\frac{p_*^2}{2m}=\frac{h^2}{32\pi^2mL^2}}\quad(p_*\ll mc).
+\]
+Nếu $p_*c$ so sánh được hoặc lớn hơn $mc^2$, phải dùng
+\[
+\boxed{W_{\text{đ},*}\sim\sqrt{p_*^2c^2+m^2c^4}-mc^2}.
+\]
+
+\cum{D. Toán tử và phương trình Schrödinger}{g2-operators}
+\muc{Đại lượng vật lý, toán tử và trạng thái riêng}{}{operators}
+Toán tử tác dụng lên hàm sóng để biểu diễn một đại lượng vật lý.
+Trong biểu diễn tọa độ một chiều, với $V(x)$ là thế năng:
+\[
+\hat x\psi=x\psi,\qquad
+\boxed{\hat p_x=-i\hbar\frac{\dd}{\dd x}},\qquad
+\boxed{\hat H=-\frac{\hbar^2}{2m}\frac{\dd^2}{\dd x^2}+V(x)}.
+\]
+Trạng thái riêng $\psi_a$ của toán tử $\hat A$ thỏa
+\[
+\boxed{\hat A\psi_a=a\psi_a}.
+\]
+$a$ là trị riêng; trên trạng thái riêng này, phép đo đại lượng $A$ cho giá trị $a$.
+$\hat H$ là toán tử năng lượng cơ học, gồm động năng và thế năng.
+
+\newpage
+\muc{Hàm riêng và trị riêng của toán tử đạo hàm}{Bài 2-14}{eigenfunctions}
 Đặt toán tử tác dụng lên hàm riêng bằng trị riêng nhân chính hàm đó:
 \[
 \hat L\psi=\ell\psi,\quad\hat L=i\frac{\dd}{\dd x}
@@ -470,8 +698,19 @@ Vì $\hat p_x=-i\hbar\dd/\dd x=-\hbar\hat L$, ta có $p_x=-\hbar\ell$.
 Hạt tự do trên toàn trục không có điều kiện biên giam giữ: $\ell,p_x$ liên tục.
 Sóng phẳng là hàm riêng suy rộng; dùng gói sóng khi cần chuẩn hóa trên toàn trục.
 
-\newpage
-\dang{Giếng thế vô hạn: hàm sóng, vận tốc, năng lượng}{2-15, 2-17, 2-18}{infinite-well}
+\muc{Phương trình Schrödinger và cách kiểm tra nghiệm}{}{schrodinger-check}
+Với trạng thái dừng và thế năng $V(x)$:
+\[
+\boxed{-\frac{\hbar^2}{2m}\psi''(x)+V(x)\psi(x)=E\psi(x)}.
+\]
+\textbf{Cách kiểm tra:} tính $\psi',\psi''$; thay vào phương trình, rút gọn vế trái
+trừ $E\psi$ về không với mọi $x$ trong miền. Kiểm tra thêm điều kiện biên.
+Hệ số nhân không đổi không ảnh hưởng việc thỏa phương trình;
+chuẩn hóa là điều kiện cần kiểm tra riêng.
+Trong các bài Schrödinger ở đây, $E=\Wd+V$ là năng lượng cơ học, tính theo mốc thế năng của bài; không cộng thêm $mc^2$.
+
+\cum{E. Các mô hình thế năng}{g2-models}
+\muc{Giếng thế vô hạn: hàm sóng, vận tốc, năng lượng}{Bài 2-15, 2-17, 2-18}{infinite-well}
 Hai vách cứng tại $x=0,L$; bên trong thế năng bằng không.
 \[
 \boxed{\psi_n(x)=A\sin\frac{n\pi x}{L}},\qquad n=1,2,3,\ldots
@@ -497,7 +736,8 @@ E_\gamma=E_{n_i}-E_{n_f}=(n_i^2-n_f^2)E_1,\qquad
 \]
 Ba mức đầu: $E_1,4E_1,9E_1$; chuyển $2\to1$ giải phóng $3E_1$.
 
-\muc{Xác suất trên một đoạn trong giếng vô hạn}{GK 10}{well-probability}
+\newpage
+\muc{Xác suất trên một đoạn trong giếng vô hạn}{}{well-probability}
 Với giếng $0\le x\le L$, trạng thái $n$, đoạn $[a,b]\subseteq[0,L]$:
 \[
 \boxed{P_{[a,b]}=\frac{b-a}{L}
@@ -511,58 +751,52 @@ Dùng $\sin^2u=(1-\cos2u)/2$ để tự tích phân khi đổi miền.
 Giếng tại $[x_0,x_0+L]$: thay tọa độ bằng $x-x_0$.
 Chỉ lấy $P\simeq(b-a)/L$ khi số hạng dao động đủ nhỏ so với độ chính xác yêu cầu.
 
-\dang{Xuyên hầm qua rào thế chữ nhật}{2-16}{rectangular-barrier}
-Rào cao $V_0$ (năng lượng), rộng $a$; hạt tới có $0<K<V_0$,
+\muc{Dao động tử điều hòa và trạng thái cơ bản}{}{harmonic-oscillator}
+$V(x)=m\omega^2x^2/2$, $\psi=Ae^{-\alpha x^2/2}$:
+\[
+\psi'=-\alpha x\psi,\qquad \psi''=(\alpha^2x^2-\alpha)\psi,
+\]
+\[
+\boxed{\alpha=\frac{m\omega}{\hbar}},\qquad
+\boxed{E_0=\frac{\hbar\omega}{2}},\qquad
+A=\left(\frac{m\omega}{\pi\hbar}\right)^{1/4}\ \text{nếu chuẩn hóa}.
+\]
+Các mức dao động tử: $E_j=(j+\tfrac12)\hbar\omega$, $j=0,1,2,\ldots$.
+
+\muc{Xuyên hầm qua rào thế chữ nhật}{Bài 2-16}{rectangular-barrier}
+Rào cao $V_0$ (năng lượng), rộng $a$; hạt tới có $0<\Wd<V_0$,
 thế năng ở hai phía rào bằng nhau:
 \[
-\kappa=\frac{\sqrt{2m(V_0-K)}}{\hbar},\qquad
-\boxed{D=\left[1+\frac{V_0^2\sinh^2(\kappa a)}{4K(V_0-K)}\right]^{-1}}.
+\kappa=\frac{\sqrt{2m(V_0-\Wd)}}{\hbar},\qquad
+\boxed{D=\left[1+\frac{V_0^2\sinh^2(\kappa a)}{4\Wd(V_0-\Wd)}\right]^{-1}}.
 \]
-Đổi $V_0-K$ sang J khi tính $\kappa$; $a$ tính bằng m.
-Tỉ số $V_0^2/[4K(V_0-K)]$ có thể dùng đồng nhất đơn vị eV.
+Đổi $V_0-\Wd$ sang J khi tính $\kappa$; $a$ tính bằng m.
+Tỉ số $V_0^2/[4\Wd(V_0-\Wd)]$ có thể dùng đồng nhất đơn vị eV.
 Khi $\kappa a\gg1$:
 \[
-D\simeq\frac{16K(V_0-K)}{V_0^2}e^{-2\kappa a}.
+D\simeq\frac{16\Wd(V_0-\Wd)}{V_0^2}e^{-2\kappa a}.
 \]
 $e^{-2\kappa a}$ riêng lẻ chỉ giữ thừa số suy giảm mũ, không giữ hệ số ghép biên.
 
 \chuong{III}{NGUYÊN TỬ VÀ MÔMEN ĐỘNG LƯỢNG}{ch3}
+\cum{A. Số lượng tử và toán tử mômen động lượng}{g3-angular}
+\muc{Số lượng tử, mômen quỹ đạo và spin}{}{angular-basics}
+$n$ là số lượng tử chính; $l$ đặc trưng mômen quỹ đạo; $m_l$ đặc trưng hình chiếu:
+\[
+n=1,2,\ldots,\qquad l=0,1,\ldots,n-1,\qquad m_l=-l,-l+1,\ldots,l.
+\]
+\[
+\boxed{L=\hbar\sqrt{l(l+1)}},\qquad
+\boxed{L_z=m_l\hbar}.
+\]
+Electron còn có spin $s=1/2$, với hai giá trị hình chiếu:
+\[
+S=\hbar\sqrt{s(s+1)},\qquad S_z=m_s\hbar,\qquad m_s=\pm\frac12.
+\]
+Mômen toàn phần là $\vec J=\vec L+\vec S$.
+Với nhiều electron, $\vec L$ và $\vec S$ lần lượt là tổng mômen quỹ đạo và tổng spin.
 
-\dang{Phổ hydro, giới hạn dãy và kích thích}{3-1, 3-2, 3-3}{hydrogen}
-\[
-\boxed{E_n=-\frac{E_I}{n^2}},\quad E_I\simeq13{,}6\text{ eV},\qquad
-\boxed{\frac1\lambda=R_H\left(\frac1{n_f^2}-\frac1{n_i^2}\right)},\ n_i>n_f.
-\]
-$R_H\simeq1{,}097\cdot10^7\text{ m}^{-1}$; dãy Lyman có $n_f=1$,
-dãy Balmer có $n_f=2$.
-\[
-\lambda_{\max}=\frac1{R_H[n_f^{-2}-(n_f+1)^{-2}]},\qquad
-\boxed{\lambda_{\min}=\frac{n_f^2}{R_H}}.
-\]
-Từ giới hạn Balmer: $R_H=4/\lambda_{\min}$,
-$E_I=hcR_H=4hc/\lambda_{\min}$.
-Electron tới có động năng $K_b<E_I$ kích thích từ mức cơ bản nếu
-\[
-E_I\left(1-\frac1{n^2}\right)\le K_b
-\quad\Longrightarrow\quad n\le\frac1{\sqrt{1-K_b/E_I}}.
-\]
-Lấy số nguyên lớn nhất thỏa điều kiện, rồi liệt kê các cặp $n_i>n_f$ có thể phát xạ
-trong tập hợp nguyên tử. Nếu $K_b\ge E_I$, ion hóa cũng có thể xảy ra.
-
-\dang{Mômen từ quỹ đạo theo mô hình cổ điển}{3-4}{classical-moment}
-Electron chuyển động tròn bán kính $r$, tốc độ góc $\omega$, chu kỳ $T$:
-\[
-I_{eq}=\frac eT=\frac{e\omega}{2\pi},\qquad \mu=I_{eq}\pi r^2=\frac{e\omega r^2}{2}.
-\]
-Với lực Coulomb giữ quỹ đạo quanh proton:
-\[
-m_e\omega^2r=\frac{e^2}{4\pi\varepsilon_0r^2}
-\quad\Longrightarrow\quad
-\boxed{\mu=\frac{e^2}{2}\sqrt{\frac{r}{4\pi\varepsilon_0m_e}}},\qquad
-\vec\mu=-\frac{e}{2m_e}\vec L.
-\]
-
-\muc{Giao hoán và toán tử nâng, hạ mômen động lượng}{GK 6}{commutators}
+\muc{Giao hoán và toán tử nâng, hạ mômen động lượng}{}{commutators}
 \textbf{Nhận dạng:} ngoặc vuông giữa các toán tử là
 $[\hat A,\hat B]=\hat A\hat B-\hat B\hat A$.
 \[
@@ -586,11 +820,21 @@ Với $a,b$ là các số; ba hệ thức cơ bản theo thứ tự vòng $x\to 
 trong các biểu thức này, $L_i$ đều là toán tử.
 
 \newpage
-\dang{Mômen từ và định hướng lượng tử}{3-5, 3-6}{quantized-moment}
+\cum{B. Mômen từ quỹ đạo và spin}{g3-magnetic}
+\muc{Mômen từ quỹ đạo theo mô hình cổ điển}{Bài 3-4}{classical-moment}
+Electron chuyển động tròn bán kính $r$, tốc độ góc $\omega$, chu kỳ $T$:
 \[
-l=0,1,\ldots,n-1,\quad m_l=-l,\ldots,l,\quad
-L=\hbar\sqrt{l(l+1)},\quad L_z=m_l\hbar.
+I_{eq}=\frac eT=\frac{e\omega}{2\pi},\qquad \mu=I_{eq}\pi r^2=\frac{e\omega r^2}{2}.
 \]
+Với lực Coulomb giữ quỹ đạo quanh proton:
+\[
+m_e\omega^2r=\frac{e^2}{4\pi\varepsilon_0r^2}
+\quad\Longrightarrow\quad
+\boxed{\mu=\frac{e^2}{2}\sqrt{\frac{r}{4\pi\varepsilon_0m_e}}},\qquad
+\vec\mu=-\frac{e}{2m_e}\vec L.
+\]
+
+\muc{Mômen từ và định hướng lượng tử}{Bài 3-5, 3-6}{quantized-moment}
 \[
 \boxed{\mu=\mu_B\sqrt{l(l+1)}},\qquad \mu_z=-m_l\mu_B,\qquad
 \mu_B=\frac{e\hbar}{2m_e}=9{,}274\cdot10^{-24}\text{ J/T}.
@@ -603,7 +847,7 @@ Với $l>0$, góc $\vartheta$ giữa $\vec L$ và trục $Oz$:
 Vẽ mỗi vectơ có độ dài $\sqrt{l(l+1)}\hbar$ và hình chiếu $m_l\hbar$.
 Với $l=0$, $L=0$, không có hướng xác định.
 
-\dang{Đảo spin và photon bước sóng 21 cm}{3-7}{spin-flip}
+\muc{Đảo spin và photon bước sóng 21 cm}{Bài 3-7}{spin-flip}
 Trong mô hình hai mức Zeeman của electron:
 \[
 \vec\mu_s=-\frac e{m_e}\vec S,\quad E_B=-\vec\mu_s\cdot\vec B,\quad
@@ -614,7 +858,9 @@ E_{m_s}=2\mu_Bm_s B,\quad m_s=\pm\frac12.
 \quad\Longrightarrow\quad\boxed{B=\frac{hc}{2\mu_B\lambda}}.
 \]
 
-\dang{Lớp điền đầy và cấu hình năm khí trơ}{3-8, 3-9}{closed-shells}
+\newpage
+\cum{C. Cấu hình và phổ nguyên tử}{g3-spectrum}
+\muc{Lớp điền đầy và cấu hình năm khí trơ}{Bài 3-8, 3-9}{closed-shells}
 Các phân lớp điền đầy có $L=S=J=0$; số hạng phổ
 $^{2S+1}L_J={}^1S_0$.
 Mỗi phân lớp $l$ chứa tối đa $2(2l+1)$ electron: $s^2,p^6,d^{10},f^{14}$.
@@ -633,9 +879,50 @@ Xe & 54 & $[\mathrm{Kr}]\,4d^{10}\,5s^2\,5p^6$ \\
 \end{tabular}
 \end{center}
 
-\chuong{IV}{BÁN DẪN}{ch4}
+\muc{Phổ hydro, giới hạn dãy và kích thích}{Bài 3-1, 3-2, 3-3}{hydrogen}
+\[
+\boxed{E_n=-\frac{E_I}{n^2}},\quad E_I\simeq13{,}6\text{ eV},\qquad
+\boxed{\frac1\lambda=R_H\left(\frac1{n_f^2}-\frac1{n_i^2}\right)},\ n_i>n_f.
+\]
+$R_H\simeq1{,}097\cdot10^7\text{ m}^{-1}$; dãy Lyman có $n_f=1$,
+dãy Balmer có $n_f=2$.
+\[
+\lambda_{\max}=\frac1{R_H[n_f^{-2}-(n_f+1)^{-2}]},\qquad
+\boxed{\lambda_{\min}=\frac{n_f^2}{R_H}}.
+\]
+Từ giới hạn Balmer: $R_H=4/\lambda_{\min}$,
+$E_I=hcR_H=4hc/\lambda_{\min}$.
+Electron tới có động năng $W_{\text{đ},b}<E_I$ kích thích từ mức cơ bản nếu
+\[
+E_I\left(1-\frac1{n^2}\right)\le W_{\text{đ},b}
+\quad\Longrightarrow\quad n\le\frac1{\sqrt{1-W_{\text{đ},b}/E_I}}.
+\]
+Lấy số nguyên lớn nhất thỏa điều kiện, rồi liệt kê các cặp $n_i>n_f$ có thể phát xạ
+trong tập hợp nguyên tử. Nếu $W_{\text{đ},b}\ge E_I$, ion hóa cũng có thể xảy ra.
 
-\dang{Nồng độ riêng theo nhiệt độ và vùng cấm}{4-1, 4-2}{intrinsic-temperature}
+\chuong{IV}{BÁN DẪN}{ch4}
+\cum{A. Vùng năng lượng và thống kê hạt dẫn}{g4-bands}
+\muc{Vùng năng lượng, hạt dẫn và mức Fermi}{}{band-basics}
+$E_c$ là đáy vùng dẫn, $E_v$ là đỉnh vùng hóa trị; vùng cấm có độ rộng
+\[
+\boxed{E_g=E_c-E_v}.
+\]
+$n,p$ là nồng độ electron và lỗ trống; $N_c,N_v$ là mật độ trạng thái hiệu dụng
+của vùng dẫn và vùng hóa trị. $E_F$ là mức Fermi.
+Trong cân bằng nhiệt, với bán dẫn không suy biến:
+\[
+\boxed{n=N_c e^{(E_F-E_c)/(kT)}},\qquad
+\boxed{p=N_v e^{(E_v-E_F)/(kT)}}.
+\]
+\[
+\boxed{np=n_i^2},\qquad
+\boxed{n_i=\sqrt{N_cN_v}\,e^{-E_g/(2kT)}}.
+\]
+Mẫu riêng có $n=p=n_i$; pha donor làm tăng electron, pha acceptor làm tăng lỗ trống.
+Khi $E_F$ đi sâu vào vùng dẫn hoặc vùng hóa trị, cần xét sự suy biến.
+Năng lượng và $kT$ phải cùng đơn vị; ở $300\text{ K}$, $kT\simeq0{,}02585\text{ eV}$.
+
+\muc{Nồng độ riêng theo nhiệt độ và vùng cấm}{Bài 4-1, 4-2}{intrinsic-temperature}
 Với bán dẫn không suy biến và khối lượng hiệu dụng coi như không đổi:
 \[
 N_c,N_v\propto T^{3/2},\qquad\boxed{n_i=\sqrt{N_cN_v}\,e^{-E_g/(2kT)}}.
@@ -657,20 +944,9 @@ n_i(T)=A T^{3/2}e^{\alpha/(2k)}e^{-E_g(0)/(2kT)}.
 Nếu $E_g$ tính bằng eV, dùng $k=8{,}617\cdot10^{-5}\text{ eV/K}$;
 $T$ luôn tính bằng K. Không cần biết $\alpha$ khi lấy tỉ số.
 
-\dang{Bán dẫn suy biến: đếm trạng thái}{4-4}{degenerate}
-Với mỗi trạng thái quỹ đạo chiếm ô không gian pha $h^3$ và hai trạng thái spin:
-\[
-n=\frac2{h^3}\frac{4\pi p_F^3}{3},\qquad p_F=\sqrt{2m^*(E_F-E_c)}.
-\]
-\[
-\boxed{n=\frac{8\pi}{3}\left(\frac{2m^*}{h^2}\right)^{3/2}(E_F-E_c)^{3/2}},\qquad
-E_F-E_c=\frac{h^2}{2m^*}\left(\frac{3n}{8\pi}\right)^{2/3}.
-\]
-Áp dụng gần đúng điền đầy bậc thang, $E_F-E_c\gg kT$.
-Số $h^3$ dùng đếm trạng thái không phải hệ số trong bất đẳng thức độ lệch chuẩn.
-
 \newpage
-\dang{Pha tạp, pha bù và mức Fermi}{4-3}{doping-fermi}
+\cum{B. Pha tạp, mức Fermi và độ dẫn}{g4-doping}
+\muc{Pha tạp, pha bù và mức Fermi}{Bài 4-3}{doping-fermi}
 Đường tính: $N_d-N_a\to n,p\to E_F$.
 Tạp chất ion hóa hoàn toàn, cân bằng nhiệt, không suy biến:
 \[
@@ -700,7 +976,19 @@ $N_a=N_d$ & $n=p=n_i$ & \\
 đổi sang mốc $E_c$ bằng $E_c-E_v=E_g$.
 Ở $300\text{ K}$, $kT\simeq0{,}02585\text{ eV}\simeq0{,}026\text{ eV}$.
 
-\dang{Độ dẫn, điện trở suất và dòng điện}{4-6, 4-10}{conductivity}
+\muc{Bán dẫn suy biến: đếm trạng thái}{Bài 4-4}{degenerate}
+Với mỗi trạng thái quỹ đạo chiếm ô không gian pha $h^3$ và hai trạng thái spin:
+\[
+n=\frac2{h^3}\frac{4\pi p_F^3}{3},\qquad p_F=\sqrt{2m^*(E_F-E_c)}.
+\]
+\[
+\boxed{n=\frac{8\pi}{3}\left(\frac{2m^*}{h^2}\right)^{3/2}(E_F-E_c)^{3/2}},\qquad
+E_F-E_c=\frac{h^2}{2m^*}\left(\frac{3n}{8\pi}\right)^{2/3}.
+\]
+Áp dụng gần đúng điền đầy bậc thang, $E_F-E_c\gg kT$.
+Số $h^3$ dùng đếm trạng thái không phải hệ số trong bất đẳng thức độ lệch chuẩn.
+
+\muc{Độ dẫn, điện trở suất và dòng điện}{Bài 4-6, 4-10}{conductivity}
 \[
 \boxed{\sigma=e(n\mu_n+p\mu_p)},\qquad\boxed{\rho=\frac1\sigma},\qquad
 \boxed{I=\sigma\mathcal E S}.
@@ -726,7 +1014,8 @@ cm$^{-3}$ & cm$^2$/(V\,s) & S/cm; $\Omega$\,cm \\
 Tính $I$ bằng hệ SI: đổi $\mathcal E$ sang V/m và $S$ sang m$^2$.
 
 \newpage
-\dang{Mức Fermi, công thoát và thế tiếp xúc}{4-5, 4-7}{contact-potential}
+\cum{C. Tiếp xúc và tiếp giáp}{g4-junctions}
+\muc{Mức Fermi, công thoát và thế tiếp xúc}{Bài 4-5, 4-7}{contact-potential}
 Với mẫu không suy biến, ion hóa hoàn toàn:
 \[
 E_F^{(n)}=E_c-kT\ln\frac{N_c}{N_d},\qquad
@@ -746,7 +1035,7 @@ $V_T$ là điện thế nhiệt: dùng $k_B$ bằng J/K; ở $300\text{ K}$, $V_
 Khi vẽ trạng thái cân bằng, $E_F$ nằm ngang xuyên suốt hai phía;
 $E_c,E_v$ uốn cong cùng nhau và giữ khoảng cách $E_g$.
 
-\dang{Miền nghèo, điện dung và ngưỡng điện trường}{4-8, 4-9}{pn-junction}
+\muc{Miền nghèo, điện dung và ngưỡng điện trường}{Bài 4-8, 4-9}{pn-junction}
 Tiếp giáp đột ngột, pha tạp đều, bỏ hạt tự do trong miền nghèo.
 Đặt $\varepsilon_s=\varepsilon_r\varepsilon_0$ và
 $V_j=U_k+U_R$ khi thiên áp ngược; $V_j=U_k-U_F>0$ khi thiên áp thuận.
@@ -771,8 +1060,8 @@ Dùng nồng độ m$^{-3}$, $\varepsilon_s$ F/m và điện trường V/m.
 Nếu đề cho $eU_k$ bằng eV, đổi sang điện thế $U_k$ bằng V trước khi cộng với $U_R$.
 
 \chuong{V}{SỢI QUANG VÀ QUANG ĐIỆN TỬ}{ch5}
-
-\dang{Khẩu độ số và góc thu nhận}{5-1}{numerical-aperture}
+\cum{A. Truyền ánh sáng trong sợi quang}{g5-fiber}
+\muc{Khẩu độ số và góc thu nhận}{Bài 5-1}{numerical-aperture}
 Lõi chiết suất $n_1$, vỏ $n_2<n_1$, môi trường ngoài $n_0$.
 Góc tới $\theta_i$ đo so với trục sợi ở mặt đầu; góc tia trong lõi là $\theta$.
 \[
@@ -789,7 +1078,7 @@ n_2=n_1(1-\Delta),\qquad NA=n_1\sqrt{2\Delta-\Delta^2}\simeq n_1\sqrt{2\Delta}.
 \]
 Trong không khí lấy $n_0\simeq1$; $\theta_{i,\max}$ là \emph{nửa} góc mở thu nhận.
 
-\dang{Ước lượng số bậc mode dẫn}{5-2}{mode-orders}
+\muc{Ước lượng số bậc mode dẫn}{Bài 5-2}{mode-orders}
 Trong mô hình tiết diện phẳng và bỏ dịch pha phản xạ,
 điều kiện tự lặp pha theo phương ngang là
 \[
@@ -812,7 +1101,7 @@ M\simeq\frac{V^2}{2}\quad(V\gg1,\ \text{gồm hai phân cực}).
 Hai công thức đếm các tập mode khác nhau, không thay trực tiếp cho nhau.
 
 \newpage
-\dang{Độ giãn xung và tốc độ truyền ước lượng}{5-3}{modal-dispersion}
+\muc{Độ giãn xung và tốc độ truyền ước lượng}{Bài 5-3}{modal-dispersion}
 Sợi giật cấp dài $L$, bỏ qua tán sắc vật liệu:
 \[
 t_{\min}=\frac{n_1L}{c},\qquad t_{\max}=\frac{n_1^2L}{cn_2},\qquad
@@ -825,33 +1114,15 @@ t_{\min}=\frac{n_1L}{c},\qquad t_{\max}=\frac{n_1^2L}{cn_2},\qquad
 Đây là ước lượng tốc độ từ độ giãn xung; không đồng nhất với định nghĩa băng thông
 $-3\text{ dB}$ cho mọi dạng đáp ứng. Khẩu độ số và góc thu nhận dùng mục 5-1 ở trên.
 
-\dang{Ngưỡng hấp thụ và sự điền đầy vùng}{5-4}{absorption-edge}
+\cum{B. Hấp thụ và đáp ứng của bán dẫn}{g5-absorption}
+\muc{Photon và ngưỡng hấp thụ vùng--vùng}{Bài 5-4}{absorption-threshold}
 Ban đầu, hấp thụ vùng--vùng của bán dẫn vùng cấm thẳng cần $E_\gamma\ge E_g$:
 \[
 \boxed{\lambda_{th}=\frac{hc}{E_g}},\qquad
 \lambda_{th}[\mu\text{m}]\simeq\frac{1{,}240}{E_g[\text{eV}]}.
 \]
-Kích thích mạnh làm electron chiếm trạng thái gần đáy vùng dẫn và lỗ trống làm trống
-trạng thái gần đỉnh vùng hóa trị. Hấp thụ cần trạng thái đầu có electron và trạng thái cuối còn trống.
-Trong gần đúng điền đầy bậc thang, chuyển mức thẳng và khối lượng hiệu dụng đẳng hướng:
-\[
-E_{th}'=E_g+\epsilon_n+\epsilon_p,\qquad \boxed{\lambda_{th}'=\frac{hc}{E_{th}'}}.
-\]
-Tính $\epsilon_n,\epsilon_p$ từ \emph{đúng hàm mật độ trạng thái đề cho}.
-Nếu $g(E)=A\sqrt{E-E_c}$ thì
-\[
-n=\int_{E_c}^{E_c+\epsilon_n}g(E)\dd E=\frac{2A}{3}\epsilon_n^{3/2}
-\quad\Longrightarrow\quad\boxed{\epsilon_n=\left(\frac{3n}{2A}\right)^{2/3}}.
-\]
-Với hệ số $A=2\pi(2m^*/h^2)^{3/2}$ trong bài 5-4:
-\[
-\epsilon_n=\frac{h^2}{2m^*}\left(\frac{3n}{4\pi}\right)^{2/3}.
-\]
-Tương tự cho lỗ trống; nếu $n=p$ và $m_n^*=m_p^*$ thì $\epsilon_p=\epsilon_n$.
-Đổi cm$^{-3}$ sang m$^{-3}$ khi dùng $h$ bằng J\,s và $m^*$ bằng kg.
 
-\newpage
-\dang{Hấp thụ ánh sáng, bề dày và năng lượng nhiệt}{5-5, 5-6}{optical-absorption}
+\muc{Hấp thụ ánh sáng, bề dày và năng lượng nhiệt}{Bài 5-5, 5-6}{optical-absorption}
 Công suất tới $P_0$, hệ số phản xạ mặt trước $\mathcal R$, hệ số hấp thụ $\alpha$,
 bề dày $d$. Mô hình truyền một lần, bỏ phản xạ lặp bên trong:
 \[
@@ -873,7 +1144,28 @@ $\alpha d$ phải không thứ nguyên: nếu $\alpha$ cm$^{-1}$ thì $d$ tính 
 Dùng $E_\gamma,E_g$ bằng J khi chia $Q$ tính bằng J để tìm số photon.
 Chia công suất cho năng lượng cho tốc độ photon/s; chia năng lượng cho năng lượng cho số photon.
 
-\dang{Quang dẫn: nồng độ, số hạt và thời gian sống}{5-7}{photoconductivity}
+\newpage
+\muc{Ngưỡng hấp thụ khi các trạng thái đã được điền đầy}{Bài 5-4}{absorption-edge}
+Kích thích mạnh làm electron chiếm trạng thái gần đáy vùng dẫn và lỗ trống làm trống
+trạng thái gần đỉnh vùng hóa trị. Hấp thụ cần trạng thái đầu có electron và trạng thái cuối còn trống.
+Trong gần đúng điền đầy bậc thang, chuyển mức thẳng và khối lượng hiệu dụng đẳng hướng:
+\[
+E_{th}'=E_g+\epsilon_n+\epsilon_p,\qquad \boxed{\lambda_{th}'=\frac{hc}{E_{th}'}}.
+\]
+Tính $\epsilon_n,\epsilon_p$ từ \emph{đúng hàm mật độ trạng thái đề cho}.
+Nếu $g(E)=A\sqrt{E-E_c}$ thì
+\[
+n=\int_{E_c}^{E_c+\epsilon_n}g(E)\dd E=\frac{2A}{3}\epsilon_n^{3/2}
+\quad\Longrightarrow\quad\boxed{\epsilon_n=\left(\frac{3n}{2A}\right)^{2/3}}.
+\]
+Với hệ số $A=2\pi(2m^*/h^2)^{3/2}$ trong bài 5-4:
+\[
+\epsilon_n=\frac{h^2}{2m^*}\left(\frac{3n}{4\pi}\right)^{2/3}.
+\]
+Tương tự cho lỗ trống; nếu $n=p$ và $m_n^*=m_p^*$ thì $\epsilon_p=\epsilon_n$.
+Đổi cm$^{-3}$ sang m$^{-3}$ khi dùng $h$ bằng J\,s và $m^*$ bằng kg.
+
+\muc{Quang dẫn: nồng độ, số hạt và thời gian sống}{Bài 5-7}{photoconductivity}
 Mẫu dài $L$, rộng $W$, dày $D$, điện áp $U$; $\Delta n=\Delta p$ phân bố đều.
 \[
 \Delta I=e(\mu_n+\mu_p)\Delta n\frac UL WD

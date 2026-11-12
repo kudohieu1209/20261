@@ -1,0 +1,148 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=17mm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\usepackage{amsmath,amssymb,xcolor,tikz}
+\usetikzlibrary{arrows.meta,calc}
+\definecolor{ink}{HTML}{15334A}
+\definecolor{teal}{HTML}{087F8C}
+\definecolor{orange}{HTML}{D77824}
+\definecolor{pale}{HTML}{EFF6FA}
+\definecolor{muted}{HTML}{536777}
+\color{ink}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+\pagestyle{empty}
+\newcommand{\head}[2]{{\small\color{teal}\bfseries VLĐT / BÀI 2.7 \hfill #1 / 2}\par\vspace{3mm}{\LARGE\bfseries #2}\par}
+\newcommand{\parttitle}[1]{\vspace{2mm}{\large\bfseries #1}\par}
+\tikzset{ray/.style={-{Stealth[length=2.5mm]},very thick,teal}, dim/.style={<->,>=Stealth,thin,muted}, lab/.style={font=\small,align=center}, plane/.style={thick,teal!65}}
+\begin{document}
+\head{1}{Màng bạc và các mặt mạng là gì?}
+\textbf{Đề bài:} Chùm electron có động năng $T=60\,\mathrm{keV}$ xuyên qua màng đa tinh thể Ag; khoảng cách hai mặt mạng $d=4{,}08\,\text{\AA}$; màn cách màng $L=40\,\mathrm{cm}$. Tìm bán kính ảnh nhiễu xạ bậc nhất.
+
+\parttitle{1. Màng đa tinh thể = nhiều hạt tinh thể nhỏ ghép lại}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\path[use as bounding box] (-.2,-.3) rectangle (16.8,3.8);
+\fill[pale] (0,0) rectangle (6.1,3.1);
+\draw[muted] (0,0) rectangle (6.1,3.1);
+\draw[muted] (1.8,0)--(2.4,1.5)--(1.4,3.1) (4.3,0)--(3.7,1.65)--(4.6,3.1) (0,1.2)--(2.4,1.5)--(3.7,1.65)--(6.1,1.1);
+\foreach \xx/\yy/\a in {1/.65/10,1/2.3/-20,3/2.4/25,3.1/.65/-10,5/2.2/-30,5.1/.55/15}{
+  \begin{scope}[shift={(\xx,\yy)},rotate=\a]
+  \foreach \q in {-.24,0,.24}{\draw[teal] (-.6,\q)--(.6,\q);}
+  \end{scope}}
+\node[lab,anchor=south] at (3,3.2) {\textbf{Phóng to một vùng màng Ag}};
+\draw[->,thick,orange] (6.5,1.5)--(7.6,1.5);
+\node[lab,text width=1.6cm] at (7.05,2.3) {xem trong\ một hạt};
+\foreach \yy in {.4,1.35,2.3}{
+  \draw[plane] (8.1,\yy)--(14.7,\yy);
+  \foreach \xx in {8.5,9.3,10.1,10.9,11.7,12.5,13.3,14.1}{\fill[ink] (\xx,\yy) circle (.065);}}
+\draw[dim] (15.1,.4)--node[right,lab] {$d$}(15.1,1.35);
+\node[lab,anchor=south] at (11.4,2.65) {\textbf{Các lớp nguyên tử song song}};
+\node[lab,text width=7.2cm] at (3,-.6) {Mỗi vùng là một hạt tinh thể.\ Các hạt có hướng sắp xếp khác nhau.};
+\node[lab,text width=7.5cm] at (11.7,-.6) {Hình là lát cắt: mỗi hàng chấm biểu diễn\ một mặt mạng khi nhìn từ cạnh.};
+\end{tikzpicture}
+\end{center}
+\textbf{Mặt mạng} là mặt phẳng hình học đi qua các nút mạng của tinh thể. Có thể hình dung như các tầng xếp đều nhau. $d$ là khoảng cách \textbf{vuông góc} giữa hai mặt kế tiếp cùng họ; không phải bề dày cả màng.
+
+\parttitle{2. Điều kiện Bragg chọn các hướng nhiễu xạ mạnh}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\path[use as bounding box] (-.1,-2.3) rectangle (16.7,2.7);
+\foreach \yy in {0,-.75}{\draw[plane] (.4,\yy)--(9.2,\yy);}
+\coordinate (P) at (4,0);
+\draw[ray] (.8,1.85)--(P);
+\draw[ray] (P)--(7.2,1.85);
+\draw[dashed,muted] (P)--(7,-1.73);
+\draw[orange,thick] (P)++(150:1) arc (150:180:1);
+\node at (2.76,.32) {$\theta$};
+\draw[orange,thick] (P)++(0:1.05) arc (0:30:1.05);
+\node at (5.3,.31) {$\theta$};
+\draw[orange,thick] (P)++(-30:2.25) arc (-30:30:2.25);
+\node[fill=white,inner sep=1.2pt] at (6.47,0) {$2\theta$};
+\node[lab,anchor=south] at (1.5,2) {tia tới};
+\node[lab,anchor=south] at (7.3,2) {tia nhiễu xạ};
+\node[lab,anchor=west,text width=2.2cm] at (7.25,-1.6) {hướng tia tới kéo dài};
+\draw[dim] (.7,-.75)--node[left] {$d$}(.7,0);
+\node[lab,anchor=west,text width=6cm] at (10.1,1.9) {$\theta$: góc tia với \textbf{mặt mạng}.\\[3mm]$2\theta$: góc tia nhiễu xạ với\ \textbf{hướng tia tới kéo dài}.};
+\node[lab,anchor=west,text width=6cm] at (10.1,-.25) {Điều kiện tăng cường:\\[2mm]$2d\sin\theta=n\lambda$\\[2mm]\textbf{Bậc nhất: $n=1$.}};
+\end{tikzpicture}
+\end{center}
+\vspace{1mm}
+\textbf{Vì sao có bậc nhất?} Sóng electron tán xạ từ các lớp nguyên tử có thể tăng cường nhau. Khi hiệu đường đi bằng một bước sóng $\lambda$, ta có bậc $n=1$; bằng $2\lambda$ là bậc $n=2$.
+
+\colorbox{pale}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2mm}\textbf{Ghi nhớ:} Electron có tính chất sóng nên bị nhiễu xạ. Hình Bragg mô tả hướng tăng cường do nhiều nguyên tử tán xạ; các mặt mạng không phải những tấm gương vật chất.\vspace{2mm}}}
+
+\vfill
+{\footnotesize\color{muted}Hình sơ đồ, không theo tỉ lệ. Các góc được phóng đại để dễ thấy.\par Dữ kiện theo bài 2-7 trong tài liệu bài tập của bạn. Giữ nguyên $d$ mà đề đã cho.}
+\newpage
+\head{2}{Từ chùm electron đến vòng nhiễu xạ}
+\textbf{Vì sao là vòng?} Nhiều hạt tinh thể có hướng khác nhau. Những hạt thỏa điều kiện Bragg cho cùng $d$ và $n=1$ tạo tia lệch cùng góc $2\theta$, nhưng ở nhiều phương quanh trục chùm tới. Tập hợp tia tạo \textbf{mặt nón}; giao với màn vuông góc trục là \textbf{vòng tròn}.
+
+\parttitle{3. Nhìn từ bên cạnh và nhìn thẳng vào màn}
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm]
+\path[use as bounding box] (-.1,-2.4) rectangle (16.8,3.7);
+\node[lab,anchor=south] at (5.1,3.05) {\textbf{Nhìn từ bên cạnh}};
+\fill[orange!15] (2.5,-1.4) rectangle (2.8,2.3);
+\draw[orange,thick] (2.5,-1.4) rectangle (2.8,2.3);
+\node[lab] at (2.65,2.7) {màng Ag};
+\coordinate (S) at (2.8,.2);
+\coordinate (O) at (9.6,.2);
+\coordinate (A) at (9.6,2.1);
+\node[below left,inner sep=4pt] at (S) {$S$};
+\draw[ray] (.15,.2)--(S);
+\node[lab] at (1.15,.8) {electron};
+\fill[teal!7] (S)--(A)--(9.6,-1.7)--cycle;
+\draw[teal,thick] (S)--(A) (S)--(9.6,-1.7);
+\draw[ray] (S)--(6.9,1.345);
+\draw[ray] (S)--(6.9,-.945);
+\draw[dashed,muted,->] (S)--(10.15,.2);
+\draw[very thick,ink] (9.6,-1.9)--(9.6,2.4);
+\node[lab] at (9.6,2.8) {màn};
+\draw[orange,thick] (S)++(0:2) arc (0:15.61:2);
+\node[lab] at (5.16,.53) {$2\theta$};
+\draw[dim] (10,.2)--node[right] {$R$}(10,2.1);
+\draw[dim] (2.8,-2.13)--node[fill=white] {$L=40\,\mathrm{cm}$}(9.6,-2.13);
+\fill[orange] (O) circle (.06) node[below left] {$O$};
+\fill[teal] (A) circle (.06) node[above left] {$A$};
+\draw[muted] (9.35,.2)--(9.35,.45)--(9.6,.45);
+\node[lab,anchor=south] at (14.1,3.05) {\textbf{Nhìn thẳng vào màn}};
+\fill[ink] (11.65,-1.85) rectangle (16.55,2.65);
+\draw[teal!30,line width=4pt,opacity=.45] (14.1,.4) circle (1.55);
+\draw[teal!35,line width=1.5pt] (14.1,.4) circle (1.55);
+\fill[white] (14.1,.4) circle (.07);
+\draw[<->,>=Stealth,white] (14.1,.4)--node[above] {$R$}(15.65,.4);
+\node[text=white,lab] at (14.1,-1.48) {vòng nhiễu xạ $n=1$};
+\node[text=white,lab,anchor=north east] at (14,.23) {$O$};
+\node[lab,text width=5cm] at (14.1,-2.2) {Chấm giữa: chùm truyền thẳng.};
+\end{tikzpicture}
+\end{center}
+\vspace{-3mm}
+Trong tam giác vuông $SOA$: $SO=L$, $OA=R$, $\angle ASO=2\theta$. Do đó:
+\[
+\boxed{R=L\tan(2\theta)}\qquad\text{(đây là hình nên phác khi làm bài).}
+\]
+\parttitle{4. Nối hình vẽ với phép tính}
+\textbf{Bước 1.} Tìm bước sóng electron, có hiệu chỉnh tương đối tính:
+\[
+\lambda=\frac{hc}{\sqrt{T(T+2m_ec^2)}}
+=\frac{12{,}3984}{\sqrt{60(60+2\times511)}}\,\text{\AA}
+\simeq 0{,}04866\,\text{\AA}.
+\]
+\textbf{Bước 2.} Bậc nhất $n=1$ trong điều kiện Bragg:
+\[
+2d\sin\theta=\lambda
+\quad\Rightarrow\quad \theta\simeq 0{,}005963\,\mathrm{rad},
+\qquad 2\theta\simeq0{,}01193\,\mathrm{rad}.
+\]
+\textbf{Bước 3.} Đưa góc lệch vào hình học trên màn:
+\[
+R=L\tan(2\theta)\simeq\frac{L\lambda}{d}
+=\frac{400\times0{,}04866}{4{,}08}\,\mathrm{mm}
+\simeq \boxed{4{,}77\,\mathrm{mm}}.
+\]
+\colorbox{pale}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2mm}\textbf{Khi trình bày:} Đề không yêu cầu vẽ, nhưng chỉ cần phác hình bên cạnh với màng, màn, $L$, $R$, $2\theta$ là bạn giải thích được công thức. \textbf{Bán kính} đo từ tâm đến vòng; đường kính vòng bằng $2R$.\vspace{2mm}}}
+\vfill
+{\footnotesize\color{muted}Chỉ minh họa bậc nhất ứng với $d$ đã cho; các vòng khác được lược bỏ. Bậc Bragg $n=1$ không đồng nghĩa với thứ tự tất cả các vòng từ mọi họ mặt mạng trong mẫu thật.\par Hình học tham khảo: IUCr, International Tables for Crystallography, mục 2.4.2 (2019).}
+\end{document}
