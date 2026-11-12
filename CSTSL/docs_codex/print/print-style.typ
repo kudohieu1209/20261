@@ -33,17 +33,19 @@
   #body
 ]
 
-#let example(ex) = block(width: 100%, breakable: ex.id == "VD 12", above: 15pt, below: 14pt)[
+#let example(ex) = block(width: 100%, breakable: true, above: 13pt, below: 12pt)[
   #metadata((kind: "example", id: ex.id, title: ex.short)) <print-index>
+  #line(length: 100%, stroke: 0.45pt + luma(130))
+  #v(3pt)
   #block(width: 100%, breakable: false, sticky: true)[
-    #block(sticky: true, below: 7pt)[
-      *#if ex.id.slice(0, 3) == "VD " { "Ví dụ " + ex.id.slice(3) } else { "Bài tập " + ex.id.slice(3) }. #ex.title.*
+    #block(sticky: true, below: 6pt)[
+      #strong[#if ex.id.slice(0, 3) == "VD " [EX#sub[#ex.id.slice(3)]] else if ex.id.slice(0, 3) == "BT " [BT#sub[#ex.id.slice(3)]] else [#ex.id]. #ex.title.]
     ]
     #ex.prompt
   ]
-  #block(above: 9pt)[
+  #block(above: 8pt, breakable: true)[
     #set par(justify: false)
-    #block(sticky: true, below: 7pt)[_Giải._]
+    #block(sticky: true, below: 6pt)[_Giải._]
     #ex.answer
   ]
   #metadata((kind: "example-end", id: ex.id)) <print-index>
@@ -71,7 +73,7 @@
     let ends = query(<print-index>).filter(it => it.value.kind == kind + "-end" and it.value.id in ids)
     last = calc.max(last, ..ends.map(it => it.location().page()))
   }
-  [tr. #first#if last != first [–#last]]
+  [#first#if last != first [–#last]]
 }
 
 #let topic-map(groups) = layout(size => {
@@ -116,7 +118,17 @@
   ]
 })
 
-#let formula(card) = {
-  [#metadata((kind: "formula", id: card.id, title: card.title)) <print-index>]
-  note(card.title, card.body)
-}
+#let formula(card) = block(width: 100%, breakable: false, above: 10pt, below: 10pt)[
+  #metadata((kind: "formula", id: card.id, title: card.title)) <print-index>
+  #block(
+    width: 100%,
+    stroke: 0.65pt + black,
+    radius: 2pt,
+    inset: (x: 8pt, top: 6pt, bottom: 6pt),
+    fill: luma(253),
+  )[
+    #set par(justify: false)
+    #block(sticky: true, below: 5pt)[*#card.title*]
+    #card.body
+  ]
+]

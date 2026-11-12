@@ -16,7 +16,12 @@
 #let mark(id) = [#metadata((kind:"topic", id:id)) <print-index>]
 #let worked(id, title, body) = [
   #metadata((kind:"example", id:id, title:title)) <print-index>
-  #note([Bài mẫu. #title], body)
+  #block(width: 100%, breakable: false, above: 13pt, below: 12pt)[
+    #line(length: 100%, stroke: 0.45pt + luma(130))
+    #v(3pt)
+    #block(sticky: true, below: 6pt)[#strong[EX#sub[#if id.starts-with("X") { id.slice(1) } else { id }]#if title != none [. #title]]]
+    #body
+  ]
   #metadata((kind:"example-end", id:id)) <print-index>
 ]
 
@@ -33,11 +38,25 @@
   #worked("X1", [Chọn mô hình cho quầy giao dịch])[
     *Đề.* Một quầy có khách tới ngẫu nhiên, một nhân viên, đủ chỗ đợi. Cần ước lượng thời gian khách ở quầy.
 
-    _Giải._ Đầu vào là tốc độ tới $lambda$ và phân bố thời gian phục vụ $S$;
+    _Giải._ \
+    Đầu vào là tốc độ tới $lambda$ và phân bố thời gian phục vụ $S$;
     đầu ra là $T$ hoặc $T_q$. Nếu tới Poisson, $S$ có phân bố mũ và phục vụ FIFO,
     chọn M/M/1/∞. Đo số khách và thời gian phục vụ để ước lượng $lambda$, $mu=1/E[S]$;
     kiểm tra $lambda<mu$, tính $T=1/(mu-lambda)$ rồi so sánh thời gian đo được.
     Nếu giả thiết mũ không phù hợp, cân nhắc M/G/1 hoặc mô phỏng.
+  ]
+  #block(width: 100%, breakable: false, above: 10pt, below: 4pt)[
+    #text(weight: "bold")[Bảng so sánh 4 phương pháp đánh giá hiệu năng:]
+    #v(3pt)
+    #table(
+      columns: (1.4fr, 2.6fr, 2.6fr, 2.4fr),
+      align: (left, left, left, left),
+      table.header([*Phương pháp*], [*Ưu điểm*], [*Nhược điểm*], [*Khi nào chọn*]),
+      [Đo đạc], [Chính xác nhất, số liệu thật], [Tốn kém, hệ thống phải chạy thật], [Kiểm chứng, nghiệm thu hệ thống],
+      [Giả lập], [Gần sát thực tế, an toàn], [Chi phí phần cứng, tốn công dựng], [Kiểm thử thiết bị/giao thức mới],
+      [Mô phỏng], [Linh hoạt, giải được hệ phức tạp], [Chạy máy lâu, phụ thuộc giả lập], [Hệ thống lớn, phân bố phi tuyến],
+      [Phân tích toán], [Nhanh, nghiệm tường minh], [Cần nhiều giả thiết đơn giản hoá], [Thiết kế ban đầu, ước lượng nhanh],
+    )
   ]
 ]
 
@@ -98,7 +117,8 @@
     *Đề.* Ba công đoạn độc lập, mỗi công đoạn có thời gian mũ trung bình 2 phút. Tính trung bình,
     phương sai tổng thời gian $S$ và $P(S<=6)$.
 
-    _Giải._ $r=1/2$ mỗi phút, $S$ có Gamma $(3,1/2)$.
+    _Giải._ \
+    $r=1/2$ mỗi phút, $S$ có Gamma $(3,1/2)$.
     $ E[S]=3/r=6 " phút", quad "Var"(S)=3/r^2=12 " phút"^2. $
     Hàm phân bố Gamma dạng nguyên:
     $ P(S<=t)=1-e^(-r t)sum_(j=0)^(n-1)(r t)^j/j! quad (t>=0). $
@@ -116,6 +136,11 @@
   #f("F2")
   == Bài mẫu Poisson, mũ, ghép và tách luồng
   #for id in ("VD 1", "VD 2", "VD 3", "VD 4") { ex(id) }
+  #note("Lưu ý tính nhanh khi ghép / tách luồng Poisson")[
+    - *Ghép luồng:* $lambda = sum_i lambda_i$, luồng gộp là Poisson; xác suất sự kiện từ nguồn $i$ là $lambda_i / lambda$.
+    - *Tách luồng:* Tách với xác suất $p_i$ cho luồng Poisson độc lập mới có tốc độ $lambda_i = p_i lambda$.
+    - *Tính không nhớ:* $P(tau > s + t | tau > s) = P(tau > t) = e^(-lambda t)$; thời gian đã chờ không ảnh hưởng tương lai.
+  ]
 ]
 
 #let topic-four() = [
@@ -174,6 +199,13 @@
   #ex("VD 9")
   #f("F6")
   #ex("VD 11")
+  #note("Cách tính đệ quy Erlang B và quan hệ Erlang B → Erlang C")[
+    - *Bấm máy tính đệ quy Erlang B:* Bắt đầu $B(0, a) = 1$, tính lần lượt:
+      $ B(j, a) = (a B(j-1, a)) / (j + a B(j-1, a)) quad (j = 1, 2, dots, c). $
+    - *Quan hệ Erlang B $->$ Erlang C:* Khi đã có $B(c, a)$ và tải mỗi server $rho = a/c < 1$:
+      $ C(c, a) = B(c, a) / (1 - rho + rho B(c, a)). $
+      _(Giúp tính nhanh $C(c, a)$ trực tiếp từ $B(c, a)$ mà không cần tính lại tổng chuỗi luỹ thừa ở mẫu số)._
+  ]
   #f("F7")
   #ex("VD 12")
   #note("Kiểm tra bài nhiều server")[
@@ -192,11 +224,39 @@
     *Đề.* Cùng tới Poisson $lambda=4$/phút, cùng thời gian phục vụ trung bình 10 s.
     So sánh thời gian chờ nếu phục vụ mũ và phục vụ cố định.
 
-    _Giải._ $mu=6$/phút, $rho=2/3<1$.
+    _Giải._ \
+    $mu=6$/phút, $rho=2/3<1$.
     $ T_q^("M/M/1")=rho/(mu(1-rho))=1/3 " phút"=20 " s". $
     $ T_q^("M/D/1")=rho/(2 mu(1-rho))=1/6 " phút"=10 " s". $
     Tổng thời gian trong hệ lần lượt 30 s và 20 s. Cùng tải và cùng trung bình phục vụ,
     giảm biến động phục vụ giúp giảm thời gian chờ.
+  ]
+  #block(width: 100%, breakable: false, above: 10pt, below: 4pt)[
+    #text(weight: "bold")[Bảng tra cứu công thức các mô hình hàng đợi 1 server phổ biến:]
+    #v(3pt)
+    #table(
+      columns: (1.4fr, 1.3fr, 1.4fr, 1.8fr, 2fr),
+      align: (left, center, center, center, center),
+      table.header([*Mô hình*], [*Điều kiện*], [*$P_B$ (Từ chối)*], [*$N_q$ (Hàng đợi)*], [*$T$ (Thời gian trong hệ)*]),
+      [M/M/1/1], [Mọi $rho$], [$rho / (1 + rho)$], [$0$], [$1 / mu$],
+      [M/M/1], [$rho < 1$], [$0$], [$rho^2 / (1 - rho)$], [$1 / (mu(1 - rho))$],
+      [M/M/1/$k$], [Mọi $rho$], [$rho^k p_0$], [$N - (1 - p_0)$], [$N / (lambda (1 - P_B))$],
+      [M/D/1], [$rho < 1$], [$0$], [$rho^2 / (2(1 - rho))$], [$1/mu + rho / (2mu(1 - rho))$],
+      [M/G/1], [$rho < 1$], [$0$], [$(lambda^2 sigma_s^2 + rho^2)/(2(1-rho))$], [$E[S] + N_q / lambda$],
+    )
+  ]
+  #block(width: 100%, breakable: false, above: 8pt, below: 4pt)[
+    #text(weight: "bold")[Bảng tra cứu công thức các mô hình nhiều server ($c$ server):]
+    #v(3pt)
+    #table(
+      columns: (1.4fr, 1.3fr, 1.6fr, 1.8fr, 1.9fr),
+      align: (left, center, center, center, center),
+      table.header([*Mô hình*], [*Điều kiện*], [*Xác suất nghẽn / đợi*], [*$N_q$ (Hàng đợi)*], [*$T$ (Thời gian trong hệ)*]),
+      [M/M/$c$], [$a/c < 1$], [$P("đợi") = C(c, a)$], [$C(c, a) rho / (1 - rho)$], [$1/mu + C(c, a) / (c mu - lambda)$],
+      [M/M/$c$/$c$], [Mọi $a$], [$P_B = B(c, a)$], [$0$], [$1 / mu$],
+      [M/M/$c$/$k$], [Mọi $a$], [$P_B = p_k$], [$sum_(n=c)^k (n-c) p_n$], [$N / (lambda (1 - P_B))$],
+      [M/M/$oo$], [Mọi $a$], [$0$], [$0$], [$1 / mu$],
+    )
   ]
 ]
 
@@ -230,7 +290,8 @@
     *Đề.* Hai khách luân phiên qua hai nút M/M/1 theo tuyến $1 -> 2 -> 1$,
     $mu_1=2$/s, $mu_2=4$/s. Tìm phân bố số khách và thông lượng qua mỗi nút.
 
-    _Giải._ Chọn $v_1=v_2=1$, nên $w_1=1/2$, $w_2=1/4$.
+    _Giải._ \
+    Chọn $v_1=v_2=1$, nên $w_1=1/2$, $w_2=1/4$.
     Các trạng thái $(n_1,n_2)=(0,2),(1,1),(2,0)$ có trọng số lần lượt $1/16,1/8,1/4$;
     tổng $G(2)=7/16$. Suy ra xác suất tương ứng $1/7,2/7,4/7$.
     $ N_1=(0+2+8)/7=10/7, quad N_2=4/7, quad N_1+N_2=2. $
@@ -239,13 +300,21 @@
     Thông lượng chu trình $X=12/7$/s, thời gian một vòng $T=M/X=7/6$ s.
   ]
 
+  #pagebreak()
   == Trễ theo tuyến và xấp xỉ độc lập KIA
   #qa("B15")
   #f("N3")
-  #note("Trình tự giải mạng mở")[
-    Đọc hướng mũi tên → lập và giải hệ lưu lượng → kiểm tra ổn định từng nút → tính $N_i,T_i$
-    và xác suất → cộng $N_i$ rồi chia tổng tốc độ tới *từ ngoài*.
-    Nếu hỏi theo tuyến, cộng trễ mỗi lần đi qua nút và lấy trọng số đúng theo luồng.
+  #note("Trình tự 4 bước giải chi tiết bài toán mạng hàng đợi mở")[
+    + *Bước 1 — Lập hệ cân bằng luồng:* Tại mỗi nút $i in {1, dots, k}$, tổng luồng vào bằng tổng luồng ra:
+      $ lambda_i = gamma_i + sum_(j=1)^k lambda_j r_(j i) $
+      _(với $gamma_i$ là luồng từ ngoài vào nút $i$; $r_(j i)$ là xác suất rẽ nhánh từ nút $j$ sang nút $i$)._
+    + *Bước 2 — Giải hệ tìm các $lambda_i$:* Biểu diễn mọi $lambda_i$ theo luồng đầu vào $gamma$.
+    + *Bước 3 — Kiểm tra điều kiện ổn định:* Tính $rho_i = lambda_i / mu_i$ cho từng nút. Mạng ổn định khi và chỉ khi $rho_i < 1$ với mọi $i$.
+    + *Bước 4 — Tính các chỉ tiêu hiệu năng mạng:*
+      - Từng nút: $N_i = rho_i / (1 - rho_i)$; $T_i = 1 / (mu_i - lambda_i) = N_i / lambda_i$.
+      - Toàn mạng: $N_"mạng" = sum_(i=1)^k N_i$; trễ toàn mạng $T_"mạng" = N_"mạng" / gamma_"vào"$ với $gamma_"vào" = sum_i gamma_i$.
+      - Trễ theo tuyến: $T_"tuyến" = sum_(i in "tuyến") T_i$ (nếu có lặp thì nhân số lần qua nút).
+      - Xác suất mạng rỗng (không có yêu cầu nào): $P_0 = product_(i=1)^k (1 - rho_i)$.
   ]
 ]
 
@@ -272,7 +341,8 @@
     *Đề.* Bản tin 12.000 bit đi qua 3 liên kết 1 Mbit/s. Bỏ qua lan truyền, tiêu đề và xử lý.
     So sánh gửi nguyên khối với chia thành 4 gói bằng nhau.
 
-    _Giải._ Nguyên khối: $3 times 12000/10^6=36$ ms.
+    _Giải._ \
+    Nguyên khối: $3 times 12000/10^6=36$ ms.
     Chia gói: $L=3000$ bit, mỗi chặng phát một gói mất 3 ms.
     $ t_"xong"=(3+4-1) times 3=18 " ms". $
     Gói sau được phát khi gói trước đang đi tiếp ở chặng kế tiếp, tạo truyền gối đầu.

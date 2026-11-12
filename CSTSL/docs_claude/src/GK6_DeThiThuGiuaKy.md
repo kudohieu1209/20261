@@ -57,7 +57,7 @@ a) Mô hình hoá hệ thống theo ký hiệu Kendall.
 b) Tính xác suất khách được phục vụ ngay và xác suất bãi bị tắc do người tới quá đông.
 c) Tính thời gian trung bình khách phải đợi cho đến khi được phục vụ.
 
-**Câu 3 (4 điểm).** Cho mạng hàng đợi mở 4 nút có sơ đồ như ví dụ trên lớp (slide tr. 87): yêu cầu từ ngoài vào nút 4 với γ4 = 5 yêu cầu/s; nút 4 → nút 1; nút 1 → nút 2 (r12 = 0,4) và nút 3 (r13 = 0,6); nút 2 → nút 1 (r21 = 1); nút 3 → nút 1 (r31 = 0,5), ra ngoài (r30 = 0,5). 1/μ1 = 0,02 s; 1/μ2 = 0,03 s; 1/μ3 = 0,04 s; 1/μ4 = 0,05 s. (Hình: cắt từ docs/slide's thầy Dũng/03-HangDoi.pdf trang 87, nửa phải.)
+**Câu 3 (4 điểm).** Cho mạng hàng đợi mở 4 nút có sơ đồ như ví dụ trên lớp (slide tr. 87): yêu cầu từ ngoài vào nút 4 với γ4 = 5 yêu cầu/s; nút 4 → nút 1 (r41 = 1); nút 1 → nút 2 (r12 = 0,4) và nút 3 (r13 = 0,6); nút 2 → nút 1 (r21 = 1); nút 3 → nút 1 (r31 = 0,5), ra ngoài (r30 = 0,5). 1/μ1 = 0,02 s; 1/μ2 = 0,03 s; 1/μ3 = 0,04 s; 1/μ4 = 0,05 s. (Hình: cắt từ docs/slide's thầy Dũng/03-HangDoi.pdf trang 87, nửa phải.)
 a) Tính λ1, λ2, λ3, λ4.
 b) Tính N1, N2, N3, N4 và số yêu cầu trung bình N trong hệ thống.
 c) Tính xác suất để hệ thống không có yêu cầu nào.

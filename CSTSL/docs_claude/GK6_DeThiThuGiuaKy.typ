@@ -4,7 +4,7 @@
 #let soft = rgb("#eef3fa")
 #let ok = rgb("#2e7d4f")
 
-#set document(title: "GK6 — Ba đề thi thử giữa kỳ")
+#set document(title: "GK6 — Ba đề thi thử giữa kỳ (60 phút, tự luận)")
 #set page(
   paper: "a4",
   margin: (x: 1.8cm, top: 2cm, bottom: 1.8cm),
@@ -75,8 +75,8 @@
 // Dòng thông tin dưới tên đề
 #let de-info = block(width: 100%, inset: (x: 2pt, y: 2pt), below: 10pt)[
   #set text(10pt)
-  Thời gian: *60 phút* · Tự luận · Tài liệu giấy #h(1fr)
-  Bắt đầu: #box(width: 2cm, repeat[.]) #h(0.6em) Kết thúc: #box(width: 2cm, repeat[.])
+  Thời gian: *60 phút* #text(fill: gray)[(được dùng tài liệu giấy)] #h(1fr)
+  Bắt đầu: #box(width: 2cm, repeat[.]) #h(0.3em) · #h(0.3em) Kết thúc: #box(width: 2cm, repeat[.])
 ]
 // Điểm từng ý — căn phải
 #let d(s) = [#h(1fr)#box(inset: (x: 5pt, y: 2pt), radius: 3pt, fill: ok.lighten(85%),
@@ -139,10 +139,12 @@
 #align(center)[
   #v(0.6cm)
   #text(22pt, weight: "bold", fill: accent)[GK6 — Ba đề thi thử giữa kỳ]
-  #v(2pt)
-  #text(11pt, fill: gray)[đúng hình thức thầy báo: tự luận · 60 phút · được dùng tài liệu giấy — kèm lời giải]
+  #v(-6pt)
+  #text(14pt, weight: "bold", fill: accent)[(60 phút, tự luận)]
+  #v(-2pt)
+  #text(10.5pt, fill: gray)[đúng hình thức thầy báo · được dùng tài liệu giấy · kèm lời giải]
 ]
-#v(6pt)
+#v(4pt)
 
 #box-note("Thông tin thi (thầy Nguyễn Xuân Dũng)", warn)[
   - *100% tự luận*; *60 phút*.
@@ -159,12 +161,14 @@ Vì vậy cả ba đề đều là *biến thể đổi số của các ví dụ
   + Trình bày tự luận đủ 5 dòng: *mô hình → tham số → công thức → thay số → kết luận*. Viết thẳng vào ô lưới dưới mỗi câu.
   + Làm xong cả đề mới lật lời giải; tự chấm theo thang điểm.
 
-  *Thứ tự:* Đề A và B chỉ gồm hàng đợi đơn (chắc chắn thi). Đề C có thêm mạng hàng đợi (làm nếu thầy dạy tới trước ngày thi).
-
   *Mục tiêu:* ≥ 8/10 ở đề A, ≥ 9/10 ở đề B và C, xong trước giờ 5 phút.
 ]
 
-#v(4pt)
+#box-note("Thứ tự — đề C có mạng hàng đợi", ok)[
+  Đề A và B chỉ gồm hàng đợi đơn (chắc chắn thi). Đề C có thêm mạng hàng đợi (làm nếu thầy dạy tới trước ngày thi).
+]
+
+#v(2pt)
 #table(
   columns: (1fr, auto),
   align: (left, center),
@@ -268,11 +272,11 @@ Vì vậy cả ba đề đều là *biến thể đổi số của các ví dụ
 
 #pagebreak()
 #cau[Câu 3 (4 điểm)][
-  Cho mạng hàng đợi mở 4 nút có sơ đồ như ví dụ trên lớp: yêu cầu từ ngoài vào nút 4 với #box[$gamma_4 = 5$ yêu cầu/s;] nút 4 → nút 1; nút 1 → nút 2 #box[($r_12 = 0","4$)] và nút 3 #box[($r_13 = 0","6$);] nút 2 → nút 1 #box[($r_21 = 1$);] nút 3 → nút 1 #box[($r_31 = 0","5$)], ra ngoài #box[($r_30 = 0","5$)]. #box[$1\/mu_1 = 0","02$ s;] #box[$1\/mu_2 = 0","03$ s;] #box[$1\/mu_3 = 0","04$ s;] #box[$1\/mu_4 = 0","05$ s].
+  Cho mạng hàng đợi mở 4 nút có sơ đồ như ví dụ trên lớp (slide tr. 87): yêu cầu từ ngoài vào nút 4 với #box[$gamma_4 = 5$ yêu cầu/s;] nút 4 → nút 1 #box[($r_41 = 1$);] nút 1 → nút 2 #box[($r_12 = 0","4$)] và nút 3 #box[($r_13 = 0","6$);] nút 2 → nút 1 #box[($r_21 = 1$);] nút 3 → nút 1 #box[($r_31 = 0","5$)], ra ngoài #box[($r_30 = 0","5$)]. #box[$1\/mu_1 = 0","02$ s;] #box[$1\/mu_2 = 0","03$ s;] #box[$1\/mu_3 = 0","04$ s;] #box[$1\/mu_4 = 0","05$ s].
 
   #align(center, block(fill: white, inset: 4pt, radius: 3pt, below: 4pt,
     image("img/gk3_mau2_dung_4nut.png", width: 75%)))
-  #align(center, text(9pt, fill: gray)[Sơ đồ mạng])
+  #align(center, text(9pt, fill: gray)[Sơ đồ mạng (slide thầy Dũng, 03-HangDoi tr. 87)])
 
   + Tính $lambda_1, lambda_2, lambda_3, lambda_4$.
   + Tính $N_1, N_2, N_3, N_4$ và số yêu cầu trung bình $N$ trong hệ thống.
@@ -300,7 +304,8 @@ Vì vậy cả ba đề đều là *biến thể đổi số của các ví dụ
 
 #y[a) $lambda t = 6 dot 2 = 12$ → $P\{N = 10\} = (12^10 dot e^(-12)) \/ 10! approx bold(0","105)$. #d[1đ]]
 #y[b) $lambda = 6$ cuộc/phút, $t = 15$ s $= 0","25$ phút → $P\{T < 0","25\} = 1 - e^(-6 dot 0","25) = 1 - e^(-1","5) approx bold(0","777)$. #d[1đ]]
-#y[c) Tách luồng: cuộc quốc tế là Poisson với $lambda_q = 6 dot 0","3 = 1","8$ cuộc/phút → $P\{0 "cuộc trong 1 phút"\} = e^(-1","8) approx bold(0","165)$. #d[1đ]]
+#y[c) Tách luồng: cuộc quốc tế là Poisson với $lambda_q = 6 dot 0","3 = 1","8$ cuộc/phút → \
+  $P\{$0 cuộc trong 1 phút$\} = e^(-1","8) approx bold(0","165)$. #d[1đ]]
 ]
 
 == Câu 2 #h(1fr) #text(10pt, fill: gray)[4 điểm]
@@ -373,7 +378,8 @@ Mô hình M/M/c/c (không có chỗ chờ).
 $lambda = 30$ task/ms; $mu = 1\/0","05 = 20$ task/ms; $c = 2$; $a = 1","5$; $rho = 0","75$.
 
 #block(breakable: false)[
-#y[a) Mô hình M/M/2/∞. $p_0 = 1 \/ [(1 + 1","5) + 1","5^2 \/ (2! dot 0","25)] = 1 \/ (2","5 + 4","5) = 1\/7 approx 0","1429$. $C(2; 1","5) = 4","5\/7 approx 0","643$. #d[2đ]]
+#y[a) Mô hình M/M/2/∞. #d[2đ] \
+  $p_0 = 1 \/ [(1 + 1","5) + 1","5^2 \/ (2! dot 0","25)] = 1 \/ (2","5 + 4","5) = 1\/7 approx 0","1429$. $C(2; 1","5) = 4","5\/7 approx 0","643$.]
 - $N_q = C dot rho \/ (1 - rho) = 0","643 dot 3 approx 1","929$; $N = N_q + a approx bold(3","43)$ *tác vụ*.
 - $T = 1\/mu + C \/ (c mu - lambda) = 0","05 + 0","643 \/ 10 approx bold(0","114)$ *ms*.
 ]
@@ -411,7 +417,7 @@ $lambda = 2$ khách/phút; $mu = 60\/20 = 3$ khách/phút; $rho = 2\/3$.
 #y[b) $p_0 = (1 - rho) \/ (1 - rho^7) = 0","3333 \/ (1 - 0","05853) approx bold(0","354)$ (xác suất được phục vụ ngay). #d[1,75đ] \
   $P_B = p_6 = rho^6 dot p_0 = 0","08779 dot 0","354 approx bold(0","031)$ (3,1%).]
 #y[c) $N = rho \/ (1 - rho) - 7 rho^7 \/ (1 - rho^7) = 2 - 7 dot 0","05853 \/ 0","94147 approx 1","565$; $N_q = N - (1 - p_0) approx 0","919$; #d[1,5đ] \
-  $lambda_"thực tế" = 2 dot (1 - 0","031) approx 1","938$ → $T_q = 0","919 \/ 1","938 approx bold(0","474)$ *phút* $approx$ *28,5 giây*.]
+  $lambda$ thực tế $= 2 dot (1 - 0","031) approx 1","938$ → $T_q = 0","919 \/ 1","938 approx bold(0","474)$ *phút* $approx$ *28,5 giây*.]
 ]
 
 == Câu 3 #h(1fr) #text(10pt, fill: gray)[4 điểm]
@@ -427,7 +433,8 @@ $lambda = 2$ khách/phút; $mu = 60\/20 = 3$ khách/phút; $rho = 2\/3$.
 - $rho_1 = 0","2 \/ r_13 < 1$ → $r_13 > 0","2$;
 - $rho_2 = 0","3(1 - r_13) \/ r_13 < 1$ → $r_13 > 0","231$;
 - $rho_3 = 0","4$; $rho_4 = 0","25$
-- → $bold(r_13 > 0","231 "và" r_12 = 1 - r_13 < 0","769)$.
+
+→ $bold(r_13 > 0","231)$ *và* $bold(r_12 = 1 - r_13 < 0","769)$.
 ]
 
 // =====================================================================
@@ -455,6 +462,6 @@ $lambda = 2$ khách/phút; $mu = 60\/20 = 3$ khách/phút; $rho = 2\/3$.
 )
 
 #v(6pt)
-#text(weight: "bold", fill: warn)[Lỗi sai cần chép vào mục "Lỗi hay mắc" của sổ tay]
+#text(weight: "bold", fill: warn)[Lỗi sai cần chép vào sổ tay]
 #v(-6pt)
 #o-viet(1fr)
