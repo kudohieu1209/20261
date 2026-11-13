@@ -22,15 +22,15 @@ foreach ($requiredFont in $requiredFonts) {
 }
 
 # Default: rebuild the Codex print files. Optionally rebuild the Claude lessons
-# that consume shared content, keeping their PDFs in docs_claude.
+# that consume shared content, keeping their PDFs in on-luyen-tablet.
 $courseRoot = Split-Path -Parent $PSScriptRoot
 $documents = @(
     (Join-Path $PSScriptRoot 'GK_InA4_DenTrang.typ'),
     (Join-Path $PSScriptRoot 'GK_PhuLuc_Mang_InA4_DenTrang.typ')
 )
 if ($IncludeClaude) {
-    $documents += Join-Path $courseRoot 'docs_claude/GK0_TapInGiay_ViDuTrenLop.typ'
-    $documents += Join-Path $courseRoot 'docs_claude/GK5_CauHoiLyThuyet.typ'
+    $documents += Join-Path $courseRoot 'on-luyen-tablet/GK0_TapInGiay_ViDuTrenLop.typ'
+    $documents += Join-Path $courseRoot 'on-luyen-tablet/GK5_CauHoiLyThuyet.typ'
 }
 foreach ($inputFile in $documents) {
     $outputFile = [IO.Path]::ChangeExtension($inputFile, '.pdf')

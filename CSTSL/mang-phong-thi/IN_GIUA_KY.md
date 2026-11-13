@@ -46,7 +46,7 @@ Giữ trọn từng bài hoặc từng trường hợp; bài CPU bốn nhân có
 
 ## Học và luyện trên tablet
 
-Bộ học gốc ở [docs_claude](../docs_claude/README.md):
+Bộ học gốc ở [on-luyen-tablet](../on-luyen-tablet/README.md):
 GK1–GK5 để học, xem giải thích và ghi chú; GK6 để luyện đề 60 phút; GK0 là bản gộp cũ;
 CK1–CK5 dành cho cuối kỳ. Khi luyện đề, dùng tập in mới để quen tìm nội dung theo mục lục.
 
@@ -71,7 +71,7 @@ Cần Typst và Palatino Linotype. Nếu trình biên dịch chưa có trong PAT
 ~~~
 
 Mặc định chỉ dựng hai PDF trong thư mục này. Thêm `-IncludeClaude` để dựng lại GK0/GK5
-vào đúng thư mục `docs_claude`; khi đó cần thêm Noto Sans (Regular, Bold, Italic, BoldItalic),
+vào đúng thư mục `on-luyen-tablet`; khi đó cần thêm Noto Sans (Regular, Bold, Italic, BoldItalic),
 có thể chỉ định bằng `-FontPath`.
 
 Nếu PowerShell chặn script, cho phép riêng tiến trình dựng:

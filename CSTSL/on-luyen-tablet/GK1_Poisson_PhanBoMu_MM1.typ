@@ -18,8 +18,8 @@
 #show table: it => block(breakable: false, it)
 
 #show heading.where(level: 1): it => {
-  pagebreak(weak: true)
-  block(width: 100%, fill: accent, inset: (x: 10pt, y: 8pt), radius: 4pt,
+  if it.body in ([Bài tự luyện — viết thẳng vào ô chấm], [Đáp án]) { pagebreak(weak: true) }
+  block(width: 100%, fill: accent, inset: (x: 10pt, y: 8pt), radius: 4pt, above: 18pt, sticky: true,
     text(white, size: 15pt, weight: "bold", it.body))
   v(4pt)
 }
@@ -27,7 +27,7 @@
   text(accent, size: 13pt, weight: "bold", it.body))
 
 #let box-note(title, color, body) = block(
-  width: 100%, inset: 9pt, radius: 4pt, stroke: (left: 3pt + color), fill: color.lighten(90%),
+  width: 100%, breakable: false, inset: 9pt, radius: 4pt, stroke: (left: 3pt + color), fill: color.lighten(90%),
   [#text(color, weight: "bold", title) \ #body],
 )
 #let khuon(body) = box-note("Khuôn giải", accent, body)
@@ -48,10 +48,9 @@
 #v(8pt)
 
 #box-note("Cách học buổi này (120–150 phút)", accent)[
-  + Đọc trang 1–7 (mỗi dạng ~15 phút).
+  + Đọc lần lượt Dạng A → B → C (mỗi dạng ~20 phút). Mục "ví dụ trên lớp" là bài thầy Dũng đã giảng — tự làm lại rồi mới đối chiếu.
   + Làm 15 bài ở phần *Bài tự luyện* ngay vào ô chấm bên dưới mỗi bài — *chưa nhìn đáp án*.
   + Dò *Đáp án* ở trang cuối.
-  + Chép trang *Sổ tay phòng thi* vào sổ (hoặc giữ nguyên trang đó).
 
   *Qua buổi khi:* đúng ≥ 12/15 bài, mỗi bài M/M/1 tính trọn trong ≤ 2 phút.
 ]
@@ -63,6 +62,7 @@
   [Đề có từ khoá], [Dạng], [Công thức chính],
   ["tiến trình Poisson", "*xác suất có k* gói / cuộc gọi *trong khoảng t*"], [A — đếm số lần đến], [$P(k) = ((lambda t)^k e^(-lambda t)) / k!$],
   ["*thời gian* … phân bố mũ", "đợi *lâu hơn / ít nhất / không quá* t"], [B — thời gian chờ], [$P(T > t) = e^(-lambda t)$],
+  ["nhiều luồng *đi chung*", "luồng *chia nhánh* theo xác suất"], [A+ — ghép / tách luồng], [$lambda = sum lambda_i$ ; $lambda dot p_i$],
   ["M/M/1", "hàng đợi", "số gói / trễ trung bình", "xác suất hệ rỗng"], [C — một nút M/M/1], [$rho = lambda / mu$, $N = rho / (1 - rho)$, $T = 1 / (mu - lambda)$],
 )
 
@@ -91,6 +91,35 @@
   - $t = 20$ phút $= 1/3$ giờ (đổi về giờ cho khớp $lambda$).
   - $m = 10 dot 1/3 = 10/3$.
   - $P(2) = ((10\/3)^2 e^(-10\/3)) / 2! approx bold(0","198)$.
+]
+
+#mau("ví dụ trên lớp — Tổng đài 1080 (ch.2 tr. 44)")[
+  Tổng đài 1080 nhận trung bình 10 cuộc/phút, Poisson. Xác suất có 15 cuộc trong 2 phút?
+
+  - $m = lambda t = 10 dot 2 = 20$.
+  - $P(15) = (20^15 dot e^(-20)) / 15! approx bold(0","0516)$.
+]
+
+== Ghép và tách luồng Poisson
+
+#khuon[
+  - *Ghép:* nhiều luồng Poisson $lambda_1, lambda_2, dots, lambda_n$ đi chung một chỗ → vẫn là Poisson với $lambda = lambda_1 + lambda_2 + dots + lambda_n$.
+  - *Tách:* một luồng Poisson $lambda$, mỗi yêu cầu đi nhánh $i$ với xác suất $p_i$ → nhánh $i$ là Poisson với tốc độ $lambda dot p_i$.
+  - Sau khi ghép hoặc tách xong thì dùng lại dạng A hoặc dạng B như bình thường.
+]
+
+#mau("ví dụ trên lớp — Ghép luồng (ch.2 tr. 48)")[
+  Ô tô qua nút giao 6 xe/phút, xe máy 9 xe/phút, đều Poisson.
+
+  - Tổng phương tiện: $lambda = 6 + 9 = bold(15)$ *xe/phút*, vẫn là Poisson.
+  - Thêm (tự đặt): xác suất trong 10 giây không có xe nào → $lambda t = 15 dot (10\/60) = 2","5$ → $e^(-2","5) approx bold(0","082)$.
+]
+
+#mau("ví dụ trên lớp — Tách luồng (ch.2 tr. 49)")[
+  Nhà hộ sinh có 12 bé/tuần, 55% trai, 45% gái.
+
+  - Bé trai: $12 dot 0","55 = bold(6","6)$ *bé/tuần*; bé gái: $12 dot 0","45 = bold(5","4)$ *bé/tuần*, đều là Poisson.
+  - Thêm: xác suất một tuần không có bé trai nào $= e^(-6","6) approx bold(0","00136)$.
 ]
 
 // ================= DẠNG B =================
@@ -136,11 +165,46 @@
   #text(warn)[Slide ghi đề "ít nhất 10 phút" nhưng giải "không quá". Đi thi đọc kỹ cụm này; đề mập mờ thì ghi rõ mình hiểu thế nào.]
 ]
 
+#mau("ví dụ trên lớp — Xe buýt (ch.2 tr. 46)")[
+  Xe buýt có tần suất 5 phút/chuyến (Poisson). Một người vừa lỡ chuyến. Xác suất đợi chuyến sau ít hơn 3 phút?
+
+  - "5 phút/chuyến" là thời gian trung bình giữa hai chuyến → $lambda = 1\/5$ chuyến/phút.
+  - $P(T < 3) = 1 - e^(-3\/5) = 1 - e^(-0","6) approx bold(0","451)$.
+]
+
+#bay[
+  "5 phút/chuyến" *KHÔNG* phải $lambda = 5$.
+]
+
+== Bảng các phân bố — chỉ cần tra khi đề hỏi E, Var
+
+#table(
+  columns: (1.25fr, 1fr, 2.5fr, 0.8fr, 1fr),
+  align: left + horizon,
+  [Phân bố], [Loại biến], [Công thức], [$E(x)$], [$"Var"(x)$],
+  [Bernoulli], [rời rạc (0/1)], [$P(1) = p$, $P(0) = 1 - p$], [$display(p)$], [$display(p(1 - p))$],
+  [Nhị thức $(n, p)$], [rời rạc], [$display(P(k) = C(n,k) p^k (1 - p)^(n-k))$], [$display(n p)$], [$display(n p(1 - p))$],
+  [Đều $[a, b]$], [liên tục], [$display(f(x) = 1/(b - a))$], [$display((a + b)/2)$], [$display((b - a)^2/12)$],
+  [Chuẩn $(mu, sigma)$], [liên tục], [$display(f(x) = e^(-(x-mu)^2 \/ (2 sigma^2)) / (sigma sqrt(2 pi)))$], [$display(mu)$], [$display(sigma^2)$],
+  [Mũ $(lambda)$], [liên tục], [$display(f(x) = lambda e^(-lambda x))$], [$display(1/lambda)$], [$display(1/lambda^2)$],
+  [Poisson $(alpha)$], [rời rạc], [$display(P(k) = (alpha^k e^(-alpha))/k!)$], [$display(alpha)$], [$display(alpha)$],
+  [Gamma $(n, lambda)$], [liên tục], [$display(f(x) = (lambda^n x^(n-1) e^(-lambda x))/((n-1)!))$], [$display(n/lambda)$], [$display(n/lambda^2)$],
+)
+
+#box-note("Ghi nhớ thêm", accent)[
+  - Tổng của $n$ biến mũ độc lập cùng tham số $lambda$ là biến Gamma$(n, lambda)$ (Định lý 2.1).
+  - Nhị thức = tổng của $n$ lần thử Bernoulli.
+]
+
 // ================= DẠNG C =================
 = Dạng C — Một nút M/M/1
 
 #box-note("Vì sao quan trọng nhất", warn)[
   Mọi câu mạng hàng đợi (3,5–6 điểm) đều quy về tính từng nút M/M/1 như thế này.
+]
+
+#box-note("Ký hiệu dùng thống nhất từ đây", accent)[
+  $N$, $N_q$, $N_s$ (số yêu cầu trong hệ thống / hàng đợi / đang phục vụ); $T$, $T_q$, $T_s$ (thời gian tương ứng); $rho = lambda\/(c mu)$ là tải; với 1 server thì $rho = lambda\/mu$.
 ]
 
 == Bước 1 — Đổi đề ra λ và μ (yêu cầu/giây)
@@ -215,74 +279,7 @@
   $1\/(100 - lambda) <= 0","2 arrow.r 100 - lambda >= 5 arrow.r bold(lambda <= 95)$ gói/s.
 ]
 
-// ================= BỔ SUNG THẦY DŨNG =================
-= Bổ sung: Poisson, phân bố và M/M/1
-
-#text(fill: gray)[Chương 2 + đầu chương 3.]
-
-== B1. Tính chất ghép và tách luồng Poisson
-
-#khuon[
-  - *Ghép:* nhiều luồng Poisson $lambda_1, lambda_2, dots, lambda_n$ đi chung một chỗ → vẫn là Poisson với $lambda = lambda_1 + lambda_2 + dots + lambda_n$.
-  - *Tách:* một luồng Poisson $lambda$, mỗi yêu cầu đi nhánh $i$ với xác suất $p_i$ → nhánh $i$ là Poisson với tốc độ $lambda dot p_i$.
-  - Sau khi ghép hoặc tách xong thì dùng lại dạng A hoặc dạng B như bình thường.
-]
-
-#mau("Ghép luồng")[
-  Ô tô qua nút giao 6 xe/phút, xe máy 9 xe/phút, đều Poisson.
-
-  - Tổng phương tiện: $lambda = 6 + 9 = bold(15)$ *xe/phút*, vẫn là Poisson.
-  - Thêm (tự đặt): xác suất trong 10 giây không có xe nào → $lambda t = 15 dot (10\/60) = 2","5$ → $e^(-2","5) approx bold(0","082)$.
-]
-
-#mau("Tách luồng")[
-  Nhà hộ sinh có 12 bé/tuần, 55% trai, 45% gái.
-
-  - Bé trai: $12 dot 0","55 = bold(6","6)$ *bé/tuần*; bé gái: $12 dot 0","45 = bold(5","4)$ *bé/tuần*, đều là Poisson.
-  - Thêm: xác suất một tuần không có bé trai nào $= e^(-6","6) approx bold(0","00136)$.
-]
-
-== B2. Hai ví dụ Poisson
-
-#mau("Tổng đài 1080")[
-  Tổng đài 1080 nhận trung bình 10 cuộc/phút, Poisson. Xác suất có 15 cuộc trong 2 phút?
-
-  - $m = lambda t = 10 dot 2 = 20$.
-  - $P(15) = (20^15 dot e^(-20)) / 15! approx bold(0","0516)$.
-]
-
-#mau("Xe buýt")[
-  Xe buýt có tần suất 5 phút/chuyến (Poisson). Một người vừa lỡ chuyến. Xác suất đợi chuyến sau ít hơn 3 phút?
-
-  - "5 phút/chuyến" là thời gian trung bình giữa hai chuyến → $lambda = 1\/5$ chuyến/phút.
-  - $P(T < 3) = 1 - e^(-3\/5) = 1 - e^(-0","6) approx bold(0","451)$.
-]
-
-#bay[
-  "5 phút/chuyến" *KHÔNG* phải $lambda = 5$.
-]
-
-== B3. Bảng các phân bố — chỉ cần tra khi đề hỏi E, Var
-
-#table(
-  columns: (1.25fr, 1fr, 2.5fr, 0.8fr, 1fr),
-  align: left + horizon,
-  [Phân bố], [Loại biến], [Công thức], [$E(x)$], [$"Var"(x)$],
-  [Bernoulli], [rời rạc (0/1)], [$P(1) = p$, $P(0) = 1 - p$], [$display(p)$], [$display(p(1 - p))$],
-  [Nhị thức $(n, p)$], [rời rạc], [$display(P(k) = C(n,k) p^k (1 - p)^(n-k))$], [$display(n p)$], [$display(n p(1 - p))$],
-  [Đều $[a, b]$], [liên tục], [$display(f(x) = 1/(b - a))$], [$display((a + b)/2)$], [$display((b - a)^2/12)$],
-  [Chuẩn $(mu, sigma)$], [liên tục], [$display(f(x) = e^(-(x-mu)^2 \/ (2 sigma^2)) / (sigma sqrt(2 pi)))$], [$display(mu)$], [$display(sigma^2)$],
-  [Mũ $(lambda)$], [liên tục], [$display(f(x) = lambda e^(-lambda x))$], [$display(1/lambda)$], [$display(1/lambda^2)$],
-  [Poisson $(alpha)$], [rời rạc], [$display(P(k) = (alpha^k e^(-alpha))/k!)$], [$display(alpha)$], [$display(alpha)$],
-  [Gamma $(n, lambda)$], [liên tục], [$display(f(x) = (lambda^n x^(n-1) e^(-lambda x))/((n-1)!))$], [$display(n/lambda)$], [$display(n/lambda^2)$],
-)
-
-#box-note("Ghi nhớ thêm", accent)[
-  - Tổng của $n$ biến mũ độc lập cùng tham số $lambda$ là biến Gamma$(n, lambda)$ (Định lý 2.1).
-  - Nhị thức = tổng của $n$ lần thử Bernoulli.
-]
-
-== B4. Xác suất theo thời gian trong M/M/1
+== Bước 5 — Xác suất theo thời gian trong M/M/1
 
 Hai công thức thêm cho hàng đợi M/M/1 (thầy Dũng viết M/M/1/∞):
 
@@ -293,7 +290,7 @@ Hai công thức thêm cho hàng đợi M/M/1 (thầy Dũng viết M/M/1/∞):
   [xác suất thời gian *chờ trong hàng đợi* không quá $t$], [$P(T_q <= t) = 1 - rho dot e^(-(mu - lambda) t)$],
 )
 
-#mau("Quầy tính tiền siêu thị mini")[
+#mau("ví dụ trên lớp — Quầy tính tiền siêu thị (ch.3 tr. 34)")[
   Khách vào quầy tính tiền siêu thị mini theo Poisson 40 người/giờ, thời gian phục vụ phân bố mũ trung bình 1 phút, một quầy, chỗ xếp hàng không giới hạn.
 
   - Đổi về phút: $lambda = 40\/60 = 2\/3$ người/phút; $mu = 1$ người/phút; $rho = 2\/3$.
@@ -303,32 +300,6 @@ Hai công thức thêm cho hàng đợi M/M/1 (thầy Dũng viết M/M/1/∞):
     $P = 1 - e^(-(1\/3) dot 1","5) = 1 - e^(-0","5) approx bold(0","393)$.
 ]
 
-#box-note("Ký hiệu dùng thống nhất từ đây", accent)[
-  $N$, $N_q$, $N_s$ (số yêu cầu trong hệ thống / hàng đợi / đang phục vụ); $T$, $T_q$, $T_s$ (thời gian tương ứng); $rho = lambda\/(c mu)$ là tải; với 1 server thì $rho = lambda\/mu$.
-]
-
-// ================= SỔ TAY =================
-= Sổ tay phòng thi — trang 1
-
-#set text(12pt)
-#box-note("POISSON — \"xác suất có k lần đến trong khoảng t\"", accent)[
-  $m = lambda t$ ($lambda$, $t$ cùng đơn vị) #h(1em)
-  $P(k) = (m^k e^(-m)) / k!$ #h(1em) ít nhất 1: $1 - e^(-m)$ \
-  không quá $k$: $e^(-m)(1 + m + m^2/2! + dots + m^k/k!)$
-]
-#box-note("PHÂN BỐ MŨ — \"thời gian chờ / phục vụ\"", accent)[
-  trung bình $tau$ → $lambda = 1\/tau$ #h(1em) (*KHÔNG* phải $lambda = tau$) \
-  $P(T > t) = e^(-lambda t)$ #h(1.5em) $P(T <= t) = 1 - e^(-lambda t)$ #h(1.5em) khoảng $[a, b]$: $e^(-lambda a) - e^(-lambda b)$ \
-  không nhớ: đã chờ bao lâu cũng bỏ qua
-]
-#box-note("M/M/1", accent)[
-  $lambda$ = cộng các luồng vào #h(1em) $mu = 1\/t_"phục vụ" = C\/L$ (byte → bit: ×8) \
-  $rho = lambda\/mu < 1$ (không thì: KHÔNG ỔN ĐỊNH) \
-  $p_0 = 1 - rho$ #h(1.5em) $p_n = (1 - rho) rho^n$ #h(1.5em) $P(N >= n) = rho^n$ \
-  $N = rho/(1 - rho)$ #h(2em) $T = 1/(mu - lambda)$ ← "thời gian tại nút" \
-  $N_q = rho^2/(1 - rho)$ #h(1.3em) $T_q = rho/(mu - lambda) = T - 1/mu$ \
-  Kiểm tra: $N = lambda T$, $N_q = lambda T_q$ #h(1.5em) Ngược: $T <= T_0 arrow.r lambda <= mu - 1/T_0$
-]
 #box-note("Lỗi hay mắc", warn)[
   - Thời gian TB 5 ms mà lấy $mu = 5$ → phải là $mu = 200$/s.
   - Quên đổi *byte → bit* (×8) khi tính $mu = C\/L$.
@@ -337,15 +308,6 @@ Hai công thức thêm cho hàng đợi M/M/1 (thầy Dũng viết M/M/1/∞):
   - Nhầm "ít nhất $t$" ($e^(-lambda t)$) với "không quá $t$" ($1 - e^(-lambda t)$).
   - Quên kiểm tra $rho < 1$. Quên ghi đơn vị (s / ms).
 ]
-#set text(11pt)
-#box-note("BỔ SUNG", accent)[
-  GHÉP/TÁCH POISSON: ghép → $lambda = sum lambda_i$ (vẫn Poisson); \
-  #h(1em) tách theo xác suất $p_i$ → $lambda dot p_i$ (vẫn Poisson) \
-  "$x$ phút/chuyến" = thời gian TB → $lambda = 1\/x$ \
-  M/M/1: $P(T <= t) = 1 - e^(-(mu - lambda) t)$ #h(1.5em) $P(T_q <= t) = 1 - rho dot e^(-(mu - lambda) t)$ \
-  Phân bố mũ: $E = 1\/lambda$, $"Var" = 1\/lambda^2$; #h(0.5em) Poisson: $E = "Var" = alpha$; #h(0.5em) Nhị thức: $E = n p$, $"Var" = n p(1 - p)$
-]
-#set text(11.5pt)
 
 // ================= BÀI TẬP =================
 = Bài tự luyện — viết thẳng vào ô chấm

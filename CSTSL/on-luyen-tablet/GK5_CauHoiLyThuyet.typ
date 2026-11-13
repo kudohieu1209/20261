@@ -1,5 +1,5 @@
 // Biên dịch trong thư mục này: typst compile --root .. GK5_CauHoiLyThuyet.typ
-#import "../docs_codex/content/gk-exam-theory.typ": exam-questions
+#import "../mang-phong-thi/content/gk-exam-theory.typ": exam-questions
 
 #let accent = rgb("#1f5fa8")
 #let warn = rgb("#b5452b")

@@ -2,12 +2,12 @@
 
 ## Chọn tài liệu giữa kỳ
 
-- **In mang vào thi:** [Tập A4 đen trắng đủ 7 chủ đề, 22 trang](../docs_codex/GK_InA4_DenTrang.pdf). Chỉ cần in tập này; [bản tách mạng, 6 trang](../docs_codex/GK_PhuLuc_Mang_InA4_DenTrang.pdf) trùng chủ đề 6–7, dùng để học riêng.
+- **In mang vào thi:** [Tập A4 đen trắng đủ 7 chủ đề, 22 trang](../mang-phong-thi/GK_InA4_DenTrang.pdf). Chỉ cần in tập này; [bản tách mạng, 6 trang](../mang-phong-thi/GK_PhuLuc_Mang_InA4_DenTrang.pdf) trùng chủ đề 6–7, dùng để học riêng.
 - **Học và ghi chú trên tablet:** GK1–GK5.
 - **Luyện đề 60 phút:** GK6.
 - **GK0:** bản gộp cũ; nội dung ví dụ và công thức đã được dùng chung với tập in mới.
 
-Xem [hướng dẫn chọn file, cài đặt in và cập nhật nội dung](../docs_codex/IN_GIUA_KY.md).
+Xem [hướng dẫn chọn file, cài đặt in và cập nhật nội dung](../mang-phong-thi/IN_GIUA_KY.md).
 
 Bộ tài liệu tự học từ căn bản đến nâng cao, bám sát 100% dạng bài thi cuối kỳ môn Cơ sở truyền số liệu (ĐHBK Hà Nội).
 

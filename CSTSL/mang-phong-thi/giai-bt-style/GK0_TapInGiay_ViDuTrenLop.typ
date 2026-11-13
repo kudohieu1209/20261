@@ -1,75 +1,53 @@
+#import "style.typ": *
 // Biên dịch trong thư mục này: typst compile --root .. GK0_TapInGiay_ViDuTrenLop.typ
 // Bản gộp để học. Hai bản *_InA4_DenTrang.typ là đầu vào in phòng thi.
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
-#import "../docs_codex/content/gk-exam-examples.typ": exam-examples
-#import "../docs_codex/content/gk-exam-formulas.typ": core-formulas, network-formulas
+#import "content/gk-exam-examples.typ": exam-examples
+#import "content/gk-exam-formulas.typ": core-formulas, network-formulas
 
-#let accent = rgb("#1f5fa8")
-#let warn = rgb("#b5452b")
-#let soft = rgb("#eef3fa")
+
+
+
 
 #set document(title: "GK0 — Bản gộp ví dụ và công thức")
-#set page(
-  paper: "a4",
-  margin: (x: 1.5cm, top: 1.7cm, bottom: 1.5cm),
-  header: none,
-  footer: context align(right, text(9pt, fill: gray, counter(page).display())),
-)
-#set text(font: "Noto Sans", size: 10.5pt, lang: "vi")
-#show math.equation: set text(font: "New Computer Modern Math")
-#set par(leading: 0.62em, spacing: 0.75em)
-#set list(spacing: 0.5em, indent: 2pt, body-indent: 5pt)
-#set enum(spacing: 0.5em, indent: 2pt, body-indent: 5pt)
-#set table(stroke: 0.5pt + gray, inset: 5pt)
-
-#show heading.where(level: 1): it => block(
-  width: 100%, fill: accent, inset: (x: 8pt, y: 5pt), radius: 3pt,
-  above: 12pt, below: 8pt, sticky: true,
-  text(white, size: 12.5pt, weight: "bold", it.body))
-#show heading.where(level: 2): it => block(sticky: true, above: 12pt, below: 6pt,
-  text(accent, size: 11.5pt, weight: "bold", it.body))
-#show heading.where(level: 3): it => block(above: 0pt, below: 4pt,
-  text(accent, size: 10.5pt, weight: "bold", it.body))
+#show: book
 
 // Hộp ghi chú (giống GK1–GK5) — dùng cho phần C, D
-#let box-note(title, color, body) = block(
-  width: 100%, inset: (x: 7pt, y: 5pt), radius: 3pt, stroke: (left: 3pt + color), fill: color.lighten(90%),
-  breakable: false, above: 5pt, below: 5pt,
-  [#text(color, weight: "bold", title) \ #body],
-)
+
 
 // Mục lục: mỗi mục đặt một metadata <toc>
 #let toc-mark(label, level: 1) = [#metadata((label: label, level: level)) <toc>]
 
 // Khối một ví dụ: khung đề bài + lời giải bên dưới
-#let vd(id, title, short: none, breakable: false, de, body) = block(
-  width: 100%, breakable: breakable, above: 10pt, below: 4pt,
+#let vd(id, title, short: none, breakable: true, de, body) = block(
+  width: 100%, breakable: true, above: 14pt, below: 6pt,
 )[
   #toc-mark(if short == none { id + " — " + title } else { id + " — " + short }, level: 2)
-  #block(width: 100%, inset: (x: 7pt, y: 6pt), radius: 3pt, stroke: 0.9pt + accent, fill: soft,
+  #block(width: 100%, inset: 0pt,
     below: 6pt, sticky: true)[
     #heading(level: 3)[#id — #title]
     #de
   ]
-  #pad(left: 4pt, body)
+  #block(sticky: true)[*Giải.*]
+  #body
 ]
 
 #let shared-examples = exam-examples(accent: accent)
 #let render-vd(id) = {
   let ex = shared-examples.find(x => x.id == id)
-  vd(ex.id, ex.title, short: ex.short, breakable: ex.id == "VD 12", ex.prompt, ex.answer)
+  vd(ex.id, ex.title, short: ex.short, breakable: true, ex.prompt, ex.answer)
 }
 
 // ================= TRANG 1: BÌA + THÔNG TIN THI + MỤC LỤC =================
 #align(center)[
-  #text(18pt, weight: "bold", fill: accent)[GK0 — Bản gộp ví dụ và công thức]
+  #text(16pt, weight: "bold", fill: accent)[GK0 — Bản gộp ví dụ và công thức]
   #v(-4pt)
   #text(11pt)[Toàn bộ ví dụ trên lớp (lời giải tự luận) + bảng công thức]
 ]
 #v(2pt)
 
-#block(width: 100%, inset: 8pt, radius: 3pt, stroke: 1.2pt + accent, breakable: false)[
+#block(width: 100%, inset: 8pt,  breakable: true)[
   #text(accent, weight: "bold")[Thông tin thi] (thầy Nguyễn Xuân Dũng báo):
   *100% tự luận, 60 phút, được dùng tài liệu giấy (photo hoặc ghi chép), thi đến hết phần hàng đợi; làm được các ví dụ trên lớp sẽ có lợi thế.* \
   *Bản học tổng hợp.* Khi in mang vào thi, dùng *GK_InA4_DenTrang.pdf*; in thêm *GK_PhuLuc_Mang_InA4_DenTrang.pdf* nếu phạm vi có mạng hàng đợi. Hai tập mới đã có đủ 16 ví dụ/bài tập và công thức của bản này.
@@ -79,14 +57,14 @@
 #context {
   let items = query(<toc>)
   set text(9.5pt)
-  set par(leading: 0.5em, spacing: 0.42em)
+  set par(leading: 1em, spacing: 1.3em)
   columns(2, gutter: 16pt, for it in items {
     let v = it.value
     let p = it.location().page()
     let lbl = if v.level == 1 { strong(v.label) } else { h(8pt) + v.label }
     block(width: 100%, above: if v.level == 1 { 7pt } else { 3pt }, below: 0pt,
       grid(columns: (1fr, auto), column-gutter: 3pt,
-        [#lbl #box(width: 1fr, repeat(text(luma(140))[.#h(2pt)]))],
+        [#lbl #box(width: 1fr, repeat(text(black)[.#h(2pt)]))],
         if v.level == 1 { strong(str(p)) } else { str(p) }))
   })
 }
@@ -113,10 +91,9 @@
 
 #render-vd("VD 2")
 
-#grid(columns: (1fr, 1fr), column-gutter: 10pt,
-  render-vd("VD 3"),
-  render-vd("VD 4"),
-)
+#render-vd("VD 3")
+
+#render-vd("VD 4")
 
 == Chương 3 — Hàng đợi đơn
 

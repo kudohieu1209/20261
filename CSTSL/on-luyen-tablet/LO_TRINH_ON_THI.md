@@ -11,7 +11,7 @@ Lớp: **173872 — ET4070 — thầy Nguyễn Xuân Dũng**, kỳ 20261.
 ## Thông tin thi giữa kỳ (thầy báo, ghi ngày 11/11/2026)
 
 - **100% tự luận, 60 phút.**
-- **Được dùng tài liệu giấy** (photo hoặc ghi chép) → dùng bản **A4 đen trắng** `../docs_codex/GK_InA4_DenTrang.pdf` (22 trang, đủ 7 chủ đề). Chỉ cần in tập này. Bản tách mạng (6 trang) trùng hai chủ đề cuối, để học riêng. Cài đặt in: [IN_GIUA_KY.md](../docs_codex/IN_GIUA_KY.md).
+- **Được dùng tài liệu giấy** (photo hoặc ghi chép) → dùng bản **A4 đen trắng** `../mang-phong-thi/GK_InA4_DenTrang.pdf` (22 trang, đủ 7 chủ đề). Chỉ cần in tập này. Bản tách mạng (6 trang) trùng hai chủ đề cuối, để học riêng. Cài đặt in: [IN_GIUA_KY.md](../mang-phong-thi/IN_GIUA_KY.md).
 - **Thi đến hết phần hàng đợi** (chương 2–3 slide thầy Dũng).
 - **Làm được các ví dụ trên lớp sẽ có lợi thế** → ưu tiên số 1 là tự làm lại được cả 16 ví dụ/bài tập trong GK0 mà không nhìn lời giải.
 

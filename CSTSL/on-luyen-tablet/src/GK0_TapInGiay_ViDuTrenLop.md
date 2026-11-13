@@ -1,6 +1,6 @@
 # GK0 — Bản gộp ví dụ trên lớp và bảng công thức
 
-Bản gộp cũ để đọc tổng quan. Để in mang vào thi, dùng `GK_InA4_DenTrang.pdf` (đủ 7 chủ đề); không cần in thêm bản tách mạng vì đã nằm trong tập chính. Xem [hướng dẫn in](../../docs_codex/IN_GIUA_KY.md). Nội dung hiện hành dùng chung nằm trong các file `docs_codex/content/gk-exam-*.typ`; phần dưới giữ làm ghi chú biên soạn cũ.
+Bản gộp cũ để đọc tổng quan. Để in mang vào thi, dùng `GK_InA4_DenTrang.pdf` (đủ 7 chủ đề); không cần in thêm bản tách mạng vì đã nằm trong tập chính. Xem [hướng dẫn in](../../mang-phong-thi/IN_GIUA_KY.md). Nội dung hiện hành dùng chung nằm trong các file `mang-phong-thi/content/gk-exam-*.typ`; phần dưới giữ làm ghi chú biên soạn cũ.
 
 Thông tin thi (thầy Nguyễn Xuân Dũng báo): **100% tự luận, 60 phút, được dùng tài liệu giấy (photo hoặc ghi chép), thi đến hết phần hàng đợi; làm được các ví dụ trên lớp sẽ có lợi thế.**
 → Tập này để **in ra giấy** (không dùng được tablet trong phòng thi). Gồm: (A) cách trình bày bài tự luận; (B) 16 ví dụ/bài tập trong slide và trên lớp của thầy, giải đầy đủ; (C) bảng công thức gộp; (D) từ khoá lý thuyết.
