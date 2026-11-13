@@ -1,0 +1,1198 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage{iftex}
+
+\ifpdftex
+  \usepackage[utf8]{vietnam}
+  \usepackage{tgpagella}
+  \usepackage{amsmath, amssymb}
+\else
+  \usepackage{amsmath}
+  \usepackage{fontspec}
+  \usepackage{unicode-math}
+  \setmainfont{texgyrepagella-regular.otf}[
+      Path = ../../../docs/slides/latex/fonts/,
+      BoldFont = texgyrepagella-bold.otf,
+      ItalicFont = texgyrepagella-italic.otf,
+      BoldItalicFont = texgyrepagella-bolditalic.otf
+  ]
+  \setmathfont{texgyrepagella-math.otf}[Path=../../../docs/slides/latex/fonts/]
+  \renewcommand{\boldsymbol}[1]{\symbf{#1}}
+\fi
+
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{microtype}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{multicol}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{xcolor}
+
+% Căn chỉnh khoảng cách theo chuẩn học thuật
+\linespread{1.05}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+
+% Khoảng cách phương trình toán học
+\setlength{\abovedisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\belowdisplayskip}{5pt plus 2pt minus 2pt}
+\setlength{\abovedisplayshortskip}{3pt plus 1pt}
+\setlength{\belowdisplayshortskip}{3pt plus 1pt}
+
+% Định dạng tiêu đề
+\titleformat{\section}{\large\bfseries}{\thesection}{0.5em}{}
+\titlespacing*{\section}{0pt}{14pt plus 3pt minus 2pt}{6pt plus 1pt minus 1pt}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titlespacing*{\subsection}{0pt}{12pt plus 3pt minus 2pt}{4pt plus 1pt minus 1pt}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\subsubsection}{0pt}{9pt plus 2pt minus 2pt}{3pt plus 1pt minus 1pt}
+
+\pagestyle{plain}
+\clubpenalty=10000
+\widowpenalty=10000
+
+\setlist[itemize]{leftmargin=1.5em, topsep=1pt, itemsep=1pt, parsep=0pt, label=\textbullet}
+
+% Ký hiệu
+\newcommand{\Wd}{W_{\text{đ}}}
+
+% Tiêu đề câu và các phương án
+\newcommand{\Cau}[2]{\par\Needspace{7\baselineskip}\section*{Câu #1. #2}}
+\newcommand{\DABon}[4]{%
+\begin{multicols}{4}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item #1
+    \item #2
+    \item #3
+    \item #4
+\end{enumerate}
+\end{multicols}}
+\newcommand{\DAHai}[4]{%
+\begin{multicols}{2}
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item #1
+    \item #2
+    \item #3
+    \item #4
+\end{enumerate}
+\end{multicols}}
+\newcommand{\DAMot}[4]{%
+\begin{enumerate}[label=\Alph*., itemsep=1pt, topsep=1pt, parsep=0pt, leftmargin=1.8em]
+    \item #1
+    \item #2
+    \item #3
+    \item #4
+\end{enumerate}}
+\newcommand{\Nhap}{\par\vspace{0.6cm}}
+\newcommand{\DapAn}[1]{\textbf{Đáp án:} #1\par}
+\newcommand{\Bay}[1]{\par\textbf{Bẫy:} #1\par}
+\newcommand{\PhanCachBai}{%
+  \par\Needspace{7\baselineskip}%
+  \addvspace{6pt}%
+  {\color{black!40}\hrule height 0.4pt}%
+  \nobreak\vspace{7pt}\nobreak
+}
+
+\begin{document}
+
+\begin{center}
+    {\Large\bfseries ÔN TẬP GIỮA KỲ VẬT LÝ ĐIỆN TỬ}\\[0.2cm]
+    {\bfseries HỌC PHẦN: PH3330}
+\end{center}
+\vspace{0.2cm}
+
+%=====================================================================
+% THÔNG TIN THI
+%=====================================================================
+\section*{Thông tin kỳ thi}
+
+\begin{itemize}
+    \item Thời gian: Thứ Sáu, 20/11/2026.
+    \item Hình thức: 30 câu trắc nghiệm, 60 phút (trung bình 2 phút một câu).
+    \item Nội dung: lý thuyết và bài tập. Lý thuyết không hỏi định nghĩa mà hỏi suy luận từ định nghĩa. Không có đề mẫu.
+    \item Theo lời cô: tỉ lệ đáp án gây nhiễu cao. Các đáp án nhiễu thường dựng từ đúng những lỗi được liệt kê ở mục \textbf{Bẫy}.
+\end{itemize}
+
+\section*{Phạm vi cô khoanh}
+
+\textbf{Chương 1. Chuyển động của hạt tích điện}
+\begin{itemize}
+    \item a) Chuyển động của hạt mang điện trong điện trường $\vec E$ và từ trường $\vec B$.
+    \item b) Thấu kính tĩnh điện, hội tụ và phân kỳ: một diapham; hai diapham (đặt giả thiết $\to$ tính $U_A, U_K, U_D$ $\to$ kiểm tra kết quả); mặt cầu tích điện với $U_1>U_2$ và $U_1<U_2$.
+    \item c) Tương đối tính ($v\approx c$): khối lượng nghỉ $m_0$ và khối lượng $m$.
+\end{itemize}
+\textbf{Chương 2. Photon, sóng vật chất, cơ học lượng tử}
+\begin{itemize}
+    \item a) Lưỡng tính sóng -- hạt. Photon: công suất $W$, số photon trong 1 s, quang điện ($\lambda_{\text{gh}}$, $\Wd$, công thoát $\phi$). Vi hạt: $\lambda_D$, phân biệt $v\ll c$ và $v\approx c$.
+    \item b) Hệ thức bất định: $\Delta x\,\Delta p_x\ge\hbar/2$, $\Delta E\,\Delta t\ge\hbar/2$.
+    \item c) Vi hạt trong hố thế vô hạn và hữu hạn: $E_n$, $\psi_n$, $|\psi_n|^2$, xác định vị trí, $\lambda_{\max}$, $\lambda_{\min}$, $\nu_{\min}$. Hiệu ứng đường ngầm: hệ số $D$, $d_{\min}$.
+    \item d) Toán tử: mômen động lượng, bình phương mômen động lượng, động năng, $\hat H$; phương trình $\hat L\psi=L\psi$.
+\end{itemize}
+\textbf{Chương 3. Nguyên tử}
+\begin{itemize}
+    \item a) Phổ năng lượng nguyên tử H, phát xạ: số vạch phát xạ, $\lambda_{\max}$, $\lambda_{\min}$, năng lượng ion hóa; dãy Lyman, Balmer, Paschen.
+    \item b) Ion đồng dạng hydro (He$^{+}$, Li$^{2+}$, Be$^{3+}$): $E_n$, phổ phát xạ, năng lượng ion hóa, bán kính quỹ đạo.
+    \item c) Nguyên tử nhiều electron: bộ $(n,l,m_l,m_s)$, số hạng quang phổ, quy tắc lọc lựa, sắp xếp electron.
+\end{itemize}
+
+\section*{Đính chính ghi chép}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.38\linewidth}X@{}}
+\toprule
+Vở / bảng ghi & Sửa lại \\
+\midrule
+Vở: $1s^2\,2s^2\,2p^2\,3s^2\,3p^6\,4s^2$ & Phải là $2p^6$ (bảng ghi đúng). \\
+Vở: $E_n=\dfrac{mv^2}{2}+\dfrac{Ze^2}{4\pi\varepsilon_0 r}$ & Thế năng hút mang dấu âm: $E_n=\dfrac{mv^2}{2}-\dfrac{Ze^2}{4\pi\varepsilon_0 r}$. \\
+Bảng, dòng vi hạt: $E=hc/\lambda_D$ & Chỉ đúng với photon hoặc hạt siêu tương đối tính ($E\approx pc$). Electron chậm dùng $\Wd=p^2/(2m)$. \\
+Sơ đồ ô 3d trên bảng: $\uparrow\downarrow\ \uparrow\downarrow\ \uparrow\ \uparrow\ \uparrow$ & Là $3d^7$: cấu hình $[\mathrm{Ar}]\,3d^7\,4s^2$ (Co, $Z=27$), số hạng cơ bản ${}^4F_{9/2}$. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section*{Hằng số dùng trong đề}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}lll@{}}
+\toprule
+$h=6{,}626\cdot10^{-34}$ J$\cdot$s & $\hbar=1{,}055\cdot10^{-34}$ J$\cdot$s & $hc\approx1240$ eV$\cdot$nm \\
+$e=1{,}6\cdot10^{-19}$ C & $m_e=9{,}1\cdot10^{-31}$ kg & $m_ec^2=0{,}511$ MeV \\
+$m_p=1{,}67\cdot10^{-27}$ kg & $m_p/m_e\approx1836$ & $\sqrt{1836}\approx42{,}8$ \\
+$R=1{,}097\cdot10^{7}$ m$^{-1}$ & $E_I=13{,}6$ eV & $r_0=0{,}53$ Å \\
+$\varepsilon_0=8{,}85\cdot10^{-12}$ F/m & $c=3\cdot10^{8}$ m/s & $\lambda_e\approx12{,}26/\sqrt{U}$ Å \\
+\bottomrule
+\end{tabular}
+\end{center}
+Tiêu chí tương đối tính: $\Wd/(m_0c^2)>0{,}04$ (với electron: $\Wd\gtrsim20$ keV).
+
+%=====================================================================
+% PHẦN I. LÝ THUYẾT
+%=====================================================================
+\section*{PHẦN I. LÝ THUYẾT}
+
+\subsection*{Chương 1. Chuyển động của hạt tích điện}
+
+\subsubsection*{a) Hạt mang điện trong điện trường và từ trường}
+
+\textbf{Công thức.}
+\begin{equation*}
+    \vec F=q\big(\vec E+\vec v\times\vec B\big),\qquad \Wd=|q|U\ \Longrightarrow\ v=\sqrt{\frac{2|q|U}{m}}\quad(v\ll c)
+\end{equation*}
+Tụ lái tia (điện trường đều vuông góc $\vec v_0$), quỹ đạo parabol:
+\begin{equation*}
+    y=\frac{|q|E\ell^2}{2mv_0^2}=\frac{U_d\,\ell^2}{4d\,U_0},\qquad S_E=\frac{\ell L}{2dU_0}
+\end{equation*}
+Từ trường đều, $\theta$ là góc giữa $\vec v$ và $\vec B$:
+\begin{equation*}
+    r=\frac{mv\sin\theta}{|q|B},\qquad T=\frac{2\pi m}{|q|B},\qquad h=\frac{2\pi mv\cos\theta}{|q|B}
+\end{equation*}
+Điện trường vuông góc từ trường: hạt đi thẳng khi $v=E/B$.
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Lực từ luôn vuông góc $\vec v$ nên không sinh công: tốc độ và động năng không đổi, chỉ hướng thay đổi.
+    \item $T$ không phụ thuộc $v$ (khi $v\ll c$). Tăng tốc độ gấp đôi thì $r$ và $h$ gấp đôi, $T$ giữ nguyên.
+    \item So sánh hai hạt cùng $|q|$: cùng $v$ thì $r\propto m$; cùng $U$ thì $r\propto\sqrt m$; cùng $p$ thì $r$ bằng nhau.
+    \item Hạt xuất phát từ nghỉ trong trường tĩnh điện: quỹ đạo không phụ thuộc $q/m$. Electron và proton qua cùng $U_0$ lệch cùng độ lớn, chiều ngược nhau.
+    \item Lọc vận tốc $v=E/B$ không phụ thuộc $q$, $m$ hay dấu điện tích.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $\sin\theta$ cho bán kính, $\cos\theta$ cho bước xoắn; $\theta$ đo giữa $\vec v$ và $\vec B$.
+    \item Đáp án 1836 và 42,8 luôn đi cặp: kiểm tra đại lượng nào giống nhau giữa hai hạt.
+    \item Hiệu điện thế tăng tốc trên 20 kV với electron thì phải dùng tương đối tính, kể cả khi đề không nhắc.
+\end{itemize}
+
+\subsubsection*{b) Thấu kính tĩnh điện: hội tụ hay phân kỳ}
+
+\textbf{Công thức.}
+Thấu kính mỏng: $\dfrac1a+\dfrac1b=\dfrac1f$; $f>0$ hội tụ, $f<0$ phân kỳ; chùm song song hội tụ tại $b=f$.
+
+\textbf{Một diapham} ($g$ là độ dốc điện thế theo chiều chuyển động):
+\begin{equation*}
+    \frac1f=\frac{g_+-g_-}{4U_D},\qquad g_-=\frac{U_D-U_{\text{trước}}}{d_1},\qquad g_+=\frac{U_{\text{sau}}-U_D}{d_2}
+\end{equation*}
+Đề cũ viết $f=\dfrac{4U}{E_2-E_1}$ với $E_1, E_2$ chính là $g_-, g_+$.
+
+\textbf{Hai diapham} K $\to$ D$_1$ $\to$ D$_2$ $\to$ A (khoảng cách $d_1, d_2, d_3$):
+\begin{equation*}
+    f_1=\frac{4U_1}{g_2-g_1},\qquad f_2=\frac{4U_2}{g_3-g_2},\qquad \frac1{d_2-f_1}+\frac1{d_3}=\frac1{f_2}
+\end{equation*}
+\textbf{Mặt cầu (lưới cầu) tích điện}, chiết suất tương đương $n\propto\sqrt U$:
+\begin{equation*}
+    \sqrt{U_1}\sin\alpha=\sqrt{U_2}\sin\beta,\qquad f=\frac{R}{1-\sqrt{U_1/U_2}}
+\end{equation*}
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Quy tắc nhanh: độ dốc điện thế phía sau lớn hơn phía trước thì hội tụ, nhỏ hơn thì phân kỳ.
+    \item Diapham ở cuối vùng tăng tốc (phía sau đẳng thế) là thấu kính phân kỳ; ở đầu vùng tăng tốc (phía trước đẳng thế) là hội tụ.
+    \item Nhân mọi điện thế với cùng hệ số $k$ thì $f$ không đổi; $f$ cũng không phụ thuộc $e/m$.
+    \item Electron đi vào miền có $U$ lớn hơn thì nhanh hơn, tia gãy về phía pháp tuyến, như ánh sáng đi vào môi trường chiết quang hơn.
+    \item Với chiều cong như bài 1-3: $U_1<U_2$ hội tụ, $U_1>U_2$ phân kỳ. Đề vẽ mặt cong ngược chiều thì kết luận đảo lại.
+    \item Quy trình hai diapham: đặt giả thiết $\to$ lập $f_1, f_2$ theo $U_A, U_K, U_D$ $\to$ giải phương trình bậc hai $\to$ kiểm tra nghiệm. Thường được hai nghiệm, như ``46,5 V hoặc 822,3 V'' ở đề cũ.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item Quên hệ số 4 làm $f$ nhỏ đi 4 lần; lấy $g_--g_+$ thì đáp án đổi ``hội tụ'' thành ``phân kỳ'' với cùng con số.
+    \item $d$ cho bằng cm: đổi sang m khi tính $g$ (V/m), hoặc giữ cm nhất quán cho cả $f$.
+    \item Dùng $U_1/U_2$ thay cho $\sqrt{U_1/U_2}$ trong định luật khúc xạ.
+    \item Hai diapham: $a_2=d_2-f_1$ có thể âm (vật ảo). Giữ dấu, không lấy trị tuyệt đối.
+\end{itemize}
+
+\subsubsection*{c) Tương đối tính ($v\approx c$)}
+
+\textbf{Công thức.}
+\begin{equation*}
+    m=\frac{m_0}{\sqrt{1-v^2/c^2}}=\gamma m_0,\qquad E=mc^2,\qquad \Wd=(m-m_0)c^2
+\end{equation*}
+\begin{equation*}
+    p=\gamma m_0v,\qquad E^2=p^2c^2+m_0^2c^4,\qquad pc=\sqrt{\Wd\,(\Wd+2m_0c^2)}
+\end{equation*}
+Electron tăng tốc qua $U$: $\gamma=1+\dfrac{eU}{m_0c^2}$, rồi $v=c\sqrt{1-1/\gamma^2}$.
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Khi nào phải dùng: $\Wd/(m_0c^2)>0{,}04$, với electron là $\Wd\gtrsim20$ keV.
+    \item $m=2m_0\iff\gamma=2\iff v=0{,}866c\iff\Wd=m_0c^2=0{,}511$ MeV.
+    \item Gần $c$, tăng năng lượng chủ yếu làm tăng $m$; $v$ gần như không đổi.
+    \item Trong từ trường: $r=p/(|q|B)$, $T=2\pi\gamma m_0/(|q|B)$ tăng theo năng lượng.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $\Wd\ne\frac12mv^2$, kể cả khi thay $m=\gamma m_0$.
+    \item Công thức cổ điển cho $v>c$ là dấu hiệu dạng tương đối tính, loại ngay.
+    \item Đề cho ``năng lượng'': đọc kỹ là năng lượng toàn phần $E$ hay động năng $\Wd$.
+\end{itemize}
+
+\subsection*{Chương 2. Photon, sóng vật chất, cơ học lượng tử}
+
+\subsubsection*{a) Lưỡng tính sóng -- hạt}
+
+\textbf{Công thức.}
+Photon ($m_0=0$): $\varepsilon=hf=\dfrac{hc}{\lambda}$, $p=\dfrac h\lambda=\dfrac\varepsilon c$. Công suất nguồn $W$: số photon mỗi giây
+\begin{equation*}
+    N=\frac{W}{hc/\lambda}=\frac{W\lambda}{hc}
+\end{equation*}
+Quang điện ngoài (công thoát $A$, trên bảng ký hiệu $\phi$):
+\begin{equation*}
+    \frac{hc}{\lambda}=A+W_{\text{đ}\max},\qquad \lambda_{\text{gh}}=\frac{hc}{A},\qquad eU_h=W_{\text{đ}\max}
+\end{equation*}
+Vi hạt: $\lambda_D=h/p$, với
+\begin{equation*}
+    v\ll c:\ p=\sqrt{2m\Wd}=\sqrt{2m|q|U};\qquad v\approx c:\ p=\frac{\sqrt{\Wd(\Wd+2m_0c^2)}}{c}
+\end{equation*}
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Cường độ $\leftrightarrow$ số photon mỗi giây $\leftrightarrow$ dòng quang điện bão hòa. Bước sóng $\leftrightarrow$ $W_{\text{đ}\max}$ và $U_h$.
+    \item $\lambda>\lambda_{\text{gh}}$: không có quang điện dù chiếu mạnh bao nhiêu. $\lambda_{\text{gh}}$ là của kim loại, không phụ thuộc nguồn sáng.
+    \item Cùng $\lambda_D$ thì cùng $p$; khi đó hạt nhẹ có $\Wd$ lớn hơn ($\Wd=p^2/2m$).
+    \item Cùng $\Wd$: $\lambda_D\propto1/\sqrt m$, proton có $\lambda$ nhỏ hơn electron 42,8 lần.
+    \item Tăng $U$ lên 4 lần thì $\lambda_D$ giảm 2 lần (cổ điển).
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $E=hc/\lambda$ chỉ dành cho photon. Electron 1 MeV: $h/p$ cho 0,872 pm, còn $hc/\Wd$ cho 1,24 pm; cả hai đều có trong đáp án.
+    \item $\lambda\approx12{,}26/\sqrt U$ cho kết quả bằng Å, không phải nm.
+    \item Năng lượng một photon (cỡ $10^{-19}$ J) hay đứng cạnh số photon trong đáp án; quên đổi mW sang W lệch $10^3$.
+\end{itemize}
+
+\subsubsection*{b) Hệ thức bất định}
+
+\textbf{Công thức.}
+\begin{equation*}
+    \Delta x\,\Delta p_x\ge\frac\hbar2=\frac h{4\pi},\qquad \Delta E\,\Delta t\ge\frac\hbar2,\qquad \Delta v_{\min}=\frac{\hbar}{2m\,\Delta x}
+\end{equation*}
+Độ rộng vạch phổ: $\Delta E\approx\dfrac{hc}{\lambda^2}\Delta\lambda$, rồi $\tau\approx\dfrac{\hbar}{2\Delta E}$ (theo dạng cô dạy).
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Giam hạt càng chặt ($\Delta x$ nhỏ) thì $\Delta p$ càng lớn, nên động năng tối thiểu càng lớn. Hạt bị giam không thể đứng yên: có năng lượng ``điểm không''.
+    \item Hạt nặng có $\Delta v$ nhỏ, nên vật vĩ mô coi như có quỹ đạo xác định.
+    \item Trạng thái sống lâu thì vạch hẹp; trạng thái cơ bản sống vô hạn nên có năng lượng xác định.
+    \item Chỉ các cặp cùng trục bị ràng buộc: $\Delta x$ và $\Delta p_y$ có thể cùng nhỏ.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $\hbar/2$, $\hbar$ và $h$ cho ba đáp án lệch nhau $\times2$ và $\times2\pi$. Cô dạy $\hbar/2$; đề giữa kỳ cũ (câu 7, 8) lại tính bằng $\hbar$. Tính theo $\hbar/2$ trước, không khớp thì thử $\hbar$.
+    \item Đề cho độ bất định tương đối $\Delta p/p$ với $v$ lớn: $p$ phải tính tương đối tính.
+\end{itemize}
+
+\subsubsection*{c) Vi hạt trong hố thế, hiệu ứng đường ngầm}
+
+\textbf{Công thức} (hố vô hạn, bề rộng $a$).
+\begin{equation*}
+    E_n=\frac{n^2h^2}{8ma^2}=\frac{n^2\pi^2\hbar^2}{2ma^2},\quad n=1,2,3,\dots\qquad \psi_n(x)=\sqrt{\frac2a}\,\sin\frac{n\pi x}{a}
+\end{equation*}
+\begin{equation*}
+    P_{[x_1,x_2]}=\frac{x_2-x_1}{a}-\frac{1}{2n\pi}\left[\sin\frac{2n\pi x_2}{a}-\sin\frac{2n\pi x_1}{a}\right]
+\end{equation*}
+Chuyển mức $m\to n$: $\dfrac{hc}{\lambda}=E_m-E_n=(m^2-n^2)E_1$; $\nu_{\min}=\Delta E_{\min}/h$.
+
+Xuyên hầm (hàng rào cao $U_0$, rộng $d$, $E<U_0$):
+\begin{equation*}
+    D\approx\exp\!\left[-\frac{2d}{\hbar}\sqrt{2m(U_0-E)}\right],\qquad d=\frac{\hbar\ln(1/D)}{2\sqrt{2m(U_0-E)}}
+\end{equation*}
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item $E_n\propto n^2/(ma^2)$: bề rộng gấp đôi thì năng lượng giảm 4 lần.
+    \item $\psi_n$ có $n-1$ nút bên trong và $n$ cực đại tại $x=\frac{(2k-1)a}{2n}$. $n$ chẵn thì giữa hố là nút, $n$ lẻ thì giữa hố là cực đại.
+    \item $n$ lớn thì phân bố gần đều: $P\approx(x_2-x_1)/a$ (giới hạn cổ điển).
+    \item Hố hữu hạn: sóng thấm ra ngoài, xác suất ngoài hố khác 0; số mức liên kết hữu hạn; mỗi mức thấp hơn mức tương ứng của hố vô hạn cùng bề rộng.
+    \item $D$ giảm theo hàm mũ khi tăng $d$, $m$ hoặc $U_0-E$. Bề rộng gấp đôi thì $D$ bị bình phương, không phải giảm một nửa. Electron xuyên hầm dễ hơn proton rất nhiều.
+    \item Đề hỏi $d_{\min}$ để $D$ không vượt một ngưỡng: dùng công thức $d$ ở trên.
+    \item So sánh: trong hố vô hạn, khoảng cách mức $E_{n+1}-E_n=(2n+1)E_1$ tăng theo $n$, nên $\lambda_{\max}$ ứng với chuyển mức $2\to1$. Trong nguyên tử H, các mức sít lại khi $n$ tăng, nên từ mức $n$, $\lambda_{\max}$ ứng với $n\to n-1$.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $n$ bắt đầu từ 1, nên $E_1>0$. Đáp án ``năng lượng thấp nhất bằng 0'' luôn sai.
+    \item ``Bước sóng dài nhất khi về trạng thái cơ bản'' phải xét cả chuyển mức qua mức trung gian ($2\to1$), không chỉ các chuyển mức bắt đầu từ mức cao nhất.
+    \item Thiếu hệ số 2 trong số mũ của $D$.
+\end{itemize}
+
+\subsubsection*{d) Toán tử}
+
+\textbf{Công thức.}
+\begin{equation*}
+    \hat p_x=-i\hbar\frac{\partial}{\partial x},\qquad \hat T=-\frac{\hbar^2}{2m}\nabla^2,\qquad \hat H=\hat T+U,\qquad \hat L_z=-i\hbar\frac{\partial}{\partial\varphi}
+\end{equation*}
+\begin{equation*}
+    \hat L^2=-\hbar^2\left[\frac1{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right)+\frac1{\sin^2\theta}\frac{\partial^2}{\partial\varphi^2}\right]
+\end{equation*}
+Phương trình trị riêng $\hat A\psi=a\psi$. Trị riêng: $L^2=l(l+1)\hbar^2$, $L_z=m_l\hbar$ với $m_l=-l,\dots,l$; $\hat H\psi=E\psi$ là phương trình Schrödinger dừng. Giao hoán: $[\hat x,\hat p_x]=i\hbar$, $[\hat L_x,\hat L_y]=i\hbar\hat L_z$, $[\hat L^2,\hat L_z]=0$.
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Kiểm tra hàm riêng: tác dụng toán tử rồi rút gọn. Kết quả bằng hằng số (không chứa biến) nhân $\psi$ thì đó là hàm riêng, hằng số là trị riêng.
+    \item $e^{ikx}$ là hàm riêng của $\hat p_x$ (trị riêng $\hbar k$) và của $\hat T$. $\sin kx$, $\cos kx$ chỉ là hàm riêng của $\hat T$.
+    \item $e^{im\varphi}$ là hàm riêng của $\hat L_z$ với trị riêng $m\hbar$.
+    \item Toán tử của đại lượng đo được là Hermite, nên trị riêng là số thực.
+    \item Hai đại lượng đo đồng thời chính xác được khi toán tử giao hoán: $L^2$ và $L_z$ được; $L_x$ và $L_z$ không; $x$ và $p_x$ không.
+    \item $|L|=\sqrt{l(l+1)}\,\hbar>L_{z,\max}=l\hbar$: vectơ $\vec L$ không bao giờ nằm hẳn dọc trục $z$.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $-i\cdot i=+1$: trị riêng của $\hat L_z$ trên $e^{3i\varphi}$ là $+3\hbar$.
+    \item Nhầm $l(l+1)\hbar^2$ với $l^2\hbar^2$; trị riêng của $\hat L^2$ có đơn vị $\hbar^2$, của $\hat L_z$ là $\hbar$.
+\end{itemize}
+
+\subsection*{Chương 3. Nguyên tử}
+
+\subsubsection*{a) Phổ năng lượng nguyên tử H, phát xạ}
+
+\textbf{Công thức.}
+\begin{equation*}
+    E_n=-\frac{13{,}6}{n^2}\ \text{eV},\qquad \frac1\lambda=R\left(\frac1{n_f^2}-\frac1{n_i^2}\right)
+\end{equation*}
+$E_\infty=0$ là mức chân không, nên năng lượng ion hóa từ mức $n$ là $13{,}6/n^2$ eV. Dãy Lyman $n_f=1$ (tử ngoại), Balmer $n_f=2$ (khả kiến), Paschen $n_f=3$ (hồng ngoại). Trong một dãy: $\lambda_{\max}$ khi $n_i=n_f+1$; $\lambda_{\min}=n_f^2/R$ khi $n_i\to\infty$.
+
+Số vạch từ mức $n$: khối khí $\dfrac{n(n-1)}{2}$; một nguyên tử tối đa $n-1$. Mẫu Bohr: $\Wd=-E_n$, $U=2E_n$, $r_n=n^2r_0$.
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Trạng thái electron trong H ghi bằng bộ ba $(n,l,m_l)$; năng lượng chỉ phụ thuộc $n$, mỗi mức suy biến $n^2$ lần ($2n^2$ kể cả spin).
+    \item Các mức sít lại khi $n$ tăng: từ mức $n$, $\lambda_{\min}$ ứng với $n\to1$, $\lambda_{\max}$ ứng với $n\to n-1$.
+    \item Lyman nằm hoàn toàn trong tử ngoại. Bốn vạch Balmer khả kiến: 656,3; 486,1; 434,0; 410,2 nm.
+    \item Nguyên tử ở trạng thái cơ bản chỉ hấp thụ photon có năng lượng đúng bằng $E_n-E_1$, hoặc từ 13,6 eV trở lên để ion hóa. Electron va chạm thì có thể truyền một phần năng lượng.
+    \item Kích thích bằng electron động năng $W$: lên được mức $n$ lớn nhất thỏa $13{,}6\,(1-1/n^2)\le W$.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item $\lambda_{\min}$ của một dãy là giới hạn dãy ($\infty\to n_f$), không phải vạch từ mức cao nhất mà đề cho.
+    \item ``Một nguyên tử'' và ``khối khí'' cho số vạch khác nhau (4 và 10 khi $n=5$).
+\end{itemize}
+
+\subsubsection*{b) Ion đồng dạng hydro}
+
+\textbf{Công thức.}
+Điều kiện: chỉ còn đúng 1 electron, $N_e=Z-(\text{điện tích ion})=1$.
+\begin{equation*}
+    E_n=-\frac{13{,}6\,Z^2}{n^2}\ \text{eV},\qquad r_n=\frac{n^2r_0}{Z},\qquad \frac1\lambda=RZ^2\left(\frac1{n_f^2}-\frac1{n_i^2}\right)
+\end{equation*}
+Năng lượng ion hóa từ trạng thái cơ bản: He$^{+}$ 54,4 eV; Li$^{2+}$ 122,4 eV; Be$^{3+}$ 217,6 eV. Mô hình gần đúng kiểu cổ điển:
+\begin{equation*}
+    E_n=\Wd+U=\frac{mv^2}{2}-\frac{Ze^2}{4\pi\varepsilon_0r}
+\end{equation*}
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Năng lượng nhân $Z^2$, bán kính chia $Z$, mọi bước sóng chia $Z^2$: phổ He$^{+}$ ngắn hơn phổ H 4 lần.
+    \item He$^{+}$ chuyển $2n\to2m$ cho đúng vạch $n\to m$ của H. Ví dụ He$^{+}$ $4\to2$ trùng Lyman $\alpha$ (121,5 nm).
+    \item Hạt nhân hút mạnh hơn nên electron ở gần hơn, liên kết chặt hơn.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item Kali ($Z=19$) có 1 electron hóa trị nhưng vẫn có 19 electron, không phải ion đồng dạng hydro. Cô nói: chọn kali là chưa hiểu bản chất bài toán.
+    \item Li$^{+}$ còn 2 electron. Be$^{3+}$ có $Z=4$, không phải 3.
+    \item Quên $Z^2$ khi tính bước sóng của He$^{+}$ thì ra đúng vạch của hydro (486 nm thay cho 121,5 nm).
+\end{itemize}
+
+\subsubsection*{c) Nguyên tử nhiều electron}
+
+\textbf{Công thức.}
+$n=1,2,\dots$; $l=0,\dots,n-1$ (s, p, d, f); $m_l=-l,\dots,l$; $m_s=\pm\frac12$. Pauli: không có hai electron trùng cả bốn số. Lớp chứa $2n^2$ electron, phân lớp chứa $2(2l+1)$.
+
+Thứ tự điền theo $n+l$ tăng: 1s, 2s, 2p, 3s, 3p, \textbf{4s, 3d}, 4p, 5s, 4d, 5p, 6s, 4f, 5d, \dots
+
+Số hạng quang phổ ${}^{2S+1}L_J$; $L=0,1,2,3$ ứng với S, P, D, F; $J=|L-S|,\dots,L+S$. Trạng thái cơ bản (Hund): $S$ lớn nhất $\to$ $L$ lớn nhất $\to$ $J=|L-S|$ nếu phân lớp chưa đầy nửa, $J=L+S$ nếu quá nửa.
+
+Quy tắc lọc lựa: một electron $\Delta l=\pm1$, $\Delta m_l=0,\pm1$, $\Delta n$ bất kỳ. Theo liên kết LS: $\Delta S=0$, $\Delta L=0,\pm1$, $\Delta J=0,\pm1$ (cấm $J=0\to J=0$).
+
+\textbf{Suy luận hay hỏi.}
+\begin{itemize}
+    \item Ví dụ trên bảng: $1s^2\,2s^2\,2p^6\,3s^2\,3p^6\,4s^2\,3d^7$, ô 3d là $\uparrow\downarrow\ \uparrow\downarrow\ \uparrow\ \uparrow\ \uparrow$. Ba electron độc thân nên $S=3/2$; $L=3$ (F); quá nửa nên $J=9/2$. Số hạng ${}^4F_{9/2}$ (Co).
+    \item Phân lớp đầy có $L=S=J=0$ (${}^1S_0$), chỉ cần xét phân lớp chưa đầy.
+    \item Ngoại lệ thường hỏi: Cr $[\mathrm{Ar}]\,3d^5\,4s^1$, Cu $[\mathrm{Ar}]\,3d^{10}\,4s^1$.
+    \item Kiểm tra một bộ số lượng tử: $l<n$, $|m_l|\le l$, $m_s=\pm\frac12$.
+    \item Đếm electron theo điều kiện, ví dụ $n=3$, $m_l=-1$: có ở 3p và 3d, mỗi ô 2 electron, tổng 4.
+\end{itemize}
+
+\textbf{Bẫy.}
+\begin{itemize}
+    \item Số trên bên trái là độ bội $2S+1$, không phải $J$. ${}^3D$ có $J=1,2,3$.
+    \item Chọn $J=|L-S|$ cho phân lớp quá nửa ($3d^7$ ra ${}^4F_{3/2}$ là sai).
+    \item $\Delta l=0$ ($3s\to2s$) và $\Delta l=\pm2$ ($3d\to2s$) đều bị cấm.
+\end{itemize}
+
+\subsection*{Mười hai kiểu đáp án nhiễu}
+
+\textbf{Lỗi công thức.}
+\begin{itemize}
+    \item Photon hay vi hạt: dùng $E=hc/\lambda$ cho electron. Với hạt có khối lượng, chỉ $\lambda=h/p$ luôn đúng.
+    \item Cổ điển hay tương đối tính: $\Wd/(m_0c^2)>0{,}04$ thì không được dùng $\frac12mv^2$ hay $p=\sqrt{2m\Wd}$.
+    \item $\hbar/2$, $\hbar$ hay $h$: ba đáp án cách nhau $\times2$, $\times2\pi$.
+    \item Hệ số bị rơi: 4 trong $f=4U/(g_+-g_-)$, 2 trong số mũ của $D$, $Z^2$ trong ion đồng dạng.
+    \item Căn bậc hai: $\sqrt{U_1/U_2}$ trong khúc xạ điện tử, $\sqrt m$ khi so bán kính cùng $U$.
+    \item $\sin$ hay $\cos$: bán kính dùng $v\sin\theta$, bước xoắn dùng $v\cos\theta$.
+\end{itemize}
+\textbf{Lỗi đọc đề.}
+\begin{itemize}
+    \item Một nguyên tử hay khối khí: $n-1$ hay $n(n-1)/2$ vạch.
+    \item $\lambda$ dài nhất khi về trạng thái cơ bản: xét cả chuyển mức qua trung gian. Hố thế: $2\to1$. Nguyên tử H: $n\to n-1$.
+    \item Giới hạn dãy: $\lambda_{\min}$ của dãy ứng với $\infty\to n_f$.
+    \item Đồng dạng hydro: đếm tổng số electron, không đếm electron hóa trị (bẫy kali, Li$^{+}$).
+    \item Năng lượng nào: toàn phần, động năng hay năng lượng một photon; eV hay J.
+    \item Đơn vị: Å, nm, pm; mW; cm trong bài thấu kính.
+\end{itemize}
+
+\subsection*{Chiến lược 60 phút}
+\begin{itemize}
+    \item Lượt 1 (khoảng 20 phút): làm hết câu lý thuyết suy luận và câu tính một bước.
+    \item Lượt 2: bài tính dài (hai diapham, xác suất trong hố, tương đối tính). Bài hai diapham thường ra hai nghiệm, đáp án có thể ghi cả cặp.
+    \item Trước khi bấm máy, xác định dạng: cổ điển hay tương đối tính? Một nguyên tử hay khối khí? Đề dùng $\hbar/2$ hay $\hbar$?
+    \item Hai đáp án chỉ lệch nhau $\times2$, $\times4$, căn bậc hai, $Z^2$ hoặc $10^n$: đó là đáp án nhiễu dựng từ lỗi quen. Kiểm tra lại đúng chỗ đó.
+    \item Ước lượng để loại: $v>c$, xác suất lớn hơn 1, năng lượng liên kết dương đều loại ngay.
+\end{itemize}
+
+\newpage
+%=====================================================================
+% PHẦN II. ĐỀ LUYỆN
+%=====================================================================
+\section*{PHẦN II. ĐỀ LUYỆN 36 CÂU}
+
+Làm như thi thật: khoảng 70 phút cho 36 câu, không xem Phần III. Ghi đáp án ra lề rồi đối chiếu bảng đáp án.
+
+\Cau{1}{Hạt trong từ trường}
+Một electron và một proton, ban đầu đứng yên, được tăng tốc qua cùng hiệu điện thế $U$ rồi bay vào cùng một từ trường đều theo phương vuông góc với đường sức. Tỉ số bán kính quỹ đạo $r_p/r_e$ bằng (lấy $m_p/m_e\approx1836$):
+\DAHai{$\approx1836$}{$\approx42{,}8$}{$\approx1/42{,}8$}{$1$, vì hai hạt có cùng độ lớn điện tích}
+\Nhap
+
+\Cau{2}{Bán kính quỹ đạo trong từ trường}
+Electron được tăng tốc từ nghỉ qua hiệu điện thế 1000 V rồi bay vuông góc vào từ trường đều $B=0{,}01$ T. Bán kính quỹ đạo là:
+\DABon{1,07 cm}{0,53 cm}{2,13 cm}{10,7 cm}
+\Nhap
+
+\Cau{3}{Quỹ đạo xoắn ốc}
+Electron bay vào từ trường đều với vận tốc hợp với $\vec B$ góc $\theta$ ($0^\circ<\theta<90^\circ$). Giữ nguyên $\theta$ và $B$, tăng tốc độ gấp đôi thì bán kính $r$, chu kỳ $T$ và bước xoắn $h$:
+\DAHai{$r$ tăng 2 lần; $T$ tăng 2 lần; $h$ tăng 4 lần}{$r$ tăng 2 lần; $T$ không đổi; $h$ tăng 2 lần}{$r$ tăng 2 lần; $T$ giảm một nửa; $h$ không đổi}{$r$ không đổi; $T$ không đổi; $h$ tăng 2 lần}
+\Nhap
+
+\Cau{4}{Lái tia bằng điện trường}
+Một electron và một proton, đều xuất phát từ nghỉ và được tăng tốc bởi hiệu điện thế có cùng độ lớn $U_0$, lần lượt bay vào cùng một tụ lái tia có điện trường đều vuông góc với vận tốc ban đầu. So sánh độ lệch của hai hạt khi ra khỏi tụ:
+\DAMot{Proton lệch ít hơn khoảng 1836 lần, cùng chiều}{Proton lệch ít hơn khoảng 42,8 lần, ngược chiều}{Hai độ lệch bằng nhau về độ lớn, ngược chiều nhau}{Hai độ lệch bằng nhau về độ lớn và cùng chiều}
+\Nhap
+
+\Cau{5}{Điện trường vuông góc từ trường}
+Một electron bay thẳng đều qua vùng có điện trường đều $\vec E$ vuông góc với từ trường đều $\vec B$ (vận tốc vuông góc với cả hai). Thay electron bằng proton có cùng vận tốc thì proton:
+\DAHai{Vẫn bay thẳng}{Lệch theo chiều lực điện}{Lệch theo chiều lực từ}{Chuyển động tròn bán kính $mv/(eB)$}
+\Nhap
+
+\Cau{6}{Thấu kính một diapham}
+Hệ K -- D -- A: catốt K ở 0 V; diapham D có $U_D=1000$ V, cách K một khoảng $d_1=2$ cm; anốt A có $U_A=3000$ V, cách D một khoảng $d_2=2$ cm. Coi D là thấu kính mỏng. Tiêu cự và tính chất của D là:
+\DABon{8 cm, hội tụ}{8 cm, phân kỳ}{2 cm, hội tụ}{16 cm, hội tụ}
+\Nhap
+
+\Cau{7}{Diapham ở cuối vùng tăng tốc}
+Một diapham đặt ở cuối vùng tăng tốc: phía trước có điện trường tăng tốc đều, phía sau là vùng đẳng thế. Đối với chùm electron đi qua, diapham này là:
+\DAMot{Thấu kính hội tụ}{Thấu kính phân kỳ}{Không có tác dụng thấu kính vì phía sau không có điện trường}{Hội tụ hay phân kỳ tùy giá trị $U_D$}
+\Nhap
+
+\Cau{8}{Mặt cầu tích điện}
+Chùm electron song song trục đi qua hai lưới cầu (chiều cong như bài 1-3) ngăn cách miền điện thế $U_1=100$ V (phía tới) và $U_2=400$ V (phía ra), bán kính lưới $R=5$ cm. Tiêu cự của hệ là:
+\DABon{10 cm, hội tụ}{6,67 cm, hội tụ}{10 cm, phân kỳ}{5 cm, hội tụ}
+\Nhap
+
+\Cau{9}{Mặt cầu tích điện khi đảo điện thế}
+Giữ nguyên hình học của hệ lưới cầu ở câu 8 ($R=5$ cm) nhưng đổi điện thế: $U_1=400$ V (phía tới), $U_2=100$ V (phía ra). Hệ khi đó là:
+\DAHai{Hội tụ, $f=10$ cm}{Phân kỳ, $|f|=5$ cm}{Phân kỳ, $|f|=10$ cm}{Hội tụ, $f=5$ cm}
+\Nhap
+
+\Cau{10}{Vận tốc tương đối tính}
+Electron được tăng tốc từ nghỉ qua hiệu điện thế 1 MV ($m_0c^2=0{,}511$ MeV). Vận tốc của electron là:
+\DABon{$5{,}93\cdot10^{8}$ m/s}{$2{,}82\cdot10^{8}$ m/s}{$2{,}60\cdot10^{8}$ m/s}{$1{,}98\cdot10^{8}$ m/s}
+\Nhap
+
+\Cau{11}{Động năng tương đối tính}
+Khối lượng tương đối tính của một electron gấp đôi khối lượng nghỉ của nó. Động năng của electron là:
+\DABon{0,511 MeV}{0,383 MeV}{0,192 MeV}{1,022 MeV}
+\Nhap
+
+\Cau{12}{Số photon phát ra}
+Một laser công suất 1 mW phát ánh sáng bước sóng 632,8 nm. Số photon laser phát ra trong 1 giây là:
+\DABon{$3{,}18\cdot10^{15}$}{$3{,}18\cdot10^{18}$}{$3{,}14\cdot10^{-19}$}{$3{,}18\cdot10^{12}$}
+\Nhap
+
+\Cau{13}{Quang điện khi tăng cường độ sáng}
+Chiếu ánh sáng đơn sắc có $\lambda<\lambda_{\text{gh}}$ vào catốt tế bào quang điện. Giữ nguyên bước sóng, tăng cường độ sáng gấp đôi thì:
+\DAMot{Động năng ban đầu cực đại của quang electron tăng gấp đôi}{Hiệu điện thế hãm tăng gấp đôi}{Dòng quang điện bão hòa tăng gấp đôi, động năng ban đầu cực đại không đổi}{Giới hạn quang điện $\lambda_{\text{gh}}$ tăng}
+\Nhap
+
+\Cau{14}{Hiệu điện thế hãm và giới hạn quang điện}
+Kim loại có công thoát $A=2{,}0$ eV được chiếu bức xạ $\lambda=400$ nm. Hiệu điện thế hãm và giới hạn quang điện lần lượt là:
+\DAHai{1,1 V và 620 nm}{3,1 V và 620 nm}{1,1 V và 400 nm}{2,0 V và 620 nm}
+\Nhap
+
+\Cau{15}{Hai hạt cùng bước sóng de Broglie}
+Một electron và một proton có cùng bước sóng de Broglie (cả hai chuyển động chậm, $v\ll c$). Phát biểu đúng là:
+\DAMot{Hai hạt có cùng động năng}{Hai hạt có cùng động lượng; động năng electron lớn hơn khoảng 1836 lần}{Hai hạt có cùng vận tốc}{Hai hạt có cùng động lượng; động năng proton lớn hơn khoảng 1836 lần}
+\Nhap
+
+\Cau{16}{Bước sóng de Broglie của electron chậm}
+Bước sóng de Broglie của electron được tăng tốc từ nghỉ qua hiệu điện thế 100 V là:
+\DABon{0,123 nm}{1,23 nm}{12,3 nm}{0,0123 nm}
+\Nhap
+
+\Cau{17}{Bước sóng de Broglie tương đối tính}
+Electron có động năng 1 MeV ($m_0c^2=0{,}511$ MeV, $hc=1240$ eV$\cdot$nm). Bước sóng de Broglie của electron là:
+\DABon{0,872 pm}{1,23 pm}{1,24 pm}{0,821 pm}
+\Nhap
+
+\Cau{18}{Hệ thức bất định}
+Electron bị giam trong vùng kích thước $\Delta x=0{,}1$ nm. Theo hệ thức $\Delta x\,\Delta p_x\ge\hbar/2$, độ bất định vận tốc nhỏ nhất của electron là:
+\DABon{$5{,}79\cdot10^{5}$ m/s}{$1{,}16\cdot10^{6}$ m/s}{$7{,}28\cdot10^{6}$ m/s}{$2{,}90\cdot10^{5}$ m/s}
+\Nhap
+
+\Cau{19}{Bước sóng phát xạ từ hố thế vô hạn}
+Electron trong hố thế một chiều sâu vô hạn, bề rộng $a=1$ nm, đang ở trạng thái $n=3$. Khi trở về trạng thái cơ bản (có thể qua mức trung gian), bước sóng dài nhất của photon có thể phát ra là:
+\DABon{658 nm}{411 nm}{1097 nm}{3290 nm}
+\Nhap
+
+\Cau{20}{Xác suất trong hố thế vô hạn}
+Hạt trong hố thế vô hạn bề rộng $a$, ở trạng thái cơ bản $n=1$. Xác suất tìm thấy hạt trong đoạn $[0;\,a/3]$ là:
+\DABon{0,333}{0,196}{0,609}{0,138}
+\Nhap
+
+\Cau{21}{Vị trí xác suất cực đại}
+Hạt trong hố thế vô hạn bề rộng $a$ ở trạng thái $n=2$. Vị trí có mật độ xác suất tìm thấy hạt lớn nhất là:
+\DAHai{$x=a/2$}{$x=a/4$ và $x=3a/4$}{$x=a/3$ và $x=2a/3$}{$x=0$ và $x=a$}
+\Nhap
+
+\Cau{22}{Hố thế hữu hạn và hố thế vô hạn}
+So sánh hạt trong hố thế hữu hạn với hạt trong hố thế vô hạn có cùng bề rộng. Phát biểu \textbf{sai} là:
+\DAMot{Với hố hữu hạn, xác suất tìm thấy hạt bên ngoài hố khác 0}{Hố hữu hạn chỉ có một số hữu hạn mức năng lượng liên kết}{Mức năng lượng thứ $n$ trong hố hữu hạn thấp hơn mức thứ $n$ của hố vô hạn}{Trong cả hai loại hố, hạt có thể có năng lượng bằng 0 ở trạng thái thấp nhất}
+\Nhap
+
+\Cau{23}{Hiệu ứng đường ngầm}
+Electron năng lượng $E=1$ eV tới hàng rào thế chữ nhật cao $U_0=2$ eV, bề rộng $d=0{,}5$ nm. Hệ số xuyên hầm gần đúng $D\approx\exp\!\big[-\tfrac{2d}{\hbar}\sqrt{2m(U_0-E)}\big]$ bằng:
+\DABon{$6{,}0\cdot10^{-3}$}{$7{,}7\cdot10^{-2}$}{$3{,}6\cdot10^{-5}$}{$0{,}5$}
+\Nhap
+
+\Cau{24}{Trị riêng của toán tử hình chiếu mômen động lượng}
+Hàm $\psi(\varphi)=A\,e^{3i\varphi}$ là hàm riêng của toán tử $\hat L_z=-i\hbar\,\partial/\partial\varphi$ với trị riêng:
+\DABon{$3\hbar$}{$-3\hbar$}{$3i\hbar$}{$9\hbar^2$}
+\Nhap
+
+\Cau{25}{Hàm riêng của toán tử xung lượng và động năng}
+Xét hàm sóng $\psi(x)=A\sin kx$ của hạt tự do. Phát biểu đúng là:
+\DAMot{$\psi$ là hàm riêng của $\hat p_x$ với trị riêng $\hbar k$}{$\psi$ là hàm riêng của $\hat T$ với trị riêng $\hbar^2k^2/(2m)$, nhưng không là hàm riêng của $\hat p_x$}{$\psi$ là hàm riêng của cả $\hat p_x$ và $\hat T$}{$\psi$ không là hàm riêng của toán tử nào}
+\Nhap
+
+\Cau{26}{Độ lớn mômen động lượng quỹ đạo}
+Electron ở trạng thái có số lượng tử quỹ đạo $l=2$. Độ lớn mômen động lượng quỹ đạo và giá trị lớn nhất của hình chiếu $L_z$ lần lượt là:
+\DAHai{$\sqrt6\,\hbar$ và $2\hbar$}{$2\hbar$ và $2\hbar$}{$6\hbar$ và $2\hbar$}{$\sqrt6\,\hbar$ và $\sqrt6\,\hbar$}
+\Nhap
+
+\Cau{27}{Số vạch phổ hydro}
+Một khối khí hydro được kích thích để các nguyên tử lên tới mức $n=5$. Số vạch phổ phát xạ tối đa của khối khí và số vạch thuộc dãy Balmer lần lượt là:
+\DABon{10 và 3}{4 và 1}{10 và 4}{15 và 3}
+\Nhap
+
+\Cau{28}{Giới hạn dãy Balmer}
+Bước sóng ngắn nhất trong dãy Balmer của nguyên tử hydro ($R=1{,}097\cdot10^{7}$ m$^{-1}$) là:
+\DABon{656,3 nm}{364,6 nm}{91,2 nm}{121,5 nm}
+\Nhap
+
+\Cau{29}{Động năng và thế năng trong mẫu Bohr}
+Theo mẫu Bohr, ở trạng thái cơ bản của nguyên tử hydro ($E_1=-13{,}6$ eV), động năng và thế năng của electron lần lượt là:
+\DAHai{13,6 eV và $-27{,}2$ eV}{$-13{,}6$ eV và 0}{13,6 eV và $-13{,}6$ eV}{6,8 eV và $-20{,}4$ eV}
+\Nhap
+
+\Cau{30}{Vạch phổ của ion He$^{+}$}
+Bước sóng của vạch phổ phát ra khi ion He$^{+}$ chuyển từ mức $n=4$ về $n=2$ bằng ($R=1{,}097\cdot10^{7}$ m$^{-1}$):
+\DABon{486,2 nm}{121,5 nm}{30,4 nm}{656,3 nm}
+\Nhap
+
+\Cau{31}{Ion Li$^{2+}$}
+Năng lượng ion hóa từ trạng thái cơ bản và bán kính quỹ đạo Bohr thứ nhất của ion Li$^{2+}$ ($r_0=0{,}53$ Å) lần lượt là:
+\DAHai{122,4 eV và 0,177 Å}{40,8 eV và 0,177 Å}{122,4 eV và 1,59 Å}{122,4 eV và 4,77 Å}
+\Nhap
+
+\Cau{32}{Nhận biết ion đồng dạng hydro}
+Hệ nào sau đây là ion đồng dạng hydro?
+\DAHai{Nguyên tử K ($Z=19$), có 1 electron hóa trị}{Ion Li$^{+}$ ($Z=3$)}{Ion Be$^{3+}$ ($Z=4$)}{Nguyên tử He ($Z=2$)}
+\Nhap
+
+\Cau{33}{Số lượng tử}
+Số electron tối đa trong một nguyên tử có cùng $n=3$ và $m_l=-1$ là:
+\DABon{2}{4}{6}{18}
+\Nhap
+
+\Cau{34}{Quy tắc lọc lựa}
+Theo quy tắc lọc lựa $\Delta l=\pm1$, chuyển mức nào sau đây được phép?
+\DABon{$3d\to2s$}{$3s\to2s$}{$4f\to3p$}{$3d\to2p$}
+\Nhap
+
+\Cau{35}{Số hạng quang phổ của trạng thái cơ bản}
+Nguyên tử có cấu hình $[\mathrm{Ar}]\,3d^7\,4s^2$ (sơ đồ ô 3d trên bảng: $\uparrow\downarrow\ \uparrow\downarrow\ \uparrow\ \uparrow\ \uparrow$). Số hạng quang phổ của trạng thái cơ bản là:
+\DABon{${}^4F_{9/2}$}{${}^4F_{3/2}$}{${}^2D_{5/2}$}{${}^4P_{5/2}$}
+\Nhap
+
+\Cau{36}{Các giá trị của số lượng tử J}
+Số hạng quang phổ ${}^3D$ có những giá trị $J$ nào?
+\DABon{$J=3$}{$J=1,2,3$}{$J=0,1,2,3$}{$J=2$}
+
+\newpage
+%=====================================================================
+% PHẦN III. ĐÁP ÁN VÀ LỜI GIẢI
+%=====================================================================
+\section*{PHẦN III. ĐÁP ÁN VÀ LỜI GIẢI}
+
+\subsection*{Bảng đáp án}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 \\ \hline
+B & A & B & C & A & A & B & A & B & B & A & A \\ \hline\hline
+13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & 21 & 22 & 23 & 24 \\ \hline
+C & A & B & A & A & A & C & B & B & D & A & A \\ \hline\hline
+25 & 26 & 27 & 28 & 29 & 30 & 31 & 32 & 33 & 34 & 35 & 36 \\ \hline
+B & A & A & B & A & B & A & C & B & D & A & B \\ \hline
+\end{tabular}
+\end{center}
+
+\subsection*{Lời giải chi tiết}
+
+%---------------------------------------------------------------------
+\Cau{1}{Hạt trong từ trường}
+\DapAn{\textbf{B.} $\boldsymbol{\approx42{,}8}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Vận tốc sau khi tăng tốc: $|q|U=\dfrac{mv^2}{2}\Rightarrow mv=\sqrt{2m|q|U}$.
+
+\textbf{B2:} Bán kính quỹ đạo tròn:
+\begin{equation*}
+    r=\frac{mv}{|q|B}=\frac{\sqrt{2m|q|U}}{|q|B}\ \Longrightarrow\ r\propto\sqrt m\quad(\text{cùng }U,\ \text{cùng }|q|)
+\end{equation*}
+\begin{equation*}
+    \frac{r_p}{r_e}=\sqrt{\frac{m_p}{m_e}}=\sqrt{1836}\approx\boldsymbol{42{,}8}
+\end{equation*}
+\Bay{1836 là tỉ số khi hai hạt có cùng vận tốc. Cùng $v$ thì $r\propto m$; cùng $U$ thì $r\propto\sqrt m$; cùng $p$ thì $r$ bằng nhau.}
+
+\PhanCachBai
+\Cau{2}{Bán kính quỹ đạo trong từ trường}
+\DapAn{\textbf{A. 1,07 cm}}
+
+\textbf{Giải.}
+
+\textbf{Dữ kiện:} $U=1000$ V, $B=0{,}01$ T. Vì $eU=1$ keV $\ll511$ keV nên dùng CT cổ điển.
+
+\textbf{B1:} Vận tốc electron:
+\begin{equation*}
+    v=\sqrt{\frac{2eU}{m}}=\sqrt{\frac{2\cdot1{,}6\cdot10^{-19}\cdot1000}{9{,}1\cdot10^{-31}}}\approx1{,}88\cdot10^{7}\text{ m/s}
+\end{equation*}
+\textbf{B2:} Bán kính quỹ đạo:
+\begin{equation*}
+    r=\frac{mv}{eB}=\frac{9{,}1\cdot10^{-31}\cdot1{,}88\cdot10^{7}}{1{,}6\cdot10^{-19}\cdot0{,}01}\approx1{,}07\cdot10^{-2}\text{ m}=\boldsymbol{1{,}07\text{ cm}}
+\end{equation*}
+\Bay{Các đáp án gấp đôi, gấp mười sinh ra từ lỗi đổi đơn vị hoặc bỏ căn.}
+
+\PhanCachBai
+\Cau{3}{Quỹ đạo xoắn ốc}
+\DapAn{\textbf{B. $r$ tăng 2 lần; $T$ không đổi; $h$ tăng 2 lần}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Phân tích vận tốc: $v_\perp=v\sin\theta$ tạo chuyển động tròn, $v_\parallel=v\cos\theta$ tạo chuyển động thẳng đều dọc $\vec B$.
+
+\textbf{B2:} AD các CT:
+\begin{equation*}
+    r=\frac{mv\sin\theta}{eB}\propto v,\qquad T=\frac{2\pi m}{eB}\ (\text{không chứa }v),\qquad h=v\cos\theta\cdot T\propto v
+\end{equation*}
+Vậy tăng $v$ gấp đôi thì $r$ và $h$ gấp đôi, $T$ không đổi.
+\Bay{Chu kỳ không phụ thuộc vận tốc khi $v\ll c$. Ở tốc độ tương đối tính, $m$ thay bằng $\gamma m_0$ nên $T$ tăng theo năng lượng.}
+
+\PhanCachBai
+\Cau{4}{Lái tia bằng điện trường}
+\DapAn{\textbf{C. Hai độ lệch bằng nhau về độ lớn, ngược chiều nhau}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Độ lệch khi ra khỏi tụ dài $\ell$:
+\begin{equation*}
+    y=\frac12\cdot\frac{|q|E}{m}\cdot\left(\frac{\ell}{v_0}\right)^2=\frac{|q|E\ell^2}{2mv_0^2}
+\end{equation*}
+\textbf{B2:} Hạt tăng tốc từ nghỉ: $mv_0^2=2|q|U_0$. Thay vào:
+\begin{equation*}
+    y=\frac{E\ell^2}{4U_0}\quad(\text{không chứa }q,\ m)
+\end{equation*}
+\textbf{B3:} Lực điện trên electron và proton ngược chiều vì điện tích trái dấu, nên hai hạt lệch cùng độ lớn, ngược chiều.
+\Bay{Quỹ đạo trong trường tĩnh điện của hạt xuất phát từ nghỉ không phụ thuộc $e/m$, nhưng dấu điện tích vẫn quyết định chiều lệch.}
+
+\PhanCachBai
+\Cau{5}{Điện trường vuông góc từ trường}
+\DapAn{\textbf{A. Vẫn bay thẳng}}
+
+\textbf{Giải.}
+
+\textbf{B1:} ĐK đi thẳng: lực điện cân bằng lực từ, $|q|E=|q|vB\Rightarrow v=E/B$, không phụ thuộc $q$ và $m$.
+
+\textbf{B2:} Đổi electron thành proton làm đổi chiều cả lực điện lẫn lực từ, nên hai lực vẫn cân bằng. Proton cùng vận tốc vẫn bay thẳng.
+\Bay{Bộ lọc chỉ chọn vận tốc. Hạt có $v>E/B$ mới lệch theo lực từ, $v<E/B$ lệch theo lực điện.}
+
+\PhanCachBai
+\Cau{6}{Thấu kính một diapham}
+\DapAn{\textbf{A. 8 cm, hội tụ}}
+
+\textbf{Giải.}
+
+\textbf{Dữ kiện:} $U_K=0$, $U_D=1000$ V, $U_A=3000$ V, $d_1=d_2=0{,}02$ m.
+
+\textbf{B1:} Độ dốc điện thế trước và sau diapham:
+\begin{equation*}
+    g_-=\frac{1000-0}{0{,}02}=5\cdot10^{4}\text{ V/m},\qquad g_+=\frac{3000-1000}{0{,}02}=10^{5}\text{ V/m}
+\end{equation*}
+\textbf{B2:} AD CT thấu kính một diapham:
+\begin{equation*}
+    \frac1f=\frac{g_+-g_-}{4U_D}=\frac{5\cdot10^{4}}{4000}=12{,}5\text{ m}^{-1}\ \Longrightarrow\ f=\boldsymbol{0{,}08\text{ m}=8\text{ cm}}>0
+\end{equation*}
+$f>0$ nên thấu kính hội tụ.
+\Bay{Thiếu hệ số 4 ra 2 cm. Lấy $g_--g_+$ ra ``phân kỳ''. Độ dốc điện thế phía sau lớn hơn phía trước thì hội tụ.}
+
+\PhanCachBai
+\Cau{7}{Diapham ở cuối vùng tăng tốc}
+\DapAn{\textbf{B. Thấu kính phân kỳ}}
+
+\textbf{Giải.}
+
+Phía trước có trường tăng tốc nên $g_->0$; phía sau đẳng thế nên $g_+=0$. AD CT:
+\begin{equation*}
+    \frac1f=\frac{0-g_-}{4U_D}<0
+\end{equation*}
+với mọi $U_D>0$. Vậy diapham là thấu kính phân kỳ.
+\Bay{Chỉ cần một phía có trường là đã có tác dụng thấu kính, vì mặt đẳng thế bị uốn cong qua lỗ diapham.}
+
+\PhanCachBai
+\Cau{8}{Mặt cầu tích điện}
+\DapAn{\textbf{A. 10 cm, hội tụ}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Định luật khúc xạ điện tử (bảo toàn thành phần vận tốc tiếp tuyến):
+\begin{equation*}
+    \sqrt{U_1}\sin\alpha=\sqrt{U_2}\sin\beta\qquad(\text{chiết suất tương đương }n\propto\sqrt U)
+\end{equation*}
+\textbf{B2:} AD CT tiêu cự hệ lưới cầu:
+\begin{equation*}
+    f=\frac{R}{1-\sqrt{U_1/U_2}}=\frac{5}{1-\sqrt{100/400}}=\frac{5}{1-0{,}5}=\boldsymbol{10\text{ cm}}>0
+\end{equation*}
+$f>0$ nên hệ hội tụ.
+\Bay{Dùng $U_1/U_2$ thay cho căn bậc hai sẽ ra 6,67 cm.}
+
+\PhanCachBai
+\Cau{9}{Mặt cầu tích điện khi đảo điện thế}
+\DapAn{\textbf{B. Phân kỳ, $\boldsymbol{|f|=5\text{ cm}}$}}
+
+\textbf{Giải.}
+\begin{equation*}
+    f=\frac{R}{1-\sqrt{U_1/U_2}}=\frac{5}{1-\sqrt{400/100}}=\frac{5}{1-2}=-5\text{ cm}
+\end{equation*}
+$f<0$ nên hệ phân kỳ. Electron đi vào miền điện thế thấp hơn bị chậm lại, giống ánh sáng đi ra môi trường kém chiết quang hơn.
+\Bay{``$U_1<U_2$ hội tụ, $U_1>U_2$ phân kỳ'' chỉ đúng với chiều cong của bài 1-3. Đề vẽ mặt cong ngược chiều thì kết luận đảo lại.}
+
+\PhanCachBai
+\Cau{10}{Vận tốc tương đối tính}
+\DapAn{\textbf{B.} $\boldsymbol{2{,}82\cdot10^{8}\text{ m/s}}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Kiểm tra dạng: $eU/(m_0c^2)=1/0{,}511\approx1{,}96\gg0{,}04$, phải dùng tương đối tính.
+
+\textbf{B2:} Hệ số Lorentz:
+\begin{equation*}
+    \gamma=1+\frac{eU}{m_0c^2}=1+\frac{1}{0{,}511}=2{,}957
+\end{equation*}
+\textbf{B3:} Vận tốc:
+\begin{equation*}
+    v=c\sqrt{1-\frac1{\gamma^2}}=3\cdot10^{8}\sqrt{1-\frac{1}{2{,}957^2}}=0{,}941c\approx\boldsymbol{2{,}82\cdot10^{8}\text{ m/s}}
+\end{equation*}
+\Bay{CT cổ điển $v=\sqrt{2eU/m}$ cho $5{,}93\cdot10^{8}$ m/s, lớn hơn $c$. $2{,}60\cdot10^{8}$ m/s là $0{,}866c$, ứng với $m=2m_0$.}
+
+\PhanCachBai
+\Cau{11}{Động năng tương đối tính}
+\DapAn{\textbf{A. 0,511 MeV}}
+
+\textbf{Giải.}
+\begin{equation*}
+    m=2m_0\ \Longrightarrow\ \Wd=(m-m_0)c^2=m_0c^2=\boldsymbol{0{,}511\text{ MeV}}
+\end{equation*}
+Khi đó $\gamma=2$ và $v=0{,}866c$.
+\Bay{$\frac12mv^2$ với $m=2m_0$ cho 0,383 MeV; $\frac12m_0v^2$ cho 0,192 MeV; 1,022 MeV là năng lượng toàn phần $mc^2$.}
+
+\PhanCachBai
+\Cau{12}{Số photon phát ra}
+\DapAn{\textbf{A.} $\boldsymbol{3{,}18\cdot10^{15}}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Năng lượng một photon:
+\begin{equation*}
+    \varepsilon=\frac{hc}{\lambda}=\frac{6{,}626\cdot10^{-34}\cdot3\cdot10^{8}}{632{,}8\cdot10^{-9}}=3{,}14\cdot10^{-19}\text{ J}
+\end{equation*}
+\textbf{B2:} Số photon mỗi giây:
+\begin{equation*}
+    N=\frac{W}{\varepsilon}=\frac{10^{-3}}{3{,}14\cdot10^{-19}}\approx\boldsymbol{3{,}18\cdot10^{15}}\text{ photon/s}
+\end{equation*}
+\Bay{$3{,}14\cdot10^{-19}$ là năng lượng một photon (J). Quên đổi mW sang W cho $10^{18}$.}
+
+\PhanCachBai
+\Cau{13}{Quang điện khi tăng cường độ sáng}
+\DapAn{\textbf{C. Dòng quang điện bão hòa tăng gấp đôi, động năng ban đầu cực đại không đổi}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Cường độ sáng tỉ lệ với số photon tới catốt mỗi giây. Mỗi photon giải phóng tối đa một electron, nên số electron bứt ra và dòng bão hòa tăng gấp đôi.
+
+\textbf{B2:} AD CT Einstein: $W_{\text{đ}\max}=\dfrac{hc}{\lambda}-A$ chỉ phụ thuộc $\lambda$ và công thoát, nên không đổi; $U_h$ cũng không đổi.
+\Bay{$\lambda_{\text{gh}}=hc/A$ là đặc trưng của kim loại làm catốt, không phụ thuộc ánh sáng chiếu vào.}
+
+\PhanCachBai
+\Cau{14}{Hiệu điện thế hãm và giới hạn quang điện}
+\DapAn{\textbf{A. 1,1 V và 620 nm}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Năng lượng photon: $\varepsilon=\dfrac{1240}{400}=3{,}1$ eV.
+
+\textbf{B2:} AD CT Einstein: $W_{\text{đ}\max}=3{,}1-2{,}0=1{,}1$ eV, nên $U_h=\boldsymbol{1{,}1\text{ V}}$.
+
+\textbf{B3:} Giới hạn quang điện: $\lambda_{\text{gh}}=\dfrac{hc}{A}=\dfrac{1240}{2{,}0}=\boldsymbol{620\text{ nm}}$.
+\Bay{3,1 V là năng lượng photon chia $e$, chưa trừ công thoát. Giới hạn quang điện là của kim loại, không phải bước sóng chiếu vào.}
+
+\PhanCachBai
+\Cau{15}{Hai hạt cùng bước sóng de Broglie}
+\DapAn{\textbf{B. Hai hạt có cùng động lượng; động năng electron lớn hơn khoảng 1836 lần}}
+
+\textbf{Giải.}
+
+\textbf{B1:} $\lambda=h/p$: cùng $\lambda$ thì cùng $p$.
+
+\textbf{B2:} $\Wd=\dfrac{p^2}{2m}$ nên hạt nhẹ có động năng lớn hơn:
+\begin{equation*}
+    \frac{W_{\text{đ},e}}{W_{\text{đ},p}}=\frac{m_p}{m_e}\approx1836
+\end{equation*}
+\Bay{Nếu đề cho cùng động năng thì ngược lại: proton có $\lambda$ nhỏ hơn $\sqrt{1836}\approx42{,}8$ lần.}
+
+\PhanCachBai
+\Cau{16}{Bước sóng de Broglie của electron chậm}
+\DapAn{\textbf{A. 0,123 nm}}
+
+\textbf{Giải.}
+\begin{equation*}
+    \lambda=\frac{h}{\sqrt{2meU}}=\frac{6{,}626\cdot10^{-34}}{\sqrt{2\cdot9{,}1\cdot10^{-31}\cdot1{,}6\cdot10^{-19}\cdot100}}\approx1{,}23\cdot10^{-10}\text{ m}=\boldsymbol{0{,}123\text{ nm}}
+\end{equation*}
+Kiểm tra nhanh: $\lambda\approx\dfrac{12{,}26}{\sqrt{100}}=1{,}226$ Å.
+\Bay{CT nhanh $12{,}26/\sqrt U$ cho kết quả bằng Å. Đọc thành nm thì ra 1,23 nm.}
+
+\PhanCachBai
+\Cau{17}{Bước sóng de Broglie tương đối tính}
+\DapAn{\textbf{A. 0,872 pm}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Kiểm tra dạng: $\Wd/(m_0c^2)=1/0{,}511\approx2\gg0{,}04$, phải dùng tương đối tính.
+
+\textbf{B2:} Xung lượng tương đối tính:
+\begin{equation*}
+    pc=\sqrt{\Wd(\Wd+2m_0c^2)}=\sqrt{1\cdot(1+1{,}022)}=1{,}422\text{ MeV}
+\end{equation*}
+\textbf{B3:} Bước sóng:
+\begin{equation*}
+    \lambda=\frac{hc}{pc}=\frac{1240\text{ eV}\cdot\text{nm}}{1{,}422\cdot10^{6}\text{ eV}}=8{,}72\cdot10^{-4}\text{ nm}=\boldsymbol{0{,}872\text{ pm}}
+\end{equation*}
+\Bay{Cổ điển $p=\sqrt{2m\Wd}$ cho 1,23 pm. Dùng CT photon $hc/\Wd$ cho 1,24 pm; $hc/E$ (năng lượng toàn phần) cho 0,821 pm.}
+
+\PhanCachBai
+\Cau{18}{Hệ thức bất định}
+\DapAn{\textbf{A.} $\boldsymbol{5{,}79\cdot10^{5}\text{ m/s}}$}
+
+\textbf{Giải.}
+
+AD hệ thức bất định với $\Delta p_x=m\,\Delta v$:
+\begin{equation*}
+    \Delta v\ge\frac{\hbar}{2m\,\Delta x}=\frac{1{,}055\cdot10^{-34}}{2\cdot9{,}1\cdot10^{-31}\cdot10^{-10}}\approx\boldsymbol{5{,}79\cdot10^{5}\text{ m/s}}
+\end{equation*}
+\Bay{Dùng $\hbar$ ra $1{,}16\cdot10^{6}$, dùng $h$ ra $7{,}28\cdot10^{6}$. Đề ghi rõ dạng hệ thức thì theo đề.}
+
+\PhanCachBai
+\Cau{19}{Bước sóng phát xạ từ hố thế vô hạn}
+\DapAn{\textbf{C. 1097 nm}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Mức năng lượng cơ bản:
+\begin{equation*}
+    E_1=\frac{h^2}{8ma^2}=\frac{(6{,}626\cdot10^{-34})^2}{8\cdot9{,}1\cdot10^{-31}\cdot(10^{-9})^2}=6{,}03\cdot10^{-20}\text{ J}=0{,}377\text{ eV},\qquad E_n=n^2E_1
+\end{equation*}
+\textbf{B2:} Các chuyển mức có thể khi về trạng thái cơ bản: $3\to2$ ($\Delta E=5E_1$), $3\to1$ ($8E_1$), $2\to1$ ($3E_1$).
+
+\textbf{B3:} $\lambda_{\max}$ ứng với $\Delta E$ nhỏ nhất $=3E_1=1{,}13$ eV:
+\begin{equation*}
+    \lambda_{\max}=\frac{1240}{1{,}13}\approx\boldsymbol{1097\text{ nm}}
+\end{equation*}
+\Bay{Chỉ xét chuyển mức xuất phát từ $n=3$ thì chọn 658 nm. 411 nm là $\lambda_{\min}$ ($3\to1$). 3290 nm ứng với $\Delta E=E_1$, không có chuyển mức nào như vậy.}
+
+\PhanCachBai
+\Cau{20}{Xác suất trong hố thế vô hạn}
+\DapAn{\textbf{B. 0,196}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Mật độ xác suất ở $n=1$: $|\psi_1|^2=\dfrac2a\sin^2\dfrac{\pi x}{a}=\dfrac1a\left[1-\cos\dfrac{2\pi x}{a}\right]$.
+
+\textbf{B2:} Tích phân trên $[0;\,a/3]$:
+\begin{equation*}
+    P=\frac1a\left[x-\frac{a}{2\pi}\sin\frac{2\pi x}{a}\right]_0^{a/3}=\frac13-\frac{\sin(2\pi/3)}{2\pi}=0{,}333-0{,}138=\boldsymbol{0{,}196}
+\end{equation*}
+\Bay{0,333 là phân bố đều kiểu cổ điển; 0,609 là xác suất ở một phần ba giữa hố. Ở $n=1$ hạt tập trung giữa hố nên đoạn sát thành có xác suất nhỏ hơn 1/3.}
+
+\PhanCachBai
+\Cau{21}{Vị trí xác suất cực đại}
+\DapAn{\textbf{B.} $\boldsymbol{x=a/4}$ \textbf{và} $\boldsymbol{x=3a/4}$}
+
+\textbf{Giải.}
+
+$|\psi_2|^2=\dfrac2a\sin^2\dfrac{2\pi x}{a}$ cực đại khi $\dfrac{2\pi x}{a}=\dfrac\pi2$ hoặc $\dfrac{3\pi}2$, tức $x=a/4$ và $x=3a/4$. Tại $x=a/2$ là nút: mật độ xác suất bằng 0.
+\Bay{Trạng thái $n$ có $n-1$ nút bên trong. Với $n=2$, giữa hố là nút; $a/3$ và $2a/3$ là nút của $n=3$.}
+
+\PhanCachBai
+\Cau{22}{Hố thế hữu hạn và hố thế vô hạn}
+\DapAn{\textbf{D. Trong cả hai loại hố, hạt có thể có năng lượng bằng 0 ở trạng thái thấp nhất}}
+
+\textbf{Giải.}
+
+\textbf{B1:} $n$ bắt đầu từ 1 nên $E_1>0$ (năng lượng điểm không). Điều này phù hợp hệ thức bất định: hạt bị giam có $\Delta x$ hữu hạn nên $\Delta p\ne0$. Phát biểu D sai.
+
+\textbf{B2:} A, B, C đúng: với hố hữu hạn, sóng thấm vào thành làm ``bề rộng hiệu dụng'' lớn hơn nên năng lượng thấp hơn; chỉ có hữu hạn mức nằm dưới bờ hố.
+\Bay{$n=0$ cho $\psi\equiv0$, nghĩa là không có hạt, nên không phải một trạng thái.}
+
+\PhanCachBai
+\Cau{23}{Hiệu ứng đường ngầm}
+\DapAn{\textbf{A.} $\boldsymbol{6{,}0\cdot10^{-3}}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Hệ số tắt dần trong hàng rào:
+\begin{equation*}
+    \kappa=\frac{\sqrt{2m(U_0-E)}}{\hbar}=\frac{\sqrt{2\cdot9{,}1\cdot10^{-31}\cdot1{,}6\cdot10^{-19}}}{1{,}055\cdot10^{-34}}=5{,}12\cdot10^{9}\text{ m}^{-1}
+\end{equation*}
+\textbf{B2:} Hệ số xuyên hầm:
+\begin{equation*}
+    D\approx e^{-2\kappa d}=e^{-2\cdot5{,}12\cdot10^{9}\cdot0{,}5\cdot10^{-9}}=e^{-5{,}12}\approx\boldsymbol{6{,}0\cdot10^{-3}}
+\end{equation*}
+\Bay{Quên hệ số 2 ra $7{,}7\cdot10^{-2}$. $3{,}6\cdot10^{-5}$ là $D$ khi bề rộng gấp đôi: $D$ bị bình phương chứ không giảm một nửa.}
+
+\PhanCachBai
+\Cau{24}{Trị riêng của toán tử hình chiếu mômen động lượng}
+\DapAn{\textbf{A.} $\boldsymbol{3\hbar}$}
+
+\textbf{Giải.}
+\begin{equation*}
+    \hat L_z\psi=-i\hbar\frac{\partial}{\partial\varphi}\left(Ae^{3i\varphi}\right)=-i\hbar\cdot3i\cdot Ae^{3i\varphi}=3\hbar\,\psi
+\end{equation*}
+Trị riêng là $3\hbar$.
+\Bay{$-i\cdot i=+1$. Trị riêng của toán tử Hermite là số thực nên $3i\hbar$ bị loại; $9\hbar^2$ là trị riêng của $\hat L_z^2$.}
+
+\PhanCachBai
+\Cau{25}{Hàm riêng của toán tử xung lượng và động năng}
+\DapAn{\textbf{B. $\psi$ là hàm riêng của $\hat T$ với trị riêng $\boldsymbol{\hbar^2k^2/(2m)}$, nhưng không là hàm riêng của $\hat p_x$}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Tác dụng $\hat p_x$: $\hat p_x\psi=-i\hbar kA\cos kx$, không tỉ lệ với $\sin kx$, nên $\psi$ không là hàm riêng của $\hat p_x$.
+
+\textbf{B2:} Tác dụng $\hat T$:
+\begin{equation*}
+    \hat T\psi=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}\left(A\sin kx\right)=\frac{\hbar^2k^2}{2m}\,\psi
+\end{equation*}
+$\sin kx$ là chồng chập của $e^{ikx}$ và $e^{-ikx}$: động lượng $\pm\hbar k$ chưa xác định nhưng động năng xác định.
+\Bay{Hàm riêng của $\hat p_x$ là $e^{ikx}$, không phải sin hay cos.}
+
+\PhanCachBai
+\Cau{26}{Độ lớn mômen động lượng quỹ đạo}
+\DapAn{\textbf{A.} $\boldsymbol{\sqrt6\,\hbar}$ \textbf{và} $\boldsymbol{2\hbar}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Trị riêng của $\hat L^2$: $l(l+1)\hbar^2=6\hbar^2$, nên $|L|=\sqrt6\,\hbar$.
+
+\textbf{B2:} $L_z=m_l\hbar$ với $|m_l|\le l=2$, nên $L_{z,\max}=2\hbar$.
+\Bay{$L_{z,\max}<|L|$: góc nhỏ nhất giữa $\vec L$ và trục $z$ là $\arccos(2/\sqrt6)\approx35{,}3^\circ$.}
+
+\PhanCachBai
+\Cau{27}{Số vạch phổ hydro}
+\DapAn{\textbf{A. 10 và 3}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Số vạch tối đa của khối khí từ mức $n=5$: $N=\dfrac{n(n-1)}{2}=\dfrac{5\cdot4}{2}=10$.
+
+\textbf{B2:} Dãy Balmer kết thúc ở $n=2$, xuất phát từ $n=3,4,5$: 3 vạch.
+\Bay{Một nguyên tử đơn lẻ phát tối đa $n-1=4$ photon trong một lần trở về. Đọc kỹ đề là ``một nguyên tử'' hay ``khối khí''.}
+
+\PhanCachBai
+\Cau{28}{Giới hạn dãy Balmer}
+\DapAn{\textbf{B. 364,6 nm}}
+
+\textbf{Giải.}
+
+$\lambda_{\min}$ của dãy Balmer ứng với chuyển mức $\infty\to2$:
+\begin{equation*}
+    \frac1{\lambda_{\min}}=R\left(\frac1{2^2}-0\right)\ \Longrightarrow\ \lambda_{\min}=\frac4R=\frac{4}{1{,}097\cdot10^{7}}=\boldsymbol{364{,}6\text{ nm}}
+\end{equation*}
+\Bay{656,3 nm là $\lambda_{\max}$ của Balmer; 91,2 nm và 121,5 nm là $\lambda_{\min}$, $\lambda_{\max}$ của Lyman.}
+
+\PhanCachBai
+\Cau{29}{Động năng và thế năng trong mẫu Bohr}
+\DapAn{\textbf{A. 13,6 eV và} $\boldsymbol{-27{,}2\text{ eV}}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Lực Coulomb là lực hướng tâm:
+\begin{equation*}
+    \frac{mv^2}{r}=\frac{e^2}{4\pi\varepsilon_0r^2}\ \Longrightarrow\ \Wd=\frac{mv^2}{2}=\frac{e^2}{8\pi\varepsilon_0r},\qquad U=-\frac{e^2}{4\pi\varepsilon_0r}=-2\Wd
+\end{equation*}
+\textbf{B2:} $E_1=\Wd+U=-\Wd=-13{,}6$ eV, nên $\Wd=13{,}6$ eV và $U=2E_1=-27{,}2$ eV.
+\Bay{Thế năng hút mang dấu âm và có độ lớn gấp đôi động năng. Động năng không thể âm.}
+
+\PhanCachBai
+\Cau{30}{Vạch phổ của ion He$^{+}$}
+\DapAn{\textbf{B. 121,5 nm}}
+
+\textbf{Giải.}
+
+AD CT Rydberg cho ion đồng dạng hydro với $Z=2$:
+\begin{equation*}
+    \frac1\lambda=RZ^2\left(\frac1{2^2}-\frac1{4^2}\right)=4R\cdot\frac{3}{16}=\frac{3R}{4}\ \Longrightarrow\ \lambda=\frac{4}{3R}=\boldsymbol{121{,}5\text{ nm}}
+\end{equation*}
+Vạch này trùng vạch Lyman $\alpha$ của hydro.
+\Bay{Quên $Z^2$ ra 486,2 nm (vạch H$\beta$ của hydro). 30,4 nm là vạch $2\to1$ của He$^{+}$.}
+
+\PhanCachBai
+\Cau{31}{Ion Li$^{2+}$}
+\DapAn{\textbf{A. 122,4 eV và 0,177 Å}}
+
+\textbf{Giải.}
+
+\textbf{B1:} Năng lượng ion hóa: $E_{\text{ion}}=13{,}6\,Z^2=13{,}6\cdot9=\boldsymbol{122{,}4\text{ eV}}$.
+
+\textbf{B2:} Bán kính quỹ đạo thứ nhất: $r_1=\dfrac{r_0}{Z}=\dfrac{0{,}53}{3}=\boldsymbol{0{,}177\text{ Å}}$.
+\Bay{Năng lượng tỉ lệ $Z^2$ (không phải $Z$); bán kính tỉ lệ $1/Z$ (không phải nhân $Z$ hay $Z^2$).}
+
+\PhanCachBai
+\Cau{32}{Nhận biết ion đồng dạng hydro}
+\DapAn{\textbf{C. Ion Be$^{3+}$ ($\boldsymbol{Z=4}$)}}
+
+\textbf{Giải.}
+
+Đồng dạng hydro khi chỉ còn đúng 1 electron: $N_e=Z-(\text{điện tích ion})$.
+\begin{itemize}
+    \item Be$^{3+}$: $N_e=4-3=1$, là ion đồng dạng hydro.
+    \item Li$^{+}$: $N_e=3-1=2$; He: $N_e=2$; K: $N_e=19$.
+\end{itemize}
+\Bay{Kali có 1 electron hóa trị nhưng vẫn có 19 electron, nên không dùng được $E_n=-13{,}6Z^2/n^2$.}
+
+\PhanCachBai
+\Cau{33}{Số lượng tử}
+\DapAn{\textbf{B. 4}}
+
+\textbf{Giải.}
+
+\textbf{B1:} $n=3$ cho $l=0,1,2$. $m_l=-1$ cần $l\ge1$, nên có ở $l=1$ (3p) và $l=2$ (3d).
+
+\textbf{B2:} Mỗi bộ $(n,l,m_l)$ chứa 2 electron ($m_s=\pm\frac12$). Tổng: $2\cdot2=4$ electron.
+\Bay{18 $=2n^2$ là cả lớp $n=3$; 6 là cả phân lớp 3p; 2 là khi quên phân lớp 3d.}
+
+\PhanCachBai
+\Cau{34}{Quy tắc lọc lựa}
+\DapAn{\textbf{D.} $\boldsymbol{3d\to2p}$}
+
+\textbf{Giải.}
+
+$3d\to2p$: $\Delta l=1-2=-1$, được phép. Các chuyển mức còn lại: $3d\to2s$ và $4f\to3p$ có $\Delta l=-2$; $3s\to2s$ có $\Delta l=0$; đều bị cấm.
+\Bay{$\Delta n$ có thể bất kỳ, chỉ $l$ bị ràng buộc.}
+
+\PhanCachBai
+\Cau{35}{Số hạng quang phổ của trạng thái cơ bản}
+\DapAn{\textbf{A.} $\boldsymbol{{}^4F_{9/2}}$}
+
+\textbf{Giải.}
+
+\textbf{B1:} Lõi Ar và $4s^2$ điền đầy, không đóng góp vào $L$, $S$.
+
+\textbf{B2:} $3d^7$ theo quy tắc Hund: 5 electron spin lên ở $m_l=2,1,0,-1,-2$ và 2 electron spin xuống ở $m_l=2,1$.
+\begin{equation*}
+    S=3\cdot\frac12=\frac32\ \Rightarrow\ 2S+1=4,\qquad L=\sum m_l=0+(2+1)=3\ \Rightarrow\ \text{F}
+\end{equation*}
+\textbf{B3:} Phân lớp quá nửa nên $J=L+S=\dfrac92$. Số hạng ${}^4F_{9/2}$ (nguyên tố Co).
+\Bay{$J=|L-S|=3/2$ chỉ dùng khi phân lớp chưa đầy một nửa.}
+
+\PhanCachBai
+\Cau{36}{Các giá trị của số lượng tử J}
+\DapAn{\textbf{B.} $\boldsymbol{J=1,2,3}$}
+
+\textbf{Giải.}
+
+${}^3D$: $2S+1=3\Rightarrow S=1$; chữ D cho $L=2$. Các giá trị $J=|L-S|,\dots,L+S=1,2,3$.
+\Bay{Chỉ số trên bên trái là độ bội $2S+1$, không phải $J$.}
+
+\end{document}
