@@ -544,15 +544,17 @@ R=L\tan(2\theta)\simeq L\frac{\lambda}{d}
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-Dùng ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$ theo quy ước các bài bất định của môn học. Nếu dùng độ lệch chuẩn với $\sigma_x\sigma_p\ge\hbar/2$, các giới hạn vị trí bên dưới giảm một nửa.
+Dùng hệ thức bất định Heisenberg theo giảng viên:
+$\Delta x\,\Delta p_x\ge\hbar/2=h/(4\pi)$, suy ra $\Delta x_{\min}=\dfrac{h}{4\pi\,\Delta p}$.
+(Sách cũ dùng $\hbar$ nên đáp số in trong sách lớn gấp 2 lần.)
 
-\textbf{B1:} Đối với hạt khối lượng $5\text{ mg}=5\cdot10^{-6}\text{ kg}$:
+\textbf{B1:} Đối với hạt khối lượng $5\text{ mg}=5\cdot10^{-6}\text{ kg}$, $v=2\text{ m/s}\ll c$ nên dùng cổ điển:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
   \item Xung lượng: $p = m v = (5 \cdot 10^{-6}\text{ kg}) \times 2\text{ m/s} = 10^{-5}\text{ kg}\cdot\text{m/s}$.
   \item Độ bất định xung lượng: $\Delta p = 10^{-3} p = 10^{-8}\text{ kg}\cdot\text{m/s}$.
   \item Độ bất định tọa độ:
   \begin{equation*}
-      \Delta x \gtrsim \frac{h}{2\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{2\pi \times 10^{-8}} \approx 1{,}05 \cdot 10^{-26}\text{ m} = \boldsymbol{1{,}05 \cdot 10^{-16}\text{ \AA}}
+      \Delta x \ge \frac{h}{4\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{4\pi \times 10^{-8}} \approx 5{,}27 \cdot 10^{-27}\text{ m} = \boldsymbol{5{,}27 \cdot 10^{-17}\text{ \AA}}
   \end{equation*}
   (Độ bất định tọa độ vô cùng nhỏ so với kích thước hạt, có thể xem hạt chuyển động theo quỹ đạo xác định.
   Đáp số $10{,}56\cdot10^{-20}\text{ \AA}$ in trong sách ứng với $m=5\text{ g}$, tức đã đổi nhầm mg thành g.)
@@ -560,16 +562,16 @@ Dùng ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$ theo quy ư�
 
 \textbf{B2:} Đối với electron ($v = 1{,}8 \cdot 10^8\text{ m/s} = 0{,}6c$):
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
-  \item Electron chuyển động tương đối tính:
+  \item $v/c=0{,}6$ nên electron chuyển động tương đối tính:
   \begin{equation*}
       p = \frac{m_0 v}{\sqrt{1 - v^2/c^2}} = \frac{9{,}1 \cdot 10^{-31} \times 1{,}8 \cdot 10^8}{\sqrt{1 - 0{,}6^2}} = \frac{1{,}638 \cdot 10^{-22}}{0{,}8} = 2{,}0475 \cdot 10^{-22}\text{ kg}\cdot\text{m/s}
   \end{equation*}
   \item Độ bất định xung lượng: $\Delta p = 10^{-3} p = 2{,}0475 \cdot 10^{-25}\text{ kg}\cdot\text{m/s}$.
   \item Độ bất định tọa độ:
   \begin{equation*}
-      \Delta x \gtrsim \frac{h}{2\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{2\pi \times 2{,}0475 \cdot 10^{-25}} \approx 5{,}15 \cdot 10^{-10}\text{ m} \approx \boldsymbol{5{,}14\text{ \AA}}
+      \Delta x \ge \frac{h}{4\pi \Delta p} = \frac{6{,}626 \cdot 10^{-34}}{4\pi \times 2{,}0475 \cdot 10^{-25}} \approx 2{,}58 \cdot 10^{-10}\text{ m} \approx \boldsymbol{2{,}58\text{ \AA}}
   \end{equation*}
-  (Độ bất định tọa độ lớn hơn kích thước nguyên tử ($\sim 1\text{ \AA}$), chứng tỏ electron trong thang vi mô không có khái niệm quỹ đạo cổ điển).
+  (Độ bất định tọa độ lớn hơn kích thước nguyên tử ($\sim 1\text{ \AA}$), chứng tỏ electron trong thang vi mô không có khái niệm quỹ đạo cổ điển. Sách cũ: $5{,}14\text{ \AA}$.)
 \end{itemize}
 
 
@@ -583,7 +585,7 @@ Dùng ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$ theo quy ư�
 \textbf{B1:} Đổi đơn vị:
 $\lambda=4000\text{ \AA}=4\cdot10^{-7}\text{ m}$,
 $\Delta\lambda=10^{-4}\text{ \AA}=10^{-14}\text{ m}$.
-Vì $\Delta\lambda\ll\lambda$, độ rộng tần số là
+Từ $\nu=c/\lambda$ và $\Delta\lambda\ll\lambda$, độ rộng tần số là
 \[
 \Delta\nu\simeq\left|\frac{d(c/\lambda)}{d\lambda}\right|\Delta\lambda
 =\frac{c\,\Delta\lambda}{\lambda^2}
@@ -591,16 +593,15 @@ Vì $\Delta\lambda\ll\lambda$, độ rộng tần số là
 =1{,}875\cdot10^7\text{ Hz}.
 \]
 
-\textbf{B2:} Coi độ rộng đã cho là độ rộng tự nhiên ở nửa cực đại (FWHM),
-với mức dưới có thời gian sống rất dài. Mức trên có xác suất tồn tại
-$P(t)=e^{-t/\tau}$ tạo vạch Lorentz có độ rộng
-$\Delta\nu=1/(2\pi\tau)$.
-Suy ra thời gian sống trung bình:
+\textbf{B2:} Độ bất định năng lượng của mức: $\Delta E=h\,\Delta\nu$.
+Theo hệ thức bất định Heisenberg $\Delta E\,\Delta t\ge\hbar/2=h/(4\pi)$,
+thời gian trung bình nguyên tử ở trạng thái đó:
 \[
-\tau=\frac1{2\pi\Delta\nu}
-=\frac{\lambda^2}{2\pi c\,\Delta\lambda}
-\simeq\boldsymbol{8{,}49\cdot10^{-9}\text{ s}=8{,}49\text{ ns}}.
+\tau=\frac{h}{4\pi\,\Delta E}=\frac1{4\pi\Delta\nu}
+=\frac{\lambda^2}{4\pi c\,\Delta\lambda}
+\simeq\boldsymbol{4{,}24\cdot10^{-9}\text{ s}=4{,}24\text{ ns}}.
 \]
+(Sách cũ dùng $\hbar$, cho $\tau=1/(2\pi\Delta\nu)\simeq8{,}48\cdot10^{-9}\text{ s}$.)
 
 \PhanCachBai
 
@@ -609,12 +610,13 @@ Suy ra thời gian sống trung bình:
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Xung lượng hạt liên hệ với bước sóng de Broglie: $p = \dfrac{h}{\lambda} \implies \Delta p = \dfrac{h}{\lambda}$.
+\textbf{B1:} Xung lượng hạt liên hệ với bước sóng de Broglie: $p = \dfrac{h}{\lambda} \implies \Delta p = p = \dfrac{h}{\lambda}$.
 
-\textbf{B2:} Theo quy ước ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$ của môn học:
+\textbf{B2:} Theo hệ thức bất định $\Delta x\,\Delta p\ge h/(4\pi)$:
 \begin{equation*}
-    \Delta x \gtrsim \frac{h}{2\pi \Delta p} = \frac{h}{2\pi \dfrac{h}{\lambda}} = \boldsymbol{\frac{\lambda}{2\pi}}
+    \Delta x \ge \frac{h}{4\pi \Delta p} = \frac{h}{4\pi \dfrac{h}{\lambda}} = \boldsymbol{\frac{\lambda}{4\pi}}
 \end{equation*}
+(Sách cũ: $\lambda/(2\pi)$.)
 
 \PhanCachBai
 
@@ -623,28 +625,24 @@ Suy ra thời gian sống trung bình:
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Viết năng lượng theo xung lượng: $E=p^2/(2m)$.
-Với một khoảng xung lượng nhỏ quanh $p=mv$:
+\textbf{B1:} Viết năng lượng theo xung lượng: $p=mv\Rightarrow E=\tfrac12mv^2=p^2/(2m)$.
+Với hạt có vận tốc xác định ($\Delta p\ll p$):
 \[
 \Delta E\simeq\left|\frac{dE}{dp}\right|\Delta p
-=\frac{|p|}{m}\Delta p=v\Delta p,
+=\frac{p}{m}\Delta p=v\Delta p.
 \]
-trong đó $v$ là độ lớn vận tốc.
 
 \textbf{B2:} Dùng $\Delta t=\Delta x/v$:
 \[
 \Delta E\,\Delta t\simeq
 v\Delta p\frac{\Delta x}{v}=\Delta x\,\Delta p.
 \]
-Với quy ước ước lượng độ rộng $\Delta x\,\Delta p\gtrsim\hbar$
-được dùng trong yêu cầu của bài, suy ra
+\textbf{B3:} Theo hệ thức bất định $\Delta x\,\Delta p\ge\hbar/2=h/(4\pi)$, suy ra
 \[
-\boldsymbol{\Delta E\,\Delta t\gtrsim\hbar=\frac{h}{2\pi}}.
+\boldsymbol{\Delta E\,\Delta t\ge\frac{\hbar}{2}=\frac{h}{4\pi}}.
 \]
-Nếu $\Delta x$ và $\Delta p$ được định nghĩa là độ lệch chuẩn, hệ thức chính xác là
-$\sigma_x\sigma_p\ge\hbar/2$; phép suy luận trên khi đó cho hệ số $\hbar/2$.
-Vì vậy kết quả với hệ số $h/(2\pi)$ trong đề là một ước lượng theo quy ước độ rộng,
-không phải bất đẳng thức độ lệch chuẩn với hệ số tối ưu.
+Đề gốc ghi $h/(2\pi)$ theo quy ước $\Delta x\,\Delta p\ge\hbar$ của sách cũ; cách chứng minh không đổi,
+chỉ khác hệ số ở bước cuối.
 
 \PhanCachBai
 
@@ -653,23 +651,31 @@ không phải bất đẳng thức độ lệch chuẩn với hệ số tối ư
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-Với ước lượng $\Delta x\sim L$ và hệ thức độ lệch chuẩn
-$\Delta x\,\Delta p\ge\hbar/2$, động lượng đặc trưng nhỏ nhất có bậc
-$p_{\min}\sim\hbar/(2L)$. Trong gần đúng phi tương đối tính:
-\[
-E_{\min}\sim\frac{p_{\min}^2}{2m}
-=\frac{\hbar^2}{8mL^2}=\frac{h^2}{32\pi^2mL^2}.
-\]
-Đây là ước lượng từ bất định; năng lượng cơ bản chính xác còn phụ thuộc mô hình thế giam giữ.
+\textbf{B1:} Hạt ở đâu đó trong đoạn $L$ nên $\Delta x=L$.
+Hạt chạy qua lại giữa hai đầu đoạn, xung lượng có thể là $+p$ hoặc $-p$, nên $\Delta p=2p$.
 
-Với điện tử trong hạt nhân có $L=10^{-14}\text{ m}$, $p_{\min}c\simeq9{,}87\text{ MeV}$
-lớn hơn nhiều so với $m_ec^2=0{,}511\text{ MeV}$, nên phải dùng công thức tương đối tính:
+\textbf{B2:} Theo hệ thức bất định $\Delta x\,\Delta p\ge\hbar/2=h/(4\pi)$:
 \[
-T_{\min}\sim\sqrt{(p_{\min}c)^2+(m_ec^2)^2}-m_ec^2
-\simeq\boldsymbol{9{,}37\text{ MeV}}.
+L\cdot2p\ge\frac{h}{4\pi}\quad\Longrightarrow\quad p_{\min}=\frac{h}{8\pi L}.
 \]
-Ước lượng này dùng hệ thức độ lệch chuẩn với hệ số $\hbar/2$;
-năng lượng cực tiểu chính xác còn phụ thuộc điều kiện biên của mô hình giam giữ.
+
+\textbf{B3:} Năng lượng (động năng) cực tiểu, gần đúng phi tương đối tính:
+\[
+E_{\min}=\frac{p_{\min}^2}{2m}=\boldsymbol{\frac{h^2}{128\pi^2mL^2}}.
+\]
+(Sách cũ dùng $\hbar$: $h^2/(32\pi^2mL^2)$.)
+
+\textbf{B4:} Điện tử trong hạt nhân, $L=10^{-14}\text{ m}$:
+\[
+p_{\min}=\frac{6{,}626\cdot10^{-34}}{8\pi\cdot10^{-14}}\approx2{,}64\cdot10^{-21}\text{ kg}\cdot\text{m/s},
+\qquad p_{\min}c\approx4{,}93\text{ MeV}.
+\]
+Vì $p_{\min}c\gg m_ec^2=0{,}511\text{ MeV}$ nên phải dùng công thức tương đối tính:
+\[
+T_{\min}=\sqrt{(p_{\min}c)^2+(m_ec^2)^2}-m_ec^2
+\simeq\boldsymbol{4{,}45\text{ MeV}}.
+\]
+(Sách cũ: $9{,}35\text{ MeV}$. Động năng cỡ vài MeV là quá lớn, nên điện tử không thể tồn tại trong hạt nhân.)
 
 \PhanCachBai
 

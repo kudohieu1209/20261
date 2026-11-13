@@ -345,62 +345,55 @@ $i$ là khoảng cách hai cực đại liên tiếp trên màn, không phải k
 Dùng $h$ giả định mà đề bài 2-8 cho và đổi khối lượng từ g sang kg.
 
 \dang{Bất định vị trí và xung lượng}{2-9, 2-11}{uncertainty}
-\begin{center}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabularx}{\linewidth}{@{}XX@{}}
-\toprule
-Độ lệch chuẩn của phân bố & Ước lượng độ rộng theo bậc độ lớn \\
-\midrule
-$\sigma_x\sigma_{p_x}\ge\hbar/2$ & $\Delta x\,\Delta p_x\sim\hbar$ \\
-$\sigma_{x,\min}=\hbar/(2\sigma_{p_x})$ & $\Delta x\sim\hbar/\Delta p_x$ \\
-\bottomrule
-\end{tabularx}
-\end{center}
-\textbf{Bài 2-9:} độ chính xác tương đối $r=\Delta p/p$ cho $\Delta p=rp$.
+Hệ thức bất định Heisenberg (theo giảng viên):
+\[
+\boxed{\Delta x\,\Delta p_x\ge\frac{\hbar}{2}=\frac{h}{4\pi}}
+\quad\Longrightarrow\quad
+\Delta x_{\min}=\frac{h}{4\pi\,\Delta p}.
+\]
+Sách bài tập cũ dùng $\Delta x\,\Delta p\ge\hbar$ nên đáp số sách gấp 2 lần.
+
+\textbf{Bài 2-9:} độ chính xác tương đối $r=\Delta p/p$ cho $\Delta p=rp$
+(đo đến phần nghìn: $r=10^{-3}$).
 \[
 p=mv\quad(v\ll c),\qquad p=\frac{mv}{\sqrt{1-v^2/c^2}}\quad(\text{tương đối tính}).
 \]
-Sau đó dùng công thức vị trí ứng với định nghĩa độ bất định đã chọn.
 \textbf{Bài 2-11:} khi độ bất định xung lượng bằng $p=h/\lambda$:
 \[
-\sigma_{x,\min}=\frac\lambda{4\pi}\quad(\text{độ lệch chuẩn}),\qquad
-\Delta x\sim\frac\lambda{2\pi}\quad(\text{ước lượng độ rộng}).
+\boxed{\Delta x_{\min}=\frac{\lambda}{4\pi}}.
 \]
-Hai cách định nghĩa khác nhau về hệ số; $\hbar$ không thay thế $\hbar/2$
-trong bất đẳng thức độ lệch chuẩn có hệ số tối ưu.
 
 \newpage
 \dang{Độ rộng vạch và thời gian sống}{2-10}{linewidth-lifetime}
-Với $\Delta\lambda\ll\lambda$, đổi độ rộng bước sóng sang độ rộng tần số:
+Với $\Delta\lambda\ll\lambda$, đổi độ rộng bước sóng sang độ rộng tần số (từ $\nu=c/\lambda$):
 \[
-\Delta\nu\simeq\frac{c\,\Delta\lambda}{\lambda^2}.
+\Delta\nu\simeq\frac{c\,\Delta\lambda}{\lambda^2},\qquad \Delta E=h\,\Delta\nu.
 \]
-Nếu $\Delta\nu$ là độ rộng tự nhiên ở nửa cực đại (FWHM), mức dưới sống rất lâu
-và mức trên có xác suất tồn tại $P(t)=e^{-t/\tau}$:
+Hệ thức bất định $\Delta E\,\Delta t\ge\hbar/2=h/(4\pi)$ cho thời gian sống:
 \[
-\boxed{\tau=\frac1{2\pi\Delta\nu}=\frac{\lambda^2}{2\pi c\,\Delta\lambda}}.
+\boxed{\tau=\frac{h}{4\pi\Delta E}=\frac1{4\pi\Delta\nu}=\frac{\lambda^2}{4\pi c\,\Delta\lambda}}.
 \]
-Đổi cả $\lambda$ và $\Delta\lambda$ sang m; không coi FWHM là độ lệch chuẩn.
+Đổi cả $\lambda$ và $\Delta\lambda$ sang m.
 
 \dang{Liên hệ bất định năng lượng và thời gian chuyển động}{2-12}{energy-time}
 Với $K=p^2/(2m)$, độ rộng động lượng nhỏ quanh $p=mv$:
 \[
 \Delta K\simeq\left|\frac{\dd K}{\dd p}\right|\Delta p=v\Delta p,\qquad
 \Delta t=\frac{\Delta x}{v}\quad\Longrightarrow\quad
-\Delta K\,\Delta t\simeq\Delta x\,\Delta p.
+\Delta K\,\Delta t\simeq\Delta x\,\Delta p\ge\frac{\hbar}{2}.
 \]
-Thế quy ước $\Delta x\,\Delta p\sim\hbar$ để có ước lượng theo hệ số của đề.
-Nếu dùng độ lệch chuẩn, hệ số của bất đẳng thức vị trí--xung lượng là $\hbar/2$.
+Đề gốc ghi $h/(2\pi)$ theo quy ước sách cũ; cách chứng minh không đổi.
 
 \dang{Ước lượng năng lượng khi hạt bị giam giữ}{2-13}{confinement-estimate}
-Độ dài miền giam giữ $L$ cho độ rộng vị trí cỡ $L$.
-Với cách ước lượng $p_*\sim\hbar/(2L)$:
+Hạt bị giam trong đoạn $L$: $\Delta x=L$; hạt chạy qua lại nên $\Delta p=2p$.
+Từ $L\cdot2p\ge h/(4\pi)$:
 \[
-\boxed{K_*\sim\frac{p_*^2}{2m}=\frac{h^2}{32\pi^2mL^2}}\quad(p_*\ll mc).
+p_{\min}=\frac{h}{8\pi L},\qquad
+\boxed{K_{\min}=\frac{p_{\min}^2}{2m}=\frac{h^2}{128\pi^2mL^2}}\quad(p_{\min}\ll mc).
 \]
-Nếu $p_*c$ so sánh được hoặc lớn hơn $mc^2$, phải dùng
+Nếu $p_{\min}c$ so sánh được hoặc lớn hơn $mc^2$, phải dùng
 \[
-\boxed{K_*\sim\sqrt{p_*^2c^2+m^2c^4}-mc^2}.
+\boxed{K_{\min}=\sqrt{p_{\min}^2c^2+m^2c^4}-mc^2}.
 \]
 Đây là ước lượng từ bất định; năng lượng cơ bản của giếng vô hạn được tính bằng
 $E_1=h^2/(8mL^2)$ khi đề chỉ rõ hai vách cứng.
