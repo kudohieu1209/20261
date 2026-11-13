@@ -1,0 +1,1142 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>Ôn giữa kỳ VLĐT</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Patrick+Hand&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: bảng đen làm đầu trang, các tab chương, mỗi mục = Công thức | Suy luận | Bẫy; tab cuối là phòng thi thử. */
+:root {
+  --bg: #eef3f0;
+  --surface: #ffffff;
+  --ink: #15211c;
+  --muted: #56665f;
+  --line: #d3ddd8;
+  --accent: #1e5b48;
+  --accent-soft: #e2ede8;
+  --trap: #9a5b0c;
+  --trap-bg: #fbf1df;
+  --ok: #17703f;
+  --ok-bg: #e3f3e8;
+  --bad: #b3261e;
+  --bad-bg: #fbe7e5;
+  --board: #23463b;
+  --board-2: #2c5548;
+  --chalk: #eef2e8;
+  --chalk-dim: #b9cbbf;
+  --chalk-yellow: #f2d27a;
+  --font-body: "Be Vietnam Pro", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-chalk: "Patrick Hand", "Comic Sans MS", "Segoe Print", cursive;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1613; --surface: #15201c; --ink: #e4ebe7; --muted: #9db0a7; --line: #2a3a33;
+    --accent: #7ccaa9; --accent-soft: #1b2d26; --trap: #f0b65a; --trap-bg: #2b2415;
+    --ok: #6fd69b; --ok-bg: #16301f; --bad: #ff8f84; --bad-bg: #3a1b18;
+    --board: #1a352c; --board-2: #20403a; --chalk: #eef2e8; --chalk-dim: #a9bdb1; --chalk-yellow: #f2d27a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1613; --surface: #15201c; --ink: #e4ebe7; --muted: #9db0a7; --line: #2a3a33;
+  --accent: #7ccaa9; --accent-soft: #1b2d26; --trap: #f0b65a; --trap-bg: #2b2415;
+  --ok: #6fd69b; --ok-bg: #16301f; --bad: #ff8f84; --bad-bg: #3a1b18;
+  --board: #1a352c; --board-2: #20403a; --chalk: #eef2e8; --chalk-dim: #a9bdb1; --chalk-yellow: #f2d27a;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 15.5px; line-height: 1.6; margin: 0;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--surface); }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { text-wrap: balance; line-height: 1.25; margin: 0; }
+h2 { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.12rem; font-weight: 700; }
+h4 { font-size: .78rem; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+p { margin: 0; }
+a { color: var(--accent); }
+ul { margin: 0; padding-left: 1.15em; }
+li + li { margin-top: .35em; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+mjx-container { max-width: 100%; }
+mjx-container[display="true"] { display: block; min-width: 0 !important; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding-block: 2px; margin: .4em 0 !important; }
+
+/* ---------- Bảng đen ---------- */
+.board {
+  background: radial-gradient(120% 140% at 15% 0%, var(--board-2), var(--board) 60%);
+  color: var(--chalk);
+  padding-block: 28px 30px;
+  border-bottom: 6px solid #8a6a43;
+}
+.board .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: end; }
+.board .eyebrow { font-family: var(--font-chalk); color: var(--chalk-dim); font-size: 1.15rem; }
+.board h1 { font-family: var(--font-chalk); font-weight: 400; font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.05; letter-spacing: .01em; }
+.board .lede { color: var(--chalk-dim); margin-top: 10px; max-width: 46ch; }
+.facts { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; font-family: var(--font-chalk); font-size: 1.22rem; }
+.facts li { margin: 0; border-bottom: 1px dashed rgba(238,242,232,.28); padding-bottom: 4px; }
+.facts b { font-weight: 400; color: var(--chalk-yellow); }
+.countdown { font-family: var(--font-chalk); font-size: 1.3rem; color: var(--chalk-yellow); margin-top: 12px; }
+
+/* ---------- Thanh điều hướng ---------- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--surface); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; gap: 12px; }
+.tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs a { white-space: nowrap; text-decoration: none; color: var(--muted); font-weight: 600; font-size: .92rem; padding: 13px 12px 11px; border-bottom: 3px solid transparent; }
+.tabs a:hover { color: var(--ink); }
+.tabs a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+.timer { font-family: var(--font-mono); font-size: .9rem; padding: 5px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.timer.low { background: var(--bad-bg); color: var(--bad); }
+
+main { padding-block: 28px 64px; }
+.view { display: grid; gap: 28px; scroll-margin-top: 64px; }
+.view-head { display: grid; gap: 6px; max-width: 70ch; }
+.view-head p { color: var(--muted); }
+
+/* ---------- Tổng quan ---------- */
+.scope { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.scope-col { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.scope-col h3 { display: flex; align-items: baseline; gap: 8px; }
+.scope-col h3 span { font-family: var(--font-chalk); font-weight: 400; font-size: 1.35rem; color: var(--accent); }
+.scope-item { display: grid; gap: 2px; text-decoration: none; color: inherit; padding: 8px 10px; margin: 0 -10px; border-radius: 8px; }
+.scope-item:hover { background: var(--accent-soft); }
+.scope-item strong { font-weight: 600; }
+.scope-item small { color: var(--muted); font-size: .86rem; line-height: 1.45; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.fix { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: baseline; }
+.fix .tag { font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--trap); background: var(--trap-bg); padding: 2px 7px; border-radius: 5px; }
+.fix p { min-width: 0; }
+.fix .src { color: var(--muted); }
+.consts { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.consts td { padding: 6px 4px; border-bottom: 1px solid var(--line); vertical-align: baseline; }
+.consts td:last-child { color: var(--muted); font-size: .85rem; }
+.table-scroll { overflow-x: auto; }
+
+/* ---------- Mục lý thuyết ---------- */
+.topic { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; scroll-margin-top: 64px; }
+.topic-head { padding: 16px 20px 14px; border-bottom: 1px solid var(--line); display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.topic-head .key { font-family: var(--font-chalk); font-size: 1.5rem; line-height: 1; color: var(--accent); }
+.topic-head .board-note { margin-left: auto; font-family: var(--font-chalk); color: var(--muted); font-size: 1.05rem; }
+.topic-body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.topic-body > section { padding: 16px 20px 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.topic-body > section + section { border-left: 1px solid var(--line); }
+.formulas p + p { margin-top: 2px; }
+.reason li::marker { color: var(--accent); }
+.traps { grid-column: 1 / -1; background: var(--trap-bg); border-top: 1px solid var(--line); border-left: 0 !important; }
+.traps h4 { color: var(--trap); }
+.traps li::marker { color: var(--trap); }
+.note { font-size: .9rem; color: var(--muted); }
+.contrast { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.contrast > div { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; min-width: 0; font-size: .93rem; }
+.contrast b { display: block; margin-bottom: 2px; }
+
+/* ---------- Thi thử ---------- */
+.quiz-bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font: inherit; font-weight: 600; font-size: .93rem; border-radius: 8px; padding: 9px 14px; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.btn.warn { background: var(--bad); border-color: var(--bad); color: var(--surface); }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip { font: inherit; font-size: .85rem; font-weight: 600; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.quiz-status { color: var(--muted); font-size: .92rem; }
+.result { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 24px; align-items: center; }
+.result .score { font-family: var(--font-chalk); font-size: 3.2rem; line-height: 1; color: var(--accent); }
+.result .score small { font-size: 1.3rem; color: var(--muted); }
+.result .detail { display: grid; gap: 4px; }
+.qlist { display: grid; gap: 14px; counter-reset: q; }
+.q { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 12px; min-width: 0; }
+.q-meta { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; font-size: .82rem; color: var(--muted); }
+.q-meta .num { font-family: var(--font-chalk); font-size: 1.35rem; color: var(--accent); line-height: 1; }
+.q-meta .mark { margin-left: auto; font-weight: 700; }
+.q-meta .mark.ok { color: var(--ok); }
+.q-meta .mark.bad { color: var(--bad); }
+.q-text { min-width: 0; }
+.opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; list-style: none; padding: 0; margin: 0; }
+.opts li { margin: 0; min-width: 0; }
+.opt { width: 100%; text-align: left; font: inherit; font-size: .95rem; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: baseline; }
+.opt:hover:not(:disabled) { border-color: var(--accent); }
+.opt:disabled { cursor: default; }
+.opt .letter { font-weight: 700; color: var(--muted); }
+.opt.sel { border-color: var(--accent); background: var(--accent-soft); }
+.opt.sel .letter { color: var(--accent); }
+.opt.right { border-color: var(--ok); background: var(--ok-bg); }
+.opt.right .letter { color: var(--ok); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-bg); }
+.opt.wrong .letter { color: var(--bad); }
+.explain { border-top: 1px dashed var(--line); padding-top: 10px; display: grid; gap: 8px; font-size: .94rem; }
+.explain .trap-line { background: var(--trap-bg); border-radius: 8px; padding: 8px 12px; }
+.explain .trap-line b { color: var(--trap); }
+.foot { color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 16px; }
+
+@media (max-width: 860px) {
+  .board .wrap, .scope, .two { grid-template-columns: minmax(0, 1fr); }
+  .topic-body { grid-template-columns: minmax(0, 1fr); }
+  .topic-body > section + section { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 560px) {
+  .opts, .contrast, .facts { grid-template-columns: minmax(0, 1fr); }
+  .result { grid-template-columns: minmax(0, 1fr); }
+  .topic-head .board-note { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .opt, .tabs a, .scope-item { transition: background-color .15s, border-color .15s, color .15s; }
+}
+</style>
+
+<header class="board">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Vật lý điện tử · PH3330 · giữa kỳ</p>
+      <h1>Ôn đúng phần cô khoanh</h1>
+      <p class="lede">Gom từ ảnh bảng của cô và vở ghi. Mỗi mục có công thức cốt lõi, các câu suy luận hay ra và những bẫy đáp án đã gặp. Cuối trang có phòng thi thử 30 câu, 60 phút.</p>
+    </div>
+    <div>
+      <ul class="facts">
+        <li>Thứ Sáu <b>20/11/2026</b></li>
+        <li><b>30</b> câu trắc nghiệm</li>
+        <li><b>60</b> phút · 2 phút/câu</li>
+        <li>Lý thuyết <b>+</b> bài tập</li>
+        <li>Không hỏi định nghĩa</li>
+        <li>Đáp án <b>gây nhiễu</b> nhiều</li>
+      </ul>
+      <p class="countdown" id="countdown"></p>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Các phần ôn tập">
+  <div class="wrap">
+    <div class="tabs" role="list">
+      <a role="listitem" href="#tong-quan" data-tab="tong-quan">Tổng quan</a>
+      <a role="listitem" href="#chuong-1" data-tab="chuong-1">Chương 1</a>
+      <a role="listitem" href="#chuong-2" data-tab="chuong-2">Chương 2</a>
+      <a role="listitem" href="#chuong-3" data-tab="chuong-3">Chương 3</a>
+      <a role="listitem" href="#bay" data-tab="bay">Bẫy hay gặp</a>
+      <a role="listitem" href="#thi-thu" data-tab="thi-thu">Thi thử</a>
+    </div>
+    <span class="timer" id="navTimer" hidden></span>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- =================== TỔNG QUAN =================== -->
+<div class="view" data-view="tong-quan">
+  <div class="view-head">
+    <h2>Phạm vi thi theo bảng của cô</h2>
+    <p>Ba chương, mười mục. Bấm vào từng mục để mở phần ôn tương ứng. Đề hỏi kiểu "suy ra từ định nghĩa", nên mỗi mục đều có danh sách <em>Suy luận hay hỏi</em>.</p>
+  </div>
+
+  <div class="scope">
+    <div class="scope-col">
+      <h3><span>C1</span> Chuyển động hạt tích điện</h3>
+      <a class="scope-item" href="#chuong-1" data-jump="c1a"><strong>a) Hạt mang điện trong \(\vec E,\ \vec B\)</strong><small>Parabol, đường tròn, xoắn ốc, lọc vận tốc, lái tia.</small></a>
+      <a class="scope-item" href="#chuong-1" data-jump="c1b"><strong>b) Thấu kính tĩnh điện: hội tụ / phân kỳ</strong><small>Một diapham, hai diapham (giả thiết → \(U_A, U_K, U_D\) → kiểm tra kết quả), mặt cầu tích điện \(U_1\gtrless U_2\).</small></a>
+      <a class="scope-item" href="#chuong-1" data-jump="c1c"><strong>c) Tương đối tính (\(v\approx c\))</strong><small>\(m_0\) và \(m\), động năng, động lượng.</small></a>
+    </div>
+    <div class="scope-col">
+      <h3><span>C2</span> Cơ học lượng tử</h3>
+      <a class="scope-item" href="#chuong-2" data-jump="c2a"><strong>a) Lưỡng tính sóng – hạt</strong><small>Photon: \(W\), số photon/1 s, quang điện (\(\lambda_\text{gh}\), \(W_\text{đ}\), \(\phi\)). Vi hạt: \(\lambda_D\), \(v\ll c\) hay \(v\approx c\).</small></a>
+      <a class="scope-item" href="#chuong-2" data-jump="c2b"><strong>b) Hệ thức bất định</strong><small>\(\Delta x\,\Delta p_x\ge\hbar/2\), \(\Delta E\,\Delta t\ge\hbar/2\).</small></a>
+      <a class="scope-item" href="#chuong-2" data-jump="c2c"><strong>c) Vi hạt trong hố thế, xuyên hầm</strong><small>Hố vô hạn / hữu hạn: \(E_n,\psi_n,|\psi_n|^2\), vị trí, \(\lambda_{\max},\lambda_{\min},\nu_{\min}\). Xuyên hầm: \(D\), \(d_{\min}\).</small></a>
+      <a class="scope-item" href="#chuong-2" data-jump="c2d"><strong>d) Toán tử</strong><small>Mômen động lượng, bình phương mômen, động năng, \(\hat H\); \(\hat L\psi=L\psi\).</small></a>
+    </div>
+    <div class="scope-col">
+      <h3><span>C3</span> Nguyên tử</h3>
+      <a class="scope-item" href="#chuong-3" data-jump="c3a"><strong>a) Phổ năng lượng nguyên tử H, phát xạ</strong><small>Số vạch phát xạ, \(\lambda_{\max},\lambda_{\min}\), năng lượng ion hóa; Lyman, Balmer, Paschen.</small></a>
+      <a class="scope-item" href="#chuong-3" data-jump="c3b"><strong>b) Ion đồng dạng hydro</strong><small>He⁺, Li²⁺, Be³⁺: \(E_n\), phổ phát xạ, năng lượng ion hóa, bán kính quỹ đạo.</small></a>
+      <a class="scope-item" href="#chuong-3" data-jump="c3c"><strong>c) Nguyên tử nhiều electron</strong><small>Bộ \((n,l,m_l,m_s)\), số hạng quang phổ, quy tắc lọc lựa, sắp xếp electron.</small></a>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="panel">
+      <h3>Đính chính ghi chép</h3>
+      <p class="note">So sánh ảnh bảng với vở, có bốn chỗ cần sửa trước khi học thuộc.</p>
+      <div class="fix">
+        <span class="tag">Vở</span>
+        <p><span class="src">Sắp xếp electron "1s² 2s² <s>2p²</s> 3s² 3p⁶ 4s²"</span> → phải là <b>2p⁶</b> (bảng ghi đúng).</p>
+        <span class="tag">Vở</span>
+        <p><span class="src">\(E_n=\frac{mv^2}{2}\,\mathbf{+}\,\frac{Ze^2}{4\pi\varepsilon_0 r}\)</span> → thế năng hút mang dấu âm: \(E_n=\frac{mv^2}{2}-\frac{Ze^2}{4\pi\varepsilon_0 r}\).</p>
+        <span class="tag">Bảng</span>
+        <p><span class="src">Vi hạt: \(p=h/\lambda_D,\ E=hc/\lambda_D\)</span> → vế \(E=hc/\lambda\) chỉ đúng với photon hoặc hạt siêu tương đối tính (\(E\approx pc\)). Electron chậm: \(W_\text{đ}=p^2/2m\). Rất có thể đây là chỗ cô cài đáp án nhiễu.</p>
+        <span class="tag">Vở</span>
+        <p><span class="src">Sơ đồ ô 3d trên bảng: ↑↓ ↑↓ ↑ ↑ ↑</span> là \(3d^7\), cả cấu hình là \([\text{Ar}]\,3d^7 4s^2\) = Co (Z = 27). Dòng chữ chỉ ghi tới 4s² nên dễ đếm thiếu.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Chiến lược 60 phút</h3>
+      <ul>
+        <li><b>Lượt 1 (≈ 20 phút):</b> làm hết câu lý thuyết suy luận và câu tính một bước.</li>
+        <li><b>Lượt 2:</b> bài tính dài (hai diapham, xác suất trong hố, tương đối tính). Bài hai diapham thường ra hai nghiệm, đáp án có thể ghi cả cặp.</li>
+        <li><b>Trước khi bấm máy, xác định dạng:</b> cổ điển hay tương đối tính? Một nguyên tử hay khối khí? Đề dùng \(\hbar/2\) hay \(\hbar\)?</li>
+        <li><b>Hai đáp án chỉ lệch nhau ×2, ×4, √, Z² hoặc 10ⁿ:</b> đó là đáp án nhiễu dựng từ lỗi quen. Kiểm tra lại đúng chỗ đó.</li>
+        <li><b>Ước lượng để loại:</b> \(v>c\), xác suất > 1, năng lượng liên kết dương đều loại ngay.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>Hằng số dùng trong đề</h3>
+    <div class="table-scroll">
+      <table class="consts">
+        <tr><td>\(h=6{,}626\cdot10^{-34}\) J·s</td><td>\(\hbar=1{,}055\cdot10^{-34}\) J·s</td><td>\(hc\approx1240\) eV·nm</td><td>dùng eV·nm cho photon nhanh hơn</td></tr>
+        <tr><td>\(e=1{,}6\cdot10^{-19}\) C</td><td>\(m_e=9{,}1\cdot10^{-31}\) kg</td><td>\(m_ec^2=0{,}511\) MeV</td><td>\(W_\text{đ}/m_0c^2>0{,}04\) → tương đối tính</td></tr>
+        <tr><td>\(m_p=1{,}67\cdot10^{-27}\) kg</td><td>\(m_p/m_e\approx1836\)</td><td>\(\sqrt{1836}\approx42{,}8\)</td><td>hai con số hay bị đánh tráo</td></tr>
+        <tr><td>\(R=1{,}097\cdot10^{7}\) m⁻¹</td><td>\(E_I=13{,}6\) eV</td><td>\(r_0=0{,}53\) Å</td><td>bán kính Bohr thứ nhất</td></tr>
+        <tr><td>\(\varepsilon_0=8{,}85\cdot10^{-12}\) F/m</td><td>\(c=3\cdot10^8\) m/s</td><td>\(\lambda_e\approx\dfrac{12{,}26}{\sqrt{U}}\) Å</td><td>electron chậm, \(U\) tính bằng V</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- =================== CHƯƠNG 1 =================== -->
+<div class="view" data-view="chuong-1" hidden>
+  <div class="view-head">
+    <h2>Chương 1 · Chuyển động của hạt tích điện</h2>
+    <p>Bài tập trọng tâm của chương là thấu kính (tĩnh điện). Phần lý thuyết hỏi về sự phụ thuộc: tăng gì thì cái gì đổi, cái gì không.</p>
+  </div>
+
+  <article class="topic" id="c1a">
+    <div class="topic-head"><span class="key">a</span><h3>Hạt mang điện trong \(\vec E,\ \vec B\)</h3><span class="board-note">"Cđộng hạt mang điện trg E, B"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>\[\vec F=q\big(\vec E+\vec v\times\vec B\big),\qquad W_\text{đ}=|q|U\ \Rightarrow\ v=\sqrt{\frac{2|q|U}{m}}\]</p>
+        <p>Tụ lái tia (điện trường đều ⟂ \(\vec v_0\)): quỹ đạo parabol</p>
+        <p>\[y=\frac{|q|E\ell^2}{2mv_0^2}=\frac{U_d\,\ell^2}{4d\,U_0},\qquad S_E=\frac{\ell L}{2dU_0}\]</p>
+        <p>Từ trường đều, \(\theta=(\vec v,\vec B)\):</p>
+        <p>\[r=\frac{mv\sin\theta}{|q|B},\quad T=\frac{2\pi m}{|q|B},\quad h=\frac{2\pi m v\cos\theta}{|q|B}\]</p>
+        <p>\(\vec E\perp\vec B\), hạt đi thẳng khi \(v=E/B\).</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Lực từ luôn ⟂ \(\vec v\) nên không sinh công: tốc độ và động năng không đổi, chỉ hướng thay đổi.</li>
+          <li>\(T\) không phụ thuộc \(v\) (khi \(v\ll c\)). Tăng tốc độ gấp đôi thì \(r\) và \(h\) gấp đôi, \(T\) giữ nguyên.</li>
+          <li>So sánh hai hạt cùng \(|q|\): cùng \(v\) thì \(r\propto m\); cùng \(U\) thì \(r\propto\sqrt m\); cùng \(p\) thì \(r\) bằng nhau.</li>
+          <li>Hạt xuất phát từ nghỉ trong trường tĩnh điện: quỹ đạo <b>không phụ thuộc</b> \(q/m\). Electron và proton qua cùng \(U_0\) lệch cùng độ lớn, chiều ngược nhau.</li>
+          <li>Lọc vận tốc \(v=E/B\) không phụ thuộc \(q\), \(m\) hay dấu điện tích.</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(\sin\theta\) cho bán kính, \(\cos\theta\) cho bước xoắn; \(\theta\) đo giữa \(\vec v\) và \(\vec B\), không phải với mặt phẳng ⟂ \(\vec B\).</li>
+          <li>Đáp án 1836 và 42,8 luôn đi cặp: kiểm tra đại lượng nào giống nhau giữa hai hạt.</li>
+          <li>\(U\) tăng tốc trên 20 kV với electron thì phải dùng tương đối tính, kể cả khi đề không nhắc.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c1b">
+    <div class="topic-head"><span class="key">b</span><h3>Thấu kính tĩnh điện: hội tụ hay phân kỳ</h3><span class="board-note">"diaphram &lt; 1Đ, 2Đ (giả thiết) → U<sub>A,K,D</sub> → ktra kquả"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>Thấu kính mỏng: \(\dfrac1a+\dfrac1b=\dfrac1f\); \(f>0\) hội tụ, \(f<0\) phân kỳ; chùm song song hội tụ tại \(b=f\).</p>
+        <p><b>Một diapham</b> (\(g\) = độ dốc điện thế theo chiều chuyển động):</p>
+        <p>\[\frac1f=\frac{g_+-g_-}{4U_D},\quad g_-=\frac{U_D-U_\text{trước}}{d_1},\quad g_+=\frac{U_\text{sau}-U_D}{d_2}\]</p>
+        <p class="note">Đề cũ viết \(f=\dfrac{4U}{E_2-E_1}\) với \(E_1,E_2\) chính là \(g_-,g_+\) ở trên.</p>
+        <p><b>Hai diapham</b> K → D₁ → D₂ → A (khoảng cách \(d_1,d_2,d_3\)):</p>
+        <p>\[f_1=\frac{4U_1}{g_2-g_1},\quad f_2=\frac{4U_2}{g_3-g_2},\quad \frac1{d_2-f_1}+\frac1{d_3}=\frac1{f_2}\]</p>
+        <p><b>Mặt cầu (lưới cầu) tích điện</b>, chiết suất tương đương \(n\propto\sqrt U\):</p>
+        <p>\[\sqrt{U_1}\sin\alpha=\sqrt{U_2}\sin\beta,\qquad f=\frac{R}{1-\sqrt{U_1/U_2}}\]</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Quy tắc nhanh: độ dốc điện thế phía sau <b>lớn hơn</b> phía trước thì hội tụ, nhỏ hơn thì phân kỳ.</li>
+          <li>Diapham ở cuối vùng tăng tốc (phía sau đẳng thế) là thấu kính <b>phân kỳ</b>; ở đầu vùng tăng tốc (phía trước đẳng thế) là <b>hội tụ</b>.</li>
+          <li>Nhân mọi điện thế với cùng hệ số \(k\) thì \(f\) không đổi; \(f\) cũng không phụ thuộc \(e/m\), nên ion dương qua cùng hệ (điện thế đảo dấu) cho cùng \(f\).</li>
+          <li>Hai miền điện thế: electron vào miền có \(U\) lớn hơn thì nhanh hơn, tia gãy về phía pháp tuyến, như ánh sáng vào môi trường chiết quang hơn.</li>
+          <li>Với chiều cong như bài 1-3: \(U_1&lt;U_2\) hội tụ, \(U_1&gt;U_2\) phân kỳ. Đề vẽ mặt cong ngược chiều thì kết luận đảo lại.</li>
+          <li>Quy trình hai diapham cô ghi: đặt giả thiết → lập \(f_1,f_2\) theo \(U_A,U_K,U_D\) → giải phương trình bậc hai → <b>kiểm tra</b> nghiệm (thường được hai nghiệm, như "46,5 V hoặc 822,3 V" ở đề cũ).</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>Quên hệ số 4 làm \(f\) nhỏ đi 4 lần; lấy \(g_--g_+\) thì đáp án đổi "hội tụ" thành "phân kỳ" với cùng con số.</li>
+          <li>\(d\) cho bằng cm: đổi sang m khi tính \(g\) (V/m), hoặc giữ cm nhất quán cho cả \(f\).</li>
+          <li>Dùng \(U_1/U_2\) thay cho \(\sqrt{U_1/U_2}\) trong định luật khúc xạ.</li>
+          <li>Hai diapham: \(a_2=d_2-f_1\) có thể âm (vật ảo). Giữ dấu, đừng lấy trị tuyệt đối.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c1c">
+    <div class="topic-head"><span class="key">c</span><h3>Tương đối tính (\(v\approx c\))</h3><span class="board-note">"Tương đối tính (v ≈ c) — m₀, m"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>\[m=\frac{m_0}{\sqrt{1-v^2/c^2}}=\gamma m_0,\qquad E=mc^2,\qquad W_\text{đ}=(m-m_0)c^2\]</p>
+        <p>\[p=\gamma m_0v,\qquad E^2=p^2c^2+m_0^2c^4,\qquad pc=\sqrt{W_\text{đ}\,(W_\text{đ}+2m_0c^2)}\]</p>
+        <p>Electron tăng tốc qua \(U\): \(\gamma=1+\dfrac{eU}{m_0c^2}\), rồi \(v=c\sqrt{1-1/\gamma^2}\).</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Khi nào phải dùng: \(W_\text{đ}/(m_0c^2)>0{,}04\). Với electron là \(W_\text{đ}\gtrsim20\) keV.</li>
+          <li>\(m=2m_0\) ⇔ \(\gamma=2\) ⇔ \(v=0{,}866c\) ⇔ \(W_\text{đ}=m_0c^2=0{,}511\) MeV.</li>
+          <li>Gần \(c\), tăng năng lượng chủ yếu làm tăng \(m\); \(v\) gần như không đổi.</li>
+          <li>Trong từ trường: \(r=p/(|q|B)\), \(T=2\pi\gamma m_0/(|q|B)\) tăng theo năng lượng (khác cổ điển).</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(W_\text{đ}\ne\frac12mv^2\), kể cả khi thay \(m=\gamma m_0\). Đáp án 0,383 MeV ở câu "\(m=2m_0\)" sinh ra từ lỗi này.</li>
+          <li>Công thức cổ điển cho \(v>c\) là dấu hiệu dạng tương đối tính, loại ngay.</li>
+          <li>Đề cho "năng lượng": đọc kỹ là năng lượng toàn phần \(E\) hay động năng \(W_\text{đ}\).</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</div>
+
+<!-- =================== CHƯƠNG 2 =================== -->
+<div class="view" data-view="chuong-2" hidden>
+  <div class="view-head">
+    <h2>Chương 2 · Photon, sóng vật chất, cơ học lượng tử</h2>
+    <p>Chương nặng nhất về số câu. Cô dặn "đọc kỹ đề để xác định dạng": cùng một bước sóng nhưng photon và electron dùng công thức khác nhau.</p>
+  </div>
+
+  <article class="topic" id="c2a">
+    <div class="topic-head"><span class="key">a</span><h3>Lưỡng tính sóng – hạt</h3><span class="board-note">"photon → W, số hạt photon/1s, quang điện"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p><b>Photon</b> (\(m_0=0\)): \(\varepsilon=hf=\dfrac{hc}{\lambda}\), \(p=\dfrac h\lambda=\dfrac\varepsilon c\).</p>
+        <p>Công suất nguồn \(W\) (hay \(P\)): \(\ N=\dfrac{W}{hc/\lambda}=\dfrac{W\lambda}{hc}\) photon/s.</p>
+        <p><b>Quang điện ngoài</b> (công thoát \(A\), trên bảng ký hiệu \(\phi\)):</p>
+        <p>\[\frac{hc}{\lambda}=A+W_{\text{đ}\max},\qquad \lambda_\text{gh}=\frac{hc}{A},\qquad eU_h=W_{\text{đ}\max}\]</p>
+        <p><b>Vi hạt</b>: \(\lambda_D=\dfrac hp\).</p>
+        <p>\[v\ll c:\ p=\sqrt{2mW_\text{đ}}=\sqrt{2m|q|U};\qquad v\approx c:\ p=\frac{\sqrt{W_\text{đ}(W_\text{đ}+2m_0c^2)}}{c}\]</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Cường độ ↔ số photon/s ↔ dòng quang điện bão hòa. Bước sóng ↔ \(W_{\text{đ}\max}\) và \(U_h\).</li>
+          <li>\(\lambda>\lambda_\text{gh}\): không có quang điện dù chiếu mạnh bao nhiêu. \(\lambda_\text{gh}\) là của kim loại, không phụ thuộc nguồn sáng.</li>
+          <li>Cùng \(\lambda_D\) ⇔ cùng \(p\); khi đó hạt nhẹ có \(W_\text{đ}\) lớn hơn (\(W_\text{đ}=p^2/2m\)).</li>
+          <li>Cùng \(W_\text{đ}\): \(\lambda_D\propto1/\sqrt m\), proton có \(\lambda\) nhỏ hơn electron 42,8 lần.</li>
+          <li>Tăng \(U\) lên 4 lần thì \(\lambda_D\) giảm 2 lần (cổ điển).</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(E=hc/\lambda\) chỉ dành cho photon. Electron 1 MeV: \(h/p\) cho 0,872 pm, còn \(hc/W_\text{đ}\) cho 1,24 pm. Cả hai đều có trong đáp án.</li>
+          <li>\(\lambda\approx12{,}26/\sqrt U\) ra <b>Å</b>, không phải nm.</li>
+          <li>Năng lượng một photon (≈10⁻¹⁹ J) hay đứng cạnh số photon trong đáp án; mW quên đổi sang W lệch 10³.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c2b">
+    <div class="topic-head"><span class="key">b</span><h3>Hệ thức bất định</h3><span class="board-note">"Δx·Δpₓ ≥ ħ/2 = h/4π;  Δt·ΔE ≥ ħ/2"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>\[\Delta x\,\Delta p_x\ge\frac\hbar2=\frac h{4\pi},\qquad \Delta E\,\Delta t\ge\frac\hbar2\]</p>
+        <p>Vận tốc: \(\Delta v_{\min}=\dfrac{\hbar}{2m\,\Delta x}\).</p>
+        <p>Độ rộng vạch phổ: \(\Delta E\approx\dfrac{hc}{\lambda^2}\Delta\lambda\), rồi \(\tau\approx\dfrac{\hbar}{2\Delta E}\) (theo dạng cô dạy).</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Giam hạt càng chặt (Δx nhỏ) thì Δp càng lớn, nên động năng tối thiểu càng lớn. Hạt bị giam không thể đứng yên: có năng lượng "điểm không".</li>
+          <li>Hạt nặng có Δv nhỏ, nên vật vĩ mô coi như có quỹ đạo xác định.</li>
+          <li>Trạng thái sống lâu thì vạch hẹp; trạng thái cơ bản sống vô hạn nên có năng lượng xác định.</li>
+          <li>Chỉ các cặp cùng trục bị ràng buộc: Δx và \(\Delta p_y\) có thể cùng nhỏ.</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(\hbar/2\), \(\hbar\) và \(h\) cho ba đáp án lệch nhau ×2 và ×2π. Cô dạy \(\hbar/2\); đề giữa kỳ cũ (câu 7, 8) lại tính bằng \(\hbar\). Tính theo \(\hbar/2\) trước, không khớp thì thử \(\hbar\).</li>
+          <li>Đề cho độ bất định tương đối \(\Delta p/p\) với \(v\) lớn: \(p\) phải tính tương đối tính.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c2c">
+    <div class="topic-head"><span class="key">c</span><h3>Vi hạt trong hố thế, hiệu ứng đường ngầm</h3><span class="board-note">"vô hạn / hữu hạn → Eₙ, ψₙ, |ψₙ|², xđịnh vị trí, λ<sub>max</sub>, λ<sub>min</sub>, ν<sub>min</sub>"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức (hố vô hạn, bề rộng \(a\))</h4>
+        <p>\[E_n=\frac{n^2h^2}{8ma^2}=\frac{n^2\pi^2\hbar^2}{2ma^2},\qquad n=1,2,3,\dots\]</p>
+        <p>\[\psi_n(x)=\sqrt{\frac2a}\,\sin\frac{n\pi x}{a},\qquad 0\le x\le a\]</p>
+        <p>\[P_{[x_1,x_2]}=\frac{x_2-x_1}{a}-\frac{\sin\frac{2n\pi x_2}{a}-\sin\frac{2n\pi x_1}{a}}{2n\pi}\]</p>
+        <p>Chuyển mức \(m\to n\): \(\dfrac{hc}{\lambda}=E_m-E_n=(m^2-n^2)E_1\); \(\nu_{\min}=\Delta E_{\min}/h\).</p>
+        <p><b>Xuyên hầm</b> (hàng rào cao \(U_0\), rộng \(d\), \(E&lt;U_0\)):</p>
+        <p>\[D\approx\exp\!\Big[-\frac{2d}{\hbar}\sqrt{2m(U_0-E)}\Big]\]</p>
+        <p>\[d=\frac{\hbar\ln(1/D)}{2\sqrt{2m(U_0-E)}}\]</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>\(E_n\propto n^2/(ma^2)\): bề rộng gấp đôi thì năng lượng giảm 4 lần.</li>
+          <li>\(\psi_n\) có \(n-1\) nút bên trong và \(n\) cực đại tại \(x=\frac{(2k-1)a}{2n}\). \(n\) chẵn thì giữa hố là nút, \(n\) lẻ thì giữa hố là cực đại.</li>
+          <li>\(n\) lớn thì phân bố gần đều: \(P\approx(x_2-x_1)/a\) (giới hạn cổ điển).</li>
+          <li>Hố hữu hạn: sóng thấm ra ngoài, xác suất ngoài hố khác 0; số mức liên kết hữu hạn; mỗi mức thấp hơn mức tương ứng của hố vô hạn cùng bề rộng.</li>
+          <li>\(D\) giảm theo hàm mũ khi tăng \(d\), \(m\) hoặc \(U_0-E\). Bề rộng gấp đôi thì \(D\) bị bình phương, không phải giảm một nửa. Electron xuyên hầm dễ hơn proton rất nhiều.</li>
+          <li>Đề hỏi \(d_{\min}\) để \(D\) không vượt một ngưỡng: dùng công thức \(d\) ở bên trái.</li>
+        </ul>
+        <div class="contrast">
+          <div><b>Hố thế vô hạn</b>Khoảng cách mức \(E_{n+1}-E_n=(2n+1)E_1\) tăng theo \(n\). Vì vậy \(\lambda_{\max}\) ứng với chuyển mức 2 → 1.</div>
+          <div><b>Nguyên tử H</b>Các mức sít lại khi \(n\) tăng. Vì vậy từ mức \(n\), \(\lambda_{\max}\) ứng với chuyển mức \(n\to n-1\).</div>
+        </div>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(n\) bắt đầu từ 1, nên \(E_1>0\). Đáp án "năng lượng thấp nhất bằng 0" luôn sai.</li>
+          <li>"Bước sóng dài nhất khi về trạng thái cơ bản" phải xét cả chuyển mức qua mức trung gian (2 → 1), không chỉ các chuyển mức bắt đầu từ mức cao nhất.</li>
+          <li>Thiếu hệ số 2 trong số mũ của \(D\).</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c2d">
+    <div class="topic-head"><span class="key">d</span><h3>Toán tử</h3><span class="board-note">"Moment động lg, bình phg moment động lg, động năng, Ĥ;  L̂ψ = Lψ"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>\[\hat p_x=-i\hbar\frac{\partial}{\partial x},\quad \hat T=-\frac{\hbar^2}{2m}\nabla^2,\quad \hat H=\hat T+U,\quad \hat L_z=-i\hbar\frac{\partial}{\partial\varphi}\]</p>
+        <p>\[\hat L^2=-\hbar^2\Big[\frac1{\sin\theta}\frac{\partial}{\partial\theta}\Big(\sin\theta\frac{\partial}{\partial\theta}\Big)+\frac1{\sin^2\theta}\frac{\partial^2}{\partial\varphi^2}\Big]\]</p>
+        <p>Phương trình trị riêng: \(\hat A\psi=a\psi\). Trị riêng: \(L^2=l(l+1)\hbar^2\), \(L_z=m_l\hbar\) với \(m_l=-l,\dots,l\); \(\hat H\psi=E\psi\) là phương trình Schrödinger dừng.</p>
+        <p>Giao hoán: \([\hat x,\hat p_x]=i\hbar\), \([\hat L_x,\hat L_y]=i\hbar\hat L_z\), \([\hat L^2,\hat L_z]=0\).</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Kiểm tra hàm riêng: tác dụng toán tử, rút gọn. Kết quả bằng hằng số (không chứa biến) nhân \(\psi\) thì đó là hàm riêng, hằng số là trị riêng.</li>
+          <li>\(e^{ikx}\) là hàm riêng của \(\hat p_x\) (trị riêng \(\hbar k\)) và của \(\hat T\). \(\sin kx\), \(\cos kx\) chỉ là hàm riêng của \(\hat T\).</li>
+          <li>\(e^{im\varphi}\) là hàm riêng của \(\hat L_z\) với trị riêng \(m\hbar\).</li>
+          <li>Toán tử của đại lượng đo được là Hermite, nên trị riêng là số thực.</li>
+          <li>Hai đại lượng đo đồng thời chính xác được khi toán tử giao hoán: \(L^2\) và \(L_z\) được; \(L_x\) và \(L_z\) không; \(x\) và \(p_x\) không.</li>
+          <li>\(|L|=\sqrt{l(l+1)}\,\hbar>L_{z,\max}=l\hbar\): vectơ \(\vec L\) không bao giờ nằm hẳn dọc trục \(z\).</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(-i\cdot i=+1\): trị riêng của \(\hat L_z\) trên \(e^{3i\varphi}\) là \(+3\hbar\).</li>
+          <li>Nhầm \(l(l+1)\hbar^2\) với \(l^2\hbar^2\); trị riêng của \(\hat L^2\) có đơn vị \(\hbar^2\), của \(\hat L_z\) là \(\hbar\).</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</div>
+
+<!-- =================== CHƯƠNG 3 =================== -->
+<div class="view" data-view="chuong-3" hidden>
+  <div class="view-head">
+    <h2>Chương 3 · Nguyên tử</h2>
+    <p>Từ hydro sang ion đồng dạng chỉ cần thêm \(Z\). Cô nhấn mạnh: hiểu thế nào là "đồng dạng hydro" thì mới không chọn nhầm.</p>
+  </div>
+
+  <article class="topic" id="c3a">
+    <div class="topic-head"><span class="key">a</span><h3>Phổ năng lượng nguyên tử H, phát xạ</h3><span class="board-note">"số phát xạ, λ<sub>max</sub>, λ<sub>min</sub>, nlg ion hoá"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>\[E_n=-\frac{13{,}6}{n^2}\ \text{eV},\qquad \frac1\lambda=R\Big(\frac1{n_f^2}-\frac1{n_i^2}\Big)\]</p>
+        <p>\(E_\infty=0\) là mức chân không, nên năng lượng ion hóa từ mức \(n\) là \(13{,}6/n^2\) eV.</p>
+        <p>Dãy: <b>Lyman</b> \(n_f=1\) (tử ngoại), <b>Balmer</b> \(n_f=2\) (khả kiến), <b>Paschen</b> \(n_f=3\) (hồng ngoại).</p>
+        <p>Trong một dãy: \(\lambda_{\max}\) khi \(n_i=n_f+1\); \(\lambda_{\min}=\dfrac{n_f^2}{R}\) khi \(n_i\to\infty\).</p>
+        <p>Số vạch từ mức \(n\): khối khí \(\dfrac{n(n-1)}{2}\); một nguyên tử tối đa \(n-1\).</p>
+        <p>Mẫu Bohr: \(W_\text{đ}=-E_n\), \(U=2E_n\), \(r_n=n^2r_0\).</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Trạng thái của electron trong H ghi bằng bộ ba \((n,l,m_l)\); năng lượng chỉ phụ thuộc \(n\), mỗi mức suy biến \(n^2\) lần (\(2n^2\) kể cả spin).</li>
+          <li>Các mức sít lại khi \(n\) tăng: từ mức \(n\), \(\lambda_{\min}\) ứng với \(n\to1\), \(\lambda_{\max}\) ứng với \(n\to n-1\).</li>
+          <li>Lyman nằm hoàn toàn trong tử ngoại. Bốn vạch Balmer khả kiến: 656,3 · 486,1 · 434,0 · 410,2 nm.</li>
+          <li>Nguyên tử ở trạng thái cơ bản chỉ hấp thụ photon có năng lượng đúng bằng \(E_n-E_1\), hoặc từ 13,6 eV trở lên để ion hóa. Electron va chạm thì có thể truyền một phần năng lượng.</li>
+          <li>Kích thích bằng electron động năng \(W\): lên được mức \(n\) lớn nhất thỏa \(13{,}6\,(1-1/n^2)\le W\).</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(\lambda_{\min}\) của một dãy là giới hạn dãy (\(\infty\to n_f\)), không phải vạch từ mức cao nhất mà đề cho.</li>
+          <li>"Một nguyên tử" và "khối khí" cho số vạch khác nhau (4 và 10 khi \(n=5\)).</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c3b">
+    <div class="topic-head"><span class="key">b</span><h3>Ion đồng dạng hydro</h3><span class="board-note">"He⁺, Li²⁺, Be³⁺ → Eₙ, phổ p.xạ, nlg ion hoá, bk qđạo"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>Điều kiện: chỉ còn đúng 1 electron, \(N_e=Z-(\text{điện tích ion})=1\).</p>
+        <p>\[E_n=-\frac{13{,}6\,Z^2}{n^2}\ \text{eV},\quad r_n=\frac{n^2r_0}{Z},\quad \frac1\lambda=RZ^2\Big(\frac1{n_f^2}-\frac1{n_i^2}\Big)\]</p>
+        <p>Năng lượng ion hóa từ trạng thái cơ bản: He⁺ 54,4 eV · Li²⁺ 122,4 eV · Be³⁺ 217,6 eV.</p>
+        <p>Mẫu gần đúng kiểu cổ điển (cô: "chấp nhận mô hình gần đúng"):</p>
+        <p>\[E_n=W_\text{đ}+U=\frac{mv^2}{2}-\frac{Ze^2}{4\pi\varepsilon_0r}\]</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Năng lượng nhân \(Z^2\), bán kính chia \(Z\), mọi bước sóng chia \(Z^2\): phổ He⁺ ngắn hơn phổ H 4 lần.</li>
+          <li>He⁺ chuyển \(2n\to2m\) cho đúng vạch \(n\to m\) của H. Ví dụ He⁺ 4 → 2 trùng Lyman α (121,5 nm).</li>
+          <li>Hạt nhân hút mạnh hơn nên electron ở gần hơn, liên kết chặt hơn.</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>Kali (Z = 19) có 1 electron hóa trị nhưng vẫn có 19 electron, không phải ion đồng dạng hydro. Cô nói: chọn kali là chưa hiểu bản chất bài toán.</li>
+          <li>Li⁺ còn 2 electron. Be³⁺ có \(Z=4\), không phải 3.</li>
+          <li>Quên \(Z^2\) khi tính bước sóng của He⁺ thì ra đúng vạch của hydro (486 nm thay cho 121,5 nm).</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+
+  <article class="topic" id="c3c">
+    <div class="topic-head"><span class="key">c</span><h3>Nguyên tử nhiều electron</h3><span class="board-note">"(n, l, m<sub>l</sub>, m<sub>s</sub>), số hạng quang phổ, qtắc chọn lọc, sắp xếp đtử"</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>\(n=1,2,\dots\); \(l=0,\dots,n-1\) (s, p, d, f); \(m_l=-l,\dots,l\); \(m_s=\pm\frac12\).</p>
+        <p>Pauli: không có hai electron trùng cả bốn số. Lớp chứa \(2n^2\), phân lớp chứa \(2(2l+1)\).</p>
+        <p>Thứ tự điền theo \(n+l\) tăng: 1s 2s 2p 3s 3p <b>4s 3d</b> 4p 5s 4d 5p 6s 4f 5d …</p>
+        <p>Số hạng quang phổ \({}^{2S+1}L_J\); \(L=0,1,2,3\to\) S, P, D, F; \(J=|L-S|,\dots,L+S\).</p>
+        <p>Trạng thái cơ bản (Hund): \(S\) lớn nhất → \(L\) lớn nhất → \(J=|L-S|\) nếu phân lớp chưa đầy nửa, \(J=L+S\) nếu quá nửa.</p>
+        <p>Lọc lựa: một electron \(\Delta l=\pm1\), \(\Delta m_l=0,\pm1\), \(\Delta n\) bất kỳ. Theo LS: \(\Delta S=0\), \(\Delta L=0,\pm1\), \(\Delta J=0,\pm1\) (cấm \(0\to0\)).</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Ví dụ trên bảng: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷, ô 3d là ↑↓ ↑↓ ↑ ↑ ↑. Ba electron độc thân → \(S=3/2\); \(L=3\) (F); quá nửa → \(J=9/2\). Số hạng \({}^4F_{9/2}\) (Co).</li>
+          <li>Phân lớp đầy có \(L=S=J=0\) (\({}^1S_0\)), chỉ cần xét phân lớp chưa đầy.</li>
+          <li>Ngoại lệ thường hỏi: Cr \([\text{Ar}]3d^54s^1\), Cu \([\text{Ar}]3d^{10}4s^1\).</li>
+          <li>Kiểm tra một bộ số lượng tử: \(l&lt;n\), \(|m_l|\le l\), \(m_s=\pm\frac12\).</li>
+          <li>Đếm electron theo điều kiện, ví dụ \(n=3,\ m_l=-1\): có ở 3p và 3d, mỗi ô 2 electron → 4.</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>Số trên bên trái là độ bội \(2S+1\), không phải \(J\). \({}^3D\) có \(J=1,2,3\).</li>
+          <li>Chọn \(J=|L-S|\) cho phân lớp quá nửa (3d⁷ ra \({}^4F_{3/2}\) là sai).</li>
+          <li>\(\Delta l=0\) (3s → 2s) và \(\Delta l=\pm2\) (3d → 2s) đều bị cấm.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
+</div>
+
+<!-- =================== BẪY =================== -->
+<div class="view" data-view="bay" hidden>
+  <div class="view-head">
+    <h2>Mười hai kiểu đáp án nhiễu</h2>
+    <p>Cô nói tỉ lệ đáp án "lừa" cao. Các đáp án nhiễu thường dựng từ đúng những lỗi dưới đây, nên khi hai lựa chọn chỉ khác nhau đúng một lỗi, hãy kiểm tra lỗi đó.</p>
+  </div>
+  <div class="two">
+    <div class="panel">
+      <h3>Lỗi công thức</h3>
+      <ul>
+        <li><b>Photon hay vi hạt:</b> dùng \(E=hc/\lambda\) cho electron. Với hạt có khối lượng, chỉ \(\lambda=h/p\) luôn đúng.</li>
+        <li><b>Cổ điển hay tương đối tính:</b> \(W_\text{đ}/m_0c^2>0{,}04\) thì không được dùng \(\tfrac12mv^2\) hay \(p=\sqrt{2mW}\).</li>
+        <li><b>\(\hbar/2\), \(\hbar\) hay \(h\):</b> ba đáp án cách nhau ×2, ×2π.</li>
+        <li><b>Hệ số bị rơi:</b> 4 trong \(f=4U/(g_+-g_-)\), 2 trong số mũ của \(D\), \(Z^2\) trong ion đồng dạng.</li>
+        <li><b>Căn bậc hai:</b> \(\sqrt{U_1/U_2}\) trong khúc xạ điện tử, \(\sqrt{m}\) khi so bán kính cùng \(U\).</li>
+        <li><b>sin hay cos:</b> bán kính dùng \(v\sin\theta\), bước xoắn dùng \(v\cos\theta\).</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Lỗi đọc đề</h3>
+      <ul>
+        <li><b>Một nguyên tử hay khối khí:</b> \(n-1\) hay \(n(n-1)/2\) vạch.</li>
+        <li><b>λ dài nhất khi về cơ bản:</b> xét cả chuyển mức qua trung gian. Hố thế: 2 → 1. Nguyên tử H: \(n\to n-1\).</li>
+        <li><b>Giới hạn dãy:</b> \(\lambda_{\min}\) của dãy ứng với \(\infty\to n_f\).</li>
+        <li><b>Đồng dạng hydro:</b> đếm electron, không đếm electron hóa trị (bẫy kali, Li⁺).</li>
+        <li><b>Năng lượng nào:</b> toàn phần, động năng hay năng lượng một photon; eV hay J.</li>
+        <li><b>Đơn vị:</b> Å, nm, pm; mW; cm trong bài thấu kính.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- =================== THI THỬ =================== -->
+<div class="view" data-view="thi-thu" hidden>
+  <div class="view-head">
+    <h2>Phòng thi thử</h2>
+    <p>Ngân hàng 36 câu theo đúng phạm vi cô khoanh, mỗi câu có ít nhất một đáp án nhiễu dựng từ lỗi quen. <b>Luyện tập</b> hiện lời giải ngay khi chọn. <b>Thi thử</b> bốc 30 câu, đảo đáp án, tính giờ 60 phút như đề thật.</p>
+  </div>
+  <div class="quiz-bar">
+    <button class="btn primary" id="startExam" type="button">Bắt đầu thi thử 30 câu</button>
+    <button class="btn" id="toPractice" type="button" hidden>Về chế độ luyện tập</button>
+    <button class="btn" id="resetPractice" type="button">Xóa kết quả luyện tập</button>
+    <div class="chips" id="chapterChips" role="group" aria-label="Lọc theo chương">
+      <button class="chip" type="button" data-ch="0" aria-pressed="true">Tất cả</button>
+      <button class="chip" type="button" data-ch="1" aria-pressed="false">Chương 1</button>
+      <button class="chip" type="button" data-ch="2" aria-pressed="false">Chương 2</button>
+      <button class="chip" type="button" data-ch="3" aria-pressed="false">Chương 3</button>
+    </div>
+    <button class="chip" type="button" id="wrongOnly" aria-pressed="false" hidden>Chỉ xem câu sai</button>
+    <span class="quiz-status" id="quizStatus"></span>
+  </div>
+  <div class="result" id="result" hidden></div>
+  <div class="qlist" id="qlist"></div>
+  <div class="quiz-bar" id="submitBar" hidden>
+    <button class="btn warn" id="submitExam" type="button">Nộp bài</button>
+    <span class="quiz-status" id="submitHint"></span>
+  </div>
+</div>
+
+<p class="foot">Nguồn: ảnh bảng buổi ôn ngày 13/11 và vở ghi; quy ước công thức theo sổ <em>CT.tex</em> và đề giữa kỳ cũ trong thư mục VLDT. Số liệu trong các câu thi thử đã được tính lại bằng máy.</p>
+</main>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  svg: { fontCache: 'global' },
+  options: { enableMenu: false }
+};
+</script>
+<script>
+(function () {
+  const R = String.raw;
+  // ch: chương; a: chỉ số đáp án đúng (0..3) trong mảng o gốc
+  const QS = [
+    // ---------------- Chương 1 ----------------
+    { id: 'r-ratio', ch: 1, t: 'Hạt trong từ trường',
+      q: R`Một electron và một proton, ban đầu đứng yên, được tăng tốc qua cùng hiệu điện thế \(U\) rồi bay vào cùng một từ trường đều theo phương vuông góc với đường sức. Tỉ số bán kính quỹ đạo \(r_p/r_e\) bằng (lấy \(m_p/m_e\approx1836\)):`,
+      o: [R`\(\approx1836\)`, R`\(\approx42{,}8\)`, R`\(\approx1/42{,}8\)`, R`\(1\), vì hai hạt có cùng độ lớn điện tích`], a: 1,
+      why: R`\(r=\dfrac{mv}{|q|B}=\dfrac{\sqrt{2m|q|U}}{|q|B}\Rightarrow r\propto\sqrt m\) khi cùng \(U\) và cùng \(|q|\). Vậy \(r_p/r_e=\sqrt{1836}\approx42{,}8\).`,
+      trap: R`1836 là tỉ số khi hai hạt có cùng vận tốc. Xác định đại lượng nào giống nhau: cùng \(v\) thì \(r\propto m\); cùng \(U\) thì \(r\propto\sqrt m\); cùng \(p\) thì \(r\) bằng nhau.` },
+    { id: 'r-calc', ch: 1, t: 'Hạt trong từ trường',
+      q: R`Electron được tăng tốc từ nghỉ qua hiệu điện thế 1000 V rồi bay vuông góc vào từ trường đều \(B=0{,}01\) T. Bán kính quỹ đạo là:`,
+      o: ['1,07 cm', '0,53 cm', '2,13 cm', '10,7 cm'], a: 0,
+      why: R`\(v=\sqrt{2eU/m}=1{,}88\cdot10^{7}\) m/s; \(r=\dfrac{mv}{eB}=\dfrac{9{,}1\cdot10^{-31}\cdot1{,}88\cdot10^{7}}{1{,}6\cdot10^{-19}\cdot0{,}01}\approx1{,}07\cdot10^{-2}\) m.`,
+      trap: R`1 keV ≪ 511 keV nên dùng cổ điển được. Các đáp án gấp đôi, gấp mười sinh ra từ lỗi đổi đơn vị hoặc bỏ căn.` },
+    { id: 'helix-speed', ch: 1, t: 'Quỹ đạo xoắn ốc',
+      q: R`Electron bay vào từ trường đều với vận tốc hợp với \(\vec B\) góc \(\theta\) (\(0^\circ<\theta<90^\circ\)). Giữ nguyên \(\theta\) và \(B\), tăng tốc độ gấp đôi thì bán kính \(r\), chu kỳ \(T\) và bước xoắn \(h\):`,
+      o: [R`\(r\) ×2; \(T\) ×2; \(h\) ×4`, R`\(r\) ×2; \(T\) không đổi; \(h\) ×2`, R`\(r\) ×2; \(T\) giảm một nửa; \(h\) không đổi`, R`\(r\) không đổi; \(T\) không đổi; \(h\) ×2`], a: 1,
+      why: R`\(r=\dfrac{mv\sin\theta}{eB}\propto v\); \(T=\dfrac{2\pi m}{eB}\) không chứa \(v\); \(h=v\cos\theta\cdot T\propto v\).`,
+      trap: R`Chu kỳ không phụ thuộc vận tốc khi \(v\ll c\). Ở tốc độ tương đối tính, \(m\) thay bằng \(\gamma m_0\) nên \(T\) tăng theo năng lượng.` },
+    { id: 'deflect-qm', ch: 1, t: 'Lái tia bằng điện trường',
+      q: R`Một electron và một proton, đều xuất phát từ nghỉ và được tăng tốc bởi hiệu điện thế có cùng độ lớn \(U_0\), lần lượt bay vào cùng một tụ lái tia có điện trường đều vuông góc với vận tốc ban đầu. So sánh độ lệch của hai hạt khi ra khỏi tụ:`,
+      o: ['Proton lệch ít hơn khoảng 1836 lần, cùng chiều', 'Proton lệch ít hơn khoảng 42,8 lần, ngược chiều', 'Hai độ lệch bằng nhau về độ lớn, ngược chiều nhau', 'Hai độ lệch bằng nhau về độ lớn và cùng chiều'], a: 2,
+      why: R`\(y=\dfrac{|q|E\ell^2}{2mv_0^2}\) và \(mv_0^2=2|q|U_0\) nên \(y=\dfrac{E\ell^2}{4U_0}\): không chứa \(q\), \(m\). Lực điện trên hai hạt ngược chiều vì điện tích trái dấu.`,
+      trap: R`Quỹ đạo trong trường tĩnh điện của hạt xuất phát từ nghỉ chỉ phụ thuộc điện thế, không phụ thuộc \(e/m\). Nhưng dấu điện tích vẫn quyết định chiều lệch.` },
+    { id: 'selector', ch: 1, t: 'Điện trường ⟂ từ trường',
+      q: R`Một electron bay thẳng đều qua vùng có điện trường đều \(\vec E\) vuông góc với từ trường đều \(\vec B\) (vận tốc vuông góc với cả hai). Thay electron bằng proton có cùng vận tốc thì proton:`,
+      o: ['Vẫn bay thẳng', 'Lệch theo chiều lực điện', 'Lệch theo chiều lực từ', R`Chuyển động tròn bán kính \(mv/(eB)\)`], a: 0,
+      why: R`Điều kiện đi thẳng \(|q|E=|q|vB\Rightarrow v=E/B\), không phụ thuộc \(q\), \(m\). Đổi dấu điện tích làm đổi chiều cả hai lực nên chúng vẫn cân bằng.`,
+      trap: R`Bộ lọc chỉ chọn vận tốc. Hạt có \(v>E/B\) mới lệch theo lực từ, \(v<E/B\) lệch theo lực điện.` },
+    { id: 'diaphragm-f', ch: 1, t: 'Thấu kính một diapham',
+      q: R`Hệ K – D – A: catốt K ở 0 V; diapham D có \(U_D=1000\) V, cách K \(d_1=2\) cm; anốt A có \(U_A=3000\) V, cách D \(d_2=2\) cm. Coi D là thấu kính mỏng. Tiêu cự và tính chất của D:`,
+      o: ['8 cm, hội tụ', '8 cm, phân kỳ', '2 cm, hội tụ', '16 cm, hội tụ'], a: 0,
+      why: R`\(g_-=\dfrac{1000-0}{0{,}02}=5\cdot10^4\) V/m; \(g_+=\dfrac{3000-1000}{0{,}02}=10^5\) V/m. \(\dfrac1f=\dfrac{g_+-g_-}{4U_D}=\dfrac{5\cdot10^4}{4000}=12{,}5\) m⁻¹ nên \(f=8\) cm \(>0\): hội tụ.`,
+      trap: R`Thiếu hệ số 4 ra 2 cm. Lấy \(g_--g_+\) ra "phân kỳ". Quy tắc nhanh: độ dốc điện thế phía sau lớn hơn phía trước thì hội tụ.` },
+    { id: 'diaphragm-exit', ch: 1, t: 'Thấu kính một diapham',
+      q: R`Một diapham đặt ở cuối vùng tăng tốc: phía trước có điện trường tăng tốc đều, phía sau là vùng đẳng thế. Đối với chùm electron đi qua, diapham này là:`,
+      o: ['Thấu kính hội tụ', 'Thấu kính phân kỳ', 'Không có tác dụng thấu kính vì phía sau không có điện trường', R`Hội tụ hay phân kỳ tùy giá trị \(U_D\)`], a: 1,
+      why: R`\(g_->0\), \(g_+=0\) nên \(\dfrac1f=\dfrac{-g_-}{4U_D}<0\): phân kỳ, với mọi \(U_D>0\).`,
+      trap: R`Chỉ cần một phía có trường là đã có tác dụng thấu kính, vì mặt đẳng thế bị uốn cong qua lỗ diapham.` },
+    { id: 'grid-f', ch: 1, t: 'Mặt cầu tích điện',
+      q: R`Chùm electron song song trục đi qua hai lưới cầu (chiều cong như bài 1-3) ngăn cách miền điện thế \(U_1=100\) V (phía tới) và \(U_2=400\) V (phía ra), bán kính lưới \(R=5\) cm. Tiêu cự của hệ:`,
+      o: ['10 cm, hội tụ', '6,67 cm, hội tụ', '10 cm, phân kỳ', '5 cm, hội tụ'], a: 0,
+      why: R`Khúc xạ điện tử: \(\sqrt{U_1}\sin\alpha=\sqrt{U_2}\sin\beta\), chiết suất tương đương \(n\propto\sqrt U\). \(f=\dfrac{R}{1-\sqrt{U_1/U_2}}=\dfrac{5}{1-0{,}5}=10\) cm \(>0\).`,
+      trap: R`Dùng \(U_1/U_2\) thay cho căn bậc hai sẽ ra 6,67 cm.` },
+    { id: 'grid-reverse', ch: 1, t: 'Mặt cầu tích điện',
+      q: R`Giữ nguyên hình học của hệ lưới cầu ở câu trước (\(R=5\) cm) nhưng đổi điện thế: \(U_1=400\) V (phía tới), \(U_2=100\) V (phía ra). Hệ khi đó là:`,
+      o: [R`Hội tụ, \(f=10\) cm`, R`Phân kỳ, \(|f|=5\) cm`, R`Phân kỳ, \(|f|=10\) cm`, R`Hội tụ, \(f=5\) cm`], a: 1,
+      why: R`\(f=\dfrac{5}{1-\sqrt{400/100}}=\dfrac{5}{1-2}=-5\) cm: phân kỳ. Electron vào miền điện thế thấp hơn bị chậm lại, giống ánh sáng đi ra môi trường kém chiết quang hơn.`,
+      trap: R`"\(U_1<U_2\) hội tụ, \(U_1>U_2\) phân kỳ" chỉ đúng với chiều cong của bài 1-3. Đề vẽ mặt cong ngược chiều thì kết luận đảo lại.` },
+    { id: 'rel-speed', ch: 1, t: 'Tương đối tính',
+      q: R`Electron được tăng tốc từ nghỉ qua hiệu điện thế 1 MV (\(m_0c^2=0{,}511\) MeV). Vận tốc của electron:`,
+      o: [R`\(5{,}93\cdot10^8\) m/s`, R`\(2{,}82\cdot10^8\) m/s`, R`\(2{,}60\cdot10^8\) m/s`, R`\(1{,}98\cdot10^8\) m/s`], a: 1,
+      why: R`\(\gamma=1+\dfrac{eU}{m_0c^2}=1+\dfrac{1}{0{,}511}=2{,}957\); \(v=c\sqrt{1-1/\gamma^2}=0{,}941c\approx2{,}82\cdot10^8\) m/s.`,
+      trap: R`Công thức cổ điển \(v=\sqrt{2eU/m}\) cho \(5{,}93\cdot10^8\) m/s, lớn hơn \(c\). \(2{,}60\cdot10^8\) m/s là \(0{,}866c\), ứng với \(m=2m_0\).` },
+    { id: 'rel-energy', ch: 1, t: 'Tương đối tính',
+      q: R`Khối lượng tương đối tính của một electron gấp đôi khối lượng nghỉ của nó. Động năng của electron là:`,
+      o: ['0,511 MeV', '0,383 MeV', '0,192 MeV', '1,022 MeV'], a: 0,
+      why: R`\(m=2m_0\Rightarrow W_\text{đ}=(m-m_0)c^2=m_0c^2=0{,}511\) MeV (khi đó \(v=0{,}866c\)).`,
+      trap: R`\(\tfrac12mv^2\) với \(m=2m_0\) cho 0,383 MeV; \(\tfrac12m_0v^2\) cho 0,192 MeV; 1,022 MeV là năng lượng toàn phần \(mc^2\).` },
+
+    // ---------------- Chương 2 ----------------
+    { id: 'photon-count', ch: 2, t: 'Photon',
+      q: R`Một laser công suất 1 mW phát ánh sáng bước sóng 632,8 nm. Số photon laser phát ra trong 1 giây là:`,
+      o: [R`\(3{,}18\cdot10^{15}\)`, R`\(3{,}18\cdot10^{18}\)`, R`\(3{,}14\cdot10^{-19}\)`, R`\(3{,}18\cdot10^{12}\)`], a: 0,
+      why: R`Năng lượng một photon \(\varepsilon=hc/\lambda=3{,}14\cdot10^{-19}\) J. \(N=W/\varepsilon=10^{-3}/3{,}14\cdot10^{-19}\approx3{,}18\cdot10^{15}\) photon/s.`,
+      trap: R`\(3{,}14\cdot10^{-19}\) là năng lượng một photon (J). Quên đổi mW sang W cho \(10^{18}\).` },
+    { id: 'pe-intensity', ch: 2, t: 'Quang điện',
+      q: R`Chiếu ánh sáng đơn sắc có \(\lambda<\lambda_\text{gh}\) vào catốt tế bào quang điện. Giữ nguyên bước sóng, tăng cường độ sáng gấp đôi thì:`,
+      o: ['Động năng ban đầu cực đại của quang electron tăng gấp đôi', 'Hiệu điện thế hãm tăng gấp đôi', 'Dòng quang điện bão hòa tăng gấp đôi, động năng ban đầu cực đại không đổi', R`Giới hạn quang điện \(\lambda_\text{gh}\) tăng`], a: 2,
+      why: R`Cường độ tỉ lệ số photon tới mỗi giây, nên số electron bứt ra và dòng bão hòa tăng. \(W_{\text{đ}\max}=hc/\lambda-A\) chỉ phụ thuộc \(\lambda\) và công thoát.`,
+      trap: R`\(\lambda_\text{gh}=hc/A\) là đặc trưng của kim loại làm catốt, không phụ thuộc ánh sáng chiếu vào.` },
+    { id: 'pe-calc', ch: 2, t: 'Quang điện',
+      q: R`Kim loại có công thoát \(A=2{,}0\) eV được chiếu bức xạ \(\lambda=400\) nm. Hiệu điện thế hãm và giới hạn quang điện lần lượt là:`,
+      o: ['1,1 V và 620 nm', '3,1 V và 620 nm', '1,1 V và 400 nm', '2,0 V và 620 nm'], a: 0,
+      why: R`\(\varepsilon=1240/400=3{,}1\) eV; \(W_{\text{đ}\max}=3{,}1-2{,}0=1{,}1\) eV nên \(U_h=1{,}1\) V; \(\lambda_\text{gh}=1240/2{,}0=620\) nm.`,
+      trap: R`3,1 V là năng lượng photon chia \(e\), chưa trừ công thoát. Giới hạn quang điện là của kim loại, không phải bước sóng chiếu vào.` },
+    { id: 'same-lambda', ch: 2, t: 'Sóng de Broglie',
+      q: R`Một electron và một proton có cùng bước sóng de Broglie (cả hai chuyển động chậm, \(v\ll c\)). Phát biểu đúng:`,
+      o: ['Hai hạt có cùng động năng', 'Hai hạt có cùng động lượng; động năng electron lớn hơn khoảng 1836 lần', 'Hai hạt có cùng vận tốc', 'Hai hạt có cùng động lượng; động năng proton lớn hơn khoảng 1836 lần'], a: 1,
+      why: R`\(\lambda=h/p\): cùng \(\lambda\) thì cùng \(p\). \(W_\text{đ}=\dfrac{p^2}{2m}\) nên hạt nhẹ có động năng lớn hơn: \(W_e/W_p=m_p/m_e\approx1836\).`,
+      trap: R`Nếu đề cho cùng động năng thì ngược lại: proton có \(\lambda\) nhỏ hơn \(\sqrt{1836}\approx42{,}8\) lần.` },
+    { id: 'db-100V', ch: 2, t: 'Sóng de Broglie',
+      q: R`Bước sóng de Broglie của electron được tăng tốc từ nghỉ qua hiệu điện thế 100 V là:`,
+      o: ['0,123 nm', '1,23 nm', '12,3 nm', '0,0123 nm'], a: 0,
+      why: R`\(\lambda=\dfrac{h}{\sqrt{2meU}}\approx\dfrac{12{,}26}{\sqrt{U}}\) Å \(=1{,}226\) Å \(=0{,}123\) nm.`,
+      trap: R`Công thức nhanh \(12{,}26/\sqrt U\) cho kết quả bằng Å. Đọc thành nm thì ra 1,23 nm.` },
+    { id: 'db-rel', ch: 2, t: 'Sóng de Broglie',
+      q: R`Electron có động năng 1 MeV (\(m_0c^2=0{,}511\) MeV, \(hc=1240\) eV·nm). Bước sóng de Broglie của electron là:`,
+      o: ['0,872 pm', '1,23 pm', '1,24 pm', '0,821 pm'], a: 0,
+      why: R`\(W_\text{đ}/m_0c^2\approx2\gg0{,}04\): tương đối tính. \(pc=\sqrt{W_\text{đ}(W_\text{đ}+2m_0c^2)}=\sqrt{1\cdot2{,}022}=1{,}422\) MeV; \(\lambda=\dfrac{hc}{pc}=\dfrac{1240\ \text{eV·nm}}{1{,}422\cdot10^6\ \text{eV}}=0{,}872\) pm.`,
+      trap: R`Cổ điển \(p=\sqrt{2mW_\text{đ}}\) cho 1,23 pm. Dùng công thức photon \(hc/W_\text{đ}\) cho 1,24 pm; \(hc/E_\text{toàn phần}\) cho 0,821 pm.` },
+    { id: 'uncert-v', ch: 2, t: 'Hệ thức bất định',
+      q: R`Electron bị giam trong vùng kích thước \(\Delta x=0{,}1\) nm. Theo hệ thức \(\Delta x\,\Delta p_x\ge\hbar/2\), độ bất định vận tốc nhỏ nhất của electron là:`,
+      o: [R`\(5{,}79\cdot10^5\) m/s`, R`\(1{,}16\cdot10^6\) m/s`, R`\(7{,}28\cdot10^6\) m/s`, R`\(2{,}90\cdot10^5\) m/s`], a: 0,
+      why: R`\(\Delta v\ge\dfrac{\hbar}{2m\Delta x}=\dfrac{1{,}055\cdot10^{-34}}{2\cdot9{,}1\cdot10^{-31}\cdot10^{-10}}=5{,}79\cdot10^5\) m/s.`,
+      trap: R`Dùng \(\hbar\) ra \(1{,}16\cdot10^6\), dùng \(h\) ra \(7{,}28\cdot10^6\). Đề ghi rõ dạng hệ thức thì theo đề.` },
+    { id: 'well-cascade', ch: 2, t: 'Hố thế vô hạn',
+      q: R`Electron trong hố thế một chiều sâu vô hạn, bề rộng \(a=1\) nm, đang ở trạng thái \(n=3\). Khi trở về trạng thái cơ bản (có thể qua mức trung gian), bước sóng dài nhất của photon có thể phát ra là:`,
+      o: ['658 nm', '411 nm', '1097 nm', '3290 nm'], a: 2,
+      why: R`\(E_1=\dfrac{h^2}{8ma^2}=0{,}377\) eV, \(E_n=n^2E_1\). Các chuyển mức: 3 → 2 (\(5E_1\)), 3 → 1 (\(8E_1\)), 2 → 1 (\(3E_1\)). \(\lambda_{\max}\) ứng với \(\Delta E\) nhỏ nhất \(=3E_1=1{,}13\) eV, \(\lambda=1240/1{,}13\approx1097\) nm.`,
+      trap: R`Chỉ xét chuyển mức xuất phát từ \(n=3\) thì chọn 658 nm. 411 nm là \(\lambda_{\min}\) (3 → 1). 3290 nm ứng với \(\Delta E=E_1\), không có chuyển mức nào như vậy.` },
+    { id: 'well-prob', ch: 2, t: 'Hố thế vô hạn',
+      q: R`Hạt trong hố thế vô hạn bề rộng \(a\), ở trạng thái cơ bản \(n=1\). Xác suất tìm thấy hạt trong đoạn \([0;\,a/3]\) là:`,
+      o: ['0,333', '0,196', '0,609', '0,138'], a: 1,
+      why: R`\(P=\displaystyle\int_0^{a/3}\frac2a\sin^2\frac{\pi x}{a}\,dx=\frac13-\frac{\sin(2\pi/3)}{2\pi}=0{,}333-0{,}138=0{,}196\).`,
+      trap: R`0,333 là phân bố đều kiểu cổ điển; 0,609 là xác suất ở một phần ba giữa hố. Ở \(n=1\) hạt tập trung giữa hố nên đoạn sát thành có xác suất nhỏ hơn 1/3.` },
+    { id: 'well-n2', ch: 2, t: 'Hố thế vô hạn',
+      q: R`Hạt trong hố thế vô hạn bề rộng \(a\) ở trạng thái \(n=2\). Vị trí có mật độ xác suất tìm thấy hạt lớn nhất là:`,
+      o: [R`\(x=a/2\)`, R`\(x=a/4\) và \(x=3a/4\)`, R`\(x=a/3\) và \(x=2a/3\)`, R`\(x=0\) và \(x=a\)`], a: 1,
+      why: R`\(|\psi_2|^2=\dfrac2a\sin^2\dfrac{2\pi x}{a}\) cực đại khi \(\dfrac{2\pi x}{a}=\dfrac\pi2,\dfrac{3\pi}2\), tức \(x=a/4,\ 3a/4\). Tại \(x=a/2\) là nút: mật độ xác suất bằng 0.`,
+      trap: R`Trạng thái \(n\) có \(n-1\) nút bên trong. Với \(n=2\), giữa hố là nút; \(a/3, 2a/3\) là nút của \(n=3\).` },
+    { id: 'finite-well', ch: 2, t: 'Hố thế hữu hạn',
+      q: R`So sánh hạt trong hố thế hữu hạn với hạt trong hố thế vô hạn có cùng bề rộng. Phát biểu <b>SAI</b> là:`,
+      o: ['Với hố hữu hạn, xác suất tìm thấy hạt bên ngoài hố khác 0', 'Hố hữu hạn chỉ có một số hữu hạn mức năng lượng liên kết', 'Mức năng lượng thứ n trong hố hữu hạn thấp hơn mức thứ n của hố vô hạn', 'Trong cả hai loại hố, hạt có thể có năng lượng bằng 0 ở trạng thái thấp nhất'], a: 3,
+      why: R`\(n\) bắt đầu từ 1 nên \(E_1>0\) (năng lượng điểm không), phù hợp hệ thức bất định: hạt bị giam có \(\Delta p\ne0\). Ba phát biểu còn lại đúng: sóng thấm vào thành làm "bề rộng hiệu dụng" lớn hơn nên năng lượng thấp hơn.`,
+      trap: R`\(n=0\) cho \(\psi\equiv0\), nghĩa là không có hạt, nên không phải một trạng thái.` },
+    { id: 'tunnel', ch: 2, t: 'Hiệu ứng đường ngầm',
+      q: R`Electron năng lượng \(E=1\) eV tới hàng rào thế chữ nhật cao \(U_0=2\) eV, bề rộng \(d=0{,}5\) nm. Hệ số xuyên hầm gần đúng \(D\approx\exp\!\big[-\tfrac{2d}{\hbar}\sqrt{2m(U_0-E)}\big]\) bằng:`,
+      o: [R`\(6{,}0\cdot10^{-3}\)`, R`\(7{,}7\cdot10^{-2}\)`, R`\(3{,}6\cdot10^{-5}\)`, '0,5'], a: 0,
+      why: R`\(\kappa=\dfrac{\sqrt{2m(U_0-E)}}{\hbar}=5{,}12\cdot10^{9}\) m⁻¹; \(2\kappa d=5{,}12\); \(D=e^{-5{,}12}\approx6{,}0\cdot10^{-3}\).`,
+      trap: R`Quên hệ số 2 ra \(7{,}7\cdot10^{-2}\). \(3{,}6\cdot10^{-5}\) là \(D\) khi bề rộng gấp đôi: \(D\) bị bình phương chứ không giảm một nửa.` },
+    { id: 'op-Lz', ch: 2, t: 'Toán tử',
+      q: R`Hàm \(\psi(\varphi)=A\,e^{3i\varphi}\) là hàm riêng của toán tử \(\hat L_z=-i\hbar\,\partial/\partial\varphi\) với trị riêng:`,
+      o: [R`\(3\hbar\)`, R`\(-3\hbar\)`, R`\(3i\hbar\)`, R`\(9\hbar^2\)`], a: 0,
+      why: R`\(\hat L_z\psi=-i\hbar\cdot(3i)\,Ae^{3i\varphi}=3\hbar\,\psi\).`,
+      trap: R`\(-i\cdot i=+1\). Trị riêng của toán tử Hermite là số thực nên \(3i\hbar\) bị loại; \(9\hbar^2\) là trị riêng của \(\hat L_z^2\).` },
+    { id: 'op-sin', ch: 2, t: 'Toán tử',
+      q: R`Xét hàm sóng \(\psi(x)=A\sin kx\) của hạt tự do. Phát biểu đúng:`,
+      o: [R`\(\psi\) là hàm riêng của \(\hat p_x\) với trị riêng \(\hbar k\)`, R`\(\psi\) là hàm riêng của \(\hat T\) với trị riêng \(\hbar^2k^2/2m\), nhưng không là hàm riêng của \(\hat p_x\)`, R`\(\psi\) là hàm riêng của cả \(\hat p_x\) và \(\hat T\)`, R`\(\psi\) không là hàm riêng của toán tử nào`], a: 1,
+      why: R`\(\hat p_x\psi=-i\hbar kA\cos kx\), không tỉ lệ với \(\sin kx\). \(\hat T\psi=-\dfrac{\hbar^2}{2m}(-k^2)A\sin kx=\dfrac{\hbar^2k^2}{2m}\psi\). \(\sin kx\) là chồng chập của \(e^{ikx}\) và \(e^{-ikx}\): động lượng \(\pm\hbar k\) chưa xác định nhưng động năng xác định.`,
+      trap: R`Hàm riêng của \(\hat p_x\) là \(e^{ikx}\), không phải sin hay cos.` },
+    { id: 'L-mag', ch: 2, t: 'Toán tử',
+      q: R`Electron ở trạng thái có số lượng tử quỹ đạo \(l=2\). Độ lớn mômen động lượng quỹ đạo và giá trị lớn nhất của hình chiếu \(L_z\) lần lượt là:`,
+      o: [R`\(\sqrt6\,\hbar\) và \(2\hbar\)`, R`\(2\hbar\) và \(2\hbar\)`, R`\(6\hbar\) và \(2\hbar\)`, R`\(\sqrt6\,\hbar\) và \(\sqrt6\,\hbar\)`], a: 0,
+      why: R`Trị riêng của \(\hat L^2\) là \(l(l+1)\hbar^2=6\hbar^2\), nên \(|L|=\sqrt6\,\hbar\). \(L_z=m_l\hbar\) với \(|m_l|\le l\), nên \(L_{z,\max}=2\hbar\).`,
+      trap: R`\(L_{z,\max}<|L|\): góc nhỏ nhất giữa \(\vec L\) và trục \(z\) là \(\arccos(2/\sqrt6)\approx35{,}3^\circ\).` },
+
+    // ---------------- Chương 3 ----------------
+    { id: 'lines-n5', ch: 3, t: 'Phổ hydro',
+      q: R`Một khối khí hydro được kích thích để các nguyên tử lên tới mức \(n=5\). Số vạch phổ phát xạ tối đa của khối khí và số vạch thuộc dãy Balmer lần lượt là:`,
+      o: ['10 và 3', '4 và 1', '10 và 4', '15 và 3'], a: 0,
+      why: R`\(N=\dfrac{n(n-1)}2=10\). Dãy Balmer kết thúc ở \(n=2\), xuất phát từ \(n=3,4,5\): 3 vạch.`,
+      trap: R`Một nguyên tử đơn lẻ phát tối đa \(n-1=4\) photon trong một lần trở về. Đọc kỹ đề là "một nguyên tử" hay "khối khí".` },
+    { id: 'balmer-min', ch: 3, t: 'Phổ hydro',
+      q: R`Bước sóng ngắn nhất trong dãy Balmer của nguyên tử hydro (\(R=1{,}097\cdot10^7\) m⁻¹) là:`,
+      o: ['656,3 nm', '364,6 nm', '91,2 nm', '121,5 nm'], a: 1,
+      why: R`\(\lambda_{\min}\) ứng với \(\infty\to2\): \(\dfrac1\lambda=\dfrac R4\Rightarrow\lambda=\dfrac4R=364{,}6\) nm.`,
+      trap: R`656,3 nm là \(\lambda_{\max}\) của Balmer; 91,2 nm và 121,5 nm là \(\lambda_{\min}\), \(\lambda_{\max}\) của Lyman.` },
+    { id: 'H-energies', ch: 3, t: 'Mẫu nguyên tử hydro',
+      q: R`Theo mẫu Bohr, ở trạng thái cơ bản của nguyên tử hydro (\(E_1=-13{,}6\) eV), động năng và thế năng của electron lần lượt là:`,
+      o: ['13,6 eV và −27,2 eV', '−13,6 eV và 0', '13,6 eV và −13,6 eV', '6,8 eV và −20,4 eV'], a: 0,
+      why: R`Lực Coulomb là lực hướng tâm: \(\dfrac{mv^2}{2}=\dfrac{e^2}{8\pi\varepsilon_0r}=-E_n\); \(U=-\dfrac{e^2}{4\pi\varepsilon_0r}=2E_n\). Vậy \(W_\text{đ}=13{,}6\) eV, \(U=-27{,}2\) eV, tổng \(-13{,}6\) eV.`,
+      trap: R`Thế năng hút mang dấu âm và có độ lớn gấp đôi động năng. Động năng không thể âm.` },
+    { id: 'He-line', ch: 3, t: 'Ion đồng dạng hydro',
+      q: R`Bước sóng của vạch phổ phát ra khi ion He⁺ chuyển từ mức \(n=4\) về \(n=2\) bằng (\(R=1{,}097\cdot10^7\) m⁻¹):`,
+      o: ['486,2 nm', '121,5 nm', '30,4 nm', '656,3 nm'], a: 1,
+      why: R`\(\dfrac1\lambda=RZ^2\Big(\dfrac1{2^2}-\dfrac1{4^2}\Big)=4R\cdot\dfrac3{16}=\dfrac{3R}4\Rightarrow\lambda=121{,}5\) nm, trùng vạch Lyman α của hydro.`,
+      trap: R`Quên \(Z^2\) ra 486,2 nm (vạch Hβ của hydro). 30,4 nm là vạch 2 → 1 của He⁺.` },
+    { id: 'Li-ion', ch: 3, t: 'Ion đồng dạng hydro',
+      q: R`Năng lượng ion hóa từ trạng thái cơ bản và bán kính quỹ đạo Bohr thứ nhất của ion Li²⁺ (\(r_0=0{,}53\) Å) lần lượt là:`,
+      o: ['122,4 eV và 0,177 Å', '40,8 eV và 0,177 Å', '122,4 eV và 1,59 Å', '122,4 eV và 4,77 Å'], a: 0,
+      why: R`\(E_\text{ion}=13{,}6\,Z^2=13{,}6\cdot9=122{,}4\) eV; \(r_1=\dfrac{r_0}{Z}=\dfrac{0{,}53}{3}=0{,}177\) Å.`,
+      trap: R`Năng lượng tỉ lệ \(Z^2\) (không phải \(Z\)); bán kính tỉ lệ \(1/Z\) (không phải nhân \(Z\) hay \(Z^2\)).` },
+    { id: 'H-like', ch: 3, t: 'Ion đồng dạng hydro',
+      q: R`Hệ nào sau đây là ion đồng dạng hydro?`,
+      o: ['Nguyên tử K (Z = 19), có 1 electron hóa trị', 'Ion Li⁺ (Z = 3)', 'Ion Be³⁺ (Z = 4)', 'Nguyên tử He (Z = 2)'], a: 2,
+      why: R`Đồng dạng hydro khi chỉ còn đúng 1 electron: \(N_e=Z-(\text{điện tích ion})\). Be³⁺: \(4-3=1\). Li⁺: \(3-1=2\); He: 2; K: 19.`,
+      trap: R`Kali có 1 electron hóa trị nhưng vẫn có 19 electron, nên không dùng được \(E_n=-13{,}6Z^2/n^2\).` },
+    { id: 'qn-count', ch: 3, t: 'Số lượng tử',
+      q: R`Số electron tối đa trong một nguyên tử có cùng \(n=3\) và \(m_l=-1\) là:`,
+      o: ['2', '4', '6', '18'], a: 1,
+      why: R`\(n=3\Rightarrow l=0,1,2\). \(m_l=-1\) cần \(l\ge1\): có ở \(l=1\) và \(l=2\). Mỗi bộ \((n,l,m_l)\) chứa 2 electron (\(m_s=\pm\frac12\)), tổng 4.`,
+      trap: R`18 \(=2n^2\) là cả lớp \(n=3\); 6 là cả phân lớp 3p; 2 là khi quên phân lớp 3d.` },
+    { id: 'selection', ch: 3, t: 'Quy tắc lọc lựa',
+      q: R`Theo quy tắc lọc lựa \(\Delta l=\pm1\), chuyển mức nào sau đây được phép?`,
+      o: ['3d → 2s', '3s → 2s', '4f → 3p', '3d → 2p'], a: 3,
+      why: R`3d → 2p: \(\Delta l=1-2=-1\), được phép. 3d → 2s và 4f → 3p có \(\Delta l=-2\); 3s → 2s có \(\Delta l=0\).`,
+      trap: R`\(\Delta n\) có thể bất kỳ, chỉ \(l\) bị ràng buộc.` },
+    { id: 'term-Co', ch: 3, t: 'Số hạng quang phổ',
+      q: R`Nguyên tử có cấu hình \([\text{Ar}]\,3d^7\,4s^2\) (sơ đồ ô 3d trên bảng: ↑↓ ↑↓ ↑ ↑ ↑). Số hạng quang phổ của trạng thái cơ bản là:`,
+      o: [R`\({}^4F_{9/2}\)`, R`\({}^4F_{3/2}\)`, R`\({}^2D_{5/2}\)`, R`\({}^4P_{5/2}\)`], a: 0,
+      why: R`Lõi Ar và 4s² điền đầy, không đóng góp. 3d⁷: 5 electron spin lên (\(m_l=2\dots-2\)) và 2 electron spin xuống ở \(m_l=2,1\). \(S=3\cdot\tfrac12=\tfrac32\Rightarrow2S+1=4\); \(L=\sum m_l=3\Rightarrow F\). Phân lớp quá nửa nên \(J=L+S=\tfrac92\).`,
+      trap: R`\(J=|L-S|=3/2\) chỉ dùng khi phân lớp chưa đầy một nửa.` },
+    { id: 'term-J', ch: 3, t: 'Số hạng quang phổ',
+      q: R`Số hạng quang phổ \({}^3D\) có những giá trị \(J\) nào?`,
+      o: [R`\(J=3\)`, R`\(J=1,2,3\)`, R`\(J=0,1,2,3\)`, R`\(J=2\)`], a: 1,
+      why: R`\(2S+1=3\Rightarrow S=1\); D \(\Rightarrow L=2\). \(J=|L-S|,\dots,L+S=1,2,3\).`,
+      trap: R`Chỉ số trên bên trái là độ bội \(2S+1\), không phải \(J\).` }
+  ];
+
+  const byId = Object.fromEntries(QS.map(q => [q.id, q]));
+  const LETTERS = ['A', 'B', 'C', 'D'];
+  const EXAM_N = 30, EXAM_MS = 60 * 60 * 1000;
+  const KEY_P = 'vldt-gk-practice', KEY_E = 'vldt-gk-exam';
+
+  const load = k => { try { return JSON.parse(localStorage.getItem(k)) || null; } catch (e) { return null; } };
+  const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  const drop = k => { try { localStorage.removeItem(k); } catch (e) {} };
+
+  let practice = load(KEY_P) || {};
+  let exam = load(KEY_E);
+  let chFilter = 0, wrongOnly = false, tick = null, confirmTimer = null;
+
+  const $ = id => document.getElementById(id);
+  const qlist = $('qlist');
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+  function typeset(el) {
+    if (window.MathJax && MathJax.typesetPromise) {
+      try { MathJax.typesetClear && MathJax.typesetClear([el]); } catch (e) {}
+      MathJax.typesetPromise([el]).catch(() => {});
+    }
+  }
+  const mode = () => (exam ? (exam.submitted ? 'result' : 'exam') : 'practice');
+
+  function questionHTML(q, num, order) {
+    const opts = order.map((oi, pos) =>
+      `<li><button type="button" class="opt" data-q="${q.id}" data-i="${oi}"><span class="letter">${LETTERS[pos]}.</span><span>${q.o[oi]}</span></button></li>`).join('');
+    return `<article class="q" data-id="${q.id}">
+      <div class="q-meta"><span class="num">Câu ${num}</span><span>Chương ${q.ch} · ${q.t}</span><span class="mark"></span></div>
+      <div class="q-text">${q.q}</div>
+      <ol class="opts">${opts}</ol>
+      <div class="explain" hidden><p><b>Giải.</b> ${q.why}</p><p class="trap-line"><b>Bẫy:</b> ${q.trap}</p></div>
+    </article>`;
+  }
+
+  function paintQuestion(el) {
+    const q = byId[el.dataset.id];
+    const m = mode();
+    const chosen = m === 'practice' ? practice[q.id] : (exam.answers[q.id]);
+    const reveal = m === 'result' || (m === 'practice' && chosen !== undefined);
+    el.querySelectorAll('.opt').forEach(b => {
+      const i = +b.dataset.i;
+      b.classList.remove('sel', 'right', 'wrong');
+      b.disabled = reveal;
+      if (reveal) {
+        if (i === q.a) b.classList.add('right');
+        else if (i === chosen) b.classList.add('wrong');
+      } else if (i === chosen) b.classList.add('sel');
+    });
+    el.querySelector('.explain').hidden = !reveal;
+    const mark = el.querySelector('.mark');
+    mark.className = 'mark';
+    if (reveal) {
+      if (chosen === undefined) { mark.textContent = 'Bỏ trống'; mark.classList.add('bad'); }
+      else if (chosen === q.a) { mark.textContent = 'Đúng'; mark.classList.add('ok'); }
+      else { mark.textContent = 'Sai'; mark.classList.add('bad'); }
+    } else mark.textContent = '';
+  }
+
+  function visibleList() {
+    const m = mode();
+    if (m === 'practice') return QS.filter(q => !chFilter || q.ch === chFilter).map(q => ({ q, order: [0, 1, 2, 3] }));
+    let list = exam.ids.map(id => ({ q: byId[id], order: exam.orders[id] }));
+    if (m === 'result' && wrongOnly) list = list.filter(x => exam.answers[x.q.id] !== x.q.a);
+    return list;
+  }
+
+  function render() {
+    const m = mode();
+    const list = visibleList();
+    const numFor = id => m === 'practice' ? QS.findIndex(q => q.id === id) + 1 : exam.ids.indexOf(id) + 1;
+    qlist.innerHTML = list.map(({ q, order }) => questionHTML(q, numFor(q.id), order)).join('') ||
+      '<p class="quiz-status">Không có câu sai nào. Làm đề mới để luyện thêm.</p>';
+    qlist.querySelectorAll('.q').forEach(paintQuestion);
+    $('chapterChips').hidden = m !== 'practice';
+    $('resetPractice').hidden = m !== 'practice';
+    $('wrongOnly').hidden = m !== 'result';
+    $('toPractice').hidden = m === 'practice';
+    $('submitBar').hidden = m !== 'exam';
+    $('startExam').textContent = m === 'practice' ? 'Bắt đầu thi thử 30 câu' : (m === 'exam' ? 'Bỏ đề, bốc đề mới' : 'Làm đề mới');
+    renderResult();
+    updateStatus();
+    typeset(qlist);
+  }
+
+  function updateStatus() {
+    const m = mode();
+    const s = $('quizStatus');
+    if (m === 'practice') {
+      const pool = QS.filter(q => !chFilter || q.ch === chFilter);
+      const done = pool.filter(q => practice[q.id] !== undefined);
+      const right = done.filter(q => practice[q.id] === q.a).length;
+      s.textContent = `Đã làm ${done.length}/${pool.length} · đúng ${right}`;
+    } else if (m === 'exam') {
+      const n = Object.keys(exam.answers).length;
+      s.textContent = `Đã chọn ${n}/${EXAM_N} câu`;
+      $('submitHint').textContent = n < EXAM_N ? `Còn ${EXAM_N - n} câu chưa chọn.` : 'Đã chọn đủ 30 câu.';
+    } else s.textContent = '';
+  }
+
+  function renderResult() {
+    const box = $('result');
+    if (mode() !== 'result') { box.hidden = true; return; }
+    const per = { 1: [0, 0], 2: [0, 0], 3: [0, 0] };
+    let right = 0;
+    exam.ids.forEach(id => { const q = byId[id]; per[q.ch][1]++; if (exam.answers[id] === q.a) { right++; per[q.ch][0]++; } });
+    const blank = exam.ids.filter(id => exam.answers[id] === undefined).length;
+    const used = Math.min(EXAM_MS, (exam.submittedAt || Date.now()) - (exam.end - EXAM_MS));
+    const mins = Math.max(1, Math.round(used / 60000));
+    box.innerHTML = `<div class="score">${right}<small>/${EXAM_N}</small></div>
+      <div class="detail">
+        <p><b>Điểm hệ 10: ${(right / 3).toFixed(1).replace('.', ',')}</b> · làm trong ${mins} phút${blank ? ` · bỏ trống ${blank} câu` : ''}</p>
+        <p class="quiz-status">Chương 1: ${per[1][0]}/${per[1][1]} · Chương 2: ${per[2][0]}/${per[2][1]} · Chương 3: ${per[3][0]}/${per[3][1]}</p>
+        <p class="quiz-status">Đọc dòng "Bẫy" ở các câu sai: phần lớn đáp án nhiễu dựng từ đúng lỗi đó.</p>
+      </div>`;
+    box.hidden = false;
+  }
+
+  function startExam() {
+    const ids = shuffle(QS.map(q => q.id)).slice(0, EXAM_N);
+    const orders = {};
+    ids.forEach(id => { orders[id] = shuffle([0, 1, 2, 3]); });
+    exam = { ids, orders, answers: {}, end: Date.now() + EXAM_MS, submitted: false };
+    wrongOnly = false; $('wrongOnly').setAttribute('aria-pressed', 'false');
+    save(KEY_E, exam);
+    render(); startTick();
+    document.querySelector('[data-view="thi-thu"]').scrollIntoView({ block: 'start' });
+  }
+
+  function submitExam() {
+    if (!exam || exam.submitted) return;
+    exam.submitted = true; exam.submittedAt = Math.min(Date.now(), exam.end);
+    save(KEY_E, exam); stopTick(); render();
+    document.querySelector('[data-view="thi-thu"]').scrollIntoView({ block: 'start' });
+  }
+
+  function fmt(ms) {
+    const t = Math.max(0, Math.ceil(ms / 1000));
+    return String(Math.floor(t / 60)).padStart(2, '0') + ':' + String(t % 60).padStart(2, '0');
+  }
+  function startTick() {
+    stopTick();
+    const el = $('navTimer');
+    const step = () => {
+      if (!exam || exam.submitted) { stopTick(); return; }
+      const left = exam.end - Date.now();
+      el.hidden = false;
+      el.textContent = 'Còn ' + fmt(left);
+      el.classList.toggle('low', left < 5 * 60 * 1000);
+      if (left <= 0) submitExam();
+    };
+    step(); tick = setInterval(step, 1000);
+  }
+  function stopTick() { if (tick) clearInterval(tick); tick = null; $('navTimer').hidden = true; }
+
+  qlist.addEventListener('click', ev => {
+    const b = ev.target.closest('.opt');
+    if (!b || b.disabled) return;
+    const id = b.dataset.q, i = +b.dataset.i, m = mode();
+    if (m === 'practice') { practice[id] = i; save(KEY_P, practice); }
+    else if (m === 'exam') { exam.answers[id] = i; save(KEY_E, exam); }
+    else return;
+    paintQuestion(b.closest('.q'));
+    updateStatus();
+  });
+
+  $('startExam').addEventListener('click', startExam);
+  $('toPractice').addEventListener('click', () => { exam = null; drop(KEY_E); stopTick(); render(); });
+  $('resetPractice').addEventListener('click', () => { practice = {}; drop(KEY_P); render(); });
+  $('chapterChips').addEventListener('click', ev => {
+    const c = ev.target.closest('.chip'); if (!c) return;
+    chFilter = +c.dataset.ch;
+    $('chapterChips').querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    render();
+  });
+  $('wrongOnly').addEventListener('click', () => {
+    wrongOnly = !wrongOnly; $('wrongOnly').setAttribute('aria-pressed', String(wrongOnly)); render();
+  });
+  $('submitExam').addEventListener('click', () => {
+    const btn = $('submitExam');
+    if (btn.dataset.armed) { clearTimeout(confirmTimer); delete btn.dataset.armed; btn.textContent = 'Nộp bài'; submitExam(); return; }
+    btn.dataset.armed = '1'; btn.textContent = 'Bấm lần nữa để nộp';
+    confirmTimer = setTimeout(() => { delete btn.dataset.armed; btn.textContent = 'Nộp bài'; }, 4000);
+  });
+
+  // ---------- Tabs theo hash ----------
+  const VIEWS = ['tong-quan', 'chuong-1', 'chuong-2', 'chuong-3', 'bay', 'thi-thu'];
+  function showView() {
+    const h = location.hash.slice(1);
+    const v = VIEWS.includes(h) ? h : 'tong-quan';
+    document.querySelectorAll('[data-view]').forEach(el => { el.hidden = el.dataset.view !== v; });
+    document.querySelectorAll('[data-tab]').forEach(a => {
+      if (a.dataset.tab === v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('hashchange', () => { showView(); window.scrollTo({ top: 0 }); });
+  document.querySelectorAll('[data-jump]').forEach(a => a.addEventListener('click', ev => {
+    ev.preventDefault();
+    const target = a.dataset.jump;
+    if (location.hash !== a.getAttribute('href')) location.hash = a.getAttribute('href');
+    showView();
+    requestAnimationFrame(() => { const t = document.getElementById(target); if (t) t.scrollIntoView({ block: 'start' }); });
+  }));
+
+  // ---------- Đếm ngày ----------
+  (function () {
+    const examDay = new Date(2026, 10, 20);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const d = Math.round((examDay - today) / 86400000);
+    $('countdown').textContent = d > 1 ? `Còn ${d} ngày nữa` : d === 1 ? 'Thi vào ngày mai' : d === 0 ? 'Hôm nay thi, bình tĩnh nhé' : 'Đã thi xong';
+  })();
+
+  showView();
+  if (exam && !exam.submitted && Date.now() >= exam.end) { exam.submitted = true; exam.submittedAt = exam.end; save(KEY_E, exam); }
+  render();
+  if (mode() === 'exam') startTick();
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>
+
+</body>
+</html>
