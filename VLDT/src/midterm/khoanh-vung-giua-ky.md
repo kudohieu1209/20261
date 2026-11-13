@@ -4,6 +4,8 @@
 - Lý thuyết không hỏi định nghĩa, mà hỏi suy luận từ định nghĩa. Không có đề mẫu.
 - Theo lời cô: tỉ lệ đáp án gây nhiễu ("lừa") cao.
 - Trang ôn tập và thi thử: [on-tap-giua-ky.html](on-tap-giua-ky.html) (mở bằng trình duyệt; cần mạng để tải MathJax).
+- Bản in để học bằng giấy: [on-tap-giua-ky.pdf](on-tap-giua-ky.pdf) (44 câu, cùng thứ tự đáp án với trang web).
+- Cô dặn thêm: bài tập chương 3 trong sách (baitap.pdf) hơi ít, phải chú ý thêm phần lý thuyết.
 - Ảnh bảng và vở gốc: [../../docs/khoanh-vung-giua-ky/](../../docs/khoanh-vung-giua-ky/).
 
 ## Phạm vi (chép lại từ bảng)
@@ -33,6 +35,7 @@
   - Cô nhắc: chọn kali (1 electron hóa trị nhưng 19 electron) là chưa hiểu bản chất bài toán.
   - Mô hình gần đúng kiểu cổ điển: E_n = W_đ + U = mv²/2 − Ze²/(4πε0·r).
 - c) Nguyên tử nhiều electron: bộ số lượng tử (n, l, m_l, m_s), số hạng quang phổ, quy tắc lọc lựa, sắp xếp electron. Ví dụ trên bảng: 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷ (ô 3d: ↑↓ ↑↓ ↑ ↑ ↑).
+- d) (Bổ sung theo lời dặn sau) Lý thuyết của bài sách 3-3 đến 3-9: mômen từ quỹ đạo và spin, định hướng không gian, vạch 21 cm, Zeeman, lớp điền đầy ¹S₀, cấu hình khí trơ, kích thích bằng va chạm electron.
 
 ## Đính chính so với vở ghi
 

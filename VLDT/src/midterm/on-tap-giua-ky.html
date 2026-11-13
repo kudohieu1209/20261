@@ -237,7 +237,7 @@ main { padding-block: 28px 64px; }
 <div class="view" data-view="tong-quan">
   <div class="view-head">
     <h2>Phạm vi thi theo bảng của cô</h2>
-    <p>Ba chương, mười mục. Bấm vào từng mục để mở phần ôn tương ứng. Đề hỏi kiểu "suy ra từ định nghĩa", nên mỗi mục đều có danh sách <em>Suy luận hay hỏi</em>.</p>
+    <p>Ba chương, mười một mục (mục 3d thêm theo lời dặn sau của cô). Bấm vào từng mục để mở phần ôn tương ứng. Đề hỏi kiểu "suy ra từ định nghĩa", nên mỗi mục đều có danh sách <em>Suy luận hay hỏi</em>.</p>
   </div>
 
   <div class="scope">
@@ -259,6 +259,7 @@ main { padding-block: 28px 64px; }
       <a class="scope-item" href="#chuong-3" data-jump="c3a"><strong>a) Phổ năng lượng nguyên tử H, phát xạ</strong><small>Số vạch phát xạ, \(\lambda_{\max},\lambda_{\min}\), năng lượng ion hóa; Lyman, Balmer, Paschen.</small></a>
       <a class="scope-item" href="#chuong-3" data-jump="c3b"><strong>b) Ion đồng dạng hydro</strong><small>He⁺, Li²⁺, Be³⁺: \(E_n\), phổ phát xạ, năng lượng ion hóa, bán kính quỹ đạo.</small></a>
       <a class="scope-item" href="#chuong-3" data-jump="c3c"><strong>c) Nguyên tử nhiều electron</strong><small>Bộ \((n,l,m_l,m_s)\), số hạng quang phổ, quy tắc lọc lựa, sắp xếp electron.</small></a>
+      <a class="scope-item" href="#chuong-3" data-jump="c3d"><strong>d) Mômen từ, spin, định hướng không gian</strong><small>Thêm theo lời cô: bài tập chương 3 trong sách ít, phải chú ý lý thuyết (bài 3-3 đến 3-9).</small></a>
     </div>
   </div>
 
@@ -553,7 +554,7 @@ main { padding-block: 28px 64px; }
 <div class="view" data-view="chuong-3" hidden>
   <div class="view-head">
     <h2>Chương 3 · Nguyên tử</h2>
-    <p>Từ hydro sang ion đồng dạng chỉ cần thêm \(Z\). Cô nhấn mạnh: hiểu thế nào là "đồng dạng hydro" thì mới không chọn nhầm.</p>
+    <p>Từ hydro sang ion đồng dạng chỉ cần thêm \(Z\). Cô dặn thêm: bài tập chương 3 trong sách hơi ít, nên phải chú ý phần lý thuyết. Mục d gom phần lý thuyết của các bài sách 3-3 đến 3-9.</p>
   </div>
 
   <article class="topic" id="c3a">
@@ -650,6 +651,43 @@ main { padding-block: 28px 64px; }
       </section>
     </div>
   </article>
+
+  <article class="topic" id="c3d">
+    <div class="topic-head"><span class="key">d</span><h3>Mômen từ, spin và định hướng không gian</h3><span class="board-note">bài sách 3-3 … 3-9</span></div>
+    <div class="topic-body">
+      <section class="formulas">
+        <h4>Công thức</h4>
+        <p>Cổ điển (3-4): \(\mu=I\pi r^2=\dfrac{e\omega r^2}{2}=\dfrac{e^2}{2}\sqrt{\dfrac{r}{4\pi\varepsilon_0m}}\), \(\ \vec\mu=-\dfrac{e}{2m}\vec L\).</p>
+        <p>Lượng tử (3-5): \(\mu=\mu_B\sqrt{l(l+1)}\), \(\mu_z=-m_l\mu_B\), \(\mu_B=\dfrac{e\hbar}{2m}=9{,}274\cdot10^{-24}\) J/T.</p>
+        <p>Định hướng (3-6): \(2l+1\) hướng, \(\cos\theta=\dfrac{m_l}{\sqrt{l(l+1)}}\).</p>
+        <p>Spin: \(|S|=\tfrac{\sqrt3}{2}\hbar\), \(S_z=\pm\tfrac\hbar2\), \(\vec\mu_s=-\dfrac{e}{m}\vec S\Rightarrow\mu_{s,z}=\mp\mu_B\).</p>
+        <p>Đảo spin, vạch 21 cm (3-7): \(\Delta E=2\mu_BB=\dfrac{hc}{\lambda}\Rightarrow B=\dfrac{hc}{2\mu_B\lambda}\approx0{,}051\) T.</p>
+        <p>Kích thích bằng electron (3-3): \(13{,}6\big(1-\tfrac1{n^2}\big)\le W\). Với 12,2 eV lên được \(n=3\), phát 3 vạch 6563, 1215, 1026 Å.</p>
+        <p>Khí trơ (3-9): He 1s² · Ne [He]2s²2p⁶ · Ar [Ne]3s²3p⁶ · Kr [Ar]3d¹⁰4s²4p⁶ · Xe [Kr]4d¹⁰5s²5p⁶.</p>
+      </section>
+      <section class="reason">
+        <h4>Suy luận hay hỏi</h4>
+        <ul>
+          <li>Mức \(n=3\) có \(l=0,1,2\) nên \(\mu=0,\ \sqrt2\mu_B,\ \sqrt6\mu_B\).</li>
+          <li>Góc nhỏ nhất giữa \(\vec L\) và \(Oz\): 45° khi \(l=1\), 35,3° khi \(l=2\). \(\vec L\) không bao giờ song song \(Oz\); \(l=0\) thì không có hướng xác định.</li>
+          <li>Hệ số từ hồi chuyển của spin gấp đôi quỹ đạo (\(e/m\) so với \(e/2m\)).</li>
+          <li>Stern–Gerlach: chùm nguyên tử có \(l=0\) vẫn tách làm 2, bằng chứng cho spin.</li>
+          <li>Zeeman thường: mức \(l\) tách thành \(2l+1\) mức cách nhau \(\mu_BB\); với \(\Delta m_l=0,\pm1\) một vạch tách thành 3.</li>
+          <li>Lớp điền đầy (3-8): \(\sum m_l=0\), \(\sum m_s=0\) nên \(L=S=J=0\), số hạng \({}^1S_0\).</li>
+          <li>Nguyên tử nhiều electron: năng lượng phụ thuộc cả \(n\) và \(l\) do hiệu ứng chắn; electron s xuyên sâu vào lõi nên có năng lượng thấp hơn, vì vậy 4s điền trước 3d. Kim loại kiềm có phổ giống hydro nhưng \(E\) phụ thuộc \(n\) và \(l\).</li>
+        </ul>
+      </section>
+      <section class="traps">
+        <h4>Bẫy</h4>
+        <ul>
+          <li>\(\mu\) dùng \(\sqrt{l(l+1)}\), không phải \(l\); \(l\) chỉ chạy tới \(n-1\).</li>
+          <li>Đảo spin cho \(\Delta E=2\mu_BB\); lấy \(\mu_BB\) thì \(B\) sai gấp đôi.</li>
+          <li>Electron va chạm truyền được một phần năng lượng, còn photon phải có năng lượng đúng bằng \(\Delta E\). 12,2 eV &lt; 13,6 eV vẫn kích thích được.</li>
+          <li>\({}^2S_{1/2}\) là của kim loại kiềm (thêm 1 electron s), không phải của nguyên tử chỉ gồm lớp đầy.</li>
+        </ul>
+      </section>
+    </div>
+  </article>
 </div>
 
 <!-- =================== BẪY =================== -->
@@ -688,7 +726,7 @@ main { padding-block: 28px 64px; }
 <div class="view" data-view="thi-thu" hidden>
   <div class="view-head">
     <h2>Phòng thi thử</h2>
-    <p>Ngân hàng 36 câu theo đúng phạm vi cô khoanh, mỗi câu có ít nhất một đáp án nhiễu dựng từ lỗi quen. <b>Luyện tập</b> hiện lời giải ngay khi chọn. <b>Thi thử</b> bốc 30 câu, đảo đáp án, tính giờ 60 phút như đề thật.</p>
+    <p>Ngân hàng 44 câu theo đúng phạm vi cô khoanh, cùng số câu và thứ tự đáp án với bản PDF in giấy, mỗi câu có ít nhất một đáp án nhiễu dựng từ lỗi quen. <b>Luyện tập</b> hiện lời giải ngay khi chọn. <b>Thi thử</b> bốc 30 câu, đảo đáp án, tính giờ 60 phút như đề thật.</p>
   </div>
   <div class="quiz-bar">
     <button class="btn primary" id="startExam" type="button">Bắt đầu thi thử 30 câu</button>
@@ -910,7 +948,47 @@ window.MathJax = {
       q: R`Số hạng quang phổ \({}^3D\) có những giá trị \(J\) nào?`,
       o: [R`\(J=3\)`, R`\(J=1,2,3\)`, R`\(J=0,1,2,3\)`, R`\(J=2\)`], a: 1,
       why: R`\(2S+1=3\Rightarrow S=1\); D \(\Rightarrow L=2\). \(J=|L-S|,\dots,L+S=1,2,3\).`,
-      trap: R`Chỉ số trên bên trái là độ bội \(2S+1\), không phải \(J\).` }
+      trap: R`Chỉ số trên bên trái là độ bội \(2S+1\), không phải \(J\).` },
+    { id: 'mu-n3', ch: 3, t: 'Mômen từ',
+      q: R`Các giá trị có thể có của mômen từ quỹ đạo của electron ở mức \(n=3\) là:`,
+      o: [R`\(0;\ \sqrt2\mu_B;\ \sqrt6\mu_B\)`, R`\(\mu_B;\ 2\mu_B;\ 3\mu_B\)`, R`\(0;\ \mu_B;\ 2\mu_B\)`, R`\(\sqrt2\mu_B;\ \sqrt6\mu_B;\ \sqrt{12}\mu_B\)`], a: 0,
+      why: R`\(n=3\Rightarrow l=0,1,2\); \(\mu=\mu_B\sqrt{l(l+1)}\) cho \(0,\ \sqrt2\mu_B,\ \sqrt6\mu_B\).`,
+      trap: R`\(l\) chỉ chạy tới \(n-1\); \(\mu\) dùng \(\sqrt{l(l+1)}\), không phải \(l\). \(0;\ \mu_B;\ 2\mu_B\) là các giá trị \(|\mu_z|\).` },
+    { id: 'L-orient', ch: 3, t: 'Định hướng không gian',
+      q: R`Electron có \(l=1\). Số hướng có thể của \(\vec L\) và góc nhỏ nhất giữa \(\vec L\) với trục \(Oz\) là:`,
+      o: ['3 hướng; 45°', '3 hướng; 0°', '2 hướng; 45°', '3 hướng; 35,3°'], a: 0,
+      why: R`\(m_l=-1,0,1\): 3 hướng. Góc nhỏ nhất ứng với \(m_l=1\): \(\cos\theta=\dfrac{1}{\sqrt2}\Rightarrow\theta=45^\circ\).`,
+      trap: R`35,3° là góc nhỏ nhất khi \(l=2\). \(\vec L\) không thể song song \(Oz\) vì \(|L|=\sqrt2\hbar>L_{z,\max}=\hbar\).` },
+    { id: 'spin-21cm', ch: 3, t: 'Spin',
+      q: R`Vạch 21 cm phát ra khi spin electron trong nguyên tử hydro đảo hướng. Biết \(\vec\mu_s=-\dfrac em\vec S\) và \(E_B=-\vec\mu\cdot\vec B\), từ trường tác dụng lên electron có độ lớn:`,
+      o: ['0,051 T', '0,102 T', '0,026 T', '5,1 T'], a: 0,
+      why: R`\(\mu_{s,z}=\mp\mu_B\) nên hai mức cách nhau \(\Delta E=2\mu_BB\). \(\Delta E=\dfrac{hc}{\lambda}=9{,}47\cdot10^{-25}\) J, \(B=\dfrac{9{,}47\cdot10^{-25}}{2\cdot9{,}274\cdot10^{-24}}\approx0{,}051\) T.`,
+      trap: R`Lấy \(\Delta E=\mu_BB\) ra 0,102 T; lấy \(4\mu_BB\) ra 0,026 T.` },
+    { id: 'closed-shell', ch: 3, t: 'Số hạng quang phổ',
+      q: R`Nguyên tử chỉ gồm các lớp và phân lớp điền đầy có số hạng của trạng thái cơ bản là:`,
+      o: [R`\({}^1S_0\)`, R`\({}^3S_1\)`, R`\({}^1P_1\)`, R`\({}^2S_{1/2}\)`], a: 0,
+      why: R`Mỗi phân lớp đầy có \(\sum m_l=0\) và \(\sum m_s=0\) nên \(L=S=0\), \(J=0\): \({}^1S_0\).`,
+      trap: R`\({}^2S_{1/2}\) là của kim loại kiềm (lớp đầy cộng 1 electron s).` },
+    { id: 'excite-12', ch: 3, t: 'Kích thích nguyên tử',
+      q: R`Khí hydro ở trạng thái cơ bản bị bắn phá bởi chùm electron có động năng 12,2 eV. Số vạch phổ khí phát ra là:`,
+      o: ['3 vạch (6563; 1215; 1026 Å)', '1 vạch (1215 Å)', '6 vạch', 'Không phát vạch nào vì 12,2 eV < 13,6 eV'], a: 0,
+      why: R`Lên \(n=3\) cần \(13{,}6(1-\tfrac19)=12{,}09\) eV ≤ 12,2 eV; lên \(n=4\) cần 12,75 eV, không đủ. Từ \(n=3\): 3 → 2, 3 → 1, 2 → 1, tức 3 vạch.`,
+      trap: R`Electron va chạm có thể truyền một phần năng lượng (khác photon). Không cần đủ năng lượng ion hóa mới kích thích được.` },
+    { id: 'zeeman', ch: 3, t: 'Hiệu ứng Zeeman',
+      q: R`Trong hiệu ứng Zeeman thường (bỏ qua spin), vạch ứng với chuyển mức p → s đặt trong từ trường tách thành:`,
+      o: ['3 vạch', '2 vạch', '5 vạch', 'Không tách'], a: 0,
+      why: R`Mức p tách thành 3 mức (\(m_l=-1,0,1\)) cách nhau \(\mu_BB\); mức s không tách. Với \(\Delta m_l=0,\pm1\) có 3 vạch.`,
+      trap: R`5 là số mức con của d, không phải số vạch của p → s.` },
+    { id: 'kr-config', ch: 3, t: 'Cấu hình electron',
+      q: R`Cấu hình electron ở trạng thái cơ bản của Kr (\(Z=36\)) là:`,
+      o: [R`\([\text{Ar}]\,3d^{10}4s^24p^6\)`, R`\([\text{Ar}]\,4s^24p^6\)`, R`\([\text{Ar}]\,4s^24p^64d^{10}\)`, R`\([\text{Ar}]\,3d^84s^24p^8\)`], a: 0,
+      why: R`Sau Ar (18 electron) điền 4s² rồi 3d¹⁰ rồi 4p⁶: 18 + 18 = 36.`,
+      trap: R`\([\text{Ar}]4s^24p^6\) chỉ có 26 electron; phân lớp p chứa tối đa 6 electron.` },
+    { id: 'alkali', ch: 3, t: 'Nguyên tử nhiều electron',
+      q: R`Trong nguyên tử kim loại kiềm, năng lượng của electron hóa trị phụ thuộc vào:`,
+      o: [R`\(n\) và \(l\)`, R`Chỉ \(n\), như nguyên tử hydro`, R`Chỉ \(l\)`, R`\(n\), \(l\) và \(m_l\), kể cả khi không có từ trường`], a: 0,
+      why: R`Electron hóa trị bị lõi chắn một phần; quỹ đạo s xuyên sâu vào lõi nên chịu điện tích hiệu dụng lớn hơn. Vì vậy \(E\) phụ thuộc cả \(l\). \(m_l\) chỉ tách mức khi có từ trường.`,
+      trap: R`Chỉ hydro và ion đồng dạng hydro mới có \(E\) chỉ phụ thuộc \(n\).` }
   ];
 
   const byId = Object.fromEntries(QS.map(q => [q.id, q]));
@@ -934,6 +1012,8 @@ window.MathJax = {
     for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
     return a;
   }
+  // Thứ tự phương án giống hệt bản PDF (VLDT/src/midterm/on-tap-giua-ky.pdf)
+  const PDF_ORDER = {"r-ratio":[3,0,1,2],"r-calc":[2,0,3,1],"helix-speed":[2,0,3,1],"deflect-qm":[1,3,0,2],"selector":[0,2,1,3],"diaphragm-f":[0,1,3,2],"diaphragm-exit":[0,1,3,2],"grid-f":[0,3,2,1],"grid-reverse":[0,3,1,2],"rel-speed":[0,1,3,2],"rel-energy":[0,3,1,2],"photon-count":[2,3,1,0],"pe-intensity":[2,3,0,1],"pe-calc":[2,3,0,1],"same-lambda":[0,1,2,3],"db-100V":[2,3,0,1],"db-rel":[2,1,3,0],"uncert-v":[0,3,2,1],"well-cascade":[3,2,1,0],"well-prob":[3,0,1,2],"well-n2":[2,3,0,1],"finite-well":[3,1,2,0],"tunnel":[1,2,0,3],"op-Lz":[2,1,3,0],"op-sin":[0,2,3,1],"L-mag":[3,2,0,1],"lines-n5":[0,2,3,1],"balmer-min":[0,2,1,3],"H-energies":[2,3,1,0],"He-line":[2,1,0,3],"Li-ion":[0,2,3,1],"H-like":[2,1,0,3],"qn-count":[2,3,0,1],"selection":[0,3,2,1],"term-Co":[0,2,3,1],"term-J":[2,1,3,0],"mu-n3":[2,0,3,1],"L-orient":[3,2,0,1],"spin-21cm":[2,1,3,0],"closed-shell":[3,0,2,1],"excite-12":[3,1,0,2],"zeeman":[2,0,3,1],"kr-config":[3,2,0,1],"alkali":[1,2,3,0]};
   function typeset(el) {
     if (window.MathJax && MathJax.typesetPromise) {
       try { MathJax.typesetClear && MathJax.typesetClear([el]); } catch (e) {}
@@ -979,7 +1059,7 @@ window.MathJax = {
 
   function visibleList() {
     const m = mode();
-    if (m === 'practice') return QS.filter(q => !chFilter || q.ch === chFilter).map(q => ({ q, order: [0, 1, 2, 3] }));
+    if (m === 'practice') return QS.filter(q => !chFilter || q.ch === chFilter).map(q => ({ q, order: PDF_ORDER[q.id] }));
     let list = exam.ids.map(id => ({ q: byId[id], order: exam.orders[id] }));
     if (m === 'result' && wrongOnly) list = list.filter(x => exam.answers[x.q.id] !== x.q.a);
     return list;
