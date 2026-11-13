@@ -29,7 +29,7 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta, decorations.pathmorphing}
 
 % Căn chỉnh khoảng cách theo chuẩn học thuật
 \linespread{1.05}
@@ -172,6 +172,47 @@ Thay số:
 
 \textbf{Dữ kiện:} $R = 3\text{ cm} = 0{,}03\text{ m}$, $U_1 = 300\text{ V}$, $U_2 = 500\text{ V}$. Cần tìm: $f$.
 
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=1.15, >={Stealth[length=2.4mm]}, font=\small]
+  \def\R{2.4}
+  \def\z{1.3}
+  \pgfmathsetmacro{\xa}{\R-sqrt(\R*\R-\z*\z)}
+  \pgfmathsetmacro{\tha}{asin(\z/\R)}
+  \pgfmathsetmacro{\thb}{0.55*\tha}
+  \pgfmathsetmacro{\ph}{\tha-\thb}
+  \pgfmathsetmacro{\xb}{\xa+\z/tan(\ph)}
+  \draw[dashdotted, gray] (-2.8,0) -- (\xb+0.9,0);
+  % hai lưới cầu
+  \draw[thick] ({\R+\R*cos(140)},{\R*sin(140)}) arc (140:220:\R);
+  \draw[thick] ({\R+(\R-0.1)*cos(140)},{(\R-0.1)*sin(140)}) arc (140:220:\R-0.1);
+  \node at (-1.3,2.05) {$U_1=300$ V};
+  \node at (1.7,2.05) {$U_2=500$ V};
+  % tâm O, pháp tuyến OA
+  \fill (\R,0) circle (1.6pt) node[below] {$O$};
+  \draw[dashed] (\R,0) -- ({\xa-0.8*(\R-\xa)/\R},{\z+0.8*\z/\R});
+  \node[below left=-1pt] at ({(\R+\xa)/2},{\z/2}) {$R$};
+  % tia tới, tia khúc xạ
+  \draw[->, very thick, blue!70!black] (-2.6,\z) -- (\xa,\z);
+  \draw[densely dotted] (\xa,\z) -- (\xa+2.6,\z);
+  \draw[->, very thick, red!75!black] (\xa,\z) -- (\xb,0);
+  \fill (\xa,\z) circle (1.4pt) node[above right=1pt] {$A$};
+  \fill (0,0) circle (1.4pt) node[below left] {$C$};
+  \fill (\xb,0) circle (1.6pt) node[below] {$B$};
+  % góc
+  \draw ({\xa-0.8},\z) arc (180:{180-\tha}:0.8);
+  \node at ({\xa+1.15*cos(180-\tha/2)},{\z+1.15*sin(180-\tha/2)}) {$\theta_1$};
+  \draw ({\xa+1.0*cos(-\tha)},{\z+1.0*sin(-\tha)}) arc ({-\tha}:{-\ph}:1.0);
+  \node at ({\xa+1.38*cos(-(\tha+\ph)/2)},{\z+1.38*sin(-(\tha+\ph)/2)}) {$\theta_2$};
+  \draw ({\xa+2.0},\z) arc (0:{-\ph}:2.0);
+  \node at ({\xa+2.3*cos(-\ph/2)},{\z+2.3*sin(-\ph/2)}) {$\varphi$};
+  % z và f
+  \draw[<->] (-1.9,0) -- (-1.9,\z) node[midway, left] {$z$};
+  \draw[<->] (0,-0.75) -- (\xb,-0.75) node[midway, below] {$f=CB$};
+  \draw[thin] (0,-0.1) -- (0,-0.85); \draw[thin] (\xb,-0.1) -- (\xb,-0.85);
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 1.3: Tia song song cách trục $z$ khúc xạ tại $A$ trên lưới cầu tâm $O$, cắt trục tại tiêu điểm $B$.}
+\end{minipage}\end{center}
+
 \textbf{B1:} Chứng minh tính hội tụ:
 \begin{itemize}[leftmargin=*, topsep=1pt, itemsep=1pt]
   \item Xét hạt điện tử bay song song với trục quang học, cách trục khoảng $z \ll R$. Tia tới gặp mặt lưới tại điểm $A$. Pháp tuyến tại $A$ đi qua tâm cầu $O$.
@@ -195,8 +236,9 @@ Thay số:
   \end{equation*}
   \item Biểu thức $CB$ hoàn toàn không phụ thuộc vào $z$ (hay $\theta_1$), chứng tỏ mọi tia song song đều hội tụ tại cùng một tiêu điểm $B$. Do đó:
   \begin{equation*}
-      f = CB = \frac{R}{1 - \sqrt{\dfrac{U_1}{U_2}}} = \frac{3\text{ cm}}{1 - \sqrt{\dfrac{300}{500}}} \approx \frac{3}{1 - 0{,}7746} = \boldsymbol{13{,}25\text{ cm}} = \boldsymbol{0{,}1325\text{ m}}
+      f = CB = \frac{R}{1 - \sqrt{\dfrac{U_1}{U_2}}} = \frac{3\text{ cm}}{1 - \sqrt{\dfrac{300}{500}}} \approx \frac{3}{1 - 0{,}7746} \approx \boldsymbol{13{,}31\text{ cm}} = \boldsymbol{0{,}1331\text{ m}}
   \end{equation*}
+  (Sách ghi $13{,}25\text{ cm}$ do làm tròn $\sqrt{0{,}6}\approx0{,}7736$.)
 \end{itemize}
 
 \PhanCachBai
@@ -289,9 +331,21 @@ Thay số với $d_1 = 0{,}5\text{ cm}$, $d_2 = 0{,}8\text{ cm}$, $U_G = 200\tex
 \end{itemize}
 
 \textbf{B3:} Thay $f_1, f_2$ vào giải PT tìm $U_2$:
-Thay $f_1 = \dfrac{4 U_1 d}{U_2 - 2 U_1}$ và $f_2 = -\dfrac{2 U_2 d}{U_2 - U_1}$ vào hệ thức trên, rút gọn ta thu được phương trình bậc 2 đối với $U_2$:
+Với $U_1=100\text{ V}$ và tính khoảng cách theo đơn vị $d$ ($d=1$):
 \begin{equation*}
-    U_2^2 - 460 U_2 + 12000 = 0
+    f_1 = \frac{400}{U_2 - 200}, \qquad f_2 = -\frac{2U_2}{U_2 - 100}
+\end{equation*}
+Viết hệ thức ở B2 dưới dạng $d - f_1 = \dfrac{d f_2}{d - f_2}$:
+\begin{equation*}
+    1 - \frac{400}{U_2-200} = \frac{f_2}{1-f_2}
+    \iff \frac{U_2-600}{U_2-200} = -\frac{2U_2}{3U_2-100}
+\end{equation*}
+\begin{equation*}
+    \iff (U_2-600)(3U_2-100) = -2U_2(U_2-200)
+    \iff 5U_2^2 - 2300U_2 + 60000 = 0
+\end{equation*}
+\begin{equation*}
+    \iff U_2^2 - 460 U_2 + 12000 = 0
 \end{equation*}
 Giải PT bậc 2 ta được 2 nghiệm thỏa mãn:
 \begin{equation*}
@@ -344,13 +398,13 @@ Thay số với $\varphi_K = 2\text{ eV} = 3{,}2\cdot10^{-19}\text{ J}$:
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{Dữ kiện:} $\lambda = 2500\text{ \AA} = 2{,}5 \cdot 10^{-7}\text{ m}$, $\varphi_K = 2{,}2\text{ eV}$, $I = 2\text{ W/m}^2$. Cần tìm: $T_{\max}$, $J_e$.
+\textbf{Dữ kiện:} $\lambda = 2500\text{ \AA} = 2{,}5 \cdot 10^{-7}\text{ m}$, $\varphi_K = 2{,}2\text{ eV}$, $I = 2\text{ W/m}^2$. Cần tìm: $W_{\text{đ}\max}$, $J_e$.
 
 \textbf{B1:} AD PT Einstein cho hiện tượng quang điện, tính động năng cực đại:
 \begin{equation*}
     W_{\text{đ}\max} = \frac{h c}{\lambda} - \varphi_K = \frac{6{,}626 \cdot 10^{-34} \times 3 \cdot 10^8}{2{,}5 \cdot 10^{-7} \times 1{,}6 \cdot 10^{-19}} - 2{,}2 = 4{,}969\text{ eV} - 2{,}2\text{ eV} = \boldsymbol{2{,}77\text{ eV}} 
 \end{equation*}
-Đổi ra Jun: $W_{\text{đ}\max} \approx \boldsymbol{4{,}43 \cdot 10^{-19}\text{ J}}$.
+Đổi ra Jun: $W_{\text{đ}\max} \approx \boldsymbol{4{,}43 \cdot 10^{-19}\text{ J}}$. (Sách ghi $2{,}75\text{ eV}$ do làm tròn $hc/\lambda$.)
 
 \textbf{B2:} Số photon đập vào $1\text{ m}^2$ bề mặt Kali trong $1\text{ s}$:
 \begin{equation*}
@@ -696,6 +750,23 @@ chỉ khác hệ số ở bước cuối.
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=0.95, >={Stealth[length=2.4mm]}, font=\small]
+  \fill[gray!45] (-0.3,0) rectangle (0,1.8);
+  \fill[gray!45] (5,0) rectangle (5.3,1.8);
+  \draw[thick] (0,1.8) -- (0,0) -- (5,0) -- (5,1.8);
+  \fill[orange!80] (2.5,0.75) circle (0.16);
+  \draw[->, thick, blue!70!black] (2.75,0.95) -- (3.9,0.95) node[above] {$+p$};
+  \draw[->, thick, blue!70!black] (2.25,0.55) -- (1.1,0.55) node[below] {$-p$};
+  \draw[<->] (0,-0.35) -- (5,-0.35) node[midway, below] {$\Delta x = L$};
+  \draw[->] (6.2,0.75) -- (9.6,0.75) node[right] {$p$};
+  \fill[blue!70!black] (6.9,0.75) circle (1.8pt) node[below] {$-p$};
+  \fill[blue!70!black] (8.9,0.75) circle (1.8pt) node[below] {$+p$};
+  \draw[<->, red!75!black] (6.9,1.2) -- (8.9,1.2) node[midway, above] {$\Delta p = 2p$};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 2.5: Hạt bị giam trong đoạn $L$ chạy qua lại, xung lượng có thể là $+p$ hoặc $-p$.}
+\end{minipage}\end{center}
+
 \textbf{B1:} Hạt ở đâu đó trong đoạn $L$ nên $\Delta x=L$.
 Hạt chạy qua lại giữa hai đầu đoạn, xung lượng có thể là $+p$ hoặc $-p$, nên $\Delta p=2p$.
 
@@ -757,9 +828,9 @@ Vận tốc nhỏ nhất tương ứng:
     v_{\min} = \sqrt{\frac{2 E_1}{m}} = \frac{h}{2 m L} = \frac{6{,}625 \cdot 10^{-34}}{2 \times 10^{-14} \times 10^{-4}} = \boldsymbol{3{,}3 \cdot 10^{-16}\text{ m/s}}
 \end{equation*}
 
-\textbf{B2:} Khi hạt có vận tốc $v = 10^{-5}\text{ m/s}$, động năng $E = \dfrac{1}{2} m v^2$:
+\textbf{B2:} Khi hạt có vận tốc $v = 1\text{ mm}/100\text{ s} = 10^{-5}\text{ m/s}$, động năng $W_{\text{đ}} = \dfrac{1}{2} m v^2 = E_n = n^2E_1$:
 \begin{equation*}
-    n = \sqrt{\frac{E}{E_1}} = \frac{2 m L v}{h} = \frac{2 \times 10^{-14} \times 10^{-4} \times 10^{-5}}{6{,}625 \cdot 10^{-34}} \approx \boldsymbol{3 \cdot 10^{10}}
+    n = \sqrt{\frac{W_{\text{đ}}}{E_1}} = \frac{2 m L v}{h} = \frac{2 \times 10^{-14} \times 10^{-4} \times 10^{-5}}{6{,}625 \cdot 10^{-34}} \approx \boldsymbol{3 \cdot 10^{10}}
 \end{equation*}
 Số lượng tử $n$ vô cùng lớn, chứng tỏ trong thế giới vĩ mô các mức năng lượng san sát nhau tạo thành phổ liên tục (nguyên lý tương ứng Bohr).
 
@@ -770,19 +841,35 @@ Số lượng tử $n$ vô cùng lớn, chứng tỏ trong thế giới vĩ mô 
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{B1:} Trong rào, $U_0-E=20\text{ eV}$ và hàm sóng có dạng
+\textbf{Dữ kiện:} $W_{\text{đ}}=50\text{ eV}$, $U_0=70\text{ eV}$; a) $L=1{,}0\text{ nm}$, b) $L=0{,}1\text{ nm}$. Cần tìm: $D$.
+
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=0.95, >={Stealth[length=2.4mm]}, font=\small]
+  \draw[->] (-0.2,0) -- (7.4,0) node[right] {$x$};
+  \draw[->] (0,-0.2) -- (0,3.0) node[above] {$U$};
+  \draw[very thick] (0.2,0) -- (3,0) -- (3,2.4) -- (4.4,2.4) -- (4.4,0) -- (7.1,0);
+  \node[right] at (4.4,2.4) {$U_0=70$ eV};
+  \draw[dashed, blue!70!black, thick] (0.2,1.71) -- (7.1,1.71) node[right] {$W_{\text{đ}}=50$ eV};
+  \draw[->, thick, blue!70!black] (0.7,2.2) -- (2.0,2.2) node[midway, above] {$e^-$};
+  \node at (1.5,0.6) {I}; \node at (3.7,0.6) {II}; \node at (5.8,0.6) {III};
+  \draw[<->] (3,-0.45) -- (4.4,-0.45) node[midway, below] {$L$};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 2.6: Rào thế chữ nhật cao $U_0$, bề dày $L$; electron tới có động năng $W_{\text{đ}}<U_0$.}
+\end{minipage}\end{center}
+
+\textbf{B1:} Trong rào, $U_0-W_{\text{đ}}=20\text{ eV}$ và hàm sóng có dạng
 $\psi=B e^{\kappa x}+C e^{-\kappa x}$, với
 \[
-\kappa=\frac{\sqrt{2m_e(U_0-E)}}{\hbar}
+\kappa=\frac{\sqrt{2m_e(U_0-W_{\text{đ}})}}{\hbar}
 \simeq\boldsymbol{2{,}29\cdot10^{10}\text{ m}^{-1}}.
 \]
 Ghép liên tục $\psi$ và $d\psi/dx$ tại hai mặt rào, với thế năng bằng nhau ở hai phía,
 cho hệ số truyền chính xác:
 \[
-D=\left[1+\frac{U_0^2}{4E(U_0-E)}\sinh^2(\kappa L)\right]^{-1}.
+D=\left[1+\frac{U_0^2}{4W_{\text{đ}}(U_0-W_{\text{đ}})}\sinh^2(\kappa L)\right]^{-1}.
 \]
 Tỉ số năng lượng trong ngoặc có thể tính trực tiếp bằng eV:
-$U_0^2/[4E(U_0-E)]=70^2/(4\times50\times20)=1{,}225$.
+$U_0^2/[4W_{\text{đ}}(U_0-W_{\text{đ}})]=70^2/(4\times50\times20)=1{,}225$.
 
 \textbf{B2:} Với $L=1{,}0\text{ nm}$, $\kappa L\simeq22{,}91$:
 \[
@@ -825,7 +912,7 @@ AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
 
 \begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.36\textwidth]{images/fig_2_18_well.png}\\[0.1cm]
-  \textit{Hình 2.5: Giếng thế năng một chiều sâu vô hạn.}
+  \textit{Hình 2.7: Giếng thế năng một chiều sâu vô hạn.}
 \end{minipage}\end{center}
 
 \textbf{B1:} Năng lượng ở 3 mức đầu tiên ($E_n = n^2 E_1$):
@@ -855,6 +942,22 @@ AD điều kiện chuẩn hóa trên đoạn $[0, L]$:
 \textbf{Giải.}
 
 \textbf{Dữ kiện:} Dãy Lyman tương ứng $n_1 = 1$, hằng số Rydberg $R \approx 1{,}097 \cdot 10^7\text{ m}^{-1} = 1{,}097 \cdot 10^{-3}\text{ \AA}^{-1}$.
+
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=0.95, >={Stealth[length=2.4mm]}, font=\small]
+  \foreach \n/\y/\E in {1/0/{-13{,}6}, 2/3.6/{-3{,}40}} {
+    \draw[very thick] (0,\y) -- (7.2,\y) node[right] {$n=\n$ \ ($\E$ eV)};
+  }
+  \draw[very thick] (0,5.3) -- (7.2,5.3) node[right] {$n=\infty$ \ ($0$ eV)};
+  \node at (7.0,4.5) {$\vdots$};
+  \draw[->, very thick, purple] (0.8,3.6) -- (0.8,0.03) node[pos=0.5, right] {$\lambda_{\max}$};
+  \draw[->, very thick, purple] (2.3,5.3) -- (2.3,0.03) node[pos=0.5, right] {$\lambda_{\min}$};
+  \node[purple] at (1.55,-0.4) {dãy Lyman (về $n=1$)};
+  \draw[->, very thick, red!75!black] (6.0,5.3) -- (6.0,3.63) node[pos=0.5, left] {$\lambda_{\min}=3650$ \AA};
+  \node[red!75!black] at (5.0,3.25) {dãy Balmer (về $n=2$)};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 3.1: Dãy Lyman (bài 3-1) và vạch ngắn nhất dãy Balmer (bài 3-2) của nguyên tử hydro.}
+\end{minipage}\end{center}
 
 \textbf{B1:} AD công thức Rydberg cho dãy Lyman:
 \begin{equation*}
@@ -903,7 +1006,7 @@ Thay số:
 \Needspace{4\baselineskip}
 \textbf{Giải.}
 
-\textbf{Dữ kiện:} Năng lượng chùm electron kích thích $E_e = 12{,}2\text{ eV}$. Ban đầu nguyên tử ở trạng thái cơ bản $E_1 = -13{,}6\text{ eV}$.
+\textbf{Dữ kiện:} Động năng electron kích thích $W_{\text{đ}} = 12{,}2\text{ eV}$. Ban đầu nguyên tử ở trạng thái cơ bản $E_1 = -13{,}6\text{ eV}$.
 
 \textbf{B1:} Xác định mức kích thích cao nhất $n$ mà nguyên tử có thể đạt được:
 Năng lượng kích thích:
@@ -924,7 +1027,7 @@ Do đó, mức kích thích cao nhất có thể đạt là $n=3$; các nguyên 
   \draw[->, very thick, red!80!black] (2.6, 2.4) -- (2.6, 1.2) node[midway, right] {$\lambda_2$};
   \draw[->, very thick, purple] (4.0, 1.2) -- (4.0, 0) node[midway, right] {$\lambda_3$};
 \end{tikzpicture}\\[0.1cm]
-\textit{Hình 3.1: Các bước dịch chuyển mức năng lượng và vạch phát xạ của nguyên tử Hydro.}
+\textit{Hình 3.2: Các bước dịch chuyển mức năng lượng và vạch phát xạ của nguyên tử Hydro.}
 \end{minipage}\end{center}
 
 \textbf{B2:} Tập hợp các nguyên tử kích thích có thể phát ra 3 vạch quang phổ; mỗi nguyên tử có thể trở về trực tiếp hoặc qua các mức trung gian:
@@ -952,16 +1055,16 @@ Do đó, mức kích thích cao nhất có thể đạt là $n=3$; các nguyên 
 
 \begin{center}\begin{minipage}{\linewidth}\centering
   \includegraphics[width=0.28\textwidth]{images/fig_3_4_orbit.png}\\[0.1cm]
-  \textit{Hình 3.2: Chuyển động tròn của electron tạo thành dòng điện kín sinh ra mômen từ.}
+  \textit{Hình 3.3: Chuyển động tròn của electron tạo thành dòng điện kín sinh ra mômen từ.}
 \end{minipage}\end{center}
 
 \textbf{B1:} Cường độ dòng điện tương đương do electron chuyển động tròn chu kỳ $T$ tạo ra:
 \begin{equation*}
     I = \frac{e}{T} = \frac{e \omega}{2\pi}
 \end{equation*}
-Diện tích giới hạn bởi quỹ đạo tròn: $A = \pi r^2$. Mômen từ của nguyên tử:
+Diện tích giới hạn bởi quỹ đạo tròn: $A = \pi r^2$. Mômen từ quỹ đạo:
 \begin{equation*}
-    |\vec{M}| = I \cdot A = \frac{e \omega}{2\pi} \cdot (\pi r^2) = \frac{1}{2} e \omega r^2
+    \mu = I \cdot A = \frac{e \omega}{2\pi} \cdot (\pi r^2) = \frac{1}{2} e \omega r^2
 \end{equation*}
 
 \textbf{B2:} AD định luật 2 Newton, lực tĩnh điện Coulomb đóng vai trò lực hướng tâm:
@@ -971,10 +1074,10 @@ Diện tích giới hạn bởi quỹ đạo tròn: $A = \pi r^2$. Mômen từ c
 
 \textbf{B3:} Thay $\omega$ vào biểu thức mômen từ:
 \begin{equation*}
-    |\vec{M}| = \frac{1}{2} e r^2 \sqrt{\frac{k e^2}{m r^3}} = \boldsymbol{\frac{e^2}{2}\sqrt{\frac{k r}{m}}} = \boldsymbol{\frac{e^2}{2}\sqrt{\frac{r}{4\pi\varepsilon_0 m}}}
+    \mu = \frac{1}{2} e r^2 \sqrt{\frac{k e^2}{m r^3}} = \boldsymbol{\frac{e^2}{2}\sqrt{\frac{k r}{m}}} = \boldsymbol{\frac{e^2}{2}\sqrt{\frac{r}{4\pi\varepsilon_0 m}}}
 \end{equation*}
 
-Mômen từ có hướng ngược với mômen động lượng quỹ đạo: $\vec\mu=-\dfrac{e}{2m}\vec L$.
+Mômen từ có hướng ngược với mômen động lượng quỹ đạo $\vec M_l=m\vec r\times\vec v$: $\vec\mu=-\dfrac{e}{2m}\vec M_l$.
 
 \PhanCachBai
 
@@ -1002,6 +1105,7 @@ Các giá trị có thể có của mômen từ đối với mức $n = 3$:
 \begin{equation*}
     \mu_l = \boldsymbol{0}, \qquad \mu_l = \boldsymbol{\sqrt{2}\mu_B} = \boldsymbol{\frac{e\hbar\sqrt{2}}{2m}}, \qquad \mu_l = \boldsymbol{\sqrt{6}\mu_B} = \boldsymbol{\frac{e\hbar\sqrt{6}}{2m}}
 \end{equation*}
+Thay số: $\sqrt{2}\mu_B\approx1{,}31\cdot10^{-23}\text{ J/T}$ ($l=1$), $\sqrt{6}\mu_B\approx2{,}27\cdot10^{-23}\text{ J/T}$ ($l=2$).
 
 \PhanCachBai
 
@@ -1031,8 +1135,23 @@ Với $l>0$, góc hợp bởi $\vec{M}_l$ và trục $Oz$:
   }
 }
 \end{tikzpicture}\\[2pt]
-\textit{Các định hướng với $l=1,2,3$. Với $l=0$, $M_l=0$ nên không có hướng xác định.}
+\textit{Hình 3.4: Các định hướng của $\vec M_l$ với $l=1,2,3$. Với $l=0$, $M_l=0$ nên không có hướng xác định.}
 \end{minipage}\end{center}
+
+\textbf{B2:} Độ lớn và góc $\varphi$ giữa $\vec M_l$ và trục $Oz$ ($\cos\varphi=m_l/\sqrt{l(l+1)}$):
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{cccl}
+\hline
+$l$ & $M_l$ & Số hướng & Góc $\varphi$ ứng với $m_l=+l,\dots,-l$ \\
+\hline
+0 & 0 & -- & không có hướng xác định \\
+1 & $\sqrt2\,\hbar$ & 3 & $45^\circ,\ 90^\circ,\ 135^\circ$ \\
+2 & $\sqrt6\,\hbar$ & 5 & $35{,}3^\circ,\ 65{,}9^\circ,\ 90^\circ,\ 114{,}1^\circ,\ 144{,}7^\circ$ \\
+3 & $2\sqrt3\,\hbar$ & 7 & $30^\circ,\ 54{,}7^\circ,\ 73{,}2^\circ,\ 90^\circ,\ 106{,}8^\circ,\ 125{,}3^\circ,\ 150^\circ$ \\
+\hline
+\end{tabular}
+\end{center}
 
 \PhanCachBai
 
@@ -1051,6 +1170,18 @@ Khi đảo trạng thái spin từ song song ($m_s = +1/2$) sang đối song ($m
 \begin{equation*}
     \Delta E_B = B \frac{e\hbar}{m}\left(\frac{1}{2} - \left(-\frac{1}{2}\right)\right) = B \frac{e\hbar}{m} = 2 \mu_B B
 \end{equation*}
+
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=0.95, >={Stealth[length=2.4mm]}, font=\small]
+  \draw[very thick] (0,2) -- (4,2) node[right] {spin $e^-$ song song spin $p$ \ ($m_s=+\tfrac12$)};
+  \draw[very thick] (0,0) -- (4,0) node[right] {spin $e^-$ phản song song \ ($m_s=-\tfrac12$)};
+  \draw[->, very thick] (1,2.02) -- (1,0.03);
+  \draw[<->] (-0.4,0) -- (-0.4,2) node[midway, left] {$\Delta E_B=2\mu_BB$};
+  \draw[->, thick, red!75!black, decorate, decoration={snake, amplitude=1.2mm, segment length=3mm, post length=2mm}] (1.3,1) -- (3.6,1);
+  \node[red!75!black, above] at (2.5,1.15) {photon $\lambda=21$ cm};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 3.5: Đảo spin electron trong nguyên tử hydro phát vạch $21$ cm.}
+\end{minipage}\end{center}
 
 \textbf{B2:} Độ chênh lệch năng lượng này phát ra photon bước sóng $\lambda = 21\text{ cm}$:
 \begin{equation*}
