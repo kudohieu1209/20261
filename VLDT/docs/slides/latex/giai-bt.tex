@@ -1349,6 +1349,7 @@ Photpho là tạp chất nhóm V (donor). Vì $N_a > N_d$ nên mẫu vẫn là b
   \begin{equation*}
       E_f' = E_v + kT \ln\left(\frac{N_v}{N_a - N_d}\right) = E_v + 0{,}026 \ln\left(\frac{10^{19}}{2 \cdot 10^{15}}\right) \approx \boldsymbol{E_v + 0{,}221\text{ eV}}
   \end{equation*}
+  (Sách ghi $E_v+0{,}277\text{ eV}$, không khớp phép tính: $0{,}026\ln5000\approx0{,}221$.)
 \end{itemize}
 
 \PhanCachBai
@@ -1404,9 +1405,31 @@ Lấy $T=300\text{ K}$, tương ứng với các mật độ trạng thái đã 
   \end{equation*}
 \end{itemize}
 
+\textbf{B2:} Khi tiếp xúc và cân bằng nhiệt động, mức Fermi hai bên bằng nhau nên các vùng năng lượng bị uốn.
+Độ cao bậc thế (hàng rào $eU_k$) bằng hiệu hai mức Fermi ban đầu:
+\begin{equation*}
+    n^+\!-n:\ eU_k=0{,}326-0{,}1465\approx\boldsymbol{0{,}18\text{ eV}},\qquad
+    n^+\!-p:\ eU_k=0{,}821-0{,}1465\approx\boldsymbol{0{,}675\text{ eV}}.
+\end{equation*}
+
 \begin{center}\begin{minipage}{\linewidth}\centering
-  \includegraphics[width=0.72\textwidth]{images/fig_4_5_band_diagram.png}\\[0.1cm]
-  \textit{Hình 4.1: Sơ đồ vùng năng lượng tiếp xúc $n^+ - n$ và tiếp xúc $n^+ - p$ ở trạng thái cân bằng.}
+\newcommand{\bandpanel}[4]{%
+\begin{tikzpicture}[scale=0.95, font=\small, >={Stealth[length=2mm]}]
+  \def\s{2.6}
+  \pgfmathsetmacro{\cl}{0.1465*\s}\pgfmathsetmacro{\vl}{(0.1465-1.12)*\s}
+  \pgfmathsetmacro{\cr}{#2*\s}\pgfmathsetmacro{\vr}{(#2-1.12)*\s}
+  \draw[very thick, green!50!black] (0,\cl) -- (1.4,\cl) .. controls (1.9,\cl) and (1.9,\cr) .. (2.4,\cr) -- (3.8,\cr);
+  \draw[very thick, green!50!black] (0,\vl) -- (1.4,\vl) .. controls (1.9,\vl) and (1.9,\vr) .. (2.4,\vr) -- (3.8,\vr);
+  \draw[thick, dashed, blue!70!black] (0,0) -- (3.8,0) node[right] {$E_f$};
+  \node[right] at (3.8,\cr) {$E_c$}; \node[right] at (3.8,\vr) {$E_v$};
+  \node at (0.7,{\cl+0.5}) {$n^+$}; \node at (3.1,{\cr+0.35}) {$#1$};
+  \draw[densely dotted] (2.4,\cl) -- (3.4,\cl);
+  \draw[<->, red!75!black] (3.25,\cl) -- (3.25,\cr) node[midway, left] {\scriptsize $#3$};
+  \node at (1.9,{\vl-0.55}) {#4};
+\end{tikzpicture}}%
+\bandpanel{n}{0.326}{0{,}18\text{ eV}}{a) tiếp xúc $n^+\!-n$}\qquad
+\bandpanel{p}{0.821}{0{,}675\text{ eV}}{b) tiếp xúc $n^+\!-p$}\\[0.1cm]
+  \textit{Hình 4.1: Sơ đồ vùng năng lượng ở trạng thái cân bằng (vẽ đúng tỉ lệ năng lượng).}
 \end{minipage}\end{center}
 
 \PhanCachBai
@@ -1461,6 +1484,8 @@ Vì công thoát $\Phi = E_0 - E_f$ (với $E_0$ là mức chân không):
 \begin{equation*}
     \Delta\Phi = 1{,}12\text{ eV} - 0{,}505\text{ eV} = \boldsymbol{0{,}615\text{ eV}} \implies U_k = \boldsymbol{0{,}615\text{ V}}
 \end{equation*}
+Khi hai mẫu tiếp xúc, hàng rào thế năng đối với điện tử là $eU_k=\Delta\Phi\approx\boldsymbol{0{,}615\text{ eV}}$.
+(Sách ghi $E_{f2}=E_v+0{,}119\text{ eV}$ và $0{,}735\text{ eV}$, không khớp phép tính: $0{,}026\ln10^4\approx0{,}239$.)
 
 
 \PhanCachBai
@@ -1481,8 +1506,31 @@ Hằng số điện môi tuyệt đối:
 =1{,}417\cdot10^{-10}\text{ F/m}.
 \]
 
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=0.95, font=\small, >={Stealth[length=2mm]}]
+  \def\xp{1.2}\def\xn{2.4}
+  \draw[->] (-3,0) -- (4,0) node[right] {$x$};
+  \draw[->] (0,-1.5) -- (0,1.5) node[above] {$\rho$};
+  \fill[blue!25] (-\xp,0) rectangle (0,-1.1); \draw (-\xp,0) rectangle (0,-1.1);
+  \fill[red!25] (0,0) rectangle (\xn,0.55); \draw (0,0) rectangle (\xn,0.55);
+  \node at ({-\xp/2},-0.55) {$-eN_a$}; \node at ({\xn/2},0.28) {$+eN_d$};
+  \node at (-2.3,0.5) {$p$}; \node at (3.4,0.5) {$n$};
+  \draw[<->] (-\xp,-1.75) -- (0,-1.75) node[midway, below] {$x_p$};
+  \draw[<->] (0,-1.75) -- (\xn,-1.75) node[midway, below] {$x_n$};
+  \draw[<->] (-\xp,-2.4) -- (\xn,-2.4) node[midway, below] {$W=x_p+x_n$};
+  \begin{scope}[xshift=7.6cm]
+    \draw[->] (-2.2,0) -- (3.6,0) node[right] {$x$};
+    \draw[->] (0,-0.2) -- (0,2.0) node[above] {$|\mathcal E|$};
+    \draw[very thick, orange!80!black] (-\xp,0) -- (0,1.6) -- (\xn,0);
+    \draw[dashed] (0,1.6) -- (-0.9,1.6) node[left] {$\mathcal E_{\max}$};
+    \node[orange!80!black, right] at (1.0,1.55) {diện tích tam giác $=U_k+U_{\mathrm{ng}}$};
+  \end{scope}
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 4.2: Miền nghèo của tiếp giáp $p$--$n$ đột ngột: mật độ điện tích (trái) và điện trường hình tam giác (phải).}
+\end{minipage}\end{center}
+
 \textbf{B2:} Với tiếp giáp đột ngột, pha tạp đều và tạp chất ion hóa hoàn toàn,
-điều kiện trung hòa điện tích là $N_a x_p=N_d x_n$.
+điều kiện trung hòa điện tích là $N_a x_p=N_d x_n$ (Hình 4.2).
 Tích phân phương trình Poisson cho
 \[
 V_j=\frac{e}{2\varepsilon_s}(N_a x_p^2+N_d x_n^2).
@@ -1510,6 +1558,7 @@ C=\frac{\varepsilon_s S}{W}
 =\frac{1{,}417\cdot10^{-10}\times10^{-6}}{5{,}21\cdot10^{-6}}
 \simeq\boldsymbol{2{,}72\cdot10^{-11}\text{ F}=27{,}2\text{ pF}}.
 \]
+(Sách ghi $88{,}5\text{ pF}$, không khớp với số liệu đề theo công thức trên.)
 
 \PhanCachBai
 
@@ -1528,7 +1577,7 @@ Trong mô hình tiếp giáp đột ngột, điện trường cực đại ở m
 =\frac{eN_d x_n}{\varepsilon_s},\qquad
 \varepsilon_s=16\varepsilon_0.
 \]
-Vì phân bố điện trường trong miền nghèo là tam giác:
+Vì phân bố điện trường trong miền nghèo là tam giác (Hình 4.2):
 \[
 U_k+U_{\mathrm{ng}}=\frac12\mathcal E_{\max}(x_p+x_n)
 =\frac{\varepsilon_s\mathcal E_{\max}^2}{2e}
@@ -1544,6 +1593,7 @@ U_{\mathrm{ng}}\simeq
 \]
 Kết quả này là điện áp tính theo mô hình miền nghèo và đúng giá trị
 $10^7\text{ V/cm}$ của đề; mô hình không xét các cơ chế đánh thủng khác có thể xảy ra trước ngưỡng đó.
+(Sách ghi $21{,}24\text{ V}$; giá trị này chỉ ứng với $\mathcal E_c\approx2\cdot10^5\text{ V/cm}$, không khớp số liệu đề.)
 
 \PhanCachBai
 
@@ -1584,6 +1634,7 @@ I=\sigma\mathcal E S
 =5{,}80\cdot10^{-4}\times4\cdot10^4\times3\cdot10^{-6}
 =\boldsymbol{6{,}96\cdot10^{-5}\text{ A}=69{,}6\,\mu\text{A}}.
 \]
+(Sách ghi $v_n=48\text{ m/s}$, $v_p=10\text{ m/s}$, $I=6{,}96\cdot10^{-7}\text{ A}$ do dùng nhầm $\mathcal E=400\text{ V/m}$ thay vì $400\text{ V/cm}$.)
 
 \vspace{0.45cm}
 
@@ -1730,27 +1781,48 @@ ngưỡng hấp thụ chuyển sang năng lượng cao hơn, tức bước sóng
 
 \textbf{c) Ngưỡng khi $n=p=10^{18}\text{ cm}^{-3}$.}
 Đổi nồng độ: $n=p=10^{24}\text{ m}^{-3}$.
-Đặt $\epsilon_n=E_{fn}-E_c$, $\epsilon_p=E_v-E_{fp}$.
-Tích phân đúng hàm mật độ trạng thái được cho trong đề, trong gần đúng điền đầy kiểu bậc thang:
+Đặt $\epsilon_n=E_{fn}-E_c$, $\epsilon_p=E_v-E_{fp}$ là độ sâu điền đầy (Hình 5.3).
+Hàm $g(E)$ trong đề là mật độ trạng thái quỹ đạo; mỗi trạng thái chứa 2 electron (spin), nên trong gần đúng điền đầy kiểu bậc thang:
 \[
-n=\int_{E_c}^{E_c+\epsilon_n}g(E)\,dE
-=\frac{4\pi}{3}\left(\frac{2m^*}{h^2}\right)^{3/2}\epsilon_n^{3/2}.
+n=2\int_{E_c}^{E_c+\epsilon_n}g(E)\,dE
+=\frac{8\pi}{3}\left(\frac{2m^*}{h^2}\right)^{3/2}\epsilon_n^{3/2}
 \]
-Suy ra
+(trùng công thức đã chứng minh ở bài 4-4). Suy ra
 \[
-\epsilon_n=\frac{h^2}{2m^*}\left(\frac{3n}{4\pi}\right)^{2/3}
-\simeq\boldsymbol{0{,}0580\text{ eV}}.
+\epsilon_n=\frac{h^2}{2m^*}\left(\frac{3n}{8\pi}\right)^{2/3}
+\simeq\boldsymbol{0{,}0365\text{ eV}}.
 \]
 Vì $m_n^*=m_p^*$ và $n=p$, ta có $\epsilon_p=\epsilon_n$.
+
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=1.0, font=\small, >={Stealth[length=2mm]}]
+  \def\a{0.9}\def\Ec{1.0}\def\Ev{-1.0}\def\en{0.5}
+  \pgfmathsetmacro{\kf}{sqrt(\en/\a)}
+  \fill[blue!20] (-\kf,{\Ec+\en}) -- plot[domain=-\kf:\kf, samples=40] (\x,{\Ec+\a*\x*\x}) -- cycle;
+  \fill[red!15] (-\kf,{\Ev-\en}) -- plot[domain=-\kf:\kf, samples=40] (\x,{\Ev-\a*\x*\x}) -- cycle;
+  \draw[thick] plot[domain=-1.55:1.55, samples=60] (\x,{\Ec+\a*\x*\x});
+  \draw[thick] plot[domain=-1.55:1.55, samples=60] (\x,{\Ev-\a*\x*\x});
+  \draw[->] (-2.3,0) -- (2.4,0) node[right] {$k$};
+  \draw[dashed, blue!70!black] (-1.45,{\Ec+\en}) -- (2,{\Ec+\en}) node[right] {$E_{fn}$};
+  \draw[dashed, red!70!black] (-1.45,{\Ev-\en}) -- (2,{\Ev-\en}) node[right] {$E_{fp}$};
+  \node[left] at (-1.6,\Ec) {$E_c$}; \node[left] at (-1.6,\Ev) {$E_v$};
+  \draw[->, gray, thick] (0,\Ev) -- (0,\Ec) node[pos=0.25, left] {\scriptsize $E_g$ (bị chặn)};
+  \draw[->, very thick, purple] (\kf,{\Ev-\en}) -- (\kf,{\Ec+\en}) node[pos=0.72, right] {$E_g+\epsilon_n+\epsilon_p$};
+  \node[blue!60!black, left] at (-1.6,{\Ec+0.5}) {\scriptsize đầy electron};
+  \node[red!60!black, left] at (-1.6,{\Ev-0.5}) {\scriptsize đầy lỗ trống};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 5.3: Khi kích thích mạnh, đáy vùng dẫn đã đầy electron, đỉnh vùng hóa trị đã đầy lỗ trống; chuyển mức thẳng chỉ còn xảy ra với năng lượng $\ge E_g+\epsilon_n+\epsilon_p$.}
+\end{minipage}\end{center}
+
 Chuyển mức thẳng bảo toàn xung lượng nên ngưỡng năng lượng là
 \[
 E_{th}'=E_g+\epsilon_n+\epsilon_p
-\simeq1{,}5+2\times0{,}0580=1{,}616\text{ eV}.
+\simeq1{,}5+2\times0{,}0365=1{,}573\text{ eV}.
 \]
 Do đó
 \[
-\boldsymbol{\lambda_{th}'\simeq\frac{1{,}24}{1{,}616}
-=0{,}767\,\mu\text{m}}.
+\boldsymbol{\lambda_{th}'\simeq\frac{1{,}24}{1{,}573}
+=0{,}788\,\mu\text{m}}.
 \]
 
 \PhanCachBai
@@ -1806,6 +1878,20 @@ N_\gamma=\frac{Q_{rad}}{E_g}
 
 \textbf{Dữ kiện:} $\lambda = 0{,}6\text{ }\mu\text{m}$, $P_0 = 15\text{ mW}$, $P_{\text{phản xạ}} = \dfrac{1}{3} P_0$, $P_{\text{thoát}} = \dfrac{1}{3} P_0$, $\alpha = 5 \cdot 10^4\text{ cm}^{-1}$, $\Delta E_g = 1{,}42\text{ eV}$.
 
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=1.0, font=\small, >={Stealth[length=2.2mm]}]
+  \fill[gray!20] (0,0) rectangle (2.2,2); \draw[thick] (0,0) rectangle (2.2,2);
+  \node at (1.1,2.25) {GaAs};
+  \draw[->, very thick, red!75!black] (-3.0,1.35) -- (-0.05,1.35) node[pos=0.45, above] {$P_0=15$ mW};
+  \draw[->, thick, red!50] (-0.05,0.95) -- (-3.0,0.95) node[pos=0.45, below=2pt] {$P_0/3$ phản xạ};
+  \draw[thick, orange!80!black, domain=0:2.2, samples=40] plot (\x,{0.35+1.2*exp(-ln(2)*\x/2.2)});
+  \node[orange!80!black] at (1.1,0.2) {\scriptsize hấp thụ $P_0/3$};
+  \draw[->, thick, red!60!black] (2.25,0.95) -- (4.4,0.95) node[pos=0.5, above] {$P_0/3$ thoát ra};
+  \draw[<->] (0,-0.35) -- (2.2,-0.35) node[midway, below] {$d$};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 5.4: Cân bằng công suất qua mẫu: phản xạ, hấp thụ và thoát ra mỗi phần bằng $P_0/3$.}
+\end{minipage}\end{center}
+
 \textbf{B1:} Xác định bề dày mẫu $d$:
 Công suất truyền vào trong mẫu sau khi phản xạ bề mặt trước: $P_1 = P_0 (1 - R) = P_0\left(1 - \dfrac{1}{3}\right) = \dfrac{2}{3}P_0$.
 Công suất thoát ra ở mặt sau:
@@ -1849,6 +1935,22 @@ Thay số:
 $\mu_p=0{,}17\text{ m}^2/(\text{V}\cdot\text{s})$.
 Thể tích mẫu $V=LWD=1{,}2\cdot10^{-8}\text{ m}^3$.
 Lấy các hạt dư phân bố đều, với $\Delta n=\Delta p=n_{st}$.
+
+\begin{center}\begin{minipage}{\linewidth}\centering
+\begin{tikzpicture}[scale=1.0, font=\small, >={Stealth[length=2.2mm]}]
+  \fill[gray!20] (0,0) rectangle (5,1); \draw[thick] (0,0) rectangle (5,1);
+  \fill[black] (-0.18,0) rectangle (0,1); \fill[black] (5,0) rectangle (5.18,1);
+  \foreach \x in {0.8,1.8,2.8,3.8} {\draw[->, thick, orange!80!black, decorate, decoration={snake, amplitude=0.6mm, segment length=2mm, post length=1.5mm}] (\x,2.1) -- (\x+0.3,1.08);}
+  \node[orange!80!black] at (5.6,1.9) {ánh sáng};
+  \draw (-0.1,0) -- (-0.1,-0.7) -- (2.4,-0.7); \draw (5.1,0) -- (5.1,-0.7) -- (2.6,-0.7);
+  \draw (2.4,-0.5) -- (2.4,-0.9); \draw (2.6,-0.6) -- (2.6,-0.8);
+  \node[below] at (2.5,-0.85) {\scriptsize $U=10$ V};
+  \draw[<->] (0,-1.55) -- (5,-1.55) node[midway, below] {$L=6$ mm};
+  \draw[<->] (5.45,0) -- (5.45,1) node[midway, right] {$D=1$ mm};
+  \node at (2.5,0.5) {\scriptsize tiết diện $S=W\cdot D$, $W=2$ mm};
+\end{tikzpicture}\\[0.1cm]
+\textit{Hình 5.5: Quang dẫn chiếu sáng đều; dòng chạy dọc chiều dài $L$ qua tiết diện $W\cdot D$.}
+\end{minipage}\end{center}
 
 \textbf{a) Hạt dẫn dư trong chế độ dừng.}
 Dòng điện tăng do quang dẫn thỏa mãn
